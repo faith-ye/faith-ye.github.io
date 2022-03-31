@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Hexo插入图片</title>
+      <link href="/2022/03/17/hexo-cha-ru-tu-pian/"/>
+      <url>/2022/03/17/hexo-cha-ru-tu-pian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="typora设置"><a href="#typora设置" class="headerlink" title="typora设置"></a>typora设置</h2><p>打开typora，选择：文件 - 偏好设置 - 图像 - 插入图片，做如下更改：</p><img src="/2022/03/17/hexo-cha-ru-tu-pian/image-20220331152841489.png" class="" title="image-20220331152841489"><p>该设置会使得当你插入图片时，会生成一个和文件名相同的文件夹，并将图片存入这个文件夹内。</p><h2 id="Hexo设置"><a href="#Hexo设置" class="headerlink" title="Hexo设置"></a>Hexo设置</h2><ul><li>更换插件</li></ul><p>用插件 <code>Hexo-renderer-markdown-it</code> （推荐）代替 <code>Hexo-renderer-marked</code>，执行以下代码：</p><pre class="line-numbers language-none"><code class="language-none">npm uninstall hexo-renderer-marker --save  #卸载 markednpm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ul><li>更改根目录下的_config.yml 配置</li></ul><pre class="line-numbers language-none"><code class="language-none">post_asset_folder: true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>安装插件<code>hexo-image-link</code></li></ul><pre class="line-numbers language-none"><code class="language-none">npm install hexo-image-link --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>该插件可以实现路径转换，假设：</p><p>文件名: <code>./test.md</code></p><p>图片路径: <code>./test/test.jpg</code></p><p>当插入图片 test.jpg 到 test.md 中时，typora 的引用路径为：</p><pre class="line-numbers language-none"><code class="language-none">![](test/test.jpg)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>而在Hexo发布后的引用路径为：</p><pre class="line-numbers language-none"><code class="language-none">![](test.jpg)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>因此，typora的md文件引入hexo时，应转换路径，即删掉图片路径中的 <code>"test/"</code>部分。若在md文件做上述操作，则md文件不能正常显示图片，而</p><p>hexo部署后可正常显示。为了书写方便，引入插件<code>hexo-image-link</code>即可帮助实现了这种路径转换。实现typora 文件中正常显示的图片，在hexo发布后依旧能正常显示。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>生成式对抗网络</title>
       <link href="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/"/>
       <url>/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/</url>

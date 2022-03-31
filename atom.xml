@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-03-31T07:18:46.805Z</updated>
+  <updated>2022-03-31T07:42:18.761Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo插入图片</title>
+    <link href="https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/"/>
+    <id>https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/</id>
+    <published>2022-03-17T07:30:05.000Z</published>
+    <updated>2022-03-31T07:42:18.761Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;typora设置&quot;&gt;&lt;a href=&quot;#typora设置&quot; class=&quot;headerlink&quot; title=&quot;typora设置&quot;&gt;&lt;/a&gt;typora设置&lt;/h2&gt;&lt;p&gt;打开typora，选择：文件 - 偏好设置 - 图像 -</summary>
+        
+      
+    
+    
+    
+    <category term="Hexo" scheme="https://faith-ye.github.io/categories/Hexo/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>生成式对抗网络</title>
