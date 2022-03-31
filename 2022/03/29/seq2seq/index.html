@@ -4,15 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo插入图片, 小叶の博客">
-    <meta name="description" content="typora设置打开typora，选择：文件 - 偏好设置 - 图像 - 插入图片，做如下更改：
-
-
-该设置会使得当你插入图片时，会生成一个和文件名相同的文件夹，并将图片存入这个文件夹内。
-Hexo设置
-更换插件
-
-用插件 Hexo-ren">
+    <meta name="keywords" content="Seq2Seq, 小叶の博客">
+    <meta name="description" content="**写在前面：**这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文Sequence to Sequence Learning wit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -24,7 +17,7 @@ Hexo设置
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo插入图片 | 小叶の博客</title>
+    <title>Seq2Seq | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -297,12 +290,12 @@ Hexo设置
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hexo插入图片</h1>
+                    <h1 class="description center-align post-title">Seq2Seq</h1>
                 </div>
             </div>
         </div>
@@ -416,9 +409,13 @@ Hexo设置
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/NLP/">
+                                <span class="chip bg-color">NLP</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -426,8 +423,8 @@ Hexo设置
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Hexo/" class="post-category">
-                                Hexo
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                论文阅读笔记
                             </a>
                         
                     </div>
@@ -439,7 +436,7 @@ Hexo设置
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-29
                 </div>
                 
 
@@ -448,14 +445,14 @@ Hexo设置
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    307
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -478,38 +475,35 @@ Hexo设置
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="typora设置"><a href="#typora设置" class="headerlink" title="typora设置"></a>typora设置</h2><p>打开typora，选择：文件 - 偏好设置 - 图像 - 插入图片，做如下更改：</p>
-<img src="/2022/03/17/hexo-cha-ru-tu-pian/image-20220331152841489.png" class="" title="image-20220331152841489">
-
-<p>该设置会使得当你插入图片时，会生成一个和文件名相同的文件夹，并将图片存入这个文件夹内。</p>
-<h2 id="Hexo设置"><a href="#Hexo设置" class="headerlink" title="Hexo设置"></a>Hexo设置</h2><ul>
-<li>更换插件</li>
-</ul>
-<p>用插件 <code>Hexo-renderer-markdown-it</code> （推荐）代替 <code>Hexo-renderer-marked</code>，执行以下代码：</p>
-<pre class="line-numbers language-none"><code class="language-none">npm uninstall hexo-renderer-marker --save  #卸载 marked
-npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+                <p>**写在前面：**这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a>。这篇论文研究的是机器翻译领域，作者使用的方法是利用一个多层的 LSTM 将输入文本编码成一个向量，这个向量可以视为整个输入句子的抽象表示。然后用另一个 LSTM 将前面编码的向量解码成目标句子。作者将其应用在 WMT’14 数据集上英语到法语的翻译任务，并在整个测试集上得到的 BLEU score 为34.8。下面我门结合<a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a>这本书的相关章节和这篇论文了解 seq2seq 的一般概念，并陈述构建模型时需要用的一些方法。</p>
+<h2 id="seq2seq">seq2seq</h2>
+<p>最常用的 seq2seq 模型其实就是encoder-decoder模型。encoder-decoder模型通常使用 RNN 将一段文本作为输入编码（encoder）成一个向量，这个向量可以视为整个输入句子的抽象表示。然后，该向量通过第二个 RNN 解码（decoder），该 RNN 通过一次生成一个单词来学习目标句子（也就是另一种语言的句子）。下图演示了将 seq2seq 模型用于英文到中文的翻译。</p>
+<img src="/2022/03/29/seq2seq/seq2seq.png" class="">
+<h3 id="Encoder">Encoder</h3>
+<p>图中展示了一个简单的翻译模型，模型中用&lt;bos&gt;和&lt;eos&gt;分别表示开始词元和结束词元。它的输入句子是”good morning“，它首先通过embedding层转换为对应的词向量，然后再进入编码器（encoder）。在每一个时间步，进入编码器RNN含有embedding$x_{t}$和上一时间步隐状态$h_{t-1}$，然后编码器RNN产生新的隐状态$h_{t}$。我们可以抽象地把这个隐状态代表为前面的词元。该时间步的计算可以用以下公式表达：<br>
+$$h_{t}=EncoderRNN(e(x_{t},h_{t-1}))$$</p>
+<p>在这里，我们通常使用LSTM或GRU这样的term RNN。假设，输入$X={x_{1},x_{2},…,x_{T}}$，式中 $x_{1}$=&lt;bos&gt;，$x_{2}$=good，etc 。编码器初始的隐状态 $h_{0}$ 通常初始化为0或者已经学习好的参数。一旦最后的词元 $x_{T}$ 通过embedding层进入编码器RNN，我们利用最后的隐状态 $h_{T}$ 来作为文本向量，并把它赋值给z :$h_{T}=z$</p>
+<h3 id="Decoder">Decoder</h3>
+<p>现在我们拥有文本向量z，我们可以开始将其解码成目标句子——”早上好“。同样我们用<sos>和<eos>分别表示目标句子的开始词元和结束词元。在每一个时间步，解码器RNN的输入是当前词元$y_{t}$的embedding $d$和上一时间步的隐状态$s_{t-1}$。在解码器RNN，初始隐状态$s_{0}=z=h_{T}$，即解码器初始隐状态就是编码器的最终隐状态。我们同样用一个公式表示该时间步解码器的操作：<br>
+$$s_{t}=DecoderRNN(d(y_{t},s_{t-1}))$$<br>
+在解码器中，我们需要将隐状态转换为对应的单词，因此在每一个时间步，我们通过一个线性层通过$s_{t}$去预测下一个在文本出现的单词$\overset{-}{y_{t}}$<br>
+$$\overset{-}{y_{t}}=f(s_{t})$$<br>
+解码器中的单词是随着时间步一个接一个地生成。我们通常使用&lt;bos&gt;作为解码器的第一个输入$y_{1}$，但是对于接下来的输入$y_{t&gt;1}$，我们有时使用在目标句子中下一个单词，有时也会使用经解码器预测的下一个单词$\overset{-}{y_{t}}$，这在机器翻译中被叫做teacher forcing。使用teacher-forcing，在训练过程中，可以加快模型的训练，使得模型会有较好的效果。但是在测试的时候因为不能得到目标句子的支持，存在训练测试偏差，模型会变得脆弱。<br>
+训练模型时，我们通常知道目标句子有多少单词，一旦解码器输入目标单词，模型就会停止生成单词。但在测试模型时，解码器会不断生成单词，直到模型输出&lt;eos&gt;或生成一定数量的单词之后，模型就停止生成单词。</eos></sos></p>
+<p>一旦模型得到了预测目标句子$\overset{-}{Y}={\overset{-}{y_{1}},\overset{-}{y_{2}},…,\overset{-}{y_{t}}}$，我们将其和目标句子$Y={y_{1},y_{2},…,y_{t}}$进行比较，计算出误差，利用该误差就可以更新模型的所有参数。</p>
+<h2 id="技巧">技巧</h2>
+<h3 id="数据预处理-2">数据预处理</h3>
 <ul>
-<li>更改根目录下的_config.yml 配置</li>
+<li>将文本词元化，在机器翻译中我们更喜欢单词级词元化。对训练数据的文本序列进行词元，其中每个词元要么是一个词，要么是一个标点符号。</li>
+<li>分别为源语言和目标语言构建两个字典——int2word 和 word2int （这两个字典将单词和整数一一对应）。同时为了减少数据噪声的影响，我们将出现次数少于2次的低频率词元视为未知 &lt;unk&gt; 词元。除此之外，我们还指定一些额外的特定词元，例如在小批量时用于将序列填充到相同长度的填充词元 &lt;pad&gt; ，以及序列的开始词元 &lt;bos&gt; 和结束词元 &lt;eos&gt; 。</li>
+<li>为了提高计算效率，我们可以通过截断和填充方式实现每个序列都具有相同的长度。当文本序列词元数目少于规定数据时，我们将继续在其末尾添加特定的 &lt;pad&gt; 词元。反之，我们将截断文本序列，只取前指定数目个词元，丢弃剩余词元。</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">post_asset_folder: true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li>安装插件<code>hexo-image-link</code></li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">npm install hexo-image-link --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>该插件可以实现路径转换，假设：</p>
-<p>文件名: <code>./test.md</code></p>
-<p>图片路径: <code>./test/test.jpg</code></p>
-<p>当插入图片 test.jpg 到 test.md 中时，typora 的引用路径为：</p>
-<pre class="line-numbers language-none"><code class="language-none">![](test/test.jpg)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>而在Hexo发布后的引用路径为：</p>
-<pre class="line-numbers language-none"><code class="language-none">![](test.jpg)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>因此，typora的md文件引入hexo时，应转换路径，即删掉图片路径中的 <code>"test/"</code>部分。若在md文件做上述操作，则md文件不能正常显示图片，而</p>
-<p>hexo部署后可正常显示。为了书写方便，引入插件<code>hexo-image-link</code>即可帮助实现了这种路径转换。实现typora 文件中正常显示的图片，在hexo发布后依旧能正常显示。</p>
+<h3 id="搭建模型">搭建模型</h3>
+<p>这一部分可以参考论文</p>
+<img src="/2022/03/29/seq2seq/1.png" class="">
+<h2 id="参考资料-2">参考资料</h2>
+<p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
 
                 
             </div>
@@ -536,7 +530,7 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/">https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/</a>
+                    <a href="https://faith-ye.github.io/2022/03/29/seq2seq/">https://faith-ye.github.io/2022/03/29/seq2seq/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -573,7 +567,11 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/NLP/">
+                                    <span class="chip bg-color">NLP</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1011,17 +1009,18 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/18/shu-ju-cao-zuo/">
+                <a href="/2022/03/29/seq2seq/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="数据操作">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Seq2Seq">
                         
-                        <span class="card-title">数据操作</span>
+                        <span class="card-title">Seq2Seq</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1031,26 +1030,27 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    PyTorch学习笔记
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文阅读笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
                     </a>
                     
                 </div>
@@ -1064,13 +1064,13 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/">
+                <a href="/2022/03/25/men-kong-xun-huan-dan-yuan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="生成式对抗网络">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="门控循环单元">
                         
-                        <span class="card-title">生成式对抗网络</span>
+                        <span class="card-title">门控循环单元</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1081,7 +1081,7 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-25
                             </span>
                         <span class="publish-author">
                             
@@ -1098,8 +1098,8 @@ npm install hexo-renderer-markdown-it --save  #安装markdown-it<span aria-hidde
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GAN/">
-                        <span class="chip bg-color">GAN</span>
+                    <a href="/tags/GRU/">
+                        <span class="chip bg-color">GRU</span>
                     </a>
                     
                 </div>
