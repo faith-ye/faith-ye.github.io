@@ -480,7 +480,6 @@
 
 <p>判别器和生成器都是一个神经网络结构，也就是一个黑箱模型。判别器相对比较好理解，就像一个二分类模型，有一个判别界限去区分样本，从概率的角度分析就是获得样本x属于类别y的概率，是一个条件概率P(y|x)。而生成器是需要生成数据的概率分布，就像高斯分布一样，需要去拟合整个分布，从概率角度分析就是样本x在整个分布中对应的概率。</p>
 <h1 id="GAN的相关理论"><a href="#GAN的相关理论" class="headerlink" title="GAN的相关理论"></a>GAN的相关理论</h1><p>GAN本质上是在做什么事情呢？</p>
-<p><img src="/.io//.%5C%E7%94%9F%E6%88%90%E5%BC%8F%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%5Cimage-20220313134629440.jpg"></p>
 <img src="/.io//03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313134650100.png" class="">
 
 <p>以图像生成为例，我们假设吧每一个图片看作二维空间中的一个点，并且现有图片会满足于某个数据分布，我们记作$P_{data}(x)$。那么在这个图像分布空间中，实际上只有很小一部分的区域是人脸图像。如上图所示，只有在蓝色区域采样出的点才会看起来像人脸，而在蓝色区域外采样出来的点就不是人脸。而在GAN中我们需要做的就是让机器找到人脸的分布函数，这也是GAN本质上做的事情。</p>
@@ -784,7 +783,7 @@ torch<span class="token punctuation">.</span>save<span class="token punctuation"
 
 <pre><code>Epoch [6/10] 1115/1115 Loss_D: 0.3021 Loss_G: 5.8084 | save samples to ./logs\Epoch_006.jpg
 </code></pre>
-<img src="/.io//03/16/sheng-cheng-shi-dui-kang-wang-luo/output_13_11.png" class="">  
+<img src="/.io//03/16/sheng-cheng-shi-dui-kang-wang-luo/output_13_11.png" class="">
 
 
 <pre><code>Epoch [7/10] 1115/1115 Loss_D: 0.1996 Loss_G: 1.8779 | save samples to ./logs\Epoch_007.jpg
