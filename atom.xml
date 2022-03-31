@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小叶の博客</title>
+  
+  <subtitle>小叶の博客</subtitle>
+  <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://faith-ye.github.io/"/>
+  <updated>2022-03-31T01:29:12.327Z</updated>
+  <id>https://faith-ye.github.io/</id>
+  
+  <author>
+    <name>小叶</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>生成式对抗网络</title>
+    <link href="https://faith-ye.github.io/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/"/>
+    <id>https://faith-ye.github.io/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/</id>
+    <published>2022-03-16T07:20:09.000Z</published>
+    <updated>2022-03-31T01:29:12.327Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;GAN的全称为Generative Adversarial Network，翻译成中文就是生成式对抗网络。 在github有个&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="深度学习" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
+    
+  </entry>
+  
+</feed>
