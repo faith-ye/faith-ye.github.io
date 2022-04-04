@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-02T08:12:31.668Z</updated>
+  <updated>2022-04-04T11:48:52.382Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于GAN的多水库径流序列的随机生成</title>
+    <link href="https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/"/>
+    <id>https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/</id>
+    <published>2022-04-04T11:47:07.000Z</published>
+    <updated>2022-04-04T11:48:52.382Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基于GAN的多水库径流序列的随机生成&quot;&gt;&lt;a href=&quot;#基于GAN的多水库径流序列的随机生成&quot; class=&quot;headerlink&quot; title=&quot;基于GAN的多水库径流序列的随机生成&quot;&gt;&lt;/a&gt;基于GAN的多水库径流序列的随机生成&lt;/h1&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
+    
+    <category term="径流序列的随机生成" scheme="https://faith-ye.github.io/tags/%E5%BE%84%E6%B5%81%E5%BA%8F%E5%88%97%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90/"/>
+    
+  </entry>
   
   <entry>
     <title>自注意力模型</title>
