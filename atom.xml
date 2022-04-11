@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-04T12:28:36.360Z</updated>
+  <updated>2022-04-11T10:53:11.846Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Seq2Seq代码实现</title>
+    <link href="https://faith-ye.github.io/2022/04/11/seq2seq-dai-ma-shi-xian/"/>
+    <id>https://faith-ye.github.io/2022/04/11/seq2seq-dai-ma-shi-xian/</id>
+    <published>2022-04-11T10:44:41.000Z</published>
+    <updated>2022-04-11T10:53:11.846Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在这章节，我们将用RNN搭建一个seq2seq模型(sequences to sequences)，实现英文到中文的翻译，数据集应用的是由&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
+    
+    <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
+    
+  </entry>
   
   <entry>
     <title>基于GAN的多水库径流序列的随机生成</title>
