@@ -30,9 +30,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
 </head>
 
 
@@ -489,7 +489,9 @@
 <h3 id="查询、键和值"><a href="#查询、键和值" class="headerlink" title="查询、键和值"></a>查询、键和值</h3><p>在注意力机制的背景下，我们将自主性提示称为查询（query）。给定任何查询，注意力机制通过注意力汇聚将选择引导至感官输入。在注意力机制中，这些感官输入被称为值（value）。对于每个值都有一个键（key）与之配对，这可以想象成感官输入的非自主提示。通过注意力汇聚，每个查询（自主性提示）都可以与键（非自主性提示）进行匹配，这将引导得出最匹配的值（感官输入）。下面我们来看看查询、键和值是怎样在self-attention中运作的。</p>
 <img src="/2022/04/02/zi-zhu-yi-li-mo-xing/image-20220402132249578-16488871089924.png" class="" title="image-20220402132249578">
 
-<p>  假设输入是：${a^{1},a^{2},a^{3},a^{4}}$。每个输入都对应查询、键和值。查询$q^{i}=W^{q}a^{i}$，键$k^{i}=W^{k}a^{i}$以及值$v^{i}=W^{v}a^{i}$。对于查询query，我们需要找所对应的键与之进行匹配，这样就可以得出那些信息比较重要。对应计算$a_{1,i}=q^{1}k^{i}$，再经过softmax层就可以算出每个信息对应的比重$a^{‘}<em>{1,i}=exp(a</em>{1,i}/\sum_{j}(a_{1,j}))$，进而可以求出$a^{1}$对应的输出$b^{1}=\sum_{i}a^{‘}_{1,i}v^{i}$，同理我们可以计算出$b^{2},b^{3},b^{4}$。如果计算机也这样一个接一个计算，那计算效率太低。其实我们可以通过矩阵运算实现平行运算，具体操作如下：</p>
+<p>  假设输入是：${a^{1},a^{2},a^{3},a^{4}}$。每个输入都对应查询、键和值。查询$q^{i}=W^{q}a^{i}$，键$k^{i}=W^{k}a^{i}$以及值$v^{i}=W^{v}a^{i}$。对于查询query，我们需要找所对应的键与之进行匹配，这样就可以得出那些信息比较重要。对应计算$a_{1,i}=q^{1}k^{i}$，再经过softmax层就可以算出每个信息对应的比重:</p>
+<p>$$a^{‘}<em>{1,i}=exp(a</em>{1,i}/\sum_{j}(a_{1,j}))$$</p>
+<p>进而可以求出$a^{1}$对应的输出$b^{1}=\sum_{i}a^{‘}_{1,i}v^{i}$，同理我们可以计算出$b^{2},b^{3},b^{4}$。如果计算机也这样一个接一个计算，那计算效率太低。其实我们可以通过矩阵运算实现平行运算，具体操作如下：</p>
 <p>查询：$$q^{i}=W^{q}a^{i}\Rightarrow (q^{1},q^{2},q^{3},q^{4})=W^{q}(a^{1},a^{2},a^{3},a^{4})$$</p>
 <p>键：$$k^{i}=W^{k}a^{i}\Rightarrow (k^{1},k^{2},k^{3},k^{4})=W^{k}(a^{1},a^{2},a^{3},a^{4})$$</p>
 <p>值：$$v^{i}=W^{v}a^{i}\Rightarrow (v^{1},v^{2},v^{3},v^{4})=W^{v}(a^{1},a^{2},a^{3},a^{4})$$</p>
