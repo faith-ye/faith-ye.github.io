@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-17T11:34:55.236Z</updated>
+  <updated>2022-04-11T13:15:58.472Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>BERT</title>
-    <link href="https://faith-ye.github.io/2022/04/17/bert/"/>
-    <id>https://faith-ye.github.io/2022/04/17/bert/</id>
-    <published>2022-04-17T11:26:46.000Z</published>
-    <updated>2022-04-17T11:34:55.236Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;BERT的全称是Bidirectional Encoder Representations from</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Transformer</title>
@@ -60,9 +39,9 @@
     
     <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
-    <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
-    
     <category term="Transformer" scheme="https://faith-ye.github.io/tags/Transformer/"/>
+    
+    <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
     
   </entry>
   
@@ -157,7 +136,7 @@
       
         
         
-    <summary type="html">&lt;p&gt;**写在前面：**这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文&lt;a</summary>
+    <summary type="html">&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文&lt;a</summary>
         
       
     
