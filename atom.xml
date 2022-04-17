@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-11T13:15:58.472Z</updated>
+  <updated>2022-04-17T11:34:55.236Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BERT</title>
+    <link href="https://faith-ye.github.io/2022/04/17/bert/"/>
+    <id>https://faith-ye.github.io/2022/04/17/bert/</id>
+    <published>2022-04-17T11:26:46.000Z</published>
+    <updated>2022-04-17T11:34:55.236Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;BERT的全称是Bidirectional Encoder Representations from</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Transformer</title>

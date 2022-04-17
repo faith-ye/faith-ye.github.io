@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="序列模型, 小叶の博客">
-    <meta name="description" content="假设某个序列我们可以使用$x_{t-1},…,x_{t-\tau}$而不是$x_{t-1},…,x_{1}$来估计$x_{t}$，我们就说该序列满足马尔可夫条件。用数学公式表示为：$$P(x_{1},…,x_{T})=\underset{t">
+    <meta name="keywords" content="BERT, 小叶の博客">
+    <meta name="description" content="前言BERT的全称是Bidirectional Encoder Representations from Transformers（来自Transformers的双向编码器表示），BERT基于Transformer，Transformer在">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>序列模型 | 小叶の博客</title>
+    <title>BERT | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +290,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">序列模型</h1>
+                    <h1 class="description center-align post-title">BERT</h1>
                 </div>
             </div>
         </div>
@@ -409,25 +409,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/">
-                                <span class="chip bg-color">序列模型</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                机器学习笔记
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -436,7 +423,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-20
+                    2022-04-17
                 </div>
                 
 
@@ -445,7 +432,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.9k
                 </div>
                 
 
@@ -475,173 +462,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>假设某个序列我们可以使用$x_{t-1},…,x_{t-\tau}$而不是$x_{t-1},…,x_{1}$来估计$x_{t}$，我们就说该序列满足马尔可夫条件。用数学公式表示为：<br>$$P(x_{1},…,x_{T})=\underset{t=1}{\overset{T}{\Pi}}P(x_{t}|x_{t-1},…,x_{t-\tau})$$<br>而$\tau=1$，我们就得到一个一阶马尔可夫模型，则上式变为：<br>$$P(x_{1},…,x_{T})=\underset{t=1}{\overset{T}{\Pi}}P(x_{t}|x_{t-1})$$<br>利用这一事实，我们只需要考虑过去观察中的一个非常短的历史：$P(x_{t}|x_{t-1},…,x_{1})=P(x_{t}|x_{t-1})$就能近似得出当前状态。</p>
-<p>现在我们做一个简单的实验，来探讨一下满足马尔可夫条件的模型预测的准确性，以及它的最大预测能力。</p>
-<h2 id="生成数据"><a href="#生成数据" class="headerlink" title="生成数据"></a>生成数据</h2><p>首先，我们生成一些数据：使用正弦函数和一些可加性噪声来生成序列模型，时间步长为1000。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>BERT的全称是Bidirectional Encoder Representations from Transformers（来自Transformers的双向编码器表示），BERT基于Transformer，Transformer在初始论文中是用于Seq2Seq任务中，其Encoder部分后续被迁移到各种场景，逐渐演化成一种通用的特征提取器。BERT 通过使用预训练的 Transformer编码器，能够基于其双向上下文表示任何词元。在下游任务的监督学习过程中，BERT将输入表示到一个添加的输出层中，根据任务的性质对模型架构进行最小的更改，例如预测每个词元与预测整个序列。同时，BERT对预训练Transformer编码器的所有参数进行微调，而额外的输出层将从头开始训练。</p>
+<p>在BERT的原始论文BERT: Pre-training of Deep Bidirectional Transformers forLanguage Understanding 中，BERT的描述分为三个部分：输入表示、预训练任务和下游任务。</p>
+<h2 id="BERT的输入表示"><a href="#BERT的输入表示" class="headerlink" title="BERT的输入表示"></a>BERT的输入表示</h2><p>在自然语言处理中，有些任务（如情感分析）以单个文本为输入，而有些任务（如自然语言推断）以一对文本序列作为输入。当输入为单个文本时，BERT输入序列是特殊类别词元“&lt;cls&gt;”、⽂本序列的标记、以及特殊分隔词元“&lt;sep&gt;”的连结。当输入为文本对是，BERT输入序列是“&lt;cls&gt;”、第⼀个⽂本序列的标记、“&lt;sep&gt;”、第⼆个⽂本序列标记、以及“&lt;sep&gt;”的连结。</p>
+<p>BERT选择Transformer编码器作为其双向架构。在Transformer编码器中，位置嵌入被加到输入序列的每个位置。然而，与原始Transformer编码器不同，BERT使用可学习的位置嵌入，其输入为词元嵌入（Token Embeddings）、片段嵌入（Segment Embeddings）和位置嵌入（Position Embeddings）的和。</p>
+<img src="/2022/04/17/bert/image-20220417165237930.png" class="" title="image-20220417165237930">
 
-T <span class="token operator">=</span> <span class="token number">1000</span>    <span class="token comment"># 总共产生1000个点</span>
-time_epoch <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> T <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
-y <span class="token operator">=</span> torch<span class="token punctuation">.</span>sin<span class="token punctuation">(</span><span class="token number">0.01</span> <span class="token operator">*</span> time_epoch<span class="token punctuation">)</span> <span class="token operator">+</span> torch<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>T<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="预训练任务"><a href="#预训练任务" class="headerlink" title="预训练任务"></a>预训练任务</h2><p>前面我们给出了输入文本的每个词元和插入的特殊标记“&lt;cls&gt;”及“&lt;seq&gt;” 的BERT表示。接下来，我们将使⽤这些表⽰来计算预训练BERT的损失函数。预训练包括以下两个任务：掩蔽语言模型和下一句预测。</p>
+<h3 id="掩蔽语言模型（Masked-Language-Modeling-Masked-LM）"><a href="#掩蔽语言模型（Masked-Language-Modeling-Masked-LM）" class="headerlink" title="掩蔽语言模型（Masked Language Modeling, Masked LM）"></a>掩蔽语言模型（Masked Language Modeling, Masked LM）</h3><p>根据直觉，我们有理由相信deep bidirectional model比left-to-right model（如单向LSTM）或者浅级连接的left-to-right model和right-to-left model（如双向LSTM）更加强大。为了双向编码上下文以表示每个词元，BERT随机掩蔽词元并使用来自上下文的词元以自监督（self-supervised）的方式预测掩蔽词元。此任务称为掩蔽语言模型。这个模型可以用下图表示，假设输入是机器学习。</p>
+<img src="/2022/04/17/bert/image-20220417181929265.png" class="">
 
-<p>绘制图片</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<p>在这个预训练任务中，将随机选择15%的词元作为预测的掩蔽词元。要预测⼀个掩蔽词元而不使⽤标签作弊，<br>⼀个简单的⽅法是总是⽤⼀个特殊的“&lt;mask&gt;”替换输⼊序列中的词元。然而，⼈造特殊词元“&lt;mask&gt;”不<br>会出现在微调中。为了避免预训练和微调之间的这种不匹配，如果为预测而屏蔽词元（例如，在“my dog is hairy ”中选择掩蔽和预测“hairy”），则在输⼊中将其替换为：  </p>
+<ul>
+<li>80%概率为特殊的“&lt;mask&gt;“词元（例如，“my dog is hairy ”变为“my dog is &lt;mask&gt;”）</li>
+<li>10%概率为随机词元（例如，“my dog is hairy ”变为“my dog is apple”）</li>
+<li>10%概率为不变的标签词元（例如，“my dog is hairy ”变为“my dog is hairy”）</li>
+</ul>
+<p>注意在15%的词元中，有10%的概率替换为随机词元。这种偶然的噪声鼓励BERT在其双向上下文编码中不那么偏向于掩蔽词元，而这种影响在标签保持不变时更加深刻。</p>
+<p>总的来说Masked LM的目标是预测出被掩蔽的单词，相当于做一个完形填空，做完形填空的任务有利于BERT学会理解文本的上下文信息。</p>
+<h3 id="下⼀句预测（Next-Sentence-Prediction-NSP）"><a href="#下⼀句预测（Next-Sentence-Prediction-NSP）" class="headerlink" title="下⼀句预测（Next Sentence Prediction, NSP）"></a>下⼀句预测（Next Sentence Prediction, NSP）</h3><p>虽然掩蔽语言模型能够双向上下文来表示单词，但它不能显式地表示文本对之间的逻辑关系，在这一些自然语言处理任务中尤为重要（如QA问答系统和自然语言推断）。为了帮助理解两个文本序列之间的关系，BERT在预训练中考虑了一个二元分类任务——下一句预测。在为预训练生成句子对时，有⼀半的时间它们确实是标签为“Yes”的连续句⼦。但在另⼀半的时间⾥，第⼆个句⼦是从语料库中随机抽取的，标记为“No”。</p>
+<img src="/2022/04/17/bert/image-20220417182324087.png" class="">
 
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'time_epoch'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  这个模型可以用上图表示，输入是两个句子，也就是文本对的输入格式。BERT输出是将特殊词元“&lt;cls&gt;”  编码后的向量，由于Transformer编码器中的自主意力，特殊词元“&lt;cls&gt;”的BERT表⽰已经对输⼊的两个句⼦进⾏了编码。再将编码后的向量输入一个多层感知机来预测第二个句子是否是BERT输入序列中第一个句子的下一句。  </p>
+<h3 id="用于预训练BERT的数据集"><a href="#用于预训练BERT的数据集" class="headerlink" title="用于预训练BERT的数据集"></a>用于预训练BERT的数据集</h3><p>为了预训练BERT模型，我们需要以理想的格式生成数据集，以便于上述两个预训练任务。在论文中，预训练的语料库有两个：BooksCorpus（8亿个单词）、English Wikipedia（25亿个单词）。对于English Wikipedia，只提取文本段落而忽略列表、表格和标题。</p>
+<h2 id="BERT下游任务"><a href="#BERT下游任务" class="headerlink" title="BERT下游任务"></a>BERT下游任务</h2><p>基于预训练后的BERT模型，可以将其融合到各种NLP任务中。BERT中每个词没有固定的词向量，是根据词的上下文来动态产生当前词的词向量。</p>
+<p>在论文中，列出了四大BERT的下游任务：</p>
+<img src="/2022/04/17/bert/image-20220417185625315.png" class="" title="image-20220417185625315">
 
+<p>第一个任务是句子对的分类任务，第二个是单一句子的分类任务，第三个是问答系统，第四个是单一句子的标注任务。它们均可在预训练BERT的输出上接入相应的结构实现，最后基于任务的训练数据进行微调实现。其中任务一和任务二是将特殊词元“&lt;cls&gt;”  编码后的向量输入一个分类器实现，任务四是将单个句子里每个词元经过BERT编码后的向量分别输入一个分类器中实现。</p>
+<img src="/2022/04/17/bert/image-20220417191544227.png" class="" title="image-20220417191544227">
 
-<img src="/2022/03/20/xu-lie-mo-xing/output_3_1.png" class="">
-
-
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>接下来我们对序列进行一定的处理，使这个序列转换为模型的“特征-标签”对，这里我们使用的$\tau=4$，由于前4个数据没有历史数据来描述它们，因此我们将其舍去。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader<span class="token punctuation">,</span> Dataset
-
-<span class="token keyword">class</span> <span class="token class-name">DigitDataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>x <span class="token operator">=</span> x
-        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y
-    
-    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">)</span>
-    
-    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> idx<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        X <span class="token operator">=</span> self<span class="token punctuation">.</span>x<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
-        Y <span class="token operator">=</span> self<span class="token punctuation">.</span>y<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
-        <span class="token keyword">return</span> X<span class="token punctuation">,</span> Y
-    
-
-tau <span class="token operator">=</span> <span class="token number">4</span>
-features <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>T <span class="token operator">-</span> tau<span class="token punctuation">,</span> tau<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>tau<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> y<span class="token punctuation">[</span>i<span class="token punctuation">:</span> T <span class="token operator">-</span> tau <span class="token operator">+</span> i<span class="token punctuation">]</span>
-labels <span class="token operator">=</span> y<span class="token punctuation">[</span>tau<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-
-<span class="token comment"># print(features.shape, labels.shape)</span>
-
-batch_size<span class="token punctuation">,</span> n_train <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">600</span>          <span class="token comment"># 仅使用前600个数据进行模型训练</span>
-train_set <span class="token operator">=</span> DigitDataset<span class="token punctuation">(</span>features<span class="token punctuation">[</span><span class="token punctuation">:</span> n_train<span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token punctuation">:</span> n_train<span class="token punctuation">]</span><span class="token punctuation">)</span>
-dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_set<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h2><p>在这里我们构建一个十分简单的网络来训练模型：一个拥有两个全连接层的多层感知机，ReLU激活函数，</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
-
-<span class="token comment"># 初始化网络权重参数</span>
-<span class="token keyword">def</span> <span class="token function">init_weights</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> <span class="token builtin">type</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">==</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">:</span>
-        nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>xavier_uniform_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>weight<span class="token punctuation">)</span>
-
-<span class="token keyword">class</span> <span class="token class-name">MLP</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token builtin">super</span><span class="token punctuation">(</span>MLP<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
-            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        <span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>init_weights<span class="token punctuation">)</span>
-    
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        y <span class="token operator">=</span> self<span class="token punctuation">.</span>net<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><p>设置超参数以及optimizer， criterion，并进行训练</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 模型</span>
-model <span class="token operator">=</span> MLP<span class="token punctuation">(</span><span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-n_epoch <span class="token operator">=</span> <span class="token number">10</span>
-lr <span class="token operator">=</span> <span class="token number">0.01</span>
-<span class="token comment"># optimizer</span>
-optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>lr<span class="token punctuation">)</span>
-<span class="token comment"># criterion</span>
-criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># Training</span>
-<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    total_loss <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i<span class="token punctuation">,</span>data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># 前向传播</span>
-        y_pred <span class="token operator">=</span> model<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token comment"># 后向传播</span>
-        loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>y_pred<span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        
-        total_loss <span class="token operator">+=</span> loss <span class="token operator">*</span> <span class="token builtin">len</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
-    
-    <span class="token comment"># 结果展示</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Epoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>n_epoch<span class="token punctuation">:</span><span class="token format-spec">02d</span><span class="token punctuation">}</span></span><span class="token string">] Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>total_loss <span class="token operator">/</span> n_train<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre><code>Epoch [1/10] Loss: 0.054475486278533936
-Epoch [2/10] Loss: 0.015365694649517536
-Epoch [3/10] Loss: 0.011502934619784355
-Epoch [4/10] Loss: 0.006994950119405985
-Epoch [5/10] Loss: 0.007959885522723198
-Epoch [6/10] Loss: 0.008115933276712894
-Epoch [7/10] Loss: 0.009392841719090939
-Epoch [8/10] Loss: 0.008084502071142197
-Epoch [9/10] Loss: 0.0074587250128388405
-Epoch [10/10] Loss: 0.006592489313334227
-</code></pre>
-<h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><p>由训练误差可知，模型运行的效果不错，现在让我们检验模型的预测能力，首先检验模型预测下一个时间步的能力</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">onestep_preds <span class="token operator">=</span> model<span class="token punctuation">(</span>features<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">[</span>tau<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> onestep_preds<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> color <span class="token operator">=</span> <span class="token string">'r'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'time_epoch'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">,</span> <span class="token string">'1-step preds'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<img src="/2022/03/20/xu-lie-mo-xing/output_11_1.png" class="">
-
-
-<p>由图可以看出。单步预测效果不错。即使预测的时间步超过了600+4（n_train + tau)，其预测结果看起来仍然不错。但如果数据观察序列只到了604，后面的都需要我们进行预测，那么这个模型的结果将会成为什么样子？还会有这么好的预测效果吗？</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">multistep_preds <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>T<span class="token punctuation">)</span>
-multistep_preds<span class="token punctuation">[</span><span class="token punctuation">:</span> n_train <span class="token operator">+</span> tau<span class="token punctuation">]</span> <span class="token operator">=</span> y<span class="token punctuation">[</span><span class="token punctuation">:</span> n_train <span class="token operator">+</span> tau<span class="token punctuation">]</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_train <span class="token operator">+</span> tau<span class="token punctuation">,</span> T<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    multistep_preds<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> model<span class="token punctuation">(</span>multistep_preds<span class="token punctuation">[</span>i <span class="token operator">-</span> tau<span class="token punctuation">:</span> i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 绘图</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">[</span>tau<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> onestep_preds<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">,</span> multistep_preds<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'time_epoch'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">,</span> <span class="token string">'1-step preds'</span><span class="token punctuation">,</span> <span class="token string">'multistep preds'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<img src="/2022/03/20/xu-lie-mo-xing/output_13_1.png" class="">
-
-
-<p>由图可以看出绿线的预测显然不是很理想，经过几个预测步骤之后，预测的结果很快就会衰减到一个常数。这其实是错误累积的结果，因此后面误差会相当快地偏离真实的观测结果。<br>现在我们将预测步数分别设置为1，4，16，64，通过对比比较，看看k步预测的困难。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">max_steps <span class="token operator">=</span> <span class="token number">64</span>
-features <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>T <span class="token operator">-</span> tau <span class="token operator">-</span> max_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> tau <span class="token operator">+</span> max_steps<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment"># 列i（i&lt;tau）是来⾃x的观测，其时间步从（i+1）到（i+T-tau-max_steps+1）</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>tau<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> y<span class="token punctuation">[</span>i <span class="token punctuation">:</span> T <span class="token operator">-</span> tau <span class="token operator">-</span>max_steps <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">+</span> i<span class="token punctuation">]</span>
-
-<span class="token comment"># 列i（i&gt;=tau）是来⾃（i-tau+1）步的预测，其时间步从（i+1）到（i+T-tau-max_steps+1）</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>tau<span class="token punctuation">,</span> tau <span class="token operator">+</span> max_steps<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> model<span class="token punctuation">(</span>features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i <span class="token operator">-</span> tau<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-steps <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
-<span class="token comment"># 绘图</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> steps<span class="token punctuation">:</span>
-    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_epoch<span class="token punctuation">[</span>tau <span class="token operator">+</span> i <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span> T <span class="token operator">-</span> max_steps <span class="token operator">+</span> i<span class="token punctuation">]</span> <span class="token punctuation">,</span> features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> tau <span class="token operator">+</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'time_epoch'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">-step preds'</span></span> <span class="token keyword">for</span> i <span class="token keyword">in</span> steps<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<img src="/2022/03/20/xu-lie-mo-xing/output_15_1.png" class="">
-
-<p>以上例子清楚地说明随着预测步数的增加，预测的结果逐渐变坏。虽然“4步预测”看起来仍然不错，但超过这个跨度的任何预测几乎都是无用的。</p>
+<p>对于任务三，输入是一个问题加一个文件，输出是输入文件对应答案的开始和结束位置。由此可以看出该模型实现的要求是询问的答案可以在文件中找到，那么这个任务怎么实现呢？如上图，我们初始化两个和编码词元后的向量相同长度的vector，图中橙色的向量用于确认答案在文件中开始词元的序号（位置），蓝色的向量用于确认结束词元的序号。将这两个向量分别乘于文件中的词元经过BERT编码的向量，然后通过一个softmax层找到最大值对应的序号即可得到答案。如图中s=2，e=3，如果文件的内容是how to use BERT，则答案为use BERT。因此在这个任务中，我们需要训练的参数是图中的两个向量。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.php">李宏毅 机器学习2021</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.04805">Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” <em>arXiv preprint arXiv:1810.04805</em> (2018).</a></p>
 
                 
             </div>
@@ -668,7 +522,7 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/03/20/xu-lie-mo-xing/">https://faith-ye.github.io/2022/03/20/xu-lie-mo-xing/</a>
+                    <a href="https://faith-ye.github.io/2022/04/17/bert/">https://faith-ye.github.io/2022/04/17/bert/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -705,11 +559,7 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B/">
-                                    <span class="chip bg-color">序列模型</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1147,17 +997,18 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/22/chang-duan-qi-ji-yi-wang-luo/">
+                <a href="/2022/04/17/bert/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="长短期记忆网络">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="BERT">
                         
-                        <span class="card-title">长短期记忆网络</span>
+                        <span class="card-title">BERT</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1167,9 +1018,47 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            小叶
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/11/transformer/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Transformer">
+                        
+                        <span class="card-title">Transformer</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1185,61 +1074,16 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/LSTM/">
-                        <span class="chip bg-color">LSTM</span>
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
                     </a>
                     
-                    <a href="/tags/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/">
-                        <span class="chip bg-color">文本分类</span>
+                    <a href="/tags/Seq2Seq/">
+                        <span class="chip bg-color">Seq2Seq</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/18/shu-ju-cao-zuo/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="数据操作">
-                        
-                        <span class="card-title">数据操作</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    PyTorch学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
+                    <a href="/tags/Transformer/">
+                        <span class="chip bg-color">Transformer</span>
                     </a>
                     
                 </div>
