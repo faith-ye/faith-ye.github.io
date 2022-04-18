@@ -32,9 +32,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
 </head>
 
 
@@ -481,7 +481,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="基于GAN的多水库径流序列的随机生成"><a href="#基于GAN的多水库径流序列的随机生成" class="headerlink" title="基于GAN的多水库径流序列的随机生成"></a>基于GAN的多水库径流序列的随机生成</h1><img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404135935711-16490728909091.png" class="" title="image-20220404135935711">
+                <h1 id="基于GAN的多水库径流序列的随机生成"><a href="#基于GAN的多水库径流序列的随机生成" class="headerlink" title="基于GAN的多水库径流序列的随机生成"></a>基于GAN的多水库径流序列的随机生成</h1><img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404135935711-16490728909091.png" class="">
 
 <p>该文将DCGAN和WGAN结合起来组成一个新的方法DC-WGAN，并用于径流序列的随机生成。该方法可以同时捕捉径流序列在时间和空间维度上的相关性，解决了传统方法（如Copula等）在径流序列随机生成中时空相关性表现不足的问题。</p>
 <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>隐式随机优化(implicit stochastic optimization, ISO)模型是一种已广泛应用于水库系统中长期优化运行的方法。在实际工程中，水库历史序列的长度只有几十年，难以反映未来径流变化的随机性。因此径流序列的生成是弥补历史径流样本代表性和可靠性差的关键技术，是保证ISO模型准确性的前提。</p>
@@ -519,7 +519,7 @@
 <li>判别器中使用LeakyReLU作为激活函数</li>
 </ul>
 <p>DCGAN的网络结构如下：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404182400171-16490728909102.png" class="" title="image-20220404182400171">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404182400171-16490728909102.png" class="">
 
 <h4 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h4><p>Wasserstein生成式对抗网络使用Wasserstein Distance来替换掉JS-Divergence，解决了当生成数据和真实数据没有重叠时，JS散度为log2，从而导致生成器梯度消失的问题。WGAN的优点有：</p>
 <ul>
@@ -527,27 +527,27 @@
 <li>避免了模型在训练过程中崩溃，一定程度上提升了模型的鲁棒性</li>
 </ul>
 <h4 id="DC-WGAN"><a href="#DC-WGAN" class="headerlink" title="DC-WGAN"></a>DC-WGAN</h4><p>结合DCGAN和WGAN，作者提出了DC-WGAN模型，它的结构图如下：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183358982-16490728909103.png" class="" title="image-20220404183358982">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183358982-16490728909103.png" class="">
 
 <p>DC-WGAN的模型架构和算法流程分别看左图和右图：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183813487-16490728909104.png" class="" title="image-20220404183813487">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183813487-16490728909104.png" class="">
 
 <h2 id="研究区域"><a href="#研究区域" class="headerlink" title="研究区域"></a>研究区域</h2><p>作者以中国下游金沙江梯级水库和三峡梯级水库为研究案例，包括溪洛渡、向家坝、三峡和葛洲坝四个水库。它们的地理位置如下图所示：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404184312072-16490728909106.png" class="" title="image-20220404184312072">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404184312072-16490728909106.png" class="">
 
 <p>DC-WGAN模型的实验数据为这四个水库从1940到2010的径流序列，其中90%的径流序列（64年）被用于模型训练，10%（10年）被用于模型的验证。径流序列的时间尺度为10天，模型经过训练后产生3000个10天径流序列。</p>
 <p>同时，用相同的数据，作者还用copula方法产生对应的径流序列，并将结果与DC_WGAN进行比较。</p>
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h3 id="学习能力"><a href="#学习能力" class="headerlink" title="学习能力"></a>学习能力</h3><p>为了验证DC-WGAN的学习能力，原始径流序列和DC-WGAN生成的径流序列的频率曲线如下图所示。图中DC-WGAN生成的径流样本是随机从3000个生成样本随机选择了64个（和原始数据数量一样），频率曲线使用对数正态分布函数绘制。从图中可以看出两个频率曲线几乎完全重叠，说明DC-WGAN生成了正确分布的径流序列。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404190906074-16490728909105.png" class="" title="image-20220404190906074">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404190906074-16490728909105.png" class="">
 
 <h3 id="泛化能力"><a href="#泛化能力" class="headerlink" title="泛化能力"></a>泛化能力</h3><p>为了进一步验证DC-WGAN的泛化能力，作者使用欧几里得距离(Euclidean distance)在DC-WGAN生成的3000条径流数据中找出和7个验证数据最相似的。其中三个径流序列如下图所示。由图可以看出DC-WGAN可以生成与验证集相似形态的样本，说明模型具有很强的泛化能力，图中的自相关系数曲线也验证了DC-WGAN可以捕捉径流序列的时间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404191726339-16490728909107.png" class="" title="image-20220404191726339">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404191726339-16490728909107.png" class="">
 
 <h3 id="时间相关性"><a href="#时间相关性" class="headerlink" title="时间相关性"></a>时间相关性</h3><p>为了验证径流序列的时间相关性，作者分别绘制了原始样本和分别从DC-WGAN和Copula生成样本的相关系数热力图。从下图可以看出Copula生成序列的相关性弱于原始序列和DC-WGAN生成的序列，且基于Copula的生成方法无法捕捉到弱相关性，表明DC-WGAN可以更好地学习序列的时间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404192738463-16490728909108.png" class="" title="image-20220404192738463">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404192738463-16490728909108.png" class="">
 
 <h3 id="空间相关性"><a href="#空间相关性" class="headerlink" title="空间相关性"></a>空间相关性</h3><p>为了验证径流序列的空间相关性，基于原始样本、DC-WGAN和Copula生成样本，计算溪洛渡和三峡水库10天径流的空间相关系数，如下图所示。基于三种样本的平均年径流相关系数分别为0.67、0.65和-0.01。同时可以明显地看出，溪洛渡径流系列与三峡水库径流序列呈现出较强的空间相关性。DC-WGAN可以学习到水库间径流序列的空间相关性，但基于Copula的生成方法无法捕捉到不同水库间径流序列的空间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404194104273-16490728909109.png" class="" title="image-20220404194104273">
+<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404194104273-16490728909109.png" class="">
 
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0022169421013767?via=ihub">Ma Y, Zhong P, Xu B, et al. Stochastic generation of runoff series for multiple reservoirs based on generative adversarial networks[J]. Journal of Hydrology, 2022, 605: 127326.</a></p>
 

@@ -30,9 +30,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
 </head>
 
 
@@ -485,15 +485,15 @@
             <div id="articleContent">
                 <p>在前面我们学习过<a href="https://faith-ye.github.io/2022/04/02/zi-zhu-yi-li-mo-xing/">自注意力模型</a>，自注意力模型拥有CNN并行运算和RNN挖掘序列中的关系两大优势。因此，使用自注意力模型来设计深度架构是很有吸引力的。对比之前仍然依赖RNN来实现输入表示的类似注意力模型，Transformer模型完全基于自注意力机制，不但实现了快速并行计算，还可以像DNN一样将模型增加到非常深的深度。Transformer由论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Attention is All You Need</a>提出，最初是应用于文本数据上的序列到序列学习，但现在已经推⼴到各种现代的深度学习中，例如语⾔、视觉、语⾳和强化学习领域。</p>
 <p>Transformer的整体架构如下图所示，是一个Encoder-Decoder架构。Transformer是由Encoder和Decoder组成，这两个部分是基于自注意力的模块叠加而成的，源序列和目标序列先词向量化(embedding)，然后加上位置编码(positional encoding)，再分别输入到Encoder和Decoder中。</p>
-<img src="/2022/04/11/transformer/image-20220411170353238.png" class="" title="image-20220411170353238">
+<img src="/2022/04/11/transformer/image-20220411170353238.png" class="">
 
 <h2 id="Encoder和Decoder"><a href="#Encoder和Decoder" class="headerlink" title="Encoder和Decoder"></a>Encoder和Decoder</h2><p>从宏观角度来看，transformer的Encoder是由多个相同的层叠加而成的，每个层都有两个子层(sublayer)。第一个子层是多头自注意力(multi-head self-attention)层；第二个子层是基于位置的前馈网络(position-wise feed-forward network)层。同时受残差网络的启发，每个子层都采用了残差连接(residual connection)，并在残差连接的加法计算之后，使用层规范化(layer normalization)。在计算编码器的自注意力时，查询、键和值都来自前一个layer的输出。由于使用了残差连接，Transformer的每一个layer都将输出一个d维表示向量。</p>
 <p>Transformer的Decoder也是由多个相同的层叠加而成的。除了Encoder中描述的两个子层之外，Decoder还在两个子层之间插入了第三个子层，称为编码器 - 解码器注意力(encoder-decoder attention)层。Decoder的子层同Encoder一样，使用了残差连接和层规范化。在编码器－解码器注意⼒中，查询来⾃前Decoder前一个layer的输出，而键和值来⾃Encoder的输出。在Decoder自主意力中，查询、键和值都来自于Decoder上一个layer的输出。但是和Encoder自主意力不同的是，Decoder的每个位置只能考虑位置之前的所有位置。这种掩蔽(masked)注意力保留了自回归(auto-regressive)属性，确保预测仅依赖于已生成的输出词元。  </p>
 <h2 id="自注意力"><a href="#自注意力" class="headerlink" title="自注意力"></a>自注意力</h2><p>有关这方面的详细推导请看<a href="https://faith-ye.github.io/2022/04/02/zi-zhu-yi-li-mo-xing/">这篇文章</a>，在这节我们主要讲解编码器 - 解码器注意力层是怎么运作的。</p>
-<img src="/2022/04/11/transformer/image-20220411200918339.png" class="" title="image-20220411200918339">
+<img src="/2022/04/11/transformer/image-20220411200918339.png" class="">
 
 <p>以语言识别为例，如上图假定Transformer的Encoder将一段声音讯号编码成$a^{1}、a^{2}、a^{3}$三个向量，而Transformer的Decoder获取第一个表示开始的向量，将其输入到掩蔽多头自主意力层，得到一个向量，将该向量的查询q和Encoder得到的三个向量的键、值做self-attention处理得到向量v，再把向量v作为Decoder的基于位置的前馈网络层中，最后得到目标词汇。</p>
-<img src="/2022/04/11/transformer/image-20220411200951752.png" class="" title="image-20220411200951752">
+<img src="/2022/04/11/transformer/image-20220411200951752.png" class="">
 
 <p>将得到目标词汇对应的向量连同start对应的向量作为Decoder的输出，经过掩蔽多头自主意力层得到另一个向量，将该向量的查询$q^{‘}$和Encoder得到的三个向量的键、值做self-attention处理得到向量$v^{‘}$，反复进行这样的操作直到Decoder输出结束的标志。</p>
 <h2 id="基于位置的前馈网络层"><a href="#基于位置的前馈网络层" class="headerlink" title="基于位置的前馈网络层"></a>基于位置的前馈网络层</h2><p>该层包含两个线性变换，在这两个线性变化之间有一个ReLU激活函数。</p>
