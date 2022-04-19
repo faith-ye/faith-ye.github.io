@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-18T01:01:31.006Z</updated>
+  <updated>2022-04-19T06:24:43.188Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://faith-ye.github.io/2022/04/19/hw1-regression/"/>
+    <id>https://faith-ye.github.io/2022/04/19/hw1-regression/</id>
+    <published>2022-04-19T06:09:15.987Z</published>
+    <updated>2022-04-19T06:24:43.188Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;title: HW1_Regression&lt;br&gt;top: false&lt;br&gt;mathjax: true&lt;br&gt;date: 2022-04-19</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>BERT</title>
