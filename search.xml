@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据预处理</title>
+      <link href="/2022/04/25/shu-ju-yu-chu-li/"/>
+      <url>/2022/04/25/shu-ju-yu-chu-li/</url>
+      
+        <content type="html"><![CDATA[<p>这节我们将简要介绍使用pandas预处理原始数据，并将原始数据转换为张量格式的步骤。</p><h2 id="读取数据集"><a href="#读取数据集" class="headerlink" title="读取数据集"></a>读取数据集</h2><p>首先，我们简单创建一个人工数据集，并存储在csv文件./data/house_tiny.csv中。下面我们将数据集按行写入csv文件中</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">import osos.makedirs('./data', exist_ok=True)data_file = os.path.join('./data', 'house_tiny.csv')with open(data_file, 'w') as f:    f.write('NumRooms,Alley,Price\n') # 列名    f.write('NA,Pave,127500\n') # 每⾏表⽰⼀个数据样本    f.write('2,NA,106000\n')    f.write('4,NA,178100\n')    f.write('NA,NA,140000\n')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>有数据集后，我们可以导入pandas包并调用read_csv函数加载原始数据集。该数据集有四行三列，其中每⾏描述了房间数量（“NumRooms”）、巷⼦类型（“Alley”）和房屋价格（“Price”）。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pddata = pd.read_csv(data_file)print(data)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><pre><code>   NumRooms Alley   Price0       NaN  Pave  1275001       2.0   NaN  1060002       4.0   NaN  1781003       NaN   NaN  140000</code></pre><h2 id="处理缺失值"><a href="#处理缺失值" class="headerlink" title="处理缺失值"></a>处理缺失值</h2><p>有输出结果可以看出，表格中存在缺失的数据。为了避免这些数据对之后的模型搭建存在影响，需对其进行处理，常见的方法有插值法和删除法，插值法是用一个替代值替换缺失值，而删除法则是直接忽略缺失值。</p><p><strong>插值法</strong></p><p>我们一般用同一列的均值替换“NaN”项，可以用fillna()函数实现</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">data1 = data.fillna(data.mean())print(data1)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre><code>   NumRooms Alley   Price0       3.0  Pave  1275001       2.0   NaN  1060002       4.0   NaN  1781003       3.0   NaN  140000</code></pre><p><strong>删除法</strong></p><p>一般是删除缺失值所对应的行，用dropna()函数实现</p><ul><li>axis默认值为0，当设置为1时，是删除缺失值所对应的列</li><li>subset是参考某几列（或几行）作为删除一句</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">data2 = data.dropna(axis=0, subset=['NumRooms'])print(data2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre><code>   NumRooms Alley   Price1       2.0   NaN  1060002       4.0   NaN  178100</code></pre><p>除此之外，有时还需要删除重复的数据，可以用drop_duplicates()函数实现。由于一般我们都是用插值法处理缺失值，所以这里我们考虑该方法。</p><p>通过位置索引iloc，我们将data分为inputs和outputs</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2]inputs = inputs.fillna(inputs.mean())print(inputs)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><pre><code>   NumRooms Alley0       3.0  Pave1       2.0   NaN2       4.0   NaN3       3.0   NaN</code></pre><p>对于inputs中的类别值或离散值，我们将“NaN”视为一个类别。由于“Alley”列只接受两种类型的类别值“Pave”和“NaN”，pandas可以自动将此列转换为两列“Alley_Pave”和“Alley_nan”。类型为“Pave”的⾏会将“Alley_Pave”的值设置为1，“Alley_nan”的值设置为0。类型为“NaN”的⾏会将“Alley_Pave”的值设置为0，“Alley_nan”的值设置为1。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">inputs = pd.get_dummies(inputs, dummy_na=True)print(inputs)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre><code>   NumRooms  Alley_Pave  Alley_nan0       3.0           1          01       2.0           0          12       4.0           0          13       3.0           0          1</code></pre><h2 id="转换为张量格式"><a href="#转换为张量格式" class="headerlink" title="转换为张量格式"></a>转换为张量格式</h2><p>现在inputs和outputs中所有数据都是数值类型，我们可以把它们转换为张量格式。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">import torchX, y = torch.tensor(inputs.values), torch.tensor(outputs.values)X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><pre><code>(tensor([[3., 1., 0.],         [2., 0., 1.],         [4., 0., 1.],         [3., 0., 1.]], dtype=torch.float64), tensor([127500, 106000, 178100, 140000]))</code></pre><p>这节我们主要学习了csv文件数据的预处理，其实以其他格式存储的数据也是通过类似的方式进行处理，最终都得转变成tensor格式。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> PyTorch学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HW3-CNN</title>
       <link href="/2022/04/20/hw3-cnn/"/>
       <url>/2022/04/20/hw3-cnn/</url>

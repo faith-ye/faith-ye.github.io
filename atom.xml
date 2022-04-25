@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-04-20T14:27:46.193Z</updated>
+  <updated>2022-04-25T10:22:58.111Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据预处理</title>
+    <link href="https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/"/>
+    <id>https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/</id>
+    <published>2022-04-25T10:21:59.000Z</published>
+    <updated>2022-04-25T10:22:58.111Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这节我们将简要介绍使用pandas预处理原始数据，并将原始数据转换为张量格式的步骤。&lt;/p&gt;
+&lt;h2 id=&quot;读取数据集&quot;&gt;&lt;a href=&quot;#读取数据集&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="PyTorch学习笔记" scheme="https://faith-ye.github.io/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="pytorch" scheme="https://faith-ye.github.io/tags/pytorch/"/>
+    
+  </entry>
   
   <entry>
     <title>HW3-CNN</title>
