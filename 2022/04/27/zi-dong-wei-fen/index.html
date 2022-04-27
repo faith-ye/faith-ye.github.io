@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="自动微分, 小叶の博客">
-    <meta name="description" content="在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。有过算法实现经验的小伙伴可能有过这种体验，如果一个模">
+    <meta name="description" content="在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。
+有过算法实现经验的小伙伴可能有过这种体验，如果一个">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -475,7 +476,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。有过算法实现经验的小伙伴可能有过这种体验，如果一个模型需要通过算法率定的参数够多，自己通过导数实现模型参数的更新是一件很痛苦的事。而深度学习pytorch框架通过自动计算导数（自动微分）来帮我们实现这个痛苦的过程。</p>
+                <p>在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。</p>
+<p>有过算法实现经验的小伙伴可能有过这种体验，如果一个模型需要通过算法率定的参数够多，自己通过梯度下降法实现模型参数的更新是一件很痛苦的事，而且还容易算错。深度学习pytorch框架通过自动计算导数（自动微分）来帮我们实现这个痛苦的过程。</p>
 <p>那么pytorch是如何实现自动微分？在实际应用中，系统会根据我们设计的模型构建出一个计算图，来跟踪计算是那些数据通过哪些操作组合产生输出。自动微分在计算图的基础上可以实现反向传播梯度（反向传播）来算出每个参数的偏导数，进而我们可以利用这些偏导数的数值来更新模型参数。</p>
 <h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><p>我们用函数$y = 2x^{T}x$这个简单的例子来展示pytorch是如何实现自动微分的。首先，我们创建变量x并为其分配一个初始值。</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch
