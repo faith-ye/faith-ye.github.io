@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>自动微分</title>
+      <link href="/2022/04/27/zi-dong-wei-fen/"/>
+      <url>/2022/04/27/zi-dong-wei-fen/</url>
+      
+        <content type="html"><![CDATA[<p>在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。有过算法实现经验的小伙伴可能有过这种体验，如果一个模型需要通过算法率定的参数够多，自己通过导数实现模型参数的更新是一件很痛苦的事。而深度学习pytorch框架通过自动计算导数（自动微分）来帮我们实现这个痛苦的过程。</p><p>那么pytorch是如何实现自动微分？在实际应用中，系统会根据我们设计的模型构建出一个计算图，来跟踪计算是那些数据通过哪些操作组合产生输出。自动微分在计算图的基础上可以实现反向传播梯度（反向传播）来算出每个参数的偏导数，进而我们可以利用这些偏导数的数值来更新模型参数。</p><h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><p>我们用函数$y = 2x^{T}x$这个简单的例子来展示pytorch是如何实现自动微分的。首先，我们创建变量x并为其分配一个初始值。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">import torchx = torch.arange(4.0)x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><pre><code>tensor([0., 1., 2., 3.])</code></pre><p>在计算y关于x的梯度之前，我们需要一个地方来存储梯度。实际操作中，我们会经常成千上万次地更新相同的参数，所以就不可能在每次对一个参数求导时都分配新的内存，因为每次都分配新的内存可能很快就会将内存耗尽。注意，一个标量函数关于向量x的梯度是向量，并且与x具有相同的形状。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">x.requires_grad_(True)        # 等价于x = torch.arange(4.0,requires_grad=True)x.grad        # 默认值为None<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>现在让我们计算y</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">y = 2 * torch.dot(x, x)y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre><code>tensor(28., grad_fn=&lt;MulBackward0&gt;)</code></pre><p>x是一个长度为4的向量，计算x和x的点积，得到一个标量赋值给y输出。接下来，我们通过调用反向传播函数来自动计算y关于x每个分量的梯度</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">y.backward()x.grad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><pre><code>tensor([ 0.,  4.,  8., 12.])</code></pre><p>根据导数运算，函数$y=2x^{T}x$关于x的梯度是4x，通过这可以验证上述梯度计算是否正确</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad == 4 * x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre><code>tensor([True, True, True, True])</code></pre><p>上述就是pytorch通过反向传播计算梯度，如果你想计算x的另一个函数的梯度，需要通过x.grad.zero_()消除之前的梯度值。这是因为在默认情况下，pytorch会自动累积梯度。</p><h2 id="非标量变量的反向传播"><a href="#非标量变量的反向传播" class="headerlink" title="非标量变量的反向传播"></a>非标量变量的反向传播</h2><p>当y不是标量时，向量y关于向量x的导数是一个矩阵，对于高阶和高维的y和x，求导的结果是一个高阶张量。当我们调用向量的反向计算时，我们通常会计算一批训练样本对应损失函数的导数。但在这，我们的目的不是计算微分矩阵，而是单独计算批量中每个样本的偏导数之和。由于我们只想求偏导数的和，因此可以传递一个都是1的梯度的函数，然后通过链式法则便可实现。这个函数可以通过$y.sum()=y_{1}+y_{2}+…+y_{n}$实现</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()        # 消除之前的梯度y = x * xy.sum().backward()x.grad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><pre><code>tensor([0., 2., 4., 6.])</code></pre><h2 id="分离计算"><a href="#分离计算" class="headerlink" title="分离计算"></a>分离计算</h2><p>有时，我们希望将某些计算移动到记录的计算图之外。例如，假设y是作为x的函数计算的，而z则是作为y和x的函数计算的。想象⼀下，我们想计算z关于x的梯度，但由于某种原因，我们希望将y视为⼀个常数，并且只考虑到x在y被计算后发挥的作⽤。</p><p>在这⾥，我们可以分离y来返回⼀个新变量u，该变量与y具有相同的值，但丢弃计算图中如何计算y的任何信息。换句话说，梯度不会向后流经u到x。因此，下⾯的反向传播函数计算z=u*x关于x的偏导数，并将u作为常数处理，而不是z=x*x*x关于x的偏导数。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()y = x * xu = y.detach()z = u * xz.sum().backward()x.grad, x.grad == u<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre><code>(tensor([0., 1., 4., 9.]), tensor([True, True, True, True]))</code></pre><p>由于刚刚记录了y的计算结果，我们可以随后在y上调用反向传播，得到y=x*x关于x的导数，即2*x</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()y.sum().backward()x.grad, x.grad == 2 * x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><pre><code>(tensor([0., 2., 4., 6.]), tensor([True, True, True, True]))</code></pre><p>前面我们通过一些例子学习了pytorch是如何自动计算导数，用一句话总结就是：首先将梯度附加到想要对其计算偏导数的变量上，然后记录目标值的计算，执行它的反向传播函数，最后访问得到的梯度。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a href="https://d2l.ai/">Dive into Deep Learning</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> PyTorch学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基本线性代数运算</title>
       <link href="/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/"/>
       <url>/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/</url>

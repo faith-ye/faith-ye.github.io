@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="BERT, 小叶の博客">
-    <meta name="description" content="前言BERT的全称是Bidirectional Encoder Representations from Transformers（来自Transformers的双向编码器表示），BERT基于Transformer，Transformer在">
+    <meta name="keywords" content="自动微分, 小叶の博客">
+    <meta name="description" content="在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。有过算法实现经验的小伙伴可能有过这种体验，如果一个模">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>BERT | 小叶の博客</title>
+    <title>自动微分 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +290,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">BERT</h1>
+                    <h1 class="description center-align post-title">自动微分</h1>
                 </div>
             </div>
         </div>
@@ -411,12 +411,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/NLP/">
-                                <span class="chip bg-color">NLP</span>
-                            </a>
-                        
-                            <a href="/tags/BERT/">
-                                <span class="chip bg-color">BERT</span>
+                            <a href="/tags/pytorch/">
+                                <span class="chip bg-color">pytorch</span>
                             </a>
                         
                     </div>
@@ -427,8 +423,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                深度学习笔记
+                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                PyTorch学习笔记
                             </a>
                         
                     </div>
@@ -440,7 +436,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-17
+                    2022-04-27
                 </div>
                 
 
@@ -449,14 +445,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    4 分
                 </div>
                 
 
@@ -479,40 +475,73 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>BERT的全称是Bidirectional Encoder Representations from Transformers（来自Transformers的双向编码器表示），BERT基于Transformer，Transformer在初始论文中是用于Seq2Seq任务中，其Encoder部分后续被迁移到各种场景，逐渐演化成一种通用的特征提取器。BERT 通过使用预训练的 Transformer编码器，能够基于其双向上下文表示任何词元。在下游任务的监督学习过程中，BERT将输入表示到一个添加的输出层中，根据任务的性质对模型架构进行最小的更改，例如预测每个词元与预测整个序列。同时，BERT对预训练Transformer编码器的所有参数进行微调，而额外的输出层将从头开始训练。</p>
-<p>在BERT的原始论文BERT: Pre-training of Deep Bidirectional Transformers forLanguage Understanding 中，BERT的描述分为三个部分：输入表示、预训练任务和下游任务。</p>
-<h2 id="BERT的输入表示"><a href="#BERT的输入表示" class="headerlink" title="BERT的输入表示"></a>BERT的输入表示</h2><p>在自然语言处理中，有些任务（如情感分析）以单个文本为输入，而有些任务（如自然语言推断）以一对文本序列作为输入。当输入为单个文本时，BERT输入序列是特殊类别词元“&lt;cls&gt;”、⽂本序列的标记、以及特殊分隔词元“&lt;sep&gt;”的连结。当输入为文本对是，BERT输入序列是“&lt;cls&gt;”、第⼀个⽂本序列的标记、“&lt;sep&gt;”、第⼆个⽂本序列标记、以及“&lt;sep&gt;”的连结。</p>
-<p>BERT选择Transformer编码器作为其双向架构。在Transformer编码器中，位置嵌入被加到输入序列的每个位置。然而，与原始Transformer编码器不同，BERT使用可学习的位置嵌入，其输入为词元嵌入（Token Embeddings）、片段嵌入（Segment Embeddings）和位置嵌入（Position Embeddings）的和。</p>
-<img src="/2022/04/17/bert/image-20220417165237930.png" class="">
+                <p>在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。有过算法实现经验的小伙伴可能有过这种体验，如果一个模型需要通过算法率定的参数够多，自己通过导数实现模型参数的更新是一件很痛苦的事。而深度学习pytorch框架通过自动计算导数（自动微分）来帮我们实现这个痛苦的过程。</p>
+<p>那么pytorch是如何实现自动微分？在实际应用中，系统会根据我们设计的模型构建出一个计算图，来跟踪计算是那些数据通过哪些操作组合产生输出。自动微分在计算图的基础上可以实现反向传播梯度（反向传播）来算出每个参数的偏导数，进而我们可以利用这些偏导数的数值来更新模型参数。</p>
+<h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><p>我们用函数$y = 2x^{T}x$这个简单的例子来展示pytorch是如何实现自动微分的。首先，我们创建变量x并为其分配一个初始值。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch
 
-<h2 id="预训练任务"><a href="#预训练任务" class="headerlink" title="预训练任务"></a>预训练任务</h2><p>前面我们给出了输入文本的每个词元和插入的特殊标记“&lt;cls&gt;”及“&lt;seq&gt;” 的BERT表示。接下来，我们将使⽤这些表⽰来计算预训练BERT的损失函数。预训练包括以下两个任务：掩蔽语言模型和下一句预测。</p>
-<h3 id="掩蔽语言模型（Masked-Language-Modeling-Masked-LM）"><a href="#掩蔽语言模型（Masked-Language-Modeling-Masked-LM）" class="headerlink" title="掩蔽语言模型（Masked Language Modeling, Masked LM）"></a>掩蔽语言模型（Masked Language Modeling, Masked LM）</h3><p>根据直觉，我们有理由相信deep bidirectional model比left-to-right model（如单向LSTM）或者浅级连接的left-to-right model和right-to-left model（如双向LSTM）更加强大。为了双向编码上下文以表示每个词元，BERT随机掩蔽词元并使用来自上下文的词元以自监督（self-supervised）的方式预测掩蔽词元。此任务称为掩蔽语言模型。这个模型可以用下图表示，假设输入是机器学习。</p>
-<img src="/2022/04/17/bert/image-20220417181929265.png" class="">
+x = torch.arange(4.0)
+x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>在这个预训练任务中，将随机选择15%的词元作为预测的掩蔽词元。要预测⼀个掩蔽词元而不使⽤标签作弊，<br>⼀个简单的⽅法是总是⽤⼀个特殊的“&lt;mask&gt;”替换输⼊序列中的词元。然而，⼈造特殊词元“&lt;mask&gt;”不<br>会出现在微调中。为了避免预训练和微调之间的这种不匹配，如果为预测而屏蔽词元（例如，在“my dog is hairy ”中选择掩蔽和预测“hairy”），则在输⼊中将其替换为：  </p>
-<ul>
-<li>80%概率为特殊的“&lt;mask&gt;“词元（例如，“my dog is hairy ”变为“my dog is &lt;mask&gt;”）</li>
-<li>10%概率为随机词元（例如，“my dog is hairy ”变为“my dog is apple”）</li>
-<li>10%概率为不变的标签词元（例如，“my dog is hairy ”变为“my dog is hairy”）</li>
-</ul>
-<p>注意在15%的词元中，有10%的概率替换为随机词元。这种偶然的噪声鼓励BERT在其双向上下文编码中不那么偏向于掩蔽词元，而这种影响在标签保持不变时更加深刻。</p>
-<p>总的来说Masked LM的目标是预测出被掩蔽的单词，相当于做一个完形填空，做完形填空的任务有利于BERT学会理解文本的上下文信息。</p>
-<h3 id="下⼀句预测（Next-Sentence-Prediction-NSP）"><a href="#下⼀句预测（Next-Sentence-Prediction-NSP）" class="headerlink" title="下⼀句预测（Next Sentence Prediction, NSP）"></a>下⼀句预测（Next Sentence Prediction, NSP）</h3><p>虽然掩蔽语言模型能够双向上下文来表示单词，但它不能显式地表示文本对之间的逻辑关系，在这一些自然语言处理任务中尤为重要（如QA问答系统和自然语言推断）。为了帮助理解两个文本序列之间的关系，BERT在预训练中考虑了一个二元分类任务——下一句预测。在为预训练生成句子对时，有⼀半的时间它们确实是标签为“Yes”的连续句⼦。但在另⼀半的时间⾥，第⼆个句⼦是从语料库中随机抽取的，标记为“No”。</p>
-<img src="/2022/04/17/bert/image-20220417182324087.png" class="">
 
-<p>  这个模型可以用上图表示，输入是两个句子，也就是文本对的输入格式。BERT输出是将特殊词元“&lt;cls&gt;”  编码后的向量，由于Transformer编码器中的自主意力，特殊词元“&lt;cls&gt;”的BERT表⽰已经对输⼊的两个句⼦进⾏了编码。再将编码后的向量输入一个多层感知机来预测第二个句子是否是BERT输入序列中第一个句子的下一句。  </p>
-<h3 id="用于预训练BERT的数据集"><a href="#用于预训练BERT的数据集" class="headerlink" title="用于预训练BERT的数据集"></a>用于预训练BERT的数据集</h3><p>为了预训练BERT模型，我们需要以理想的格式生成数据集，以便于上述两个预训练任务。在论文中，预训练的语料库有两个：BooksCorpus（8亿个单词）、English Wikipedia（25亿个单词）。对于English Wikipedia，只提取文本段落而忽略列表、表格和标题。</p>
-<h2 id="BERT下游任务"><a href="#BERT下游任务" class="headerlink" title="BERT下游任务"></a>BERT下游任务</h2><p>基于预训练后的BERT模型，可以将其融合到各种NLP任务中。BERT中每个词没有固定的词向量，是根据词的上下文来动态产生当前词的词向量。</p>
-<p>在论文中，列出了四大BERT的下游任务：</p>
-<img src="/2022/04/17/bert/image-20220417185625315.png" class="">
+<pre><code>tensor([0., 1., 2., 3.])
+</code></pre>
+<p>在计算y关于x的梯度之前，我们需要一个地方来存储梯度。实际操作中，我们会经常成千上万次地更新相同的参数，所以就不可能在每次对一个参数求导时都分配新的内存，因为每次都分配新的内存可能很快就会将内存耗尽。注意，一个标量函数关于向量x的梯度是向量，并且与x具有相同的形状。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.requires_grad_(True)        # 等价于x = torch.arange(4.0,requires_grad=True)
+x.grad        # 默认值为None<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>第一个任务是句子对的分类任务，第二个是单一句子的分类任务，第三个是问答系统，第四个是单一句子的标注任务。它们均可在预训练BERT的输出上接入相应的结构实现，最后基于任务的训练数据进行微调实现。其中任务一和任务二是将特殊词元“&lt;cls&gt;”  编码后的向量输入一个分类器实现，任务四是将单个句子里每个词元经过BERT编码后的向量分别输入一个分类器中实现。</p>
-<img src="/2022/04/17/bert/image-20220417191544227.png" class="">
+<p>现在让我们计算y</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y = 2 * torch.dot(x, x)
+y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>对于任务三，输入是一个问题加一个文件，输出是输入文件对应答案的开始和结束位置。由此可以看出该模型实现的要求是询问的答案可以在文件中找到，那么这个任务怎么实现呢？如上图，我们初始化两个和编码词元后的向量相同长度的vector，图中橙色的向量用于确认答案在文件中开始词元的序号（位置），蓝色的向量用于确认结束词元的序号。将这两个向量分别乘于文件中的词元经过BERT编码的向量，然后通过一个softmax层找到最大值对应的序号即可得到答案。如图中s=2，e=3，如果文件的内容是how to use BERT，则答案为use BERT。因此在这个任务中，我们需要训练的参数是图中的两个向量。</p>
+
+<pre><code>tensor(28., grad_fn=&lt;MulBackward0&gt;)
+</code></pre>
+<p>x是一个长度为4的向量，计算x和x的点积，得到一个标量赋值给y输出。接下来，我们通过调用反向传播函数来自动计算y关于x每个分量的梯度</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y.backward()
+x.grad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+<pre><code>tensor([ 0.,  4.,  8., 12.])
+</code></pre>
+<p>根据导数运算，函数$y=2x^{T}x$关于x的梯度是4x，通过这可以验证上述梯度计算是否正确</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad == 4 * x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<pre><code>tensor([True, True, True, True])
+</code></pre>
+<p>上述就是pytorch通过反向传播计算梯度，如果你想计算x的另一个函数的梯度，需要通过x.grad.zero_()消除之前的梯度值。这是因为在默认情况下，pytorch会自动累积梯度。</p>
+<h2 id="非标量变量的反向传播"><a href="#非标量变量的反向传播" class="headerlink" title="非标量变量的反向传播"></a>非标量变量的反向传播</h2><p>当y不是标量时，向量y关于向量x的导数是一个矩阵，对于高阶和高维的y和x，求导的结果是一个高阶张量。当我们调用向量的反向计算时，我们通常会计算一批训练样本对应损失函数的导数。但在这，我们的目的不是计算微分矩阵，而是单独计算批量中每个样本的偏导数之和。由于我们只想求偏导数的和，因此可以传递一个都是1的梯度的函数，然后通过链式法则便可实现。这个函数可以通过$y.sum()=y_{1}+y_{2}+…+y_{n}$实现</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()        # 消除之前的梯度
+y = x * x
+y.sum().backward()
+x.grad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<pre><code>tensor([0., 2., 4., 6.])
+</code></pre>
+<h2 id="分离计算"><a href="#分离计算" class="headerlink" title="分离计算"></a>分离计算</h2><p>有时，我们希望将某些计算移动到记录的计算图之外。例如，假设y是作为x的函数计算的，而z则是作为y和x的函数计算的。想象⼀下，我们想计算z关于x的梯度，但由于某种原因，我们希望将y视为⼀个常数，并且只考虑到x在y被计算后发挥的作⽤。</p>
+<p>在这⾥，我们可以分离y来返回⼀个新变量u，该变量与y具有相同的值，但丢弃计算图中如何计算y的任何信息。换句话说，梯度不会向后流经u到x。因此，下⾯的反向传播函数计算z=u*x关于x的偏导数，并将u作为常数处理，而不是z=x*x*x关于x的偏导数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()
+y = x * x
+u = y.detach()
+z = u * x
+z.sum().backward()
+x.grad, x.grad == u<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<pre><code>(tensor([0., 1., 4., 9.]), tensor([True, True, True, True]))
+</code></pre>
+<p>由于刚刚记录了y的计算结果，我们可以随后在y上调用反向传播，得到y=x*x关于x的导数，即2*x</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.grad.zero_()
+y.sum().backward()
+x.grad, x.grad == 2 * x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<pre><code>(tensor([0., 2., 4., 6.]), tensor([True, True, True, True]))
+</code></pre>
+<p>前面我们通过一些例子学习了pytorch是如何自动计算导数，用一句话总结就是：首先将梯度附加到想要对其计算偏导数的变量上，然后记录目标值的计算，执行它的反向传播函数，最后访问得到的梯度。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.php">李宏毅 机器学习2021</a></p>
-<p>[3] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.04805">Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” <em>arXiv preprint arXiv:1810.04805</em> (2018).</a></p>
 
                 
             </div>
@@ -539,7 +568,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/04/17/bert/">https://faith-ye.github.io/2022/04/17/bert/</a>
+                    <a href="https://faith-ye.github.io/2022/04/27/zi-dong-wei-fen/">https://faith-ye.github.io/2022/04/27/zi-dong-wei-fen/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -577,12 +606,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/NLP/">
-                                    <span class="chip bg-color">NLP</span>
-                                </a>
-                            
-                                <a href="/tags/BERT/">
-                                    <span class="chip bg-color">BERT</span>
+                                <a href="/tags/pytorch/">
+                                    <span class="chip bg-color">pytorch</span>
                                 </a>
                             
                         </div>
@@ -1022,17 +1047,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/19/hw1-regression/">
+                <a href="/2022/04/27/zi-dong-wei-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="HW1-Regression">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="自动微分">
                         
-                        <span class="card-title">HW1-Regression</span>
+                        <span class="card-title">自动微分</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1042,30 +1068,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/" class="post-category">
-                                    李宏毅ML2021作业部分
+                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    PyTorch学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Regression/">
-                        <span class="chip bg-color">Regression</span>
-                    </a>
-                    
-                    <a href="/tags/DNN/">
-                        <span class="chip bg-color">DNN</span>
+                    <a href="/tags/pytorch/">
+                        <span class="chip bg-color">pytorch</span>
                     </a>
                     
                 </div>
@@ -1079,13 +1102,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/11/transformer/">
+                <a href="/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Transformer">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="基本线性代数运算">
                         
-                        <span class="card-title">Transformer</span>
+                        <span class="card-title">基本线性代数运算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1096,14 +1119,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
+                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    PyTorch学习笔记
                                 </a>
                             
                             
@@ -1113,16 +1136,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/NLP/">
-                        <span class="chip bg-color">NLP</span>
-                    </a>
-                    
-                    <a href="/tags/Transformer/">
-                        <span class="chip bg-color">Transformer</span>
-                    </a>
-                    
-                    <a href="/tags/Seq2Seq/">
-                        <span class="chip bg-color">Seq2Seq</span>
+                    <a href="/tags/pytorch/">
+                        <span class="chip bg-color">pytorch</span>
                     </a>
                     
                 </div>
