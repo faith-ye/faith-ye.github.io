@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据预处理, 小叶の博客">
-    <meta name="description" content="这节我们将简要介绍使用pandas预处理原始数据，并将原始数据转换为张量格式的步骤。
-读取数据集首先，我们简单创建一个人工数据集，并存储在csv文件./data/house_tiny.csv中。下面我们将数据集按行写入csv文件中
-impo">
+    <meta name="keywords" content="机器学习的可解释性, 小叶の博客">
+    <meta name="description" content="引言我们都知道神经网络是一个黑箱模型，虽然它在测试集的准确率可以达到很高，但很难解释清楚其中缘由。而有些模型像线性模型、决策树等虽然很容易解释，但模型往往不够强大，在测试集上有很差的表现。然而，在测试集上表现好并不意味着模型很智能，在一些领">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +17,7 @@ impo">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数据预处理 | 小叶の博客</title>
+    <title>机器学习的可解释性 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -292,12 +290,12 @@ impo">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据预处理</h1>
+                    <h1 class="description center-align post-title">机器学习的可解释性</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +411,8 @@ impo">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/pytorch/">
-                                <span class="chip bg-color">pytorch</span>
+                            <a href="/tags/Explainable-AI/">
+                                <span class="chip bg-color">Explainable AI</span>
                             </a>
                         
                     </div>
@@ -425,8 +423,8 @@ impo">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                PyTorch学习笔记
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                深度学习笔记
                             </a>
                         
                     </div>
@@ -438,7 +436,7 @@ impo">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-25
+                    2022-05-03
                 </div>
                 
 
@@ -447,14 +445,14 @@ impo">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    819
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -477,92 +475,32 @@ impo">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这节我们将简要介绍使用pandas预处理原始数据，并将原始数据转换为张量格式的步骤。</p>
-<h2 id="读取数据集"><a href="#读取数据集" class="headerlink" title="读取数据集"></a>读取数据集</h2><p>首先，我们简单创建一个人工数据集，并存储在csv文件./data/house_tiny.csv中。下面我们将数据集按行写入csv文件中</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import os
+                <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>我们都知道神经网络是一个黑箱模型，虽然它在测试集的准确率可以达到很高，但很难解释清楚其中缘由。而有些模型像线性模型、决策树等虽然很容易解释，但模型往往不够强大，在测试集上有很差的表现。然而，在测试集上表现好并不意味着模型很智能，在一些领域中，我们不但需要模型的性能好，还需要知道为什么，我们才会放心的使用这个模型。如当我们用ML挑选简历时，我们需要知道机器学习模型是依据应聘人的那些特征做出推荐的决定，而不单单是该模型在测试集中表现好。</p>
+<p>可解释性人工智能（Explainable AI）这个技术可以用于填补这个鸿沟，但可解释性并不意味着我们要完全明白ML模型是如何运作的，就像我们不完全知道人类的大脑运行的原理，但是我们相信人类做出的决定。我们需要的只是ML模型给我一个它做出决定的理由，而这个理由可以被我们和我们的顾客以及老板满意。</p>
+<h2 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h2><p>机器学习的可解释性包括两个方面，一个是local explanation，另一个是global explanation。以图像分类器为例，local explanation需要回答的是为什么你觉得这张图片属于这个类别？而global explanation需要回答的是这些类别具有什么样的特征？</p>
+<h3 id="Local-explanation"><a href="#Local-explanation" class="headerlink" title="Local explanation"></a>Local explanation</h3><p>仍然以图像分类器为例，Local explanation的目标是每个component对于最终结果的重要性程度，这可以通过移动或修改其中一个component来看模型输出的变化来实现，模型输出改变越大，意味着这个component越重要。</p>
+<p><strong>基于梯度的方法</strong></p>
+<p>假设输入为一张图像$x$，它有很多component ${x_{1},x_{2},…,x_{N}}$ 组成。如果输入是image，则component一般是pixel，segment等。如果输入是text，则component一般是word。现在我们依次给每个component加上一个$\Delta x$，对应就会得到一个loss $\Delta e$（模型输出和真实值之间）。我们想要知道每个component对于模型判断的重要性，只需计算对应的$|\frac{\Delta e}{\Delta x}|=|\frac{\partial e}{\partial x_{n}}|$得到。利用这些数值，我们可以绘制saliency map，如下图，亮度越高（即前面计算的数值越大）的区域代表这个component对于预测结果的影响越大</p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503203524561.png" class="">
 
-os.makedirs('./data', exist_ok=True)
-data_file = os.path.join('./data', 'house_tiny.csv')
-with open(data_file, 'w') as f:
-    f.write('NumRooms,Alley,Price\n') # 列名
-    f.write('NA,Pave,127500\n') # 每⾏表⽰⼀个数据样本
-    f.write('2,NA,106000\n')
-    f.write('4,NA,178100\n')
-    f.write('NA,NA,140000\n')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基于梯度来判断component重要性的方法也存在局限性：Noisy Gradient和Gradient Saturation</p>
+<p>Noisy Gradient是有些梯度会非常大（如下图），我们可以通过在计算梯度时添加多个扰动，然后计算加入扰动后的平均梯度避免，这种方法被称作SmoothGrad，相关见论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03825">Randomly add noises to the input image, get saliency maps of the noisy images, and average them</a></p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503204447762.png" class="">
 
-<p>有数据集后，我们可以导入pandas包并调用read_csv函数加载原始数据集。该数据集有四行三列，其中每⾏描述了房间数量（“NumRooms”）、巷⼦类型（“Alley”）和房屋价格（“Price”）。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
+<p>Gradient Saturation是指某个因素对图片的预测起到了推动作用，但是这个作用是有限的，超过一定程度后就不再增加预测的几率。以预测大象这个类别为例，很明显鼻子的长度是一个很重要的影响因素。随着鼻子长度的增加，预测的几率的几率会增加，但超过一定数值后，预测概率不会增加，即出现变化率为0的情况，但这个鼻子长度的动物已经不能算是大象了。</p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503205121997.png" class="">
 
-data = pd.read_csv(data_file)
-print(data)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Global-explanation"><a href="#Global-explanation" class="headerlink" title="Global explanation"></a>Global explanation</h3><p>假设我们已经训练好一个CNN网络结构，将一张图片X输入CNN，在每一个filter后提取一个feature map，每个feature map都有对应的特征值$a_{ij}$，我们可以通过使这些特征值之和最大为目标找到对应的输入X，通过观察这个输入的特征我们就可以判断这个filter可以侦察到图片的某些特征。或者我们可以以输出为目标，找到输出为某种类别概率最高对应的输入X即可得到该类别图片对应有哪些特征？</p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503210224555.png" class="">
 
-<pre><code>   NumRooms Alley   Price
-0       NaN  Pave  127500
-1       2.0   NaN  106000
-2       4.0   NaN  178100
-3       NaN   NaN  140000
-</code></pre>
-<h2 id="处理缺失值"><a href="#处理缺失值" class="headerlink" title="处理缺失值"></a>处理缺失值</h2><p>有输出结果可以看出，表格中存在缺失的数据。为了避免这些数据对之后的模型搭建存在影响，需对其进行处理，常见的方法有插值法和删除法，插值法是用一个替代值替换缺失值，而删除法则是直接忽略缺失值。</p>
-<p><strong>插值法</strong></p>
-<p>我们一般用同一列的均值替换“NaN”项，可以用fillna()函数实现</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">data1 = data.fillna(data.mean())
-print(data1)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>但事实上，我们更多时候我们找到的X是一堆杂讯，我们根本不能从中学习到什么？其中一个解决方法是在优化目标上加上一个限制R(X)，R(X)应符合图案本身的设计，同时你还需调影响结果的超参数。下面展示<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.06579">Understanding Neural Networks Through Deep Visualization</a>侦察到各种类别对应的图片特征。</p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503211706831.png" class="">
 
-<pre><code>   NumRooms Alley   Price
-0       3.0  Pave  127500
-1       2.0   NaN  106000
-2       4.0   NaN  178100
-3       3.0   NaN  140000
-</code></pre>
-<p><strong>删除法</strong></p>
-<p>一般是删除缺失值所对应的行，用dropna()函数实现</p>
-<ul>
-<li>axis默认值为0，当设置为1时，是删除缺失值所对应的列</li>
-<li>subset是参考某几列（或几行）作为删除一句</li>
-</ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">data2 = data.dropna(axis=0, subset=['NumRooms'])
-print(data2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>另外还有一种更有效的方式，利用Generator。利用GAN训练一个Image Generator，可以通过低维度的向量通过Generator得到一个图片。与前面通过对应某个类别概率最大找到模型对应输入X不同的是，这里我们找到对应的输入z，然后将这个z输入Generator中得到Image X。借助这个图片，我们就可以找出该类别具有的一些特征。</p>
+<img src="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/image-20220503212409392.png" class="">
 
-<pre><code>   NumRooms Alley   Price
-1       2.0   NaN  106000
-2       4.0   NaN  178100
-</code></pre>
-<p>除此之外，有时还需要删除重复的数据，可以用drop_duplicates()函数实现。由于一般我们都是用插值法处理缺失值，所以这里我们考虑该方法。</p>
-<p>通过位置索引iloc，我们将data分为inputs和outputs</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2]
-inputs = inputs.fillna(inputs.mean())
-print(inputs)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre><code>   NumRooms Alley
-0       3.0  Pave
-1       2.0   NaN
-2       4.0   NaN
-3       3.0   NaN
-</code></pre>
-<p>对于inputs中的类别值或离散值，我们将“NaN”视为一个类别。由于“Alley”列只接受两种类型的类别值“Pave”和“NaN”，pandas可以自动将此列转换为两列“Alley_Pave”和“Alley_nan”。类型为“Pave”的⾏会将“Alley_Pave”的值设置为1，“Alley_nan”的值设置为0。类型为“NaN”的⾏会将“Alley_Pave”的值设置为0，“Alley_nan”的值设置为1。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">inputs = pd.get_dummies(inputs, dummy_na=True)
-print(inputs)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre><code>   NumRooms  Alley_Pave  Alley_nan
-0       3.0           1          0
-1       2.0           0          1
-2       4.0           0          1
-3       3.0           0          1
-</code></pre>
-<h2 id="转换为张量格式"><a href="#转换为张量格式" class="headerlink" title="转换为张量格式"></a>转换为张量格式</h2><p>现在inputs和outputs中所有数据都是数值类型，我们可以把它们转换为张量格式。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch
-X, y = torch.tensor(inputs.values), torch.tensor(outputs.values)
-X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-<pre><code>(tensor([[3., 1., 0.],
-         [2., 0., 1.],
-         [4., 0., 1.],
-         [3., 0., 1.]], dtype=torch.float64),
- tensor([127500, 106000, 178100, 140000]))
-</code></pre>
-<p>这节我们主要学习了csv文件数据的预处理，其实以其他格式存储的数据也是通过类似的方式进行处理，最终都得转变成tensor格式。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
+<p>推荐论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1612.00005">Plug &amp; Play Generative Networks: Conditional Iterative Generation of Images in Latent Space</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WQY85vaQfTI">李宏毅2021机器学习课程</a></p>
 
                 
             </div>
@@ -589,7 +527,7 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/">https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/</a>
+                    <a href="https://faith-ye.github.io/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/">https://faith-ye.github.io/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -627,8 +565,8 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/pytorch/">
-                                    <span class="chip bg-color">pytorch</span>
+                                <a href="/tags/Explainable-AI/">
+                                    <span class="chip bg-color">Explainable AI</span>
                                 </a>
                             
                         </div>
@@ -1068,17 +1006,18 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/">
+                <a href="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="基本线性代数运算">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="机器学习的可解释性">
                         
-                        <span class="card-title">基本线性代数运算</span>
+                        <span class="card-title">机器学习的可解释性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1088,26 +1027,27 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    PyTorch学习笔记
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    深度学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
+                    <a href="/tags/Explainable-AI/">
+                        <span class="chip bg-color">Explainable AI</span>
                     </a>
                     
                 </div>
@@ -1121,13 +1061,13 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/20/hw3-cnn/">
+                <a href="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="HW3-CNN">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="对抗攻击与防御">
                         
-                        <span class="card-title">HW3-CNN</span>
+                        <span class="card-title">对抗攻击与防御</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1138,14 +1078,14 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/" class="post-category">
-                                    李宏毅ML2021作业部分
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    深度学习笔记
                                 </a>
                             
                             
@@ -1155,12 +1095,12 @@ X, y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CNN/">
-                        <span class="chip bg-color">CNN</span>
+                    <a href="/tags/Adversarial-Attack/">
+                        <span class="chip bg-color">Adversarial Attack</span>
                     </a>
                     
-                    <a href="/tags/Classifier/">
-                        <span class="chip bg-color">Classifier</span>
+                    <a href="/tags/Defense/">
+                        <span class="chip bg-color">Defense</span>
                     </a>
                     
                 </div>
