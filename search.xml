@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>程序流程控制</title>
+      <link href="/2022/05/04/cheng-xu-liu-cheng-kong-zhi/"/>
+      <url>/2022/05/04/cheng-xu-liu-cheng-kong-zhi/</url>
+      
+        <content type="html"><![CDATA[<h2 id="分支结构"><a href="#分支结构" class="headerlink" title="分支结构"></a>分支结构</h2><h3 id="If分支"><a href="#If分支" class="headerlink" title="If分支"></a>If分支</h3><ul><li>根据判定的结果决定执行某个分支的代码</li></ul><p><strong>if分支的三种格式</strong></p><ul><li>格式1</li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java">if(条件表达式){ 代码...；}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>格式2</li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java">if(条件表达式){ 代码...;} else{ 代码...;}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>格式3</li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java">if(条件表达式1){ 代码...;} else if(条件表达式2){ 代码...;} ... else{ 代码...;}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="switch分支"><a href="#switch分支" class="headerlink" title="switch分支"></a>switch分支</h3><ul><li>也是匹配条件去执行分支，适合做值匹配的分支选择。</li></ul><p><strong>格式</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">switch(表达式){case 值1:执行代码...;break;case 值2:执行代码...;break;...case 值n-1:执行代码...;break;default:执行代码...;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>switch分支注意事项</strong></p><ul><li>表达式类型只能是byte、short、int、char、String，不支持double、float、long</li><li>case给出的值不允许重复，且只能是字面量，不能是变量</li><li>不要忘记写break，否则会出现穿透现象</li></ul><h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2><ul><li>控制一段代码反复执行很多次</li></ul><h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p><strong>格式</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">for(初始化语句;循环条件;迭代语句){    循环体语句（重复执行的代码）;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p><strong>格式</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">初始化语句;while(循环条件){循环体语句;迭代语句;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h3><p><strong>格式</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">初始化语句;do {    循环体语句;    迭代语句;} while(循环条件);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>特点：一定会运行一次循环体语句</li></ul><p>基于这三个循环结构，可以实现死循环和嵌套循环</p><h2 id="跳转关键词"><a href="#跳转关键词" class="headerlink" title="跳转关键词"></a>跳转关键词</h2><ul><li>break ： 跳出并结束当前所在循环的执行</li><li>continue ： 跳出当前循环的当次执行，进入循环的下一次</li></ul><p><strong>注意事项</strong></p><p>break只能用于结束所在循环，或者结束所在switch分支的执行；continue只能在循环中进行使用</p><h2 id="随机数Random"><a href="#随机数Random" class="headerlink" title="随机数Random"></a>随机数Random</h2><ul><li>用于在程序中获取随机数的技术</li></ul><p><strong>Random的使用</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">package random;import java.util.Random;public class RandomDemo1 {    public static void main(String[] args) {        Random random = new Random();        int number = random.nextInt(10);        System.out.println(number);    }}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>步骤</strong>：导包$\Rightarrow$创建对象$\Rightarrow$调用相关函数</p><p>上述代码中 nextInt(n) 功能只能生成：0至n-1之间的随机数，不包含n。因此要生成区间随机数可以用减加法</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">// 3 - 17 ==&gt; (0 - 14) + 3int number = random.nextInt(15) + 3;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java学习笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java基础语法</title>
       <link href="/2022/05/04/java-ji-chu-yu-fa/"/>
       <url>/2022/05/04/java-ji-chu-yu-fa/</url>

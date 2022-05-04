@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-04T02:09:01.875Z</updated>
+  <updated>2022-05-04T02:11:00.135Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>程序流程控制</title>
+    <link href="https://faith-ye.github.io/2022/05/04/cheng-xu-liu-cheng-kong-zhi/"/>
+    <id>https://faith-ye.github.io/2022/05/04/cheng-xu-liu-cheng-kong-zhi/</id>
+    <published>2022-05-04T02:09:54.000Z</published>
+    <updated>2022-05-04T02:11:00.135Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;分支结构&quot;&gt;&lt;a href=&quot;#分支结构&quot; class=&quot;headerlink&quot; title=&quot;分支结构&quot;&gt;&lt;/a&gt;分支结构&lt;/h2&gt;&lt;h3 id=&quot;If分支&quot;&gt;&lt;a href=&quot;#If分支&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Java基础语法</title>
@@ -516,31 +539,6 @@
     
     
     <category term="pytorch" scheme="https://faith-ye.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo插入图片</title>
-    <link href="https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/"/>
-    <id>https://faith-ye.github.io/2022/03/17/hexo-cha-ru-tu-pian/</id>
-    <published>2022-03-17T07:30:05.000Z</published>
-    <updated>2022-04-18T01:01:11.351Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;typora设置&quot;&gt;&lt;a href=&quot;#typora设置&quot; class=&quot;headerlink&quot; title=&quot;typora设置&quot;&gt;&lt;/a&gt;typora设置&lt;/h2&gt;&lt;p&gt;打开typora，选择：文件 - 偏好设置 - 图像 -</summary>
-        
-      
-    
-    
-    
-    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
-    
-    
-    <category term="Hexo" scheme="https://faith-ye.github.io/tags/Hexo/"/>
     
   </entry>
   
