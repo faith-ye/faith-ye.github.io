@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java方法</title>
+      <link href="/2022/05/04/java-fang-fa/"/>
+      <url>/2022/05/04/java-fang-fa/</url>
+      
+        <content type="html"><![CDATA[<h2 id="方法定义和调用"><a href="#方法定义和调用" class="headerlink" title="方法定义和调用"></a>方法定义和调用</h2><p>方法是一种语法结构，它可以把一段代码封装成一个功能，以方便重复调用，这样就提高了代码的重复性，使程序逻辑更加清晰。</p><p>以两个整数求和为例子，方法定义如下，函数声明中第一个int是<strong>返回值类型</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">public static int sum(int a, int b){    int c = a + b;    return c;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>可以在函数中调用，调用格式如下：</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">int rs = sum(100, 200);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>注意事项</strong></p><ul><li><p>方法的编写顺序无所谓，方法与方法之间是平级关系，不能嵌套定义</p></li><li><p>方法的返回值类型为void（无返回值），方法内则不能使用return返回数据，如果方法的返回值类型写了具体类型，方法内部则必须使用return返回对应类型的数据</p></li><li><p>return语句下面，不能编写代码，因为执行不到，属于无效的代码</p></li><li><p>方法不调用不执行，调用时必须严格匹配方法的参数情况</p></li><li><p>有返回值的方法调用时可以选择定义变量接受结果，或者直接输出调用，甚至直接调用；无返回值方法的调用只能直接调用一下</p></li></ul><h2 id="方法的参数传递机制"><a href="#方法的参数传递机制" class="headerlink" title="方法的参数传递机制"></a>方法的参数传递机制</h2><p><strong>Java的参数传递机制：值传递</strong></p><ul><li>在传输实参给方法的形参的时候，并不是传输实参变量本身，而是传输实参变量中存储的值</li></ul><p><strong>基本类型的传递机制</strong></p><ul><li><strong>形参</strong>：以方法为例，就是方法定义时的变量</li><li><strong>实参</strong>：在方法内部定义的变量</li><li>传输的是实参存储的值</li></ul><p><strong>引用类型的参数传递</strong></p><p>也是<strong>值传递</strong>，与基本类型的参数在传递时的不同：基本类型的参数传输存储的数据值，而引用类型的参数传输存储的<strong>地址值</strong>。</p><h2 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h2><ul><li>同一个类中，出现多个方法名称相同，但是形参列表是不同的，那么这些方法就是重载方法</li></ul><p><strong>作用</strong></p><ul><li>可读性好，方法名称相同提示是同一类型的功能，通过形参不同实现功能差异化的选择，这是一种专业的代码设计，还可以提高开发效率</li></ul><p><strong>识别技巧</strong></p><ul><li>只要是同一个类中，方法名称相同、形参列表不同，那么它们就是重载的方法，其他不关心</li><li>形参列表不同指的是：形参的<strong>个数、类型、顺序</strong>不同，不关心形参的名称</li></ul><p><strong>return关键字单独使用</strong></p><ul><li>return; —&gt; 可以立即<strong>跳出并结束当前方法的执行</strong>；return关键字单独使用可以放在任何方法中</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java学习笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数组</title>
       <link href="/2022/05/04/shu-zu/"/>
       <url>/2022/05/04/shu-zu/</url>
