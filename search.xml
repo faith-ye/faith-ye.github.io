@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java快速入门和IDEA的使用</title>
+      <link href="/2022/05/04/java-kuai-su-ru-men-he-idea-de-shi-yong/"/>
+      <url>/2022/05/04/java-kuai-su-ru-men-he-idea-de-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<h2 id="入门程序-HelloWorld"><a href="#入门程序-HelloWorld" class="headerlink" title="入门程序-HelloWorld"></a>入门程序-HelloWorld</h2><p>1、开发一个Java程序要经历的步骤</p><ul><li><strong>编写、编译(javac)、运行(java)</strong></li></ul><p>2、Java代码编写的基本要求</p><ul><li>文件名称的后缀必须是java结尾</li><li>文件名称必须与代码的类名称一致</li><li>必须使用英文模式下的符号</li></ul><p>3、JDK(Java Development Kit，Java开发工具包)的组成</p><ul><li><strong>JVM</strong>(Java Virtual Machine)：Java 虚拟机，正真运行Java程序的地方</li><li><strong>核心类库</strong>：Java自己写好的程序，给程序员自己的程序调用的</li><li><strong>JRE</strong>(Java Runtime Enviroment)：Java的运行环境，包括上面两个</li><li><strong>开发工具</strong>：javac、java…</li></ul><p>以HelloWorld程序为例，先用javac编译HelloWorld.java文件生成HelloWorld.class文件，然后通过java HelloWorld指令送到JRE中，JRE通过调用核心类库，然后送到JVM中运行。</p><h2 id="IDEA入门程序"><a href="#IDEA入门程序" class="headerlink" title="IDEA入门程序"></a>IDEA入门程序</h2><p>1、IDEA的结构</p><ul><li><strong>project - module - package - class</strong></li><li>project中可以创建多个module</li><li>module中可以创建多个package</li><li>package中可以创建多个class</li></ul><p>2、新建</p><ul><li><strong>new project / module / package / class</strong></li></ul><p>3、常用快捷键</p><ul><li>main/psvm、sout、….           快速输入相关代码</li><li>Ctrl + D                                      复制当前行数据到下一行</li><li>Ctrl + Y                                       删除所在行，建议用Ctrl + X</li><li>Ctrl + Alt + L                             格式化代码</li><li>Ctrl + /， Ctrl + Shift + /          对代码进行注释</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>机器学习的可解释性</title>
       <link href="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/"/>
       <url>/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/</url>
