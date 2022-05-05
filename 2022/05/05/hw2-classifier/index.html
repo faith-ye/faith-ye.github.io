@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="门控循环单元, 小叶の博客">
-    <meta name="description" content="门控循环单元（gated recurrent units, GRU）于2014被Cho等人提出。GRU和LSTM一样有专门的机制来确定应该何时更新隐状态，以及应该何时重置隐状态，但GRU没有单独的存储单元，即LSTM的记忆元。GRU是LST">
+    <meta name="keywords" content="HW2-Classifier, 小叶の博客">
+    <meta name="description" content="作业描述本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。
+
+bat / pat , bad / bed
+
+作业使用的数据集是TIMIT A">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>门控循环单元 | 小叶の博客</title>
+    <title>HW2-Classifier | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +294,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">门控循环单元</h1>
+                    <h1 class="description center-align post-title">HW2-Classifier</h1>
                 </div>
             </div>
         </div>
@@ -411,8 +415,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/GRU/">
-                                <span class="chip bg-color">GRU</span>
+                            <a href="/tags/Classifier/">
+                                <span class="chip bg-color">Classifier</span>
                             </a>
                         
                     </div>
@@ -423,8 +427,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                深度学习笔记
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/" class="post-category">
+                                李宏毅ML2021作业部分
                             </a>
                         
                     </div>
@@ -436,7 +440,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-25
+                    2022-05-05
                 </div>
                 
 
@@ -445,14 +449,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    10 分
                 </div>
                 
 
@@ -475,63 +479,285 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>门控循环单元（gated recurrent units, GRU）于2014被Cho等人提出。GRU和LSTM一样有专门的机制来确定应该何时更新隐状态，以及应该何时重置隐状态，但GRU没有单独的存储单元，即LSTM的记忆元。GRU是LSTM的一个变体，它结构更加简单，却能够提供和LSTM同等的效果，并且计算的速度明显更快。</p>
-<p>现在我们从GRU的内部结构开始解读：</p>
-<h2 id="重置门和更新门"><a href="#重置门和更新门" class="headerlink" title="重置门和更新门"></a>重置门和更新门</h2><p>我们首先介绍重置门（reset gate）和更新门（update gate）。重置门控制着我们还想记住过去状态的数量；更新门决定着新状态保存旧状态信息的程度。这两个门的输入和LSTM一样，是当前时间步的输入和上一时间步的隐状态，它们的输出是由使用sigmoid激活函数的两个全连接层给出。因此它们的数学表达为：</p>
-<p>$$R_{t}=\sigma({X_{t}W_{xr}+H_{t-1}W_{hr}+b_{r}})$$</p>
-<p>$$Z_{t}=\sigma({X_{t}W_{xz}+H_{t-1}W_{hz}+b_{z}})$$</p>
-<p>式中：$X_{t}\in R^{nxd}$是输入（样本个数：n，维度：d）；$H_{t-1}\in R^{nxh}$是上一时间步的隐状态；$R_{t}\in R^{nxd}$和$Z_{t}\in R^{nxd}$分别是重置门和更新门；$W_{xr},W_{xz}\in R^{dxh}$和$W_{hr},W_{hz}\in R^{hxh}$是权重参数，$b_{r},b_{z}\in R^{1xh}$是偏置项。</p>
-<h2 id="候选隐状态"><a href="#候选隐状态" class="headerlink" title="候选隐状态"></a>候选隐状态</h2><p>候选隐状态（candidate hidden state）$\overset{-}{H_{t}}\in R^{nxh}$的计算公式如下：</p>
-<p>$$\overset{-}{H_{t}}=tanh(X_{t}W_{xh}+(R_{t}\bigodot H_{t-1})W_{hh}+b_{h})$$</p>
-<p>式中$W_{xh}\in R^{dxh}$和$W_{hh}\in R^{hxh}$是权重参数，$b_{h}\in R^{1xh}$是偏置项，符号$\bigodot$是Hadamard积（按元素乘积）运算符。</p>
-<p>重置门$R_{t}$可以控制以往状态的影响程度， 当$R_{t}$中所有项接近1时，保留前一隐状态所有影响。当$R_{t}$中所有项接近0时，候选隐状态是以$X_{t}$作为输入的多层感知机的结果。</p>
-<p>以上计算流程可以用下图表示：</p>
-<img src="/2022/03/25/men-kong-xun-huan-dan-yuan/1.png" class="">
+                <h2 id="作业描述"><a href="#作业描述" class="headerlink" title="作业描述"></a>作业描述</h2><p>本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。</p>
+<ul>
+<li><strong>b</strong>at / <strong>p</strong>at , b<strong>a</strong>d / b<strong>e</strong>d</li>
+</ul>
+<p>作业使用的数据集是<a target="_blank" rel="noopener" href="https://catalog.ldc.upenn.edu/LDC93S1">TIMIT Acoustic-Phonetic Continuous Speech Corpus</a>，采用的数据格式如下：</p>
+<p><strong>timit_11/</strong></p>
+<ul>
+<li>train_11.npy –&gt; 训练数据</li>
+<li>train_label_11.npy –&gt; 逐帧phoneme标签（0-38）</li>
+<li>test_11.npy –&gt; 测试数据</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 导入需要的包
+import os
+import numpy as np
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, Dataset
+import time
+import random
+import matplotlib.pyplot as plt
 
-<h2 id="隐状态"><a href="#隐状态" class="headerlink" title="隐状态"></a>隐状态</h2><p>隐状态$H_{t}\in R^{nxh}$通过更新门$Z_{t}$来确定它多大程度上来自与旧的状态$H_{t-1}$和当前候选状态$\overset{-}{H_{t}}$，它的具体公式为：</p>
-<p>$$H_{t}=Z_{t}\bigodot H_{t-1}+(1-Z_{t})\bigodot \overset{-}{H_{t}}$$</p>
-<p>每当更新门$Z_{t}$中所有项接近1时，模型就倾向于只保存旧状态。此时，来自$X_{t}$的信息基本上被忽略。相反，当$Z_{t}$中所有项接近0时，新的隐状态$H_{t}$就会接近候选隐状态$\overset{-}{H_{t}}$这些设计可以帮助我们处理循环神经⽹络中的梯度消失问题，并更好地捕获时间步距离很⻓的序列的依赖关系。 </p>
-<p>此时GRU一个神经元一个完整的内部结构就可以用下图表示：</p>
-<img src="/2022/03/25/men-kong-xun-huan-dan-yuan/2.png" class="">
+seed = 2022
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>用LSTM，我们最后将最新的隐状态作为输入进入另一个网络，则可实现分类或回归等模型。</p>
-<h2 id="GRU网络代码"><a href="#GRU网络代码" class="headerlink" title="GRU网络代码"></a>GRU网络代码</h2><p>同LSTM我们可以调用pytorch里面的API实现一个简单的GRU网络</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
-<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
-<span class="token keyword">class</span> <span class="token class-name">GRU_Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> embedding<span class="token punctuation">,</span> embedding_dim<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">,</span> num_layers<span class="token punctuation">,</span> output_dim<span class="token punctuation">,</span> dropout<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> fix_embedding<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""
-        embedding: 词典
-        embedding_dim: 词向量的维度
-        hidden_dim: GRU神经元个数
-        num_layers: GRU的层数
-        output_dim: 隐藏层输出的维度(分类的数量)
-        """</span>
-        <span class="token builtin">super</span><span class="token punctuation">(</span>GRU_Net<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment"># 制作 embedding layer</span>
-        self<span class="token punctuation">.</span>embedding <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Embedding<span class="token punctuation">(</span>embedding<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> embedding<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>embedding<span class="token punctuation">.</span>weight <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Parameter<span class="token punctuation">(</span>embedding<span class="token punctuation">)</span>
-        <span class="token comment"># 如果 fix_embedding 为 False，在训练过程中，embedding 也会跟着被训练</span>
-        self<span class="token punctuation">.</span>embedding<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">False</span> <span class="token keyword">if</span> fix_embedding <span class="token keyword">else</span> <span class="token boolean">True</span>
-        self<span class="token punctuation">.</span>embedding_dim <span class="token operator">=</span> embedding<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>gru <span class="token operator">=</span> nn<span class="token punctuation">.</span>GRU<span class="token punctuation">(</span>embedding_dim<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">,</span> num_layers<span class="token operator">=</span>num_layers<span class="token punctuation">,</span> bidirectional<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> batch_first<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> dropout<span class="token operator">=</span>dropout<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> output_dim<span class="token punctuation">)</span>
+<h2 id="定义一些函数"><a href="#定义一些函数" class="headerlink" title="定义一些函数"></a>定义一些函数</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">def get_device():
+    ''' Get device (if GPU is available, use GPU) '''
+    return 'cuda' if torch.cuda.is_available() else 'cpu'
+
+def plot_learning_curve(loss_record, title=''):
+    ''' Plot learning curve of your model (train &amp; dev loss) '''
+    total_steps = len(loss_record['train'])
+    x_1 = range(total_steps)
+    x_2 = x_1[::len(loss_record['train']) // len(loss_record['dev'])]
+    plt.figure(figsize=(6, 4))
+    plt.plot(x_1, loss_record['train'], c='tab:red', label='train')
+    plt.plot(x_2, loss_record['dev'], c='tab:cyan', label='dev')
+    plt.ylim(0.0, 5.)
+    plt.xlabel('Training steps')
+    plt.ylabel('MSE loss')
+    plt.title('Learning curve of {}'.format(title))
+    plt.legend()
+    plt.show()
+
+def plot_accuracy(acc_record, title=''):
+    ''' Plot accuracy of your model (train &amp; dev acc) '''
+    total_steps = len(acc_record['train'])
+    x = range(total_steps)
+    plt.figure(figsize=(6, 4))
+    plt.plot(x, acc_record['train'], c='tab:red', label='train')
+    plt.plot(x, acc_record['dev'], c='tab:cyan', label='dev')
+    plt.ylim(0.0, 1.)
+    plt.xlabel('Training epochs')
+    plt.ylabel('accuracy')
+    plt.title('Learning curve of {}'.format(title))
+    plt.legend()
+    plt.show()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>从.npy文件中加载训练和测试数据</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print("Loading data ...")
+
+data_root = './timit_11/'
+train = np.load(data_root + 'train_11.npy')
+train_label = np.load(data_root + 'train_label_11.npy')
+test = np.load(data_root + 'test_11.npy')
+
+print('Size of training data: {}'.format(train.shape))
+print('Size of testing data: {}'.format(test.shape))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre><code>Loading data ...
+Size of training data: (1229932, 429)
+Size of testing data: (451552, 429)
+</code></pre>
+<h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">class TIMITDataset(Dataset):
+    def __init__(self, X, y=None):
+        self.data = torch.from_numpy(X).float()
+        if y is not None:
+            y = y.astype(np.int)
+            self.label = torch.LongTensor(y)
+        else:
+            self.label = None
     
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>embedding<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        out<span class="token punctuation">,</span> _ <span class="token operator">=</span> self<span class="token punctuation">.</span>gru<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>out<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token comment"># 句子最后时刻的hidden state</span>
-        <span class="token keyword">return</span> out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        if self.label is not None:
+            return self.data[idx], self.label[idx]
+        else:
+            return self.data[idx]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>用LSTM同样的例子，经过这个网络得出在验证集中准确率最高为0.9024，和LSTM模型的准确度差不多，但运行时间个人明显感觉短了很多。</p>
-<h2 id="与LSTM间的异同"><a href="#与LSTM间的异同" class="headerlink" title="与LSTM间的异同"></a>与LSTM间的异同</h2><p>两者相似之处：引用了门结构，并在t-１时刻到ｔ时刻信息的传递引用了新的成分（候选隐状态，在LSTM中是记忆元），不再像传统RNN只利用了当前时刻的输入和上一时刻的隐状态。这个相同之处带来了两个好处：</p>
-<p>①能够保存长期序列中的信息，且不会随时间而清除或因为与预测不相关而移除。</p>
-<p>②有效创建了绕过多个时间步骤的快捷路径。这些捷径允许误差更容易反向传播，不至于像传统RNN那样迅速消散，从而解决了梯度消失的问题。</p>
-<p>两者不同之处：</p>
-<p>①对记忆内容传递程度的控制。LSTM用output gate控制传递程度，传递给下一个unit；而GRU是完全传递给下一个unit，不做任何控制。</p>
-<p>②对候选内容的控制；LSTM计算候选记忆元不对上一信息做任何控制；而GRU计算候选隐状态时利用reset gate对上一时刻的信息进行控制。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1412.3555">Chung J, Gulcehre C, Cho K H, et al. Empirical evaluation of gated recurrent neural networks on sequence modeling[J]. arXiv preprint arXiv:1412.3555, 2014.</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
+<p>将训练数据划分为训练集和验证集，你可以通过改变变量 VAL_RATIO 来修改验证集的比例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">VAL_RATIO = 0.2
+
+percent = int(train.shape[0] * (1 - VAL_RATIO))
+train_x, val_x, train_y, val_y = train[: percent], train[percent:], train_label[: percent], train_label[percent:]
+print('Size of training set: {}'.format(train_x.shape))
+print('Size of validation set: {}'.format(val_x.shape))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre><code>Size of training set: (983945, 429)
+Size of validation set: (245987, 429)
+</code></pre>
+<h3 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a>DataLoader</h3><p>根据Dataset制作DataLoader，你可以修改下面的变量 BATCH_SIZE</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">BATCH_SIZE= 64
+train_set = TIMITDataset(train_x, train_y)
+val_set = TIMITDataset(val_x, val_y)
+train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True)
+val_loader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=False)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="模型实现相关函数"><a href="#模型实现相关函数" class="headerlink" title="模型实现相关函数"></a>模型实现相关函数</h2><h3 id="模型搭建"><a href="#模型搭建" class="headerlink" title="模型搭建"></a>模型搭建</h3><p>这部分可以自行修改，注意输入数据的维度为429，数据类别有39种</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class Classifier(nn.Module):
+    def __init__(self):
+        super(Classifier, self).__init__()
+        self.net = nn.Sequential(
+            nn.Dropout(0.5),
+            nn.Linear(429, 1024), nn.BatchNorm1d(1024), nn.ReLU(),
+            nn.Linear(1024, 512), nn.BatchNorm1d(512), nn.ReLU(),
+            nn.Linear(512, 128), nn.BatchNorm1d(128), nn.ReLU(),
+            nn.Linear(128, 39),
+        )
+    
+    def forward(self, x):
+        return self.net(x)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">def train(train_loader, val_loader, model, config, device):
+    ''' 训练模型 '''
+    n_epochs = config['n_epochs']   # 最大迭代次数
+    optimizer = torch.optim.Adam(model.parameters(), lr=config['lr'])    # optimizer使用Adam
+    criterion = nn.CrossEntropyLoss()     # 损失函数使用CrossEntropyLoss
+    
+    best_acc = 0.0             # 用于记录验证时最好的准确率，并将此时的模型
+    loss_record = {'train': [], 'dev': []}   # 记录训练损失
+    acc_record = {'train': [], 'dev': []}   # 记录预测准确度
+    
+    for epoch in range(n_epochs):
+        start_time = time.time()
+        train_acc, train_loss = 0.0, 0.0
+        
+        model.train()
+        for i, data in enumerate(train_loader):
+            optimizer.zero_grad()    # 将模型参数的 gradient 至0
+            pred = model(data[0].to(device))     # 前向传播
+            loss = criterion(pred, data[1].to(device))   # 计算loss
+            loss.backward()      # 利用后向传播算出每个参数的gradient
+            optimizer.step()     # 更新模型参数
+            
+            train_acc += np.sum(np.argmax(pred.cpu().data.numpy(), axis=1) == data[1].numpy())
+            train_loss += loss.detach().cpu().item()
+            loss_record['train'].append(loss.detach().cpu().item())
+        
+        train_acc /= len(train_loader.dataset)
+        train_loss /= len(train_loader)
+        acc_record['train'].append(train_acc)
+        
+        # 每次迭代后，在验证集中验证你的模型
+        dev_acc, dev_loss = dev(val_loader, model, device, criterion)
+        acc_record['dev'].append(dev_acc)
+        loss_record['dev'].append(dev_loss)
+        
+        # 将结果打印出来
+        print('[%02d/%02d] %2.2f sec(s) Train Acc: %3.6f Loss: %3.6f | Val Acc: %3.6f loss: %3.6f' % \
+              (epoch + 1, n_epochs, time.time() - start_time, train_acc, train_loss, dev_acc, dev_loss))
+        
+        # 当模型性能提升时保存模型
+        if dev_acc &gt; best_acc:
+            best_acc = dev_acc
+            print(f'Saving model (epoch = {epoch+1:02d}, accuracy = {best_acc:.4f})')
+            torch.save(model.state_dict(), config['save_path'])   # 保存模型到指定路径
+            
+    return best_acc, loss_record, acc_record<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">def dev(dv_set, model, device, criterion):
+    model.eval()
+    dev_loss, dev_acc = 0, 0
+    for i, data in enumerate(dv_set):
+        with torch.no_grad():
+            pred = model(data[0].to(device))     # 前向传播
+            loss = criterion(pred, data[1].to(device))   # 计算loss
+            dev_acc += np.sum(np.argmax(pred.cpu().data.numpy(), axis=1) == data[1].numpy())
+            dev_loss += loss.detach().cpu().item()
+    dev_acc /= len(dv_set.dataset)
+    dev_loss /= len(dv_set)
+    
+    return dev_acc, dev_loss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><p>config中包含模型训练的超参数（可以进行调节）和保存模型的路径</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">device = get_device()
+os.makedirs('models', exist_ok=True)
+
+# 可以进行调节来提升模型性能
+config = {
+    'n_epochs': 20,                # 最大迭代次数
+    'lr': 0.0001,
+    'save_path': 'models/model.pth'  # 模型保存路径
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="模型加载和训练"><a href="#模型加载和训练" class="headerlink" title="模型加载和训练"></a>模型加载和训练</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">model = Classifier().to(device)
+best_acc, loss_record, acc_record = train(train_loader, val_loader, model, config, device)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre><code>[01/20] 57.20 sec(s) Train Acc: 0.557558 Loss: 1.462994 | Val Acc: 0.664637 loss: 1.053488
+Saving model (epoch = 01, accuracy = 0.6646)
+[02/20] 56.90 sec(s) Train Acc: 0.620351 Loss: 1.199883 | Val Acc: 0.689223 loss: 0.962143
+Saving model (epoch = 02, accuracy = 0.6892)
+[03/20] 57.74 sec(s) Train Acc: 0.639642 Loss: 1.126359 | Val Acc: 0.697830 loss: 0.925837
+Saving model (epoch = 03, accuracy = 0.6978)
+[04/20] 58.47 sec(s) Train Acc: 0.650790 Loss: 1.082624 | Val Acc: 0.702334 loss: 0.910983
+Saving model (epoch = 04, accuracy = 0.7023)
+[05/20] 57.69 sec(s) Train Acc: 0.659812 Loss: 1.050384 | Val Acc: 0.710875 loss: 0.879367
+Saving model (epoch = 05, accuracy = 0.7109)
+[06/20] 56.52 sec(s) Train Acc: 0.666502 Loss: 1.023910 | Val Acc: 0.711595 loss: 0.874528
+Saving model (epoch = 06, accuracy = 0.7116)
+[07/20] 56.10 sec(s) Train Acc: 0.672155 Loss: 1.004645 | Val Acc: 0.715802 loss: 0.861504
+Saving model (epoch = 07, accuracy = 0.7158)
+[08/20] 56.92 sec(s) Train Acc: 0.677490 Loss: 0.985173 | Val Acc: 0.716570 loss: 0.861472
+Saving model (epoch = 08, accuracy = 0.7166)
+[09/20] 58.94 sec(s) Train Acc: 0.681727 Loss: 0.971105 | Val Acc: 0.718201 loss: 0.854832
+Saving model (epoch = 09, accuracy = 0.7182)
+[10/20] 57.46 sec(s) Train Acc: 0.685863 Loss: 0.956152 | Val Acc: 0.720412 loss: 0.842556
+Saving model (epoch = 10, accuracy = 0.7204)
+[11/20] 57.74 sec(s) Train Acc: 0.688572 Loss: 0.945479 | Val Acc: 0.722746 loss: 0.839961
+Saving model (epoch = 11, accuracy = 0.7227)
+[12/20] 55.96 sec(s) Train Acc: 0.692322 Loss: 0.932966 | Val Acc: 0.725612 loss: 0.831585
+Saving model (epoch = 12, accuracy = 0.7256)
+[13/20] 55.85 sec(s) Train Acc: 0.694755 Loss: 0.924720 | Val Acc: 0.723697 loss: 0.834497
+[14/20] 55.19 sec(s) Train Acc: 0.697134 Loss: 0.914650 | Val Acc: 0.723994 loss: 0.834626
+[15/20] 55.25 sec(s) Train Acc: 0.699457 Loss: 0.905808 | Val Acc: 0.724128 loss: 0.834366
+[16/20] 55.54 sec(s) Train Acc: 0.702026 Loss: 0.897821 | Val Acc: 0.726396 loss: 0.828473
+Saving model (epoch = 16, accuracy = 0.7264)
+[17/20] 55.55 sec(s) Train Acc: 0.703422 Loss: 0.892071 | Val Acc: 0.724526 loss: 0.832125
+[18/20] 55.20 sec(s) Train Acc: 0.706015 Loss: 0.883915 | Val Acc: 0.726095 loss: 0.828627
+[19/20] 55.15 sec(s) Train Acc: 0.707317 Loss: 0.878447 | Val Acc: 0.726091 loss: 0.829762
+[20/20] 55.05 sec(s) Train Acc: 0.708762 Loss: 0.872050 | Val Acc: 0.726941 loss: 0.828781
+Saving model (epoch = 20, accuracy = 0.7269)
+</code></pre>
+<p><strong>可视化显示</strong></p>
+<p>可视化显示可以看出训练过程中是否存在过拟合、模型不合适等问题</p>
+<p>展示训练集和验证集中loss的变化</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">plot_learning_curve(loss_record, title='deep model')<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<img src="/2022/05/05/hw2-classifier/output_23_0.png" class="">
+<p>展示训练集和验证集中acc随迭代次数的变化</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">plot_accuracy(acc_record, title='deep model')<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<img src="/2022/05/05/hw2-classifier/output_25_0.png" class="">
+
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p>创建测试dataloader，从模型保存路径中加载模型</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建dataloader
+test_set = TIMITDataset(test, None)
+test_loader = DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=False)
+
+# 加载模型
+del model
+model = Classifier().to(device)
+model.load_state_dict(torch.load(config['save_path']))       # 加载你最好的模型<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>预测</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">model.eval()
+preds = []
+for x in test_loader:                            
+    x = x.to(device) 
+    with torch.no_grad():                  
+        pred = model(x)
+        pred = np.argmax(pred.cpu().data.numpy(), axis=1)
+        for y in pred:
+            preds.append(y)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将测试集上的预测结果保存到.csv文件中</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">with open("predict.csv", 'w') as f:
+    f.write('Id,Category\n')
+    for i, y in  enumerate(preds):
+        f.write('{},{}\n'.format(i, y))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -558,7 +784,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/03/25/men-kong-xun-huan-dan-yuan/">https://faith-ye.github.io/2022/03/25/men-kong-xun-huan-dan-yuan/</a>
+                    <a href="https://faith-ye.github.io/2022/05/05/hw2-classifier/">https://faith-ye.github.io/2022/05/05/hw2-classifier/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -596,8 +822,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/GRU/">
-                                    <span class="chip bg-color">GRU</span>
+                                <a href="/tags/Classifier/">
+                                    <span class="chip bg-color">Classifier</span>
                                 </a>
                             
                         </div>
@@ -1037,17 +1263,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/29/seq2seq/">
+                <a href="/2022/05/05/hw2-classifier/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Seq2Seq">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="HW2-Classifier">
                         
-                        <span class="card-title">Seq2Seq</span>
+                        <span class="card-title">HW2-Classifier</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1057,26 +1284,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    论文阅读笔记
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/" class="post-category">
+                                    李宏毅ML2021作业部分
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/NLP/">
-                        <span class="chip bg-color">NLP</span>
+                    <a href="/tags/Classifier/">
+                        <span class="chip bg-color">Classifier</span>
                     </a>
                     
                 </div>
@@ -1090,13 +1318,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/22/chang-duan-qi-ji-yi-wang-luo/">
+                <a href="/2022/05/04/java-fang-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="长短期记忆网络">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java方法">
                         
-                        <span class="card-title">长短期记忆网络</span>
+                        <span class="card-title">Java方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1107,31 +1335,19 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Java学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/LSTM/">
-                        <span class="chip bg-color">LSTM</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/">
-                        <span class="chip bg-color">文本分类</span>
-                    </a>
-                    
                 </div>
                 
             </div>
