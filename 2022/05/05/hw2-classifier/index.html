@@ -5,11 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="HW2-Classifier, 小叶の博客">
-    <meta name="description" content="作业描述本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。
+    <meta name="description" content="作业描述
+本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。
 
 bat / pat , bad / bed
 
-作业使用的数据集是TIMIT A">
+作业使用的数据集是TIMIT ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -34,9 +35,9 @@ bat / pat , bad / bed
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-twilight.css" type="text/css"></head>
 
 
@@ -479,16 +480,17 @@ bat / pat , bad / bed
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="作业描述"><a href="#作业描述" class="headerlink" title="作业描述"></a>作业描述</h2><p>本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。</p>
+                <h2 id="作业描述">作业描述</h2>
+<p>本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。</p>
 <ul>
 <li><strong>b</strong>at / <strong>p</strong>at , b<strong>a</strong>d / b<strong>e</strong>d</li>
 </ul>
 <p>作业使用的数据集是<a target="_blank" rel="noopener" href="https://catalog.ldc.upenn.edu/LDC93S1">TIMIT Acoustic-Phonetic Continuous Speech Corpus</a>，采用的数据格式如下：</p>
 <p><strong>timit_11/</strong></p>
 <ul>
-<li>train_11.npy –&gt; 训练数据</li>
-<li>train_label_11.npy –&gt; 逐帧phoneme标签（0-38）</li>
-<li>test_11.npy –&gt; 测试数据</li>
+<li>train_11.npy --&gt; 训练数据</li>
+<li>train_label_11.npy --&gt; 逐帧phoneme标签（0-38）</li>
+<li>test_11.npy --&gt; 测试数据</li>
 </ul>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 导入需要的包
 import os
@@ -509,8 +511,8 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="定义一些函数"><a href="#定义一些函数" class="headerlink" title="定义一些函数"></a>定义一些函数</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">def get_device():
+<h2 id="定义一些函数">定义一些函数</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def get_device():
     ''' Get device (if GPU is available, use GPU) '''
     return 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -542,8 +544,9 @@ def plot_accuracy(acc_record, title=''):
     plt.title('Learning curve of {}'.format(title))
     plt.legend()
     plt.show()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>从.npy文件中加载训练和测试数据</p>
+<h2 id="数据预处理">数据预处理</h2>
+<h3 id="加载数据">加载数据</h3>
+<p>从.npy文件中加载训练和测试数据</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">print("Loading data ...")
 
 data_root = './timit_11/'
@@ -553,12 +556,12 @@ test = np.load(data_root + 'test_11.npy')
 
 print('Size of training data: {}'.format(train.shape))
 print('Size of testing data: {}'.format(test.shape))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre><code>Loading data ...
 Size of training data: (1229932, 429)
 Size of testing data: (451552, 429)
 </code></pre>
-<h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">class TIMITDataset(Dataset):
+<h3 id="Dataset">Dataset</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class TIMITDataset(Dataset):
     def __init__(self, X, y=None):
         self.data = torch.from_numpy(X).float()
         if y is not None:
@@ -575,7 +578,6 @@ Size of testing data: (451552, 429)
             return self.data[idx], self.label[idx]
         else:
             return self.data[idx]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将训练数据划分为训练集和验证集，你可以通过改变变量 VAL_RATIO 来修改验证集的比例</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">VAL_RATIO = 0.2
 
@@ -583,33 +585,33 @@ percent = int(train.shape[0] * (1 - VAL_RATIO))
 train_x, val_x, train_y, val_y = train[: percent], train[percent:], train_label[: percent], train_label[percent:]
 print('Size of training set: {}'.format(train_x.shape))
 print('Size of validation set: {}'.format(val_x.shape))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre><code>Size of training set: (983945, 429)
 Size of validation set: (245987, 429)
 </code></pre>
-<h3 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a>DataLoader</h3><p>根据Dataset制作DataLoader，你可以修改下面的变量 BATCH_SIZE</p>
+<h3 id="DataLoader">DataLoader</h3>
+<p>根据Dataset制作DataLoader，你可以修改下面的变量 BATCH_SIZE</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">BATCH_SIZE= 64
 train_set = TIMITDataset(train_x, train_y)
 val_set = TIMITDataset(val_x, val_y)
 train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=False)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="模型实现相关函数"><a href="#模型实现相关函数" class="headerlink" title="模型实现相关函数"></a>模型实现相关函数</h2><h3 id="模型搭建"><a href="#模型搭建" class="headerlink" title="模型搭建"></a>模型搭建</h3><p>这部分可以自行修改，注意输入数据的维度为429，数据类别有39种</p>
+<h2 id="模型实现相关函数">模型实现相关函数</h2>
+<h3 id="模型搭建">模型搭建</h3>
+<p>这部分可以自行修改，注意输入数据的维度为429，数据类别有39种</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">class Classifier(nn.Module):
     def __init__(self):
         super(Classifier, self).__init__()
         self.net = nn.Sequential(
-            nn.Dropout(0.5),
-            nn.Linear(429, 1024), nn.BatchNorm1d(1024), nn.ReLU(),
-            nn.Linear(1024, 512), nn.BatchNorm1d(512), nn.ReLU(),
-            nn.Linear(512, 128), nn.BatchNorm1d(128), nn.ReLU(),
+            nn.Linear(429, 1024), nn.BatchNorm1d(1024), nn.ReLU(), nn.Dropout(0.2),
+            nn.Linear(1024, 512), nn.BatchNorm1d(512), nn.ReLU(), nn.Dropout(0.2),
+            nn.Linear(512, 128), nn.BatchNorm1d(128), nn.ReLU(), nn.Dropout(0.2),
             nn.Linear(128, 39),
         )
     
     def forward(self, x):
-        return self.net(x)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">def train(train_loader, val_loader, model, config, device):
+        return self.net(x)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="训练">训练</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def train(train_loader, val_loader, model, config, device):
     ''' 训练模型 '''
     n_epochs = config['n_epochs']   # 最大迭代次数
     optimizer = torch.optim.Adam(model.parameters(), lr=config['lr'])    # optimizer使用Adam
@@ -655,8 +657,8 @@ val_loader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=False)<span aria
             torch.save(model.state_dict(), config['save_path'])   # 保存模型到指定路径
             
     return best_acc, loss_record, acc_record<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">def dev(dv_set, model, device, criterion):
+<h3 id="验证">验证</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def dev(dv_set, model, device, criterion):
     model.eval()
     dev_loss, dev_acc = 0, 0
     for i, data in enumerate(dv_set):
@@ -669,8 +671,8 @@ val_loader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=False)<span aria
     dev_loss /= len(dv_set)
     
     return dev_acc, dev_loss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><p>config中包含模型训练的超参数（可以进行调节）和保存模型的路径</p>
+<h2 id="设置超参数">设置超参数</h2>
+<p>config中包含模型训练的超参数（可以进行调节）和保存模型的路径</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">device = get_device()
 os.makedirs('models', exist_ok=True)
 
@@ -680,59 +682,61 @@ config = {
     'lr': 0.0001,
     'save_path': 'models/model.pth'  # 模型保存路径
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="模型加载和训练"><a href="#模型加载和训练" class="headerlink" title="模型加载和训练"></a>模型加载和训练</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">model = Classifier().to(device)
+<h2 id="模型加载和训练">模型加载和训练</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">model = Classifier().to(device)
 best_acc, loss_record, acc_record = train(train_loader, val_loader, model, config, device)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre><code>[01/20] 57.20 sec(s) Train Acc: 0.557558 Loss: 1.462994 | Val Acc: 0.664637 loss: 1.053488
-Saving model (epoch = 01, accuracy = 0.6646)
-[02/20] 56.90 sec(s) Train Acc: 0.620351 Loss: 1.199883 | Val Acc: 0.689223 loss: 0.962143
-Saving model (epoch = 02, accuracy = 0.6892)
-[03/20] 57.74 sec(s) Train Acc: 0.639642 Loss: 1.126359 | Val Acc: 0.697830 loss: 0.925837
-Saving model (epoch = 03, accuracy = 0.6978)
-[04/20] 58.47 sec(s) Train Acc: 0.650790 Loss: 1.082624 | Val Acc: 0.702334 loss: 0.910983
-Saving model (epoch = 04, accuracy = 0.7023)
-[05/20] 57.69 sec(s) Train Acc: 0.659812 Loss: 1.050384 | Val Acc: 0.710875 loss: 0.879367
-Saving model (epoch = 05, accuracy = 0.7109)
-[06/20] 56.52 sec(s) Train Acc: 0.666502 Loss: 1.023910 | Val Acc: 0.711595 loss: 0.874528
-Saving model (epoch = 06, accuracy = 0.7116)
-[07/20] 56.10 sec(s) Train Acc: 0.672155 Loss: 1.004645 | Val Acc: 0.715802 loss: 0.861504
-Saving model (epoch = 07, accuracy = 0.7158)
-[08/20] 56.92 sec(s) Train Acc: 0.677490 Loss: 0.985173 | Val Acc: 0.716570 loss: 0.861472
-Saving model (epoch = 08, accuracy = 0.7166)
-[09/20] 58.94 sec(s) Train Acc: 0.681727 Loss: 0.971105 | Val Acc: 0.718201 loss: 0.854832
-Saving model (epoch = 09, accuracy = 0.7182)
-[10/20] 57.46 sec(s) Train Acc: 0.685863 Loss: 0.956152 | Val Acc: 0.720412 loss: 0.842556
-Saving model (epoch = 10, accuracy = 0.7204)
-[11/20] 57.74 sec(s) Train Acc: 0.688572 Loss: 0.945479 | Val Acc: 0.722746 loss: 0.839961
-Saving model (epoch = 11, accuracy = 0.7227)
-[12/20] 55.96 sec(s) Train Acc: 0.692322 Loss: 0.932966 | Val Acc: 0.725612 loss: 0.831585
-Saving model (epoch = 12, accuracy = 0.7256)
-[13/20] 55.85 sec(s) Train Acc: 0.694755 Loss: 0.924720 | Val Acc: 0.723697 loss: 0.834497
-[14/20] 55.19 sec(s) Train Acc: 0.697134 Loss: 0.914650 | Val Acc: 0.723994 loss: 0.834626
-[15/20] 55.25 sec(s) Train Acc: 0.699457 Loss: 0.905808 | Val Acc: 0.724128 loss: 0.834366
-[16/20] 55.54 sec(s) Train Acc: 0.702026 Loss: 0.897821 | Val Acc: 0.726396 loss: 0.828473
-Saving model (epoch = 16, accuracy = 0.7264)
-[17/20] 55.55 sec(s) Train Acc: 0.703422 Loss: 0.892071 | Val Acc: 0.724526 loss: 0.832125
-[18/20] 55.20 sec(s) Train Acc: 0.706015 Loss: 0.883915 | Val Acc: 0.726095 loss: 0.828627
-[19/20] 55.15 sec(s) Train Acc: 0.707317 Loss: 0.878447 | Val Acc: 0.726091 loss: 0.829762
-[20/20] 55.05 sec(s) Train Acc: 0.708762 Loss: 0.872050 | Val Acc: 0.726941 loss: 0.828781
-Saving model (epoch = 20, accuracy = 0.7269)
+<pre><code>[01/20] 61.04 sec(s) Train Acc: 0.575976 Loss: 1.418989 | Val Acc: 0.679743 loss: 1.018808
+Saving model (epoch = 01, accuracy = 0.6797)
+[02/20] 59.27 sec(s) Train Acc: 0.636308 Loss: 1.162909 | Val Acc: 0.697712 loss: 0.942522
+Saving model (epoch = 02, accuracy = 0.6977)
+[03/20] 57.94 sec(s) Train Acc: 0.655783 Loss: 1.090724 | Val Acc: 0.708123 loss: 0.903914
+Saving model (epoch = 03, accuracy = 0.7081)
+[04/20] 57.50 sec(s) Train Acc: 0.667945 Loss: 1.045382 | Val Acc: 0.716786 loss: 0.870373
+Saving model (epoch = 04, accuracy = 0.7168)
+[05/20] 57.50 sec(s) Train Acc: 0.676864 Loss: 1.011510 | Val Acc: 0.720506 loss: 0.856811
+Saving model (epoch = 05, accuracy = 0.7205)
+[06/20] 57.69 sec(s) Train Acc: 0.684058 Loss: 0.983198 | Val Acc: 0.724416 loss: 0.837952
+Saving model (epoch = 06, accuracy = 0.7244)
+[07/20] 57.36 sec(s) Train Acc: 0.690473 Loss: 0.961224 | Val Acc: 0.726238 loss: 0.831526
+Saving model (epoch = 07, accuracy = 0.7262)
+[08/20] 56.88 sec(s) Train Acc: 0.695339 Loss: 0.943797 | Val Acc: 0.728803 loss: 0.821308
+Saving model (epoch = 08, accuracy = 0.7288)
+[09/20] 56.70 sec(s) Train Acc: 0.699613 Loss: 0.928245 | Val Acc: 0.729120 loss: 0.819629
+Saving model (epoch = 09, accuracy = 0.7291)
+[10/20] 57.16 sec(s) Train Acc: 0.703794 Loss: 0.913152 | Val Acc: 0.733738 loss: 0.803043
+Saving model (epoch = 10, accuracy = 0.7337)
+[11/20] 56.80 sec(s) Train Acc: 0.706580 Loss: 0.901354 | Val Acc: 0.735575 loss: 0.798162
+Saving model (epoch = 11, accuracy = 0.7356)
+[12/20] 56.79 sec(s) Train Acc: 0.709608 Loss: 0.888328 | Val Acc: 0.735815 loss: 0.793815
+Saving model (epoch = 12, accuracy = 0.7358)
+[13/20] 57.12 sec(s) Train Acc: 0.712408 Loss: 0.879705 | Val Acc: 0.736096 loss: 0.796301
+Saving model (epoch = 13, accuracy = 0.7361)
+[14/20] 57.16 sec(s) Train Acc: 0.715146 Loss: 0.869005 | Val Acc: 0.738202 loss: 0.787290
+Saving model (epoch = 14, accuracy = 0.7382)
+[15/20] 57.15 sec(s) Train Acc: 0.717777 Loss: 0.860623 | Val Acc: 0.737059 loss: 0.793017
+[16/20] 57.05 sec(s) Train Acc: 0.719551 Loss: 0.853531 | Val Acc: 0.737689 loss: 0.788586
+[17/20] 57.11 sec(s) Train Acc: 0.721698 Loss: 0.845117 | Val Acc: 0.739344 loss: 0.784496
+Saving model (epoch = 17, accuracy = 0.7393)
+[18/20] 57.78 sec(s) Train Acc: 0.723899 Loss: 0.838226 | Val Acc: 0.740059 loss: 0.784261
+Saving model (epoch = 18, accuracy = 0.7401)
+[19/20] 58.68 sec(s) Train Acc: 0.725527 Loss: 0.832501 | Val Acc: 0.739783 loss: 0.782018
+[20/20] 58.36 sec(s) Train Acc: 0.726496 Loss: 0.827860 | Val Acc: 0.742173 loss: 0.777942
+Saving model (epoch = 20, accuracy = 0.7422)
 </code></pre>
 <p><strong>可视化显示</strong></p>
 <p>可视化显示可以看出训练过程中是否存在过拟合、模型不合适等问题</p>
 <p>展示训练集和验证集中loss的变化</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">plot_learning_curve(loss_record, title='deep model')<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<img src="/2022/05/05/hw2-classifier/output_23_0.png" class="">
+<p>​</p>
+<img src="/2022/05/05/hw2-classifier/output_23_0-16517416642191.png" class="" title="png">
+<p>​</p>
 <p>展示训练集和验证集中acc随迭代次数的变化</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">plot_accuracy(acc_record, title='deep model')<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<img src="/2022/05/05/hw2-classifier/output_25_0.png" class="">
-
-<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p>创建测试dataloader，从模型保存路径中加载模型</p>
+<p>​</p>
+<img src="/2022/05/05/hw2-classifier/output_25_0-16517416642192.png" class="" title="png">
+<p>​</p>
+<h2 id="模型测试">模型测试</h2>
+<p>创建测试dataloader，从模型保存路径中加载模型</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建dataloader
 test_set = TIMITDataset(test, None)
 test_loader = DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=False)
@@ -740,8 +744,7 @@ test_loader = DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=False)
 # 加载模型
 del model
 model = Classifier().to(device)
-model.load_state_dict(torch.load(config['save_path']))       # 加载你最好的模型<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+model.load_state_dict(torch.load(config['save_path']))       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>预测</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">model.eval()
 preds = []
@@ -752,7 +755,6 @@ for x in test_loader:
         pred = np.argmax(pred.cpu().data.numpy(), axis=1)
         for y in pred:
             preds.append(y)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将测试集上的预测结果保存到.csv文件中</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">with open("predict.csv", 'w') as f:
     f.write('Id,Category\n')
@@ -1543,7 +1545,7 @@ for x in test_loader:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">42.6k</span>
+                        class="white-color">42.7k</span>
             
             
             
