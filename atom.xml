@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-05T09:08:37.118Z</updated>
+  <updated>2022-05-06T07:49:12.656Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -21,17 +21,14 @@
     <link href="https://faith-ye.github.io/2022/05/05/hw2-classifier/"/>
     <id>https://faith-ye.github.io/2022/05/05/hw2-classifier/</id>
     <published>2022-05-05T07:46:10.000Z</published>
-    <updated>2022-05-05T09:08:37.118Z</updated>
+    <updated>2022-05-06T07:49:12.656Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;作业描述&quot;&gt;作业描述&lt;/h2&gt;
-&lt;p&gt;本作业处理的是一个phoneme分类，是一个多元分类问题。phoneme是语言的一种语音的一种语音单位，可以用来区分一个词和另一个词，如下面黑体部分。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;b&lt;/strong&gt;at /</summary>
+    <summary type="html">&lt;h2 id=&quot;作业描述&quot;&gt;&lt;a href=&quot;#作业描述&quot; class=&quot;headerlink&quot;</summary>
         
       
     
