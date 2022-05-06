@@ -768,7 +768,7 @@ torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hi
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_19.png" class="">
 
-<p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
+<h2 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h2><p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 模型加载
 G = Generator(z_dim)
 G.load_state_dict(torch.load(os.path.join(save_dir,'dcgan_g.pth')))
