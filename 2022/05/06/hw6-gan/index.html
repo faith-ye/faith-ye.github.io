@@ -484,6 +484,8 @@
 <li>判别器中使用LeakyReLU作为激活函数</li>
 </ul>
 <p>DCGAN的网络结构如下图所示：</p>
+<img src="/2022/05/06/hw6-gan/image-20220506195849410.png" class="">
+
 <p>现在让我们来实现这一部分，首先现在我们需要导入本作业需要的一些包，并设置随机种子的个数（这部分直接复制粘贴就好)</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch.nn as nn
 import os
@@ -741,15 +743,27 @@ torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hi
 <pre><code>Epoch [6/10] 1115/1115 Loss_D: 0.1691 Loss_G: 3.0890 | save samples to ./logs\Epoch_006.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_11.png" class="">
+
+
+
 <pre><code>Epoch [7/10] 1115/1115 Loss_D: 0.1185 Loss_G: 3.0753 | save samples to ./logs\Epoch_007.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_13.png" class="">
+
+
+
 <pre><code>Epoch [8/10] 1115/1115 Loss_D: 0.1162 Loss_G: 3.1938 | save samples to ./logs\Epoch_008.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_15.png" class="">
+
+
+
 <pre><code>Epoch [9/10] 1115/1115 Loss_D: 0.1183 Loss_G: 4.2176 | save samples to ./logs\Epoch_009.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_17.png" class="">
+
+
+
 <pre><code>Epoch [10/10] 1115/1115 Loss_D: 0.1022 Loss_G: 2.4000 | save samples to ./logs\Epoch_010.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_19.png" class="">
