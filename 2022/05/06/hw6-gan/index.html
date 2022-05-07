@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="HW6-GAN, 小叶の博客">
-    <meta name="description" content="作业描述这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消">
+    <meta name="description" content="作业描述
+这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,9 +31,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小叶の博客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-twilight.css" type="text/css"></head>
 
 
@@ -445,7 +446,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
@@ -475,7 +476,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="作业描述"><a href="#作业描述" class="headerlink" title="作业描述"></a>作业描述</h2><p>这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消失的问题。具体改变有：</p>
+                <h2 id="作业描述">作业描述</h2>
+<p>这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消失的问题。具体改变有：</p>
 <ul>
 <li>取消所有的pooling层。生成器中使用fractionally strided convolution代替pooling层，判别器中使用strided convolution代替pooling层。</li>
 <li>在生成器和判别器中都使用批量标准化</li>
@@ -485,7 +487,6 @@
 </ul>
 <p>DCGAN的网络结构如下图所示：</p>
 <img src="/2022/05/06/hw6-gan/image-20220506195849410.png" class="">
-
 <p>现在让我们来实现这一部分，首先现在我们需要导入本作业需要的一些包，并设置随机种子的个数（这部分直接复制粘贴就好)</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch.nn as nn
 import os
@@ -508,8 +509,9 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>需要使用transforms将图片转成以下格式：</p>
+<h2 id="数据预处理">数据预处理</h2>
+<h3 id="Dataset">Dataset</h3>
+<p>需要使用transforms将图片转成以下格式：</p>
 <ul>
 <li>修改图片尺寸为(64, 64)</li>
 <li>将数值从[0, 1]映射到[-1, 1]</li>
@@ -529,7 +531,6 @@ class CrypkoDataset(Dataset):
         img = torchvision.io.read_image(fname)   # 读取图片
         img = self.transform(img)                # 对图片进行一定的修改
         return img<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>制定transform规则并获取dataset</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">fnames = glob.glob(os.path.join('./faces', '*'))
 # 1. 修改图片尺寸为(64, 64)
@@ -541,27 +542,20 @@ transform = transforms.Compose([
     transforms.Normalize(mean=(0.5, 0.5, 0.5),std=(0.5, 0.5, 0.5)),
 ])
 dataset = CrypkoDataset(fnames, transform)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>展示一组照片</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">images = [dataset[i] for i in range(16)]
 grid_img = torchvision.utils.make_grid(images, nrow=8)
 plt.figure(figsize=(20, 20))
 plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
 <img src="/2022/05/06/hw6-gan/output_7_2.png" class="">    
-
-
 <p>由于我们使用了transform将数据的范围变成了[-1, 1]，因此我们需要将其转换为[0, 1]，才能展示出正确的图片</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">images = [(dataset[i] + 1) / 2 for i in range(16)]
 grid_img = torchvision.utils.make_grid(images, nrow=8)
 plt.figure(figsize=(20, 20))
 plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <img src="/2022/05/06/hw6-gan/output_9_1.png" class="">
-
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>现在实现模型的部分，这一部分也可以自行修改</p>
+<h2 id="Model">Model</h2>
+<p>现在实现模型的部分，这一部分也可以自行修改</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 模型参数初始化
 def weights_init(m):
     classname = m.__class__.__name__
@@ -626,15 +620,15 @@ class Discriminator(nn.Module):
         y = self.ls(x)
         y = y.view(-1)
         return y <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><p>这部分可以进行调节</p>
+<h2 id="设置超参数">设置超参数</h2>
+<p>这部分可以进行调节</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size = 64
 z_dim = 100
 z_sample = Variable(torch.randn(100, z_dim)).cuda()         # 随机生成100个样本，用于检测模型的训练结果
 lr = 1e-4
 n_epoch = 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h2><p><strong>准备好dataloader，model，loss criterion，optimizer</strong></p>
+<h2 id="开始训练">开始训练</h2>
+<p><strong>准备好dataloader，model，loss criterion，optimizer</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 生成一个文件目录，用于保存模型结果
 save_dir = './logs'
 os.makedirs(save_dir, exist_ok=True)
@@ -654,7 +648,6 @@ criterion = nn.BCELoss()
 # optimizer
 opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=(0.5, 0.999))
 opt_D = torch.optim.Adam(D.parameters(), lr=lr, betas=(0.5, 0.999))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>Training</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">for epoch in range(n_epoch):
     for i, data in enumerate(dataloader):
@@ -721,12 +714,9 @@ opt_D = torch.optim.Adam(D.parameters(), lr=lr, betas=(0.5, 0.999))<span aria-hi
 # 模型保存
 torch.save(G.state_dict(), os.path.join(save_dir, f'dcgan_g.pth'))
 torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre><code>Epoch [1/10] 1115/1115 Loss_D: 0.5579 Loss_G: 2.0209 | save samples to ./logs\Epoch_001.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_1.png" class="">    
-
-
 <pre><code>Epoch [2/10] 1115/1115 Loss_D: 0.2129 Loss_G: 6.2952 | save samples to ./logs\Epoch_002.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_3.png" class="">
@@ -739,36 +729,23 @@ torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hi
 <pre><code>Epoch [5/10] 1115/1115 Loss_D: 0.2093 Loss_G: 3.2604 | save samples to ./logs\Epoch_005.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_9.png" class="">
-
 <pre><code>Epoch [6/10] 1115/1115 Loss_D: 0.1691 Loss_G: 3.0890 | save samples to ./logs\Epoch_006.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_11.png" class="">
-
-
-
 <pre><code>Epoch [7/10] 1115/1115 Loss_D: 0.1185 Loss_G: 3.0753 | save samples to ./logs\Epoch_007.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_13.png" class="">
-
-
-
 <pre><code>Epoch [8/10] 1115/1115 Loss_D: 0.1162 Loss_G: 3.1938 | save samples to ./logs\Epoch_008.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_15.png" class="">
-
-
-
 <pre><code>Epoch [9/10] 1115/1115 Loss_D: 0.1183 Loss_G: 4.2176 | save samples to ./logs\Epoch_009.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_17.png" class="">
-
-
-
 <pre><code>Epoch [10/10] 1115/1115 Loss_D: 0.1022 Loss_G: 2.4000 | save samples to ./logs\Epoch_010.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_19.png" class="">
-
-<h2 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h2><p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
+<h2 id="结果展示">结果展示</h2>
+<p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"># 模型加载
 G = Generator(z_dim)
 G.load_state_dict(torch.load(os.path.join(save_dir,'dcgan_g.pth')))
@@ -784,12 +761,10 @@ torchvision.utils.save_image(imgs_sample, filename, nrow=10)
 grid_img = torchvision.utils.make_grid(imgs_sample.cpu(), nrow=10)
 plt.figure(figsize=(10,10))
 plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
 <img src="/2022/05/06/hw6-gan/output_19_1.png" class="">
-
-
 <p>虽然图中的动画人物看起来很怪，但也有几分和动画人物相似，并且有的已经非常像了。这里我只把n_epoch设置为10，如果将n_epoch设置大点，我想结果会好点。</p>
+<h2 id="参考资料-2">参考资料</h2>
+<p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06434">Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks."arXiv preprint arXiv:1511.06434(2015).</a></p>
 
                 
             </div>
