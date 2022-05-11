@@ -4,10 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="基于GAN的多水库径流序列的随机生成, 小叶の博客">
-    <meta name="description" content="基于GAN的多水库径流序列的随机生成
+    <meta name="keywords" content="Java面向对象, 小叶の博客">
+    <meta name="description" content="设计对象并使用
+类（设计图）：是对象共同特征的描述
+对象：是真实存在的具体实例
 
-该文将DCGAN和WGAN结合起来组成一个新的方法DC-WGAN，并用于径流序列的随机生成。该方法可以同时捕捉径流序列在时间和空间维度上的相关性，解决了传统方法（如Copula等）在径流序列随机生成中">
+在Java中，必须先设计类，才能创建对象并使用
+
+
+注意事项：
+
+类名首字母建议大写，满足“驼峰模式”，不能用关键字，必须是合法标识符
+一个Java文件中可以">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +27,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基于GAN的多水库径流序列的随机生成 | 小叶の博客</title>
+    <title>Java面向对象 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -292,12 +300,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基于GAN的多水库径流序列的随机生成</h1>
+                    <h1 class="description center-align post-title">Java面向对象</h1>
                 </div>
             </div>
         </div>
@@ -411,17 +419,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/GAN/">
-                                <span class="chip bg-color">GAN</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%BE%84%E6%B5%81%E5%BA%8F%E5%88%97%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90/">
-                                <span class="chip bg-color">径流序列的随机生成</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -429,8 +429,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                论文阅读笔记
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                Java学习笔记
                             </a>
                         
                     </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-05-11
                 </div>
                 
 
@@ -451,14 +451,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    4 分
                 </div>
                 
 
@@ -481,75 +481,184 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="基于GAN的多水库径流序列的随机生成"><a href="#基于GAN的多水库径流序列的随机生成" class="headerlink" title="基于GAN的多水库径流序列的随机生成"></a>基于GAN的多水库径流序列的随机生成</h1><img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404135935711-16490728909091.png" class="">
+                <h2 id="设计对象并使用"><a href="#设计对象并使用" class="headerlink" title="设计对象并使用"></a>设计对象并使用</h2><ul>
+<li><strong>类（设计图）：</strong>是对象共同特征的描述</li>
+<li><strong>对象：</strong>是真实存在的具体实例</li>
+</ul>
+<p>在Java中，必须先设计类，才能创建对象并使用</p>
+<img src="/2022/05/11/java-mian-xiang-dui-xiang/image-20220509105228063.png" class="">
 
-<p>该文将DCGAN和WGAN结合起来组成一个新的方法DC-WGAN，并用于径流序列的随机生成。该方法可以同时捕捉径流序列在时间和空间维度上的相关性，解决了传统方法（如Copula等）在径流序列随机生成中时空相关性表现不足的问题。</p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>隐式随机优化(implicit stochastic optimization, ISO)模型是一种已广泛应用于水库系统中长期优化运行的方法。在实际工程中，水库历史序列的长度只有几十年，难以反映未来径流变化的随机性。因此径流序列的生成是弥补历史径流样本代表性和可靠性差的关键技术，是保证ISO模型准确性的前提。</p>
-<p>对于单个水库，现有径流序列的样本时间长度能满足ISO的操作要求。但对于具有时空相关性的径流序列，当前样本的代表性和可靠性不足以满足。而具有时空相关性的径流序列的产生给水库系统联合优化运行的精细化管理带来了巨大的挑战。然而现有径流序列生成方法并没有体现水库间的时空相关性，它们有以下缺点：</p>
+<p><strong>注意事项：</strong></p>
 <ul>
-<li>难以扩展到高维，不适合多时间尺度的多水库系统的径流随机生成</li>
-<li>径流序列的概率分布应事先假定，这在实际中不适用</li>
-<li>难于捕捉高维数据的非线性特点，无法满足水库系统径流生成的要求</li>
+<li>类名首字母建议大写，满足“驼峰模式”，不能用关键字，必须是合法标识符</li>
+<li>一个Java文件中可以定义多个class类，但只能一个类是public修饰，而且public修饰的类名必须成为代码文件名</li>
+<li>成员变量的完整定义格式是： 修饰符 数据类型 变量名称 = 初始化值; 一般无需指定初始化值，存在默认值</li>
 </ul>
-<p>为解决上述问题，作者提出了一种基于GAN的径流序列的随机生成。GAN的特征有：①可以直接学习历史数据的分布，无需预先进行数据概率分布的假定；②无监督学习的模式避免繁琐的人工标注，适用于学习和生成大规模的数据集。作者将GAN的这些特点应用于径流系统的随机生成，创新点有：</p>
+<h2 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h2><p><strong>作用</strong></p>
 <ul>
-<li>从模型学习能力和泛化能力两个方面探索DC-WGAN在水库系统径流随机生成领域的随机性</li>
-<li>与Copula方法相比，分析DC-WGAN径流样本的时空相关性</li>
+<li>定义在类中的，可以用于初始化一个类的对象，并返回对象的地址</li>
 </ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><p>生成式对抗网络(Generative adversarial network , GAN)在2014年被Goodfellow提出，已广泛用于计算机视觉和自然语言处理等领域。GAN通过生成器(generator)和判别器(discriminator)的对立实现了很好的生成效果。这两个网络的不同点在于，生成器的输入是一组随机噪音，作用是生成和目标数据分布相似的数据。而判别器的输入有真实数据和生成器生成的数据，输出是一个概率值，表示输入数据是历史数据的置信度。比如输出为1代表输入数据为真实数据，输出为0代表是生成数据。</p>
-<p>假设我们有M个水库，每个水库拥有N年的历史径流数据，每年的径流数据被划分为T个时期。历史径流数据可以表示为</p>
-<p>$${x^{t}_{i,j}},i=1,2,…,M;j=1,2,…,N;t=1,2,…,T$$</p>
-<p>真实数据用$P_{data}(x)$表示，GAN的两个网络结构：生成器$G(z;\theta^{G})$，判别器$D(x;\theta^{D})$，其中$\theta^{G}$和$\theta^{D}$是这两个网络结构的权重参数（需要通过训练得到）,z是一个已知分布的随机噪音。生成器的目标是产生的数据的分布要尽可能和真实数据的分布相似，用于<strong>“欺骗”</strong>判别器。而判别器的目标是区分数据是来源于真实数据还是生成数据。这两个网络在迭代过程中相互竞争以提高模型性能，最终生成的数据与真实数据基本一致。</p>
-<p>在确定网络训练的目标后，我们需要分别为生成器和判别器制定损失函数(loss function)来训练这个模型。生成器的目标是“欺骗”判别器，因此生成器的目标是最大化$D(G(z))$。判别器的目标是区分数据，因此我们最小化$D(G(z))$并最大化$D(x),x\in P_{data}(x)$。因此损失函数$L_{G}和L_{D}$可以表示为：</p>
-<p>$$L_{G}=E_{z\in p_{z}(z)}[log(1-D(G(z)))]$$</p>
-<p>$$L_{D}=-E_{z\in p_{z}(z)}[log(1-D(G(z)))]-E_{x\in p_{data}(x)}[log(D(x))]$$</p>
-<p>结合以上两个式子，则整个模型变成一个minimax游戏，其目标函数变为：</p>
-<p>$$\underset{\theta_{G}}{min}\underset{\theta_{D}}{max}V(G,D)=E_{z\in p_{z}(z)}[log(1-D(G(z)))]+E_{x\in p_{data}(x)}[log(D(x))]$$</p>
-<h3 id="改进的GAN"><a href="#改进的GAN" class="headerlink" title="改进的GAN"></a>改进的GAN</h3><h4 id="原始生成式对抗网络存在的缺点"><a href="#原始生成式对抗网络存在的缺点" class="headerlink" title="原始生成式对抗网络存在的缺点"></a><strong>原始生成式对抗网络存在的缺点</strong></h4><ul>
-<li>很难同时使两个网络同时收敛到最优，这就会影响模型训练的稳定性。举个简单例子，假设判别器的损失函数很短时间就收敛到0，那么生成器的参数就很难更新，这就导致生成器梯度消失的问题。</li>
-<li>通过一定的数学假设，可以用JS散度来表示上面的目标函数，而JS散度存在一个问题，就是真实数据$P_{data}$和生成数据$P_{G}$没有数据重叠的话，不断真实数据和生成数据之间的距离多远，JS散度计算出来的值都是log2，这就导致了生成器梯度消失的问题。</li>
-</ul>
-<p>大部分改进的GAN都是为了解决上述两个问题，其中DCGAN和WGAN是最有效且使用较为广泛的。</p>
-<h4 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h4><p>深度卷积生成式网络(deep convolutional generative adversarial network, DCGAN)在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消失的问题。具体改变有：</p>
+<p><strong>格式</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">修饰符 类名(形参列表){
+	...
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>调用构造器得到对象的格式</strong></p>
+<p>类 变量名称 = new 构造器;</p>
+<p><strong>分类和作用</strong></p>
 <ul>
-<li>取消所有的pooling层。生成器中使用fractionally strided convolution代替pooling层，判别器中使用strided convolution代替pooling层。</li>
-<li>在生成器和判别器中都使用批量标准化</li>
-<li>去除了全连接层</li>
-<li>生成器中使用ReLU作为激活函数，最后一层使用tanh激活函数</li>
-<li>判别器中使用LeakyReLU作为激活函数</li>
+<li>无参数构造器：初始化对象时（默认存在的），成员变量的数据均采用默认值</li>
+<li>有参数构造器：在初始化对象的时候，同时可以接收参数为对象进行赋值</li>
 </ul>
-<p>DCGAN的网络结构如下：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404182400171-16490728909102.png" class="">
-
-<h4 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h4><p>Wasserstein生成式对抗网络使用Wasserstein Distance来替换掉JS-Divergence，解决了当生成数据和真实数据没有重叠时，JS散度为log2，从而导致生成器梯度消失的问题。WGAN的优点有：</p>
+<p><strong>注意事项</strong></p>
 <ul>
-<li>判别器训练的越好，生成器就越好，这大大提高了原始GAN的稳定性</li>
-<li>避免了模型在训练过程中崩溃，一定程度上提升了模型的鲁棒性</li>
+<li>任何类定义出来，默认自带了无参数构造器，写不写都有</li>
+<li>一旦定义了有参数构造器，那么无参数构造器就没有了，如果还想用无参数构造器，此时就需要自己手写一个无参数构造器</li>
 </ul>
-<h4 id="DC-WGAN"><a href="#DC-WGAN" class="headerlink" title="DC-WGAN"></a>DC-WGAN</h4><p>结合DCGAN和WGAN，作者提出了DC-WGAN模型，它的结构图如下：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183358982-16490728909103.png" class="">
+<h2 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h2><ul>
+<li>可以出现在构造器、方法中，<strong>代表当前对象的地址</strong></li>
+</ul>
+<p><strong>作用</strong></p>
+<ul>
+<li>可以用于指定访问当前对象的成员变量、成员方法</li>
+</ul>
+<p>以this出现在有参数构造器中的用法为例，此时的this是当前对象的地址，就完美的将构造器中的name赋值给当前对象的成员变量name</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Car {
+    String name;
+    double price;
+    
+	public Car(String name, double price){
+        this.name = name;
+        this.price = price;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>DC-WGAN的模型架构和算法流程分别看左图和右图：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404183813487-16490728909104.png" class="">
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
+<li>面向对象的三大特征：封装、继承、多态</li>
+<li>作用：告诉我们，如何正确设计对象的属性和方法</li>
+<li>原则：对象代表什么，就得封装对应的数据，并提供数据对应的行为</li>
+</ul>
+<p><strong>如何封装</strong></p>
+<ul>
+<li>一般会把成员变量使用private隐藏起来，对外就不能直接访问了</li>
+<li>提供public修饰的getter和setter方法暴露其取值和赋值</li>
+</ul>
+<h2 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h2><ul>
+<li>也可以称为实体类，其对象可以用于在程序中封装数据</li>
+</ul>
+<p><strong>标准JavaBean须满足如下书写要求：</strong></p>
+<ul>
+<li>成员变量使用private修饰</li>
+<li>提供成员变量对应的setXxx() / getXxx()方法</li>
+<li>必须提供一个无参数构造器；有参数构造器是可写可不写的</li>
+</ul>
+<p><strong>成员变量和局部变量的区别</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">区别</th>
+<th align="center">成员变量</th>
+<th align="center">局部变量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">类中位置不同</td>
+<td align="center">类中，方法外</td>
+<td align="center">常见于方法中</td>
+</tr>
+<tr>
+<td align="center">初始化值不同</td>
+<td align="center">有默认值，无需初始化</td>
+<td align="center">没有默认值，使用前需要完成赋值</td>
+</tr>
+<tr>
+<td align="center">内存位置不同</td>
+<td align="center">堆内存</td>
+<td align="center">栈内存</td>
+</tr>
+<tr>
+<td align="center">生命周期不同</td>
+<td align="center">随着对象的创建而存在，随着对象的消失而消失</td>
+<td align="center">随着方法的调用而存在，随着方法的运行结束而消失</td>
+</tr>
+<tr>
+<td align="center">作用域</td>
+<td align="center"></td>
+<td align="center">在所归属的大括号中</td>
+</tr>
+</tbody></table>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ul>
+<li>目标：完成电影信息的展示案例，理解面向对象变成的代码</li>
+</ul>
+<p>首先我们设计一个Movie的类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package demo2;
 
-<h2 id="研究区域"><a href="#研究区域" class="headerlink" title="研究区域"></a>研究区域</h2><p>作者以中国下游金沙江梯级水库和三峡梯级水库为研究案例，包括溪洛渡、向家坝、三峡和葛洲坝四个水库。它们的地理位置如下图所示：</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404184312072-16490728909106.png" class="">
+public class Movie {
+    // 1、成员变量
+    private String name;
+    private double score;
+    private String actor;
 
-<p>DC-WGAN模型的实验数据为这四个水库从1940到2010的径流序列，其中90%的径流序列（64年）被用于模型训练，10%（10年）被用于模型的验证。径流序列的时间尺度为10天，模型经过训练后产生3000个10天径流序列。</p>
-<p>同时，用相同的数据，作者还用copula方法产生对应的径流序列，并将结果与DC_WGAN进行比较。</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h3 id="学习能力"><a href="#学习能力" class="headerlink" title="学习能力"></a>学习能力</h3><p>为了验证DC-WGAN的学习能力，原始径流序列和DC-WGAN生成的径流序列的频率曲线如下图所示。图中DC-WGAN生成的径流样本是随机从3000个生成样本随机选择了64个（和原始数据数量一样），频率曲线使用对数正态分布函数绘制。从图中可以看出两个频率曲线几乎完全重叠，说明DC-WGAN生成了正确分布的径流序列。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404190906074-16490728909105.png" class="">
+    // 3、构造器
+    public Movie() {
+    }
 
-<h3 id="泛化能力"><a href="#泛化能力" class="headerlink" title="泛化能力"></a>泛化能力</h3><p>为了进一步验证DC-WGAN的泛化能力，作者使用欧几里得距离(Euclidean distance)在DC-WGAN生成的3000条径流数据中找出和7个验证数据最相似的。其中三个径流序列如下图所示。由图可以看出DC-WGAN可以生成与验证集相似形态的样本，说明模型具有很强的泛化能力，图中的自相关系数曲线也验证了DC-WGAN可以捕捉径流序列的时间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404191726339-16490728909107.png" class="">
+    public Movie(String name, double score, String actor) {
+        this.name = name;
+        this.score = score;
+        this.actor = actor;
+    }
 
-<h3 id="时间相关性"><a href="#时间相关性" class="headerlink" title="时间相关性"></a>时间相关性</h3><p>为了验证径流序列的时间相关性，作者分别绘制了原始样本和分别从DC-WGAN和Copula生成样本的相关系数热力图。从下图可以看出Copula生成序列的相关性弱于原始序列和DC-WGAN生成的序列，且基于Copula的生成方法无法捕捉到弱相关性，表明DC-WGAN可以更好地学习序列的时间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404192738463-16490728909108.png" class="">
+    // 2、getter + setter
+    public String getName() {
+        return name;
+    }
 
-<h3 id="空间相关性"><a href="#空间相关性" class="headerlink" title="空间相关性"></a>空间相关性</h3><p>为了验证径流序列的空间相关性，基于原始样本、DC-WGAN和Copula生成样本，计算溪洛渡和三峡水库10天径流的空间相关系数，如下图所示。基于三种样本的平均年径流相关系数分别为0.67、0.65和-0.01。同时可以明显地看出，溪洛渡径流系列与三峡水库径流序列呈现出较强的空间相关性。DC-WGAN可以学习到水库间径流序列的空间相关性，但基于Copula的生成方法无法捕捉到不同水库间径流序列的空间相关性。</p>
-<img src="/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/image-20220404194104273-16490728909109.png" class="">
+    public void setName(String name) {
+        this.name = name;
+    }
 
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0022169421013767?via=ihub">Ma Y, Zhong P, Xu B, et al. Stochastic generation of runoff series for multiple reservoirs based on generative adversarial networks[J]. Journal of Hydrology, 2022, 605: 127326.</a></p>
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>创建对象，并访问对象</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package demo2;
+
+public class Test {
+    public static void main(String[] args) {
+        // 1、设计电影类
+        // 2、创建3个电影对象，封装电影的信息
+        // 3、定义一个电影类型的数组，存储3部电影对象
+        Movie[] movies = new Movie[3];
+        movies[0] = new Movie("《长津湖》", 9.7, "吴京");
+        movies[1] = new Movie("《我和我的父亲》", 9.6, "吴京");
+        movies[2] = new Movie("《朴水少年》", 9.5, "王川");
+        
+        // 4、遍历数组中每个电影对象，然后获取它的信息展示出来
+        for (int i = 0; i &lt; movies.length; i++) {
+            Movie m = movies[i];
+            System.out.println("电影名：" + m.getName());
+            System.out.println("得分：" + m.getScore());
+            System.out.println("主演：" + m.getActor());
+            System.out.println("------------------------------");
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -576,7 +685,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/">https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/</a>
+                    <a href="https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/">https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -613,15 +722,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/GAN/">
-                                    <span class="chip bg-color">GAN</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%BE%84%E6%B5%81%E5%BA%8F%E5%88%97%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90/">
-                                    <span class="chip bg-color">径流序列的随机生成</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1059,70 +1160,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/11/seq2seq-dai-ma-shi-xian/">
+                <a href="/2022/05/11/java-mian-xiang-dui-xiang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Seq2Seq代码实现">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Java面向对象">
                         
-                        <span class="card-title">Seq2Seq代码实现</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-11
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/NLP/">
-                        <span class="chip bg-color">NLP</span>
-                    </a>
-                    
-                    <a href="/tags/Seq2Seq/">
-                        <span class="chip bg-color">Seq2Seq</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/02/zi-zhu-yi-li-mo-xing/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="自注意力模型">
-                        
-                        <span class="card-title">自注意力模型</span>
+                        <span class="card-title">Java面向对象</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1133,14 +1182,56 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Java学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/06/hw6-gan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="HW6-GAN">
+                        
+                        <span class="card-title">HW6-GAN</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/" class="post-category">
+                                    李宏毅ML2021作业部分
                                 </a>
                             
                             
@@ -1150,8 +1241,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/attention/">
-                        <span class="chip bg-color">attention</span>
+                    <a href="/tags/GAN/">
+                        <span class="chip bg-color">GAN</span>
                     </a>
                     
                 </div>

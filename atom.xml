@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-07T03:29:01.515Z</updated>
+  <updated>2022-05-11T03:02:40.460Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java面向对象</title>
+    <link href="https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/"/>
+    <id>https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/</id>
+    <published>2022-05-11T03:00:14.000Z</published>
+    <updated>2022-05-11T03:02:40.460Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;设计对象并使用&quot;&gt;&lt;a href=&quot;#设计对象并使用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>HW6-GAN</title>
@@ -513,31 +536,6 @@
     
     
     <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Seq2Seq</title>
-    <link href="https://faith-ye.github.io/2022/03/29/seq2seq/"/>
-    <id>https://faith-ye.github.io/2022/03/29/seq2seq/</id>
-    <published>2022-03-29T09:58:21.000Z</published>
-    <updated>2022-04-18T01:01:00.840Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
   </entry>
   
