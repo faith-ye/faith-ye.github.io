@@ -53,8 +53,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;API&quot;&gt;API&lt;/h2&gt;
-&lt;p&gt;API的全称是Application Programming</summary>
+    <summary type="html">&lt;h2 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h2&gt;&lt;p&gt;API的全称是Application Programming</summary>
         
       
     
@@ -100,7 +99,7 @@
       
         
         
-    <summary type="html">&lt;h2</summary>
+    <summary type="html">&lt;h2 id=&quot;作业描述&quot;&gt;&lt;a href=&quot;#作业描述&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -416,9 +415,9 @@
     <category term="李宏毅ML2021作业部分" scheme="https://faith-ye.github.io/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/"/>
     
     
-    <category term="CNN" scheme="https://faith-ye.github.io/tags/CNN/"/>
-    
     <category term="Classifier" scheme="https://faith-ye.github.io/tags/Classifier/"/>
+    
+    <category term="CNN" scheme="https://faith-ye.github.io/tags/CNN/"/>
     
   </entry>
   
@@ -447,9 +446,9 @@
     <category term="李宏毅ML2021作业部分" scheme="https://faith-ye.github.io/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/"/>
     
     
-    <category term="Regression" scheme="https://faith-ye.github.io/tags/Regression/"/>
-    
     <category term="DNN" scheme="https://faith-ye.github.io/tags/DNN/"/>
+    
+    <category term="Regression" scheme="https://faith-ye.github.io/tags/Regression/"/>
     
   </entry>
   
@@ -474,9 +473,9 @@
     <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
-    
     <category term="BERT" scheme="https://faith-ye.github.io/tags/BERT/"/>
+    
+    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
   </entry>
   
@@ -503,9 +502,9 @@
     
     <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
-    <category term="Transformer" scheme="https://faith-ye.github.io/tags/Transformer/"/>
-    
     <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
+    
+    <category term="Transformer" scheme="https://faith-ye.github.io/tags/Transformer/"/>
     
   </entry>
   

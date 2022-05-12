@@ -486,21 +486,21 @@
 <li>数组就是用来存储一批同种类型数据的内存区域（可以理解为容器）</li>
 </ul>
 <h3 id="静态初始化数组"><a href="#静态初始化数组" class="headerlink" title="静态初始化数组"></a>静态初始化数组</h3><p>定义数组的时候直接给数组赋值</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">// 完整格式
-数据类型[] 数组名 = new 数组类型[]{元素1, 元素2, 元素3...};
-// 简化格式
-数据类型[] 数组名 = {元素1, 元素2, 元素3...};
-int[] ages = {12, 24, 36};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 完整格式</span>
+数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名 <span class="token operator">=</span> <span class="token keyword">new</span> 数组类型<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>元素<span class="token number">1</span><span class="token punctuation">,</span> 元素<span class="token number">2</span><span class="token punctuation">,</span> 元素<span class="token number">3.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// 简化格式</span>
+数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名 <span class="token operator">=</span> <span class="token punctuation">{</span>元素<span class="token number">1</span><span class="token punctuation">,</span> 元素<span class="token number">2</span><span class="token punctuation">,</span> 元素<span class="token number">3.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>数组变量名中存储的是数组在内存中的地址，数组是引用类型</li>
 </ul>
 <p><strong>数组的访问</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">// 数组名称[索引]
-System.out.println(arr[0]);           // 取值
-arr[1] = 100;                         // 赋值
-System.out.println(arr[1]);
-System.out.println(arr.length);       // 获取长度<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 数组名称[索引]</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// 取值</span>
+arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>                         <span class="token comment">// 赋值</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 获取长度</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>注意事项</strong></p>
 <ul>
@@ -514,9 +514,9 @@ System.out.println(arr.length);       // 获取长度<span aria-hidden="true" cl
 <h3 id="动态初始化数组"><a href="#动态初始化数组" class="headerlink" title="动态初始化数组"></a>动态初始化数组</h3><ul>
 <li>定义数组的时候只确定元素的类型和数组的长度，之后再存入具体数据</li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">// 格式
-数据类型[] 数组名 = new 数据类型[长度];
-int[] arr = new int[3];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 格式</span>
+数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名 <span class="token operator">=</span> <span class="token keyword">new</span> 数据类型<span class="token punctuation">[</span>长度<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>动态初始化元素默认值</strong></p>
 <img src="/2022/05/04/shu-zu/image-20220425153733090.png" class="">
@@ -524,11 +524,11 @@ int[] arr = new int[3];<span aria-hidden="true" class="line-numbers-rows"><span>
 <h2 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h2><ul>
 <li>一个一个的把数据访问一遍</li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] ages = {20, 30, 40, 50, 12};
-// 快捷方式：ages.fori + enter
-for(int i =0; i &lt; ages.length; i++){
-	System.out.println(ages[i]);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// 快捷方式：ages.fori + enter</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> ages<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ages<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="Java内存分配介绍"><a href="#Java内存分配介绍" class="headerlink" title="Java内存分配介绍"></a>Java内存分配介绍</h2><ul>
 <li>方法区：字节码文件加载时进入的内存</li>

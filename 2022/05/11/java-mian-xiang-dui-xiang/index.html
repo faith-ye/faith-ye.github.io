@@ -499,9 +499,9 @@
 <li>定义在类中的，可以用于初始化一个类的对象，并返回对象的地址</li>
 </ul>
 <p><strong>格式</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">修饰符 类名(形参列表){
-	...
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">修饰符 类名<span class="token punctuation">(</span>形参列表<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>调用构造器得到对象的格式</strong></p>
 <p>类 变量名称 = new 构造器;</p>
@@ -523,15 +523,15 @@
 <li>可以用于指定访问当前对象的成员变量、成员方法</li>
 </ul>
 <p>以this出现在有参数构造器中的用法为例，此时的this是当前对象的地址，就完美的将构造器中的name赋值给当前对象的成员变量name</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Car {
-    String name;
-    double price;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+    <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">double</span> price<span class="token punctuation">;</span>
     
-	public Car(String name, double price){
-        this.name = name;
-        this.price = price;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token keyword">public</span> <span class="token class-name">Car</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token keyword">double</span> price<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>price <span class="token operator">=</span> price<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
 <li>面向对象的三大特征：封装、继承、多态</li>
@@ -591,73 +591,73 @@
 <li>目标：完成电影信息的展示案例，理解面向对象变成的代码</li>
 </ul>
 <p>首先我们设计一个Movie的类</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">package demo2;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">demo2</span><span class="token punctuation">;</span>
 
-public class Movie {
-    // 1、成员变量
-    private String name;
-    private double score;
-    private String actor;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Movie</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1、成员变量</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">double</span> score<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> actor<span class="token punctuation">;</span>
 
-    // 3、构造器
-    public Movie() {
-    }
+    <span class="token comment">// 3、构造器</span>
+    <span class="token keyword">public</span> <span class="token class-name">Movie</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 
-    public Movie(String name, double score, String actor) {
-        this.name = name;
-        this.score = score;
-        this.actor = actor;
-    }
+    <span class="token keyword">public</span> <span class="token class-name">Movie</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token keyword">double</span> score<span class="token punctuation">,</span> <span class="token class-name">String</span> actor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>score <span class="token operator">=</span> score<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>actor <span class="token operator">=</span> actor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 2、getter + setter
-    public String getName() {
-        return name;
-    }
+    <span class="token comment">// 2、getter + setter</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public double getScore() {
-        return score;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getScore</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> score<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setScore(double score) {
-        this.score = score;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setScore</span><span class="token punctuation">(</span><span class="token keyword">double</span> score<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>score <span class="token operator">=</span> score<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public String getActor() {
-        return actor;
-    }
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getActor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> actor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setActor(String actor) {
-        this.actor = actor;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setActor</span><span class="token punctuation">(</span><span class="token class-name">String</span> actor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>actor <span class="token operator">=</span> actor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>创建对象，并访问对象</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">package demo2;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">demo2</span><span class="token punctuation">;</span>
 
-public class Test {
-    public static void main(String[] args) {
-        // 1、设计电影类
-        // 2、创建3个电影对象，封装电影的信息
-        // 3、定义一个电影类型的数组，存储3部电影对象
-        Movie[] movies = new Movie[3];
-        movies[0] = new Movie("《长津湖》", 9.7, "吴京");
-        movies[1] = new Movie("《我和我的父亲》", 9.6, "吴京");
-        movies[2] = new Movie("《朴水少年》", 9.5, "王川");
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 1、设计电影类</span>
+        <span class="token comment">// 2、创建3个电影对象，封装电影的信息</span>
+        <span class="token comment">// 3、定义一个电影类型的数组，存储3部电影对象</span>
+        <span class="token class-name">Movie</span><span class="token punctuation">[</span><span class="token punctuation">]</span> movies <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Movie</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        movies<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Movie</span><span class="token punctuation">(</span><span class="token string">"《长津湖》"</span><span class="token punctuation">,</span> <span class="token number">9.7</span><span class="token punctuation">,</span> <span class="token string">"吴京"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        movies<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Movie</span><span class="token punctuation">(</span><span class="token string">"《我和我的父亲》"</span><span class="token punctuation">,</span> <span class="token number">9.6</span><span class="token punctuation">,</span> <span class="token string">"吴京"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        movies<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Movie</span><span class="token punctuation">(</span><span class="token string">"《朴水少年》"</span><span class="token punctuation">,</span> <span class="token number">9.5</span><span class="token punctuation">,</span> <span class="token string">"王川"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         
-        // 4、遍历数组中每个电影对象，然后获取它的信息展示出来
-        for (int i = 0; i &lt; movies.length; i++) {
-            Movie m = movies[i];
-            System.out.println("电影名：" + m.getName());
-            System.out.println("得分：" + m.getScore());
-            System.out.println("主演：" + m.getActor());
-            System.out.println("------------------------------");
-        }
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token comment">// 4、遍历数组中每个电影对象，然后获取它的信息展示出来</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> movies<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Movie</span> m <span class="token operator">=</span> movies<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"电影名："</span> <span class="token operator">+</span> m<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"得分："</span> <span class="token operator">+</span> m<span class="token punctuation">.</span><span class="token function">getScore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"主演："</span> <span class="token operator">+</span> m<span class="token punctuation">.</span><span class="token function">getActor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 

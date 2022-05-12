@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="HW6-GAN, 小叶の博客">
-    <meta name="description" content="作业描述
-这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度">
+    <meta name="description" content="作业描述这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -476,8 +475,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="作业描述">作业描述</h2>
-<p>这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消失的问题。具体改变有：</p>
+                <h2 id="作业描述"><a href="#作业描述" class="headerlink" title="作业描述"></a>作业描述</h2><p>这部分我将用GAN实现一个动画人脸的生成，利用的模型是DCGAN，它在原始GAN模型的基础上，将生成器和判别器的网络结构换成了当时已经十分成熟的卷积神经网络结构，并对卷积神经网络结构进行一定的调整，克服了原始GAN训练不稳定和梯度消失的问题。具体改变有：</p>
 <ul>
 <li>取消所有的pooling层。生成器中使用fractionally strided convolution代替pooling层，判别器中使用strided convolution代替pooling层。</li>
 <li>在生成器和判别器中都使用批量标准化</li>
@@ -487,236 +485,248 @@
 </ul>
 <p>DCGAN的网络结构如下图所示：</p>
 <img src="/2022/05/06/hw6-gan/image-20220506195849410.png" class="">
-<p>现在让我们来实现这一部分，首先现在我们需要导入本作业需要的一些包，并设置随机种子的个数（这部分直接复制粘贴就好)</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import torch.nn as nn
-import os
-import glob
-import torchvision
-import torchvision.transforms as transforms
-from torch.utils.data import Dataset, DataLoader
-from torch.autograd import Variable    # 产生随机分布
-import matplotlib.pyplot as plt
 
-import random
-import torch
-import numpy as np
-seed = 2022
-random.seed(seed)
-np.random.seed(seed)
-torch.manual_seed(seed)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="数据预处理">数据预处理</h2>
-<h3 id="Dataset">Dataset</h3>
-<p>需要使用transforms将图片转成以下格式：</p>
+<p>现在让我们来实现这一部分，首先现在我们需要导入本作业需要的一些包，并设置随机种子的个数（这部分直接复制粘贴就好)</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> glob
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>transforms <span class="token keyword">as</span> transforms
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> Dataset<span class="token punctuation">,</span> DataLoader
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>autograd <span class="token keyword">import</span> Variable    <span class="token comment"># 产生随机分布</span>
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+seed <span class="token operator">=</span> <span class="token number">2022</span>
+random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+<span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+    torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed_all<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>backends<span class="token punctuation">.</span>cudnn<span class="token punctuation">.</span>benchmark <span class="token operator">=</span> <span class="token boolean">False</span>
+torch<span class="token punctuation">.</span>backends<span class="token punctuation">.</span>cudnn<span class="token punctuation">.</span>deterministic <span class="token operator">=</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>需要使用transforms将图片转成以下格式：</p>
 <ul>
 <li>修改图片尺寸为(64, 64)</li>
 <li>将数值从[0, 1]映射到[-1, 1]</li>
 <li>转成tensor格式读入</li>
 </ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># Dataset
-class CrypkoDataset(Dataset):
-    def __init__(self, fnames, transform):
-        self.fnames = fnames
-        self.transform = transform
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Dataset</span>
+<span class="token keyword">class</span> <span class="token class-name">CrypkoDataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> fnames<span class="token punctuation">,</span> transform<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>fnames <span class="token operator">=</span> fnames
+        self<span class="token punctuation">.</span>transform <span class="token operator">=</span> transform
     
-    def __len__(self):
-        return len(self.fnames)
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>fnames<span class="token punctuation">)</span>
     
-    def __getitem__(self, idx):
-        fname = self.fnames[idx]
-        img = torchvision.io.read_image(fname)   # 读取图片
-        img = self.transform(img)                # 对图片进行一定的修改
-        return img<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> idx<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        fname <span class="token operator">=</span> self<span class="token punctuation">.</span>fnames<span class="token punctuation">[</span>idx<span class="token punctuation">]</span>
+        img <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>io<span class="token punctuation">.</span>read_image<span class="token punctuation">(</span>fname<span class="token punctuation">)</span>   <span class="token comment"># 读取图片</span>
+        img <span class="token operator">=</span> self<span class="token punctuation">.</span>transform<span class="token punctuation">(</span>img<span class="token punctuation">)</span>                <span class="token comment"># 对图片进行一定的修改</span>
+        <span class="token keyword">return</span> img<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>制定transform规则并获取dataset</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">fnames = glob.glob(os.path.join('./faces', '*'))
-# 1. 修改图片尺寸为(64, 64)
-# 2. 将数值从 [0, 1] 线性映射到 [-1, 1]
-transform = transforms.Compose([
-    transforms.ToPILImage(),
-    transforms.Resize((64, 64)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=(0.5, 0.5, 0.5),std=(0.5, 0.5, 0.5)),
-])
-dataset = CrypkoDataset(fnames, transform)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fnames <span class="token operator">=</span> glob<span class="token punctuation">.</span>glob<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">'./faces'</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 1. 修改图片尺寸为(64, 64)</span>
+<span class="token comment"># 2. 将数值从 [0, 1] 线性映射到 [-1, 1]</span>
+transform <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    transforms<span class="token punctuation">.</span>ToPILImage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>Resize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span>mean<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>std<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+dataset <span class="token operator">=</span> CrypkoDataset<span class="token punctuation">(</span>fnames<span class="token punctuation">,</span> transform<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>展示一组照片</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">images = [dataset[i] for i in range(16)]
-grid_img = torchvision.utils.make_grid(images, nrow=8)
-plt.figure(figsize=(20, 20))
-plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">images <span class="token operator">=</span> <span class="token punctuation">[</span>dataset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+grid_img <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>make_grid<span class="token punctuation">(</span>images<span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>grid_img<span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 <img src="/2022/05/06/hw6-gan/output_7_2.png" class="">    
+
+
 <p>由于我们使用了transform将数据的范围变成了[-1, 1]，因此我们需要将其转换为[0, 1]，才能展示出正确的图片</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">images = [(dataset[i] + 1) / 2 for i in range(16)]
-grid_img = torchvision.utils.make_grid(images, nrow=8)
-plt.figure(figsize=(20, 20))
-plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">images <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>dataset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+grid_img <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>make_grid<span class="token punctuation">(</span>images<span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>grid_img<span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <img src="/2022/05/06/hw6-gan/output_9_1.png" class="">
-<h2 id="Model">Model</h2>
-<p>现在实现模型的部分，这一部分也可以自行修改</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 模型参数初始化
-def weights_init(m):
-    classname = m.__class__.__name__
-    if classname.find('Conv') != -1:
-        m.weight.data.normal_(0.0, 0.02)  # 均值为0，标准差为0.02的正态分布
-    elif classname.find('BatchNorm') != -1:
-        m.weight.data.normal_(1.0, 0.02)
-        m.bias.data.fill_(0)             # 均值为1，标准差为0.02的正态分布
+
+
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>现在实现模型的部分，这一部分也可以自行修改</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 模型参数初始化</span>
+<span class="token keyword">def</span> <span class="token function">weights_init</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    classname <span class="token operator">=</span> m<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__name__
+    <span class="token keyword">if</span> classname<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'Conv'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>  <span class="token comment"># 均值为0，标准差为0.02的正态分布</span>
+    <span class="token keyword">elif</span> classname<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'BatchNorm'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>
+        m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>fill_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>             <span class="token comment"># 均值为1，标准差为0.02的正态分布</span>
         
-# 生成器
-class Generator(nn.Module):
-    def __init__(self, in_dim):
-        super(Generator, self).__init__()
-        def dconv_bn_relu(in_dim, out_dim):
-            return nn.Sequential(
-                nn.ConvTranspose2d(in_dim, out_dim, kernel_size=5, stride=2, padding=2, output_padding=1, bias=False),
-                nn.BatchNorm2d(out_dim),
-                nn.ReLU(),
-            )
-        self.l1 = nn.Sequential(
-            nn.Linear(in_dim, 512 * 4 * 4),
-            nn.BatchNorm1d(512 * 4 * 4),
-            nn.ReLU(),
-        )
-        self.l2_5 = nn.Sequential(
-            dconv_bn_relu(512, 256),
-            dconv_bn_relu(256, 128),
-            dconv_bn_relu(128, 64),
-            nn.ConvTranspose2d(64, 3, kernel_size=5, stride=2, padding=2, output_padding=1),
-            nn.Tanh(),
-        )
-        self.apply(weights_init)
+<span class="token comment"># 生成器</span>
+<span class="token keyword">class</span> <span class="token class-name">Generator</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Generator<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">dconv_bn_relu</span><span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+                nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> output_padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>out_dim<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>l1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> <span class="token number">512</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>BatchNorm1d<span class="token punctuation">(</span><span class="token number">512</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>l2_5 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            dconv_bn_relu<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            dconv_bn_relu<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            dconv_bn_relu<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> output_padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Tanh<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>weights_init<span class="token punctuation">)</span>
     
-    def forward(self, x):
-        y = self.l1(x)
-        y = y.view(y.size(0), -1, 4, 4)
-        y = self.l2_5(y)
-        return y
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>l1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        y <span class="token operator">=</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span>y<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>l2_5<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y
 
-# 判别器
-class Discriminator(nn.Module):
-    def __init__(self, in_dim):
-        super(Discriminator, self).__init__()
-        def conv_bn_lrelu(in_dim, out_dim):
-            return nn.Sequential(
-                nn.Conv2d(in_dim, out_dim, 5, 2, 2),
-                nn.BatchNorm2d(out_dim),
-                nn.LeakyReLU(0.2),
-            )
-        self.ls = nn.Sequential(
-            nn.Conv2d(in_dim, 64, 5, 2, 2), nn.LeakyReLU(0.2),
-            conv_bn_lrelu(64, 128),
-            conv_bn_lrelu(128, 256),
-            conv_bn_lrelu(256, 512),
-            nn.Conv2d(512, 1, 4),
-            nn.Sigmoid(),
-        )
+<span class="token comment"># 判别器</span>
+<span class="token keyword">class</span> <span class="token class-name">Discriminator</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Discriminator<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">conv_bn_lrelu</span><span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+                nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>out_dim<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>LeakyReLU<span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>ls <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>LeakyReLU<span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            conv_bn_lrelu<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            conv_bn_lrelu<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            conv_bn_lrelu<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
         
-        self.apply(weights_init)
+        self<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>weights_init<span class="token punctuation">)</span>
     
-    def forward(self, x):
-        y = self.ls(x)
-        y = y.view(-1)
-        return y <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="设置超参数">设置超参数</h2>
-<p>这部分可以进行调节</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size = 64
-z_dim = 100
-z_sample = Variable(torch.randn(100, z_dim)).cuda()         # 随机生成100个样本，用于检测模型的训练结果
-lr = 1e-4
-n_epoch = 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="开始训练">开始训练</h2>
-<p><strong>准备好dataloader，model，loss criterion，optimizer</strong></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 生成一个文件目录，用于保存模型结果
-save_dir = './logs'
-os.makedirs(save_dir, exist_ok=True)
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>ls<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        y <span class="token operator">=</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-# dataloader
-dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+<h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><p>这部分可以进行调节</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size <span class="token operator">=</span> <span class="token number">64</span>
+z_dim <span class="token operator">=</span> <span class="token number">100</span>
+z_sample <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>         <span class="token comment"># 随机生成100个样本，用于检测模型的训练结果</span>
+lr <span class="token operator">=</span> <span class="token number">1e-4</span>
+n_epoch <span class="token operator">=</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-# model
-G = Generator(in_dim=z_dim).cuda()
-D = Discriminator(in_dim=3).cuda()
-G.train()
-D.train()
+<h2 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h2><p><strong>准备好dataloader，model，loss criterion，optimizer</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 生成一个文件目录，用于保存模型结果</span>
+save_dir <span class="token operator">=</span> <span class="token string">'./logs'</span>
+os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span> exist_ok<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
 
-# loss criterion
-criterion = nn.BCELoss()
+<span class="token comment"># dataloader</span>
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
 
-# optimizer
-opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=(0.5, 0.999))
-opt_D = torch.optim.Adam(D.parameters(), lr=lr, betas=(0.5, 0.999))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># model</span>
+G <span class="token operator">=</span> Generator<span class="token punctuation">(</span>in_dim<span class="token operator">=</span>z_dim<span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+D <span class="token operator">=</span> Discriminator<span class="token punctuation">(</span>in_dim<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+G<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+D<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># loss criterion</span>
+criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>BCELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># optimizer</span>
+opt_G <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>G<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>lr<span class="token punctuation">,</span> betas<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.999</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+opt_D <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>D<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>lr<span class="token punctuation">,</span> betas<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.999</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><strong>Training</strong></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">for epoch in range(n_epoch):
-    for i, data in enumerate(dataloader):
-        imgs = data.cuda()
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        imgs <span class="token operator">=</span> data<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        bs = imgs.size(0)
+        bs <span class="token operator">=</span> imgs<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
         
-        """训练D"""
-        z = Variable(torch.randn(bs, z_dim)).cuda()
-        g_imgs = G(z)                      # 生成的概率分布
-        r_imgs = Variable(imgs).cuda()     # 真实数据的概率分布
+        <span class="token triple-quoted-string string">"""训练D"""</span>
+        z <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>bs<span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        g_imgs <span class="token operator">=</span> G<span class="token punctuation">(</span>z<span class="token punctuation">)</span>                      <span class="token comment"># 生成的概率分布</span>
+        r_imgs <span class="token operator">=</span> Variable<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment"># 真实数据的概率分布</span>
         
-        # 对两种数据打标签，真实为1，生成的为0
-        g_label = torch.zeros((bs)).cuda()
-        r_label = torch.ones((bs)).cuda()
+        <span class="token comment"># 对两种数据打标签，真实为1，生成的为0</span>
+        g_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>bs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        r_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span>bs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        # 两种数据经过判别器
-        g_logits = D(g_imgs)
-        r_logits = D(r_imgs)
+        <span class="token comment"># 两种数据经过判别器</span>
+        g_logits <span class="token operator">=</span> D<span class="token punctuation">(</span>g_imgs<span class="token punctuation">)</span>
+        r_logits <span class="token operator">=</span> D<span class="token punctuation">(</span>r_imgs<span class="token punctuation">)</span>
         
-        # 计算D的loss
-        g_loss = criterion(g_logits, g_label)
-        r_loss = criterion(r_logits, r_label)
-        loss_D = (g_loss + r_loss) / 2
+        <span class="token comment"># 计算D的loss</span>
+        g_loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>g_logits<span class="token punctuation">,</span> g_label<span class="token punctuation">)</span>
+        r_loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>r_logits<span class="token punctuation">,</span> r_label<span class="token punctuation">)</span>
+        loss_D <span class="token operator">=</span> <span class="token punctuation">(</span>g_loss <span class="token operator">+</span> r_loss<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span>
         
-        # 后向传播更新D的模型参数
-        D.zero_grad()
-        loss_D.backward()
-        opt_D.step()
+        <span class="token comment"># 后向传播更新D的模型参数</span>
+        D<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        loss_D<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        opt_D<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        """训练G"""
-        z = Variable(torch.randn(bs, z_dim)).cuda()
-        g_imgs = G(z)
+        <span class="token triple-quoted-string string">"""训练G"""</span>
+        z <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>bs<span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        g_imgs <span class="token operator">=</span> G<span class="token punctuation">(</span>z<span class="token punctuation">)</span>
         
-        # 生成数据经过判别器
-        g_logits = D(g_imgs)
+        <span class="token comment"># 生成数据经过判别器</span>
+        g_logits <span class="token operator">=</span> D<span class="token punctuation">(</span>g_imgs<span class="token punctuation">)</span>
         
-        # 计算loss
-        loss_G = criterion(g_logits, r_label)     # 生成器的目的是生成和真实数据一样的分布，因此用的是r_label
+        <span class="token comment"># 计算loss</span>
+        loss_G <span class="token operator">=</span> criterion<span class="token punctuation">(</span>g_logits<span class="token punctuation">,</span> r_label<span class="token punctuation">)</span>     <span class="token comment"># 生成器的目的是生成和真实数据一样的分布，因此用的是r_label</span>
         
-        # 后向传播更新G的模型参数
-        G.zero_grad()
-        loss_G.backward()
-        opt_G.step()
+        <span class="token comment"># 后向传播更新G的模型参数</span>
+        G<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        loss_G<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        opt_G<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        # 打印当前模型训练的状态
-        print(f'\rEpoch [{epoch+1}/{n_epoch}] {i+1}/{len(dataloader)} Loss_D: {loss_D.item():.4f} Loss_G: {loss_G.item():.4f}', end='')
-    # 每进行一次epoch，生成一组图片，用于评估模型训练的情况
-    G.eval()
-    g_imgs_sample = (G(z_sample).data + 1) / 2
-    filename = os.path.join(save_dir, f'Epoch_{epoch + 1:03d}.jpg')
-    torchvision.utils.save_image(g_imgs_sample, filename, nrow=10)
-    print(f' | save samples to {filename}')
+        <span class="token comment"># 打印当前模型训练的状态</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'\rEpoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>n_epoch<span class="token punctuation">}</span></span><span class="token string">] </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> Loss_D: </span><span class="token interpolation"><span class="token punctuation">{</span>loss_D<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string"> Loss_G: </span><span class="token interpolation"><span class="token punctuation">{</span>loss_G<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+    <span class="token comment"># 每进行一次epoch，生成一组图片，用于评估模型训练的情况</span>
+    G<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    g_imgs_sample <span class="token operator">=</span> <span class="token punctuation">(</span>G<span class="token punctuation">(</span>z_sample<span class="token punctuation">)</span><span class="token punctuation">.</span>data <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span>
+    filename <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'Epoch_</span><span class="token interpolation"><span class="token punctuation">{</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">:</span><span class="token format-spec">03d</span><span class="token punctuation">}</span></span><span class="token string">.jpg'</span></span><span class="token punctuation">)</span>
+    torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>save_image<span class="token punctuation">(</span>g_imgs_sample<span class="token punctuation">,</span> filename<span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f' | save samples to </span><span class="token interpolation"><span class="token punctuation">{</span>filename<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
     
-    # 展示生成的图片
-    grid_img = torchvision.utils.make_grid(g_imgs_sample.cpu(), nrow=10)
-    plt.figure(figsize=(10, 10))
-    plt.imshow(grid_img.permute(1, 2, 0))
-    plt.show()
+    <span class="token comment"># 展示生成的图片</span>
+    grid_img <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>make_grid<span class="token punctuation">(</span>g_imgs_sample<span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>grid_img<span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-    # 将G转换成训练模型
-    G.train()
+    <span class="token comment"># 将G转换成训练模型</span>
+    G<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-# 模型保存
-torch.save(G.state_dict(), os.path.join(save_dir, f'dcgan_g.pth'))
-torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 模型保存</span>
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>G<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'dcgan_g.pth'</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>D<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'dcgan_d.pth'</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <pre><code>Epoch [1/10] 1115/1115 Loss_D: 0.5579 Loss_G: 2.0209 | save samples to ./logs\Epoch_001.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_1.png" class="">    
+
+
 <pre><code>Epoch [2/10] 1115/1115 Loss_D: 0.2129 Loss_G: 6.2952 | save samples to ./logs\Epoch_002.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_3.png" class="">
@@ -729,42 +739,57 @@ torch.save(D.state_dict(), os.path.join(save_dir, f'dcgan_d.pth')) <span aria-hi
 <pre><code>Epoch [5/10] 1115/1115 Loss_D: 0.2093 Loss_G: 3.2604 | save samples to ./logs\Epoch_005.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_9.png" class="">
+
 <pre><code>Epoch [6/10] 1115/1115 Loss_D: 0.1691 Loss_G: 3.0890 | save samples to ./logs\Epoch_006.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_11.png" class="">
+
+
+
 <pre><code>Epoch [7/10] 1115/1115 Loss_D: 0.1185 Loss_G: 3.0753 | save samples to ./logs\Epoch_007.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_13.png" class="">
+
+
+
 <pre><code>Epoch [8/10] 1115/1115 Loss_D: 0.1162 Loss_G: 3.1938 | save samples to ./logs\Epoch_008.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_15.png" class="">
+
+
+
 <pre><code>Epoch [9/10] 1115/1115 Loss_D: 0.1183 Loss_G: 4.2176 | save samples to ./logs\Epoch_009.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_17.png" class="">
+
+
+
 <pre><code>Epoch [10/10] 1115/1115 Loss_D: 0.1022 Loss_G: 2.4000 | save samples to ./logs\Epoch_010.jpg
 </code></pre>
 <img src="/2022/05/06/hw6-gan/output_17_19.png" class="">
-<h2 id="结果展示">结果展示</h2>
-<p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 模型加载
-G = Generator(z_dim)
-G.load_state_dict(torch.load(os.path.join(save_dir,'dcgan_g.pth')))
-G.eval()
-G.cuda() 
 
-n_output = 20
-z_sample = Variable(torch.randn(n_output, z_dim)).cuda()
-imgs_sample = (G(z_sample).data + 1) / 2.0
-filename = os.path.join(save_dir, f'result.jpg')
-torchvision.utils.save_image(imgs_sample, filename, nrow=10)
-# show image
-grid_img = torchvision.utils.make_grid(imgs_sample.cpu(), nrow=10)
-plt.figure(figsize=(10,10))
-plt.imshow(grid_img.permute(1, 2, 0))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h2><p>现在我们就可以利用我们训练好的Generator来随机生成图片</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 模型加载</span>
+G <span class="token operator">=</span> Generator<span class="token punctuation">(</span>z_dim<span class="token punctuation">)</span>
+G<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span><span class="token string">'dcgan_g.pth'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+G<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+G<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+n_output <span class="token operator">=</span> <span class="token number">20</span>
+z_sample <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>n_output<span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+imgs_sample <span class="token operator">=</span> <span class="token punctuation">(</span>G<span class="token punctuation">(</span>z_sample<span class="token punctuation">)</span><span class="token punctuation">.</span>data <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2.0</span>
+filename <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>save_dir<span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'result.jpg'</span></span><span class="token punctuation">)</span>
+torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>save_image<span class="token punctuation">(</span>imgs_sample<span class="token punctuation">,</span> filename<span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment"># show image</span>
+grid_img <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>make_grid<span class="token punctuation">(</span>imgs_sample<span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nrow<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>grid_img<span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 <img src="/2022/05/06/hw6-gan/output_19_1.png" class="">
+
 <p>虽然图中的动画人物看起来很怪，但也有几分和动画人物相似，并且有的已经非常像了。这里我只把n_epoch设置为10，如果将n_epoch设置大点，我想结果会好点。</p>
-<h2 id="参考资料-2">参考资料</h2>
-<p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06434">Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks."arXiv preprint arXiv:1511.06434(2015).</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06434">Radford, Alec, Luke Metz, and Soumith Chintala. “Unsupervised representation learning with deep convolutional generative adversarial networks.”arXiv preprint arXiv:1511.06434(2015).</a></p>
 
                 
             </div>

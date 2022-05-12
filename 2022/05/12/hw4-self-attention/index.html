@@ -501,129 +501,129 @@
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># 导入相关的包
-import os
-import json
-import torch
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader, random_split
-from pathlib import Path
-import random
-from torch.nn.utils.rnn import pad_sequence
-import numpy as np
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 导入相关的包</span>
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> Dataset<span class="token punctuation">,</span> DataLoader<span class="token punctuation">,</span> random_split
+<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
+<span class="token keyword">import</span> random
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>rnn <span class="token keyword">import</span> pad_sequence
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
-seed = 2022
-random.seed(seed)
-np.random.seed(seed)
-torch.manual_seed(seed)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+seed <span class="token operator">=</span> <span class="token number">2022</span>
+random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+<span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+    torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed_all<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>backends<span class="token punctuation">.</span>cudnn<span class="token punctuation">.</span>benchmark <span class="token operator">=</span> <span class="token boolean">False</span>
+torch<span class="token punctuation">.</span>backends<span class="token punctuation">.</span>cudnn<span class="token punctuation">.</span>deterministic <span class="token operator">=</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">class myDataset(Dataset):
-    def __init__(self, data_dir, segment_len=128):
-        self.data_dir = data_dir
-        self.segment_len = segment_len
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">myDataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data_dir<span class="token punctuation">,</span> segment_len<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data_dir <span class="token operator">=</span> data_dir
+        self<span class="token punctuation">.</span>segment_len <span class="token operator">=</span> segment_len
         
-        # 加载一个字典，该字典对应speaker的标签(0, 1, 2, ... ,599)
-        mapping_path = Path(data_dir) / "mapping.json"
-        mapping = json.load(mapping_path.open())
-        self.speaker2id = mapping["speaker2id"]
+        <span class="token comment"># 加载一个字典，该字典对应speaker的标签(0, 1, 2, ... ,599)</span>
+        mapping_path <span class="token operator">=</span> Path<span class="token punctuation">(</span>data_dir<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token string">"mapping.json"</span>
+        mapping <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>mapping_path<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>speaker2id <span class="token operator">=</span> mapping<span class="token punctuation">[</span><span class="token string">"speaker2id"</span><span class="token punctuation">]</span>
         
-        # 从metada中加载训练数据
-        metadata_path = Path(data_dir) / "metadata.json"
-        metadata = json.load(open(metadata_path))["speakers"]
+        <span class="token comment"># 从metada中加载训练数据</span>
+        metadata_path <span class="token operator">=</span> Path<span class="token punctuation">(</span>data_dir<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token string">"metadata.json"</span>
+        metadata <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token builtin">open</span><span class="token punctuation">(</span>metadata_path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">"speakers"</span><span class="token punctuation">]</span>
         
-        # speaker的总个数
-        self.speaker_num = len(metadata.keys())
-        self.data = []
-        for speaker in metadata.keys():
-            for utterances in metadata[speaker]:
-                self.data.append([utterances["feature_path"], int(self.speaker2id[speaker])])
+        <span class="token comment"># speaker的总个数</span>
+        self<span class="token punctuation">.</span>speaker_num <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>metadata<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> speaker <span class="token keyword">in</span> metadata<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> utterances <span class="token keyword">in</span> metadata<span class="token punctuation">[</span>speaker<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>data<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span>utterances<span class="token punctuation">[</span><span class="token string">"feature_path"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>speaker2id<span class="token punctuation">[</span>speaker<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     
-    def __len__(self):
-        return len(self.data)
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
     
-    def __getitem__(self, index):
-        feat_path, speaker = self.data[index]
-        # 加载预处理的mel-spectrogram
-        mel = torch.load(os.path.join(self.data_dir, feat_path))
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        feat_path<span class="token punctuation">,</span> speaker <span class="token operator">=</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+        <span class="token comment"># 加载预处理的mel-spectrogram</span>
+        mel <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data_dir<span class="token punctuation">,</span> feat_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
         
-        if len(mel) &gt; self.segment_len:
-            start = random.randint(0, len(mel) - self.segment_len)
-            mel = torch.FloatTensor(mel[start: start + self.segment_len])
-        else:
-            mel = torch.FloatTensor(mel)
-        speaker = torch.LongTensor([speaker])
-        return mel, speaker
-    def get_speaker_number(self):
-        return self.speaker_num<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>mel<span class="token punctuation">)</span> <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>segment_len<span class="token punctuation">:</span>
+            start <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>mel<span class="token punctuation">)</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>segment_len<span class="token punctuation">)</span>
+            mel <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>mel<span class="token punctuation">[</span>start<span class="token punctuation">:</span> start <span class="token operator">+</span> self<span class="token punctuation">.</span>segment_len<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            mel <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>mel<span class="token punctuation">)</span>
+        speaker <span class="token operator">=</span> torch<span class="token punctuation">.</span>LongTensor<span class="token punctuation">(</span><span class="token punctuation">[</span>speaker<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> mel<span class="token punctuation">,</span> speaker
+    <span class="token keyword">def</span> <span class="token function">get_speaker_number</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>speaker_num<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a>DataLoader</h3><ul>
 <li>把训练数据划分为训练集(90%)和验证集(10%)</li>
 <li>创建dataloader来迭代数据</li>
 </ul>
 <p>由于我们是按batch训练模型，所以需要对同一batch的数据进行填充，使它们长度相同，这部分通过定义collate_batch()函数实现</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">def collate_batch(batch):
-    mel, speaker = zip(*batch)
-    mel = pad_sequence(mel, batch_first=True, padding_value=-20)
-    # mel: (batch size, length, 40)
-    return mel, torch.FloatTensor(speaker).long()
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">collate_batch</span><span class="token punctuation">(</span>batch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    mel<span class="token punctuation">,</span> speaker <span class="token operator">=</span> <span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token operator">*</span>batch<span class="token punctuation">)</span>
+    mel <span class="token operator">=</span> pad_sequence<span class="token punctuation">(</span>mel<span class="token punctuation">,</span> batch_first<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> padding_value<span class="token operator">=</span><span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">)</span>
+    <span class="token comment"># mel: (batch size, length, 40)</span>
+    <span class="token keyword">return</span> mel<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>speaker<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">long</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-def get_dataloader(data_dir, batch_size):
-    dataset = myDataset(data_dir)
-    speaker_num = dataset.get_speaker_number()
-    # 划分数据集
-    trainlen = int(0.9 * len(dataset))
-    lengths = [trainlen, len(dataset) - trainlen]
-    trainset, validset = random_split(dataset, lengths)
+<span class="token keyword">def</span> <span class="token function">get_dataloader</span><span class="token punctuation">(</span>data_dir<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dataset <span class="token operator">=</span> myDataset<span class="token punctuation">(</span>data_dir<span class="token punctuation">)</span>
+    speaker_num <span class="token operator">=</span> dataset<span class="token punctuation">.</span>get_speaker_number<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># 划分数据集</span>
+    trainlen <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token number">0.9</span> <span class="token operator">*</span> <span class="token builtin">len</span><span class="token punctuation">(</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    lengths <span class="token operator">=</span> <span class="token punctuation">[</span>trainlen<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>dataset<span class="token punctuation">)</span> <span class="token operator">-</span> trainlen<span class="token punctuation">]</span>
+    trainset<span class="token punctuation">,</span> validset <span class="token operator">=</span> random_split<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> lengths<span class="token punctuation">)</span>
 
-    train_loader = DataLoader(
-        trainset,
-        batch_size=batch_size,
-        shuffle=True,
-        collate_fn=collate_batch,
-    )
-    valid_loader = DataLoader(
-        validset,
-        batch_size=batch_size,
-        collate_fn=collate_batch,
-    )
-    return train_loader, valid_loader, speaker_num<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>
+        trainset<span class="token punctuation">,</span>
+        batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span>
+        shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        collate_fn<span class="token operator">=</span>collate_batch<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    valid_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>
+        validset<span class="token punctuation">,</span>
+        batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span>
+        collate_fn<span class="token operator">=</span>collate_batch<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">return</span> train_loader<span class="token punctuation">,</span> valid_loader<span class="token punctuation">,</span> speaker_num<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>在这里，我们使用的模型是基于Transformer的EncoderLayer，相关使用可以看官方API <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.TransformerEncoderLayer.html#torch.nn.TransformerEncoderLayer">TransformerEncoderLayer</a>。当然，你也可以使用Transformer完整的Encoder部分，它只不过多叠了几个EncoderLayer，有关它的使用也请看官方API <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.TransformerEncoder.html#torch.nn.TransformerEncoder">TransformerEncoder</a></p>
 <p>如果你对Transformer不太了解，可以去看前面写的笔记-<a href="https://faith-ye.github.io/2022/04/11/transformer/">Transformer</a></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">class Classifier(nn.Module):
-    def __init__(self, d_model=80, n_spks=600, dropout=0.1):
-        super().__init__()
-        # 将输入的特征维度投影到d_model
-        self.prenet = nn.Linear(40, d_model)
-        # TODO: 可以尝试实现
-        #   Change Transformer to Conformer.
-        #   https://arxiv.org/abs/2005.08100
-        self.encoder_layer = nn.TransformerEncoderLayer(
-          d_model=d_model, dim_feedforward=256, nhead=2
-        )
-        # self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Classifier</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> d_model<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">,</span> n_spks<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span> dropout<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 将输入的特征维度投影到d_model</span>
+        self<span class="token punctuation">.</span>prenet <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">,</span> d_model<span class="token punctuation">)</span>
+        <span class="token comment"># TODO: 可以尝试实现</span>
+        <span class="token comment">#   Change Transformer to Conformer.</span>
+        <span class="token comment">#   https://arxiv.org/abs/2005.08100</span>
+        self<span class="token punctuation">.</span>encoder_layer <span class="token operator">=</span> nn<span class="token punctuation">.</span>TransformerEncoderLayer<span class="token punctuation">(</span>
+          d_model<span class="token operator">=</span>d_model<span class="token punctuation">,</span> dim_feedforward<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span> nhead<span class="token operator">=</span><span class="token number">2</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment"># self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)</span>
 
-        # 将 d_model 中的特征维度投影到speaker的人数中，便于分类
-        self.pred_layer = nn.Sequential(
-          # nn.Linear(d_model, d_model),
-          # nn.ReLU(),
-          nn.Linear(d_model, n_spks),
-        )
+        <span class="token comment"># 将 d_model 中的特征维度投影到speaker的人数中，便于分类</span>
+        self<span class="token punctuation">.</span>pred_layer <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+          <span class="token comment"># nn.Linear(d_model, d_model),</span>
+          <span class="token comment"># nn.ReLU(),</span>
+          nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>d_model<span class="token punctuation">,</span> n_spks<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
 
-    def forward(self, mels):
-        out = self.prenet(mels)          # out: (batch size, length, d_model)
-        out = out.permute(1, 0, 2)       # out: (length, batch size, d_model)
-        out = self.encoder_layer(out)
-        out = out.transpose(0, 1)        # out: (batch size, length, d_model)
-        stats = out.mean(dim=1)         # mean pooling
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> mels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>prenet<span class="token punctuation">(</span>mels<span class="token punctuation">)</span>          <span class="token comment"># out: (batch size, length, d_model)</span>
+        out <span class="token operator">=</span> out<span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment"># out: (length, batch size, d_model)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>encoder_layer<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
+        out <span class="token operator">=</span> out<span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>        <span class="token comment"># out: (batch size, length, d_model)</span>
+        stats <span class="token operator">=</span> out<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>         <span class="token comment"># mean pooling</span>
         
-        out = self.pred_layer(stats)    # out: (batch, n_spks)
-        return out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>pred_layer<span class="token punctuation">(</span>stats<span class="token punctuation">)</span>    <span class="token comment"># out: (batch, n_spks)</span>
+        <span class="token keyword">return</span> out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="学习率调度器"><a href="#学习率调度器" class="headerlink" title="学习率调度器"></a>学习率调度器</h2><ul>
 <li>对于transformer结构，学习率时间表的设计是和CNN不一样的</li>
@@ -633,156 +633,156 @@ def get_dataloader(data_dir, batch_size):
 <img src="/2022/05/12/hw4-self-attention/image-20220512192405370.png" class="">
 
 
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import math
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> math
 
-import torch
-from torch.optim import Optimizer
-from torch.optim.lr_scheduler import LambdaLR
+<span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>optim <span class="token keyword">import</span> Optimizer
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>lr_scheduler <span class="token keyword">import</span> LambdaLR
 
-def get_cosine_schedule_with_warmup(
-    optimizer: Optimizer,
-    num_warmup_steps: int,
-    num_training_steps: int,
-    num_cycles: float = 0.5,
-    last_epoch: int = -1,
-):
-    def lr_lambda(current_step):
-        # warmup
-        if current_step &lt; num_warmup_steps:
-            return float(current_step) / float(max(1, num_warmup_steps))
-        # decadence
-        progress = float(current_step - num_warmup_steps) / float(
-            max(1, num_training_steps - num_warmup_steps)
-        )
-        return max(
-            0.0, 0.5 * (1.0 + math.cos(math.pi * float(num_cycles) * 2.0 * progress))
-        )
-    return LambdaLR(optimizer, lr_lambda, last_epoch)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">def</span> <span class="token function">get_cosine_schedule_with_warmup</span><span class="token punctuation">(</span>
+    optimizer<span class="token punctuation">:</span> Optimizer<span class="token punctuation">,</span>
+    num_warmup_steps<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span>
+    num_training_steps<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span>
+    num_cycles<span class="token punctuation">:</span> <span class="token builtin">float</span> <span class="token operator">=</span> <span class="token number">0.5</span><span class="token punctuation">,</span>
+    last_epoch<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">lr_lambda</span><span class="token punctuation">(</span>current_step<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># warmup</span>
+        <span class="token keyword">if</span> current_step <span class="token operator">&lt;</span> num_warmup_steps<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token builtin">float</span><span class="token punctuation">(</span>current_step<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token builtin">max</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_warmup_steps<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment"># decadence</span>
+        progress <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>current_step <span class="token operator">-</span> num_warmup_steps<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">float</span><span class="token punctuation">(</span>
+            <span class="token builtin">max</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_training_steps <span class="token operator">-</span> num_warmup_steps<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token builtin">max</span><span class="token punctuation">(</span>
+            <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.5</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">+</span> math<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>math<span class="token punctuation">.</span>pi <span class="token operator">*</span> <span class="token builtin">float</span><span class="token punctuation">(</span>num_cycles<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2.0</span> <span class="token operator">*</span> progress<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token keyword">return</span> LambdaLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> lr_lambda<span class="token punctuation">,</span> last_epoch<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><p>这部分用于调节以提升模型性能</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-os.makedirs('models', exist_ok=True)
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">"cuda"</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">"cpu"</span><span class="token punctuation">)</span>
+os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span><span class="token string">'models'</span><span class="token punctuation">,</span> exist_ok<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
 
-config = {
-    "data_dir": "./Dataset",
-    "save_path": "models/model.pth",
-    "batch_size": 32,
-    "lr": 1e-3,
-    "valid_steps": 2000,
-    "warmup_steps": 1000,
-    "n_epochs": 70000,
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+config <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"data_dir"</span><span class="token punctuation">:</span> <span class="token string">"./Dataset"</span><span class="token punctuation">,</span>
+    <span class="token string">"save_path"</span><span class="token punctuation">:</span> <span class="token string">"models/model.pth"</span><span class="token punctuation">,</span>
+    <span class="token string">"batch_size"</span><span class="token punctuation">:</span> <span class="token number">32</span><span class="token punctuation">,</span>
+    <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">1e-3</span><span class="token punctuation">,</span>
+    <span class="token string">"valid_steps"</span><span class="token punctuation">:</span> <span class="token number">2000</span><span class="token punctuation">,</span>
+    <span class="token string">"warmup_steps"</span><span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    <span class="token string">"n_epochs"</span><span class="token punctuation">:</span> <span class="token number">70000</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="加载数据和模型"><a href="#加载数据和模型" class="headerlink" title="加载数据和模型"></a>加载数据和模型</h2><p>准备好dataloader，model，loss criterion，optimizer</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">train_loader, valid_loader, speaker_num = get_dataloader(config['data_dir'], config['batch_size'])
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">train_loader<span class="token punctuation">,</span> valid_loader<span class="token punctuation">,</span> speaker_num <span class="token operator">=</span> get_dataloader<span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">'data_dir'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'batch_size'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-model = Classifier(n_spks=speaker_num).to(device)
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.AdamW(model.parameters(), lr=config['lr'])
-scheduler = get_cosine_schedule_with_warmup(optimizer, config['warmup_steps'], config['n_epochs'])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+model <span class="token operator">=</span> Classifier<span class="token punctuation">(</span>n_spks<span class="token operator">=</span>speaker_num<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>AdamW<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>config<span class="token punctuation">[</span><span class="token string">'lr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+scheduler <span class="token operator">=</span> get_cosine_schedule_with_warmup<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'warmup_steps'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'n_epochs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">import time
+<h2 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> time
 
-n_epochs = config['n_epochs']         # 总迭代次数
-best_acc = -1.0                     # 用于保存在测试集准确率最高的模型
+n_epochs <span class="token operator">=</span> config<span class="token punctuation">[</span><span class="token string">'n_epochs'</span><span class="token punctuation">]</span>         <span class="token comment"># 总迭代次数</span>
+best_acc <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.0</span>                     <span class="token comment"># 用于保存在测试集准确率最高的模型</span>
 
-for epoch in range(n_epochs):
-    start_time = time.time()
-    train_acc, train_loss = 0.0, 0.0
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    start_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    train_acc<span class="token punctuation">,</span> train_loss <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span>
     
-    model.train()
-    for i,data in enumerate(train_loader):
-        optimizer.zero_grad()
-        pred = model(data[0].to(device))
-        loss = criterion(pred, data[1].to(device))
-        loss.backward()
-        optimizer.step()
-        scheduler.step()
+    model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span>data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        pred <span class="token operator">=</span> model<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>pred<span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        scheduler<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        train_acc += np.sum(np.argmax(pred.cpu().data.numpy(), axis=1) == data[1].numpy())
-        train_loss += loss.detach().cpu().item()
+        train_acc <span class="token operator">+=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>pred<span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        train_loss <span class="token operator">+=</span> loss<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-    train_acc /= len(train_loader.dataset)
-    train_loss /= len(train_loader)
+    train_acc <span class="token operator">/=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span>
+    train_loss <span class="token operator">/=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span>
     
-    # 每次迭代后，在验证集中验证模型
-    if(epoch + 1) % config['valid_steps'] == 0:
-        val_loss, val_acc = 0.0, 0.0
+    <span class="token comment"># 每次迭代后，在验证集中验证模型</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> config<span class="token punctuation">[</span><span class="token string">'valid_steps'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        val_loss<span class="token punctuation">,</span> val_acc <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span>
 
-        model.eval()
-        for i, data in enumerate(valid_loader):
-            with torch.no_grad():
-                pred = model(data[0].to(device))
-                loss = criterion(pred, data[1].to(device))
-                val_acc += np.sum(np.argmax(pred.cpu().data.numpy(), axis=1) == data[1].numpy())
-                val_loss += loss.detach().cpu().item()
-        val_acc /= len(valid_loader.dataset)
-        val_loss /= len(valid_loader)
+        model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>valid_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                pred <span class="token operator">=</span> model<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>pred<span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                val_acc <span class="token operator">+=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>pred<span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                val_loss <span class="token operator">+=</span> loss<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        val_acc <span class="token operator">/=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>valid_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span>
+        val_loss <span class="token operator">/=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>valid_loader<span class="token punctuation">)</span>
 
-        # 当模型性能提升时保存模型
-        if val_acc &gt; best_acc:
-            best_acc = val_acc
-            print(f'Saving model (epoch = {epoch+1:02d}, acc = {best_acc:.4f}), loss = {val_loss:.4f})')
-            torch.save(model.state_dict(), config['save_path'])
+        <span class="token comment"># 当模型性能提升时保存模型</span>
+        <span class="token keyword">if</span> val_acc <span class="token operator">&gt;</span> best_acc<span class="token punctuation">:</span>
+            best_acc <span class="token operator">=</span> val_acc
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Saving model (epoch = </span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token format-spec">02d</span><span class="token punctuation">}</span></span><span class="token string">, acc = </span><span class="token interpolation"><span class="token punctuation">{</span>best_acc<span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">), loss = </span><span class="token interpolation"><span class="token punctuation">{</span>val_loss<span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">)'</span></span><span class="token punctuation">)</span>
+            torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'save_path'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     
-    # 将结果打印出来
-    print('[%02d/%02d] %2.2f sec(s) Train Acc: %3.6f Loss: %3.6f' % \
-          (epoch + 1, n_epochs, time.time() - start_time, train_acc, train_loss))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token comment"># 将结果打印出来</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'[%02d/%02d] %2.2f sec(s) Train Acc: %3.6f Loss: %3.6f'</span> <span class="token operator">%</span> \
+          <span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> n_epochs<span class="token punctuation">,</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start_time<span class="token punctuation">,</span> train_acc<span class="token punctuation">,</span> train_loss<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p>首先我们得为测试数据创建dataset和dataloader，并加载我们保存的最好的模型</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">class InferenceDataset(Dataset):
-    def __init__(self, data_dir):
-        testdata_path = Path(data_dir) / "testdata.json"
-        metadata = json.load(testdata_path.open())
-        self.data_dir = data_dir
-        self.data = metadata["utterances"]
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">InferenceDataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data_dir<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        testdata_path <span class="token operator">=</span> Path<span class="token punctuation">(</span>data_dir<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token string">"testdata.json"</span>
+        metadata <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>testdata_path<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>data_dir <span class="token operator">=</span> data_dir
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> metadata<span class="token punctuation">[</span><span class="token string">"utterances"</span><span class="token punctuation">]</span>
 
-    def __len__(self):
-        return len(self.data)
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 
-    def __getitem__(self, index):
-        utterance = self.data[index]
-        feat_path = utterance["feature_path"]
-        mel = torch.load(os.path.join(self.data_dir, feat_path))
+    <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        utterance <span class="token operator">=</span> self<span class="token punctuation">.</span>data<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+        feat_path <span class="token operator">=</span> utterance<span class="token punctuation">[</span><span class="token string">"feature_path"</span><span class="token punctuation">]</span>
+        mel <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data_dir<span class="token punctuation">,</span> feat_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-        return feat_path, mel
+        <span class="token keyword">return</span> feat_path<span class="token punctuation">,</span> mel
 
 
-def inference_collate_batch(batch):
-    feat_paths, mels = zip(*batch)
+<span class="token keyword">def</span> <span class="token function">inference_collate_batch</span><span class="token punctuation">(</span>batch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    feat_paths<span class="token punctuation">,</span> mels <span class="token operator">=</span> <span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token operator">*</span>batch<span class="token punctuation">)</span>
 
-    return feat_paths, torch.stack(mels)
+    <span class="token keyword">return</span> feat_paths<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>stack<span class="token punctuation">(</span>mels<span class="token punctuation">)</span>
 
-dataset = InferenceDataset(config['data_dir'])
-dataloader = DataLoader(
-    dataset,
-    batch_size=1,
-    shuffle=False,
-    collate_fn=inference_collate_batch,
-)
+dataset <span class="token operator">=</span> InferenceDataset<span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">'data_dir'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>
+    dataset<span class="token punctuation">,</span>
+    batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>
+    shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+    collate_fn<span class="token operator">=</span>inference_collate_batch<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
 
-model = Classifier(n_spks=speaker_num).to(device)
-model.load_state_dict(torch.load(config['save_path']))
-model.eval()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+model <span class="token operator">=</span> Classifier<span class="token punctuation">(</span>n_spks<span class="token operator">=</span>speaker_num<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">'save_path'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>将预测结果保存到csv文件中</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">import csv
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv
 
-mapping_path = Path(config['data_dir']) / "mapping.json"
-mapping = json.load(mapping_path.open())
+mapping_path <span class="token operator">=</span> Path<span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">'data_dir'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token string">"mapping.json"</span>
+mapping <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>mapping_path<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-results = [["Id", "Category"]]
-for feat_paths, mels in dataloader:
-    with torch.no_grad():
-        mels = mels.to(device)
-        outs = model(mels)
-        preds = outs.argmax(1).cpu().numpy()
-        for feat_path, pred in zip(feat_paths, preds):
-            results.append([feat_path, mapping["id2speaker"][str(pred)]])
+results <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"Id"</span><span class="token punctuation">,</span> <span class="token string">"Category"</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> feat_paths<span class="token punctuation">,</span> mels <span class="token keyword">in</span> dataloader<span class="token punctuation">:</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mels <span class="token operator">=</span> mels<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+        outs <span class="token operator">=</span> model<span class="token punctuation">(</span>mels<span class="token punctuation">)</span>
+        preds <span class="token operator">=</span> outs<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> feat_path<span class="token punctuation">,</span> pred <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>feat_paths<span class="token punctuation">,</span> preds<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            results<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span>feat_path<span class="token punctuation">,</span> mapping<span class="token punctuation">[</span><span class="token string">"id2speaker"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-with open('predict.csv', 'w', newline='') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerows(results)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'predict.csv'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> newline<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span> <span class="token keyword">as</span> csvfile<span class="token punctuation">:</span>
+    writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>csvfile<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>writerows<span class="token punctuation">(</span>results<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

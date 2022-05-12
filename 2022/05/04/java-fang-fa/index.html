@@ -475,13 +475,13 @@ public static int s">
             <div id="articleContent">
                 <h2 id="方法定义和调用"><a href="#方法定义和调用" class="headerlink" title="方法定义和调用"></a>方法定义和调用</h2><p>方法是一种语法结构，它可以把一段代码封装成一个功能，以方便重复调用，这样就提高了代码的重复性，使程序逻辑更加清晰。</p>
 <p>以两个整数求和为例子，方法定义如下，函数声明中第一个int是<strong>返回值类型</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static int sum(int a, int b){
-    int c = a + b;
-    return c;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以在函数中调用，调用格式如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">int rs = sum(100, 200);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> rs <span class="token operator">=</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>注意事项</strong></p>
 <ul>
