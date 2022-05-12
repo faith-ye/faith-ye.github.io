@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="对抗攻击与防御, 小叶の博客">
-    <meta name="description" content="前言对抗攻击英文为adversarial attack，即对输入样本添加一些人无法察觉的细微改动，导致模型以高置信度输出一个错误的答案。在现实生活中，我们建立的系统很多时候会遇到干扰，甚至是人为的蓄意攻击，如垃圾邮件、恶意软件和网络入侵等。">
+    <meta name="keywords" content="Java两个常用API, 小叶の博客">
+    <meta name="description" content="API
+API的全称是Application Programming Interface，应用程序编程接口
+
+Java写好的功能代码，可以直接调用
+Oracle也为Java提供的这些功能代码提供了相应的API文档（技术使用说明书）
+
+本节主">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>对抗攻击与防御 | 小叶の博客</title>
+    <title>Java两个常用API | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +296,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">对抗攻击与防御</h1>
+                    <h1 class="description center-align post-title">Java两个常用API</h1>
                 </div>
             </div>
         </div>
@@ -409,17 +415,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Adversarial-Attack/">
-                                <span class="chip bg-color">Adversarial Attack</span>
-                            </a>
-                        
-                            <a href="/tags/Defense/">
-                                <span class="chip bg-color">Defense</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -427,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                深度学习笔记
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                Java学习笔记
                             </a>
                         
                     </div>
@@ -440,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-30
+                    2022-05-12
                 </div>
                 
 
@@ -449,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    990
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    3 分
                 </div>
                 
 
@@ -479,82 +477,160 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对抗攻击英文为adversarial attack，即对输入样本添加一些人无法察觉的细微改动，导致模型以高置信度输出一个错误的答案。在现实生活中，我们建立的系统很多时候会遇到干扰，甚至是人为的蓄意攻击，如垃圾邮件、恶意软件和网络入侵等。因此机器训练出来的模型不光性能要好，还要能够对抗人类的恶意，这就是对抗攻击与防御产生的动机。</p>
-<h2 id="对抗攻击"><a href="#对抗攻击" class="headerlink" title="对抗攻击"></a>对抗攻击</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>以图片攻击为例，图片可以看成一个很长的向量，如果在一些重要的像素部分加上一个很小的杂讯，再把它输入到神经网络。虽然我们人眼识别不出来这个改动，但通过深度学习训练出来的分类可能就会误判。下图只是为了直观，但在实际应用中这种攻击人眼是识别不出来的。</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220429154701030.png" class="">
-
-
-
-<p>通常没有被攻击的图片称为Benign Image，被攻击的图片称为Attacked Image。按照攻击得到的类别，对抗攻击可以分为：</p>
+                <h2 id="API">API</h2>
+<p>API的全称是Application Programming Interface，应用程序编程接口</p>
 <ul>
-<li>定向攻击（targeted attack）：误分类成一个指定的类别</li>
-<li>非定向攻击（non-targeted attack）：误分类成其他类别（只要不是正确的类别即可）</li>
+<li>Java写好的功能代码，可以直接调用</li>
+<li>Oracle也为Java提供的这些功能代码提供了相应的API文档（技术使用说明书）</li>
 </ul>
-<h3 id="数学理论"><a href="#数学理论" class="headerlink" title="数学理论"></a>数学理论</h3><p>假设benign image是$x^{0}$，输入到一个图像分类器中，输出为$y^{0}=f(x^{0})$，该图片对应的真实分类为cat，$\overset{-}{y}$</p>
-<p>被攻击后的输入是x，输出$y=f(x)$，想要攻击成功的话，就得让y和$\overset{-}{y}$相差越大越好。如果是定向攻击的话，还要保证y和$y^{target}$越接近越好。</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220429160059119.png" class="">
-
-<p>因此这个模型的损失函数（Loss Function）可以定义为：</p>
+<p>本节主要学习String和ArrayList这两个常用API</p>
+<h2 id="String">String</h2>
+<p>String类定义的变量可以用于存储字符串，同时String类提供了很多操作字符串的功能，我们可以直接使用</p>
+<p><strong>概述</strong></p>
 <ul>
-<li>Non-targeted attack: $L(x)=-e(y,\overset{-}{y})$</li>
-<li>targeted attack: $L(x)=-e(y,\overset{-}{y})+e(y,y^{target})$</li>
+<li>java.lang.String类代表字符串，String类定义的变量可以用于指向字符串对象，然后操作该字符串</li>
+<li>Java程序中的所有字符文字都为此类的对象</li>
 </ul>
-<p>式中函数e()表示输入之间的差异，目标是使L(x)越小越好</p>
-<p>另外正如我们前面所说，这些攻击是不容易被人类观察到的，即$x$和$x^{0}$之间的差距越小越好，所有整个模型需要优化的表达式为：</p>
-<p>$$x^{*}=arg \underset{d(x,x^{0})\leq\epsilon}{min}L(x)$$</p>
-<p>怎么计算$d(x,x^{0})$呢，通常采用的是向量p-范数</p>
+<p><strong>String是不可变字符串的原因？</strong></p>
+<p>String变量每次的修改其实都是产生并指向了新的字符串对象，原来的字符串对象都是没有改变的，所以称不可变字符串</p>
+<p><strong>特点</strong></p>
 <ul>
-<li><p>2-范数L2-norm ：$d(x,x^{0})=\parallel \Delta x \parallel_{2} = \sqrt{\overset{n}{\underset{i=1}{\sum}}|\Delta x_{i}|^{2}}$</p>
+<li>双引号创建的字符串对象，在字符串常量池中存储同一个</li>
+<li>通过new构造器创建的字符串对象，在堆内存中分开存储</li>
+</ul>
+<p><strong>字符串内容比较</strong></p>
+<p>推荐使用String类提供的”equals“比较：只关心内容一样即可。不推荐用”==“比较，因为比较的是地址</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">public boolean equals(Object anObject)</td>
+<td style="text-align:center">将此字符串与指定对象进行比较。只关心字符内容是否一致！</td>
+</tr>
+<tr>
+<td style="text-align:center">public boolean equalsIgnoreCase (String anotherString)</td>
+<td style="text-align:center">将此字符串与指定对象进行比较，忽略大小写比较字符串。只关心字符内容是否一致！</td>
+</tr>
+</tbody>
+</table>
+<p>以equals为例，使用如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">okName.equals(name)   // 判断okName字符串和name字符串是否相同，返回值为true或false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>String常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public int length()</td>
+<td>返回此字符串的长度</td>
+</tr>
+<tr>
+<td>public char charAt(int index)</td>
+<td>获取某个索引位置处的字符</td>
+</tr>
+<tr>
+<td>public char[] toCharArray()：</td>
+<td>将当前字符串转换成字符数组返回</td>
+</tr>
+<tr>
+<td>public String substring(int beginIndex, int endIndex)</td>
+<td>根据开始和结束索引进行截取，得到新的字符串（包前不包后）</td>
+</tr>
+<tr>
+<td>public String substring(int beginIndex)</td>
+<td>从传入的索引处截取，截取到末尾，得到新的字符串</td>
+</tr>
+<tr>
+<td>public String replace(CharSequence target, CharSequence replacement)</td>
+<td>使用新值，将字符串中的旧值替换，得到新的字符串</td>
+</tr>
+<tr>
+<td>public String[] split(String regex)</td>
+<td>根据传入的规则切割字符串，得到字符串数组返回</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ArrayList">ArrayList</h2>
+<p>ArrayList代表的是集合类，集合是一种容器，与数组类似，不同的是集合的大小是不固定的。通过创建ArrayList的对象表示得到一个集合容器，同时ArrayList提供了比数组更好用，更丰富的API给程序员使用</p>
+<p><strong>ArrayList对象创建</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">ArrayList list = new ArrayList();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>ArrayList集合的添加元素的方法</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">public boolean add(E e)</td>
+<td style="text-align:left">将指定的元素追加到此集合的末尾</td>
+</tr>
+<tr>
+<td style="text-align:left">public void add(int index,E element)</td>
+<td style="text-align:left">在此集合中的指定位置插入指定的元素</td>
+</tr>
+</tbody>
+</table>
+<p><strong>泛型概述</strong></p>
+<ul>
+<li>ArrayList&lt;E&gt;：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。</li>
+</ul>
+<p><strong>举例：</strong></p>
+<ul>
+<li>
+<p>ArrayList&lt;String&gt; ：此集合只能操作字符串类型的元素。</p>
 </li>
-<li><p>无穷范数L-infinity ：$d(x,x^{0})=\parallel \Delta x \parallel_{\infty} = \underset{i}{max}|\Delta x_{i}|$</p>
+<li>
+<p>ArrayList&lt;Integer&gt;：此集合只能操作整数类型的元素。</p>
 </li>
 </ul>
-<p>确定后模型的损失函数后，我们就可以用其来确定输入，这与往常的神经网络更新网络结构的参数是不一样的，因为被攻击的模型已经确认。</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220429165210157.png" class="">
-
-<p>同样，我们可以采用梯度下降法确定输入x，因为模型对输入加了限制，因此我们需对优化算法进行一些修改。以L-infinity确认$d(x,x^{0})$，则为了满足$d(x,x^{0})\leq\epsilon$的限制，只需将每个像素的的更新都在以$\epsilon$为边长的正方形内。</p>
-<p>从整个数学理论上看，如果我们想对攻击进行改进，就需要使用更有效的限制或者更好的优化方法。</p>
-<p>李宏毅老师课堂上了讲解了两种优化方法，下面提供了论文的链接，感兴趣的可以去了解一下</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1412.6572"><strong>Fast Gradient Sign Method (FGSM)</strong></a></li>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.02533"><strong>Iterative FGSM</strong></a></li>
-</ul>
-<p>FGSM中作者的想法很大胆，只使用一次迭代就可以达到攻击的目的。作者只是对上面的方法做了一个简单的修改，在对损失函数求导得到的梯度上加一个符号函数sign（大于0输出1，小于0输出-1），这样就能满足输入限制的要求</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220429175930538.png" class="">
-
-<h2 id="白盒攻击-amp-黑盒攻击"><a href="#白盒攻击-amp-黑盒攻击" class="headerlink" title="白盒攻击&amp;黑盒攻击"></a>白盒攻击&amp;黑盒攻击</h2><p>前面我们列举的例子就是白盒攻击（white box attack），即在攻击之前我们就已经知道模型的参数。但在通常情况下，我们是不知道模型的参数，这种情况下的攻击被称作黑盒攻击（black box attack）。</p>
-<h3 id="黑盒攻击"><a href="#黑盒攻击" class="headerlink" title="黑盒攻击"></a>黑盒攻击</h3><ul>
-<li>不知道目标模型的参数，但有目标模型的训练资料</li>
-</ul>
-<p>在这种情况之下，我们可以训练一个替代模型，然后使用代理模型产生被攻击的对象</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220430153827720.png" class="">
-
-<p>那么上面所说的黑箱攻击容易成功吗？</p>
-<p>从论文<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1611.02770.pdf">Delving into Transferable Adversarial Examples and Black-box Attacks</a>的实验结果来看，是容易成功的</p>
-<p>下图中有两个表格，第一个表格中列代表被攻击的模型，行代表的是代理模型。每个单元格中的数值表示在行中模型生成攻击成功的图像在列中模型上评估的正确性。因此准确率越低，代表产生的攻击越有效。对角线上代理模型和攻击模型是同一模型，可以看成是白盒攻击。不同行不同列即为黑盒攻击，从实验结果中可以看出得出的准确率都在50%以下，因此黑箱攻击还是挺有效。</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220430184814214.png" class="">
-
-<p>第二个表格中“-”好代表没有用这个模型训练生成攻击成功的图像，因此在第二个表格中，对角线代表的是黑盒攻击，因为代理模型中并未采用待攻击的模型。这些黑盒攻击中，准确率最高为6%，比第一个表格中只使用一个代理模型产生的黑盒攻击的模型准确率降了很多，说明采用多个代理模型产生的黑盒攻击更有效。</p>
-<p>你可能还是会怀疑黑盒攻击为什么会产生效果，这篇论文作者给出的j解释是每个模型产生攻击的方向很相似，想更深入了解这个问题可以看论文<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1905.02175.pdf">Adversarial Examples Are Not Bugs, They Are Features</a></p>
-<p>另外还有很多黑盒攻击：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1710.08864.pdf">One Pixel Attack for Fooling Deep Neural Networks</a>，只需要改变一个像素就可以达到攻击的目的</li>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.08401.pdf">Universal adversarial perturbations</a>，使用一个通用的非常小的扰动就可以让攻击成功</li>
-</ul>
-<p>上面讲述的对抗攻击都是应用在图像上，其实对抗攻击还可以应用于语言处理、自然语言处理以及我们的日常生活中，因此我们需要想办法做好防御，来抵御这些来自人类的恶意。</p>
-<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><p>防御有以下两种：被动防御和主动防御</p>
-<h3 id="被动防御"><a href="#被动防御" class="headerlink" title="被动防御"></a>被动防御</h3><p>以图像攻击为例，被动防御中最经典的做法就是在图像进入模型之前在一个filter（滤波器），这样会使那些使得攻击成功的扰动信号失真，从而使攻击失效。</p>
-<img src="/2022/04/30/dui-kang-gong-ji-yu-fang-yu/image-20220430192108405.png" class="">
-
-<p>常用的方法有：</p>
-<ul>
-<li>将输入图像轻微模糊化，但并不影响分类</li>
-<li>图像压缩（先压缩再解压从而消除攻击）</li>
-<li>使用Generator技术生成和输入图像几乎一摸一样的image</li>
-<li>随机防御（Randomization），有几种防御手段，随机选择其中一个，目的是预防防御预先被人知道</li>
-</ul>
-<h3 id="主动防御"><a href="#主动防御" class="headerlink" title="主动防御"></a>主动防御</h3><p>主动防御为每一张图像生成一个对抗图像，然后将生成的对抗图像和原始图像都丢入模型中进行训练（<strong>对抗训练</strong>），从而增强了模型的鲁棒性。这种方法也可以看作一种<strong>数据增强</strong>（Data Augmentation）的手段，缺点就是成倍的增加计算量。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xGQKhbjrFRk">李宏毅2021机器学习课程</a></p>
+<p>**注意：**集合中只能存储引用类型，不支持基本数据类型，因此不能填int，需用Integer</p>
+<p><strong>ArrayList集合常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">public E get(int  index)</td>
+<td style="text-align:left">返回指定索引处的元素</td>
+</tr>
+<tr>
+<td style="text-align:left">public int  size()</td>
+<td style="text-align:left">返回集合中的元素的个数</td>
+</tr>
+<tr>
+<td style="text-align:left">public E remove(int  index)</td>
+<td style="text-align:left">删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td style="text-align:left">public boolean remove(Object o)</td>
+<td style="text-align:left">删除指定的元素，返回删除是否成功</td>
+</tr>
+<tr>
+<td style="text-align:left">public E set(int index,E element)</td>
+<td style="text-align:left">修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+</tbody>
+</table>
+<p>利用上述方法，我们可以实现集合的遍历：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">for (int i = 0; i &lt; list.size(); i++) {
+    System.out.println(list.get(i));
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -581,7 +657,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/04/30/dui-kang-gong-ji-yu-fang-yu/">https://faith-ye.github.io/2022/04/30/dui-kang-gong-ji-yu-fang-yu/</a>
+                    <a href="https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/">https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,15 +694,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Adversarial-Attack/">
-                                    <span class="chip bg-color">Adversarial Attack</span>
-                                </a>
-                            
-                                <a href="/tags/Defense/">
-                                    <span class="chip bg-color">Defense</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1064,66 +1132,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/05/03/ji-qi-xue-xi-de-ke-jie-shi-xing/">
+                <a href="/2022/05/12/java-liang-ge-chang-yong-api/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="机器学习的可解释性">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java两个常用API">
                         
-                        <span class="card-title">机器学习的可解释性</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Explainable-AI/">
-                        <span class="chip bg-color">Explainable AI</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/27/zi-dong-wei-fen/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="自动微分">
-                        
-                        <span class="card-title">自动微分</span>
+                        <span class="card-title">Java两个常用API</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1134,27 +1154,61 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    PyTorch学习笔记
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Java学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/pytorch/">
-                        <span class="chip bg-color">pytorch</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/11/java-mian-xiang-dui-xiang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Java面向对象">
+                        
+                        <span class="card-title">Java面向对象</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Java学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>

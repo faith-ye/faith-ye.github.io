@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-11T03:02:40.460Z</updated>
+  <updated>2022-05-12T07:30:34.175Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java两个常用API</title>
+    <link href="https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/"/>
+    <id>https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/</id>
+    <published>2022-05-12T07:30:01.000Z</published>
+    <updated>2022-05-12T07:30:34.175Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;API&quot;&gt;API&lt;/h2&gt;
+&lt;p&gt;API的全称是Application Programming</summary>
+        
+      
+    
+    
+    
+    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Java面向对象</title>
@@ -511,31 +535,6 @@
     <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
     
     <category term="径流序列的随机生成" scheme="https://faith-ye.github.io/tags/%E5%BE%84%E6%B5%81%E5%BA%8F%E5%88%97%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自注意力模型</title>
-    <link href="https://faith-ye.github.io/2022/04/02/zi-zhu-yi-li-mo-xing/"/>
-    <id>https://faith-ye.github.io/2022/04/02/zi-zhu-yi-li-mo-xing/</id>
-    <published>2022-04-02T08:10:56.000Z</published>
-    <updated>2022-04-27T07:40:48.741Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;前面我们学习过LSTM、GRU，它们都可以挖掘序列之间的某种联系。举个简单的例子——I saw a</summary>
-        
-      
-    
-    
-    
-    <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
     
   </entry>
   

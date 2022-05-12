@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java两个常用API</title>
+      <link href="/2022/05/12/java-liang-ge-chang-yong-api/"/>
+      <url>/2022/05/12/java-liang-ge-chang-yong-api/</url>
+      
+        <content type="html"><![CDATA[<h2 id="API">API</h2><p>API的全称是Application Programming Interface，应用程序编程接口</p><ul><li>Java写好的功能代码，可以直接调用</li><li>Oracle也为Java提供的这些功能代码提供了相应的API文档（技术使用说明书）</li></ul><p>本节主要学习String和ArrayList这两个常用API</p><h2 id="String">String</h2><p>String类定义的变量可以用于存储字符串，同时String类提供了很多操作字符串的功能，我们可以直接使用</p><p><strong>概述</strong></p><ul><li>java.lang.String类代表字符串，String类定义的变量可以用于指向字符串对象，然后操作该字符串</li><li>Java程序中的所有字符文字都为此类的对象</li></ul><p><strong>String是不可变字符串的原因？</strong></p><p>String变量每次的修改其实都是产生并指向了新的字符串对象，原来的字符串对象都是没有改变的，所以称不可变字符串</p><p><strong>特点</strong></p><ul><li>双引号创建的字符串对象，在字符串常量池中存储同一个</li><li>通过new构造器创建的字符串对象，在堆内存中分开存储</li></ul><p><strong>字符串内容比较</strong></p><p>推荐使用String类提供的”equals“比较：只关心内容一样即可。不推荐用”==“比较，因为比较的是地址</p><table><thead><tr><th style="text-align:center">方法名</th><th style="text-align:center">说明</th></tr></thead><tbody><tr><td style="text-align:center">public boolean equals(Object anObject)</td><td style="text-align:center">将此字符串与指定对象进行比较。只关心字符内容是否一致！</td></tr><tr><td style="text-align:center">public boolean equalsIgnoreCase (String anotherString)</td><td style="text-align:center">将此字符串与指定对象进行比较，忽略大小写比较字符串。只关心字符内容是否一致！</td></tr></tbody></table><p>以equals为例，使用如下：</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">okName.equals(name)   // 判断okName字符串和name字符串是否相同，返回值为true或false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>String常用方法</strong></p><table><thead><tr><th>方法名</th><th>说明</th></tr></thead><tbody><tr><td>public int length()</td><td>返回此字符串的长度</td></tr><tr><td>public char charAt(int index)</td><td>获取某个索引位置处的字符</td></tr><tr><td>public char[] toCharArray()：</td><td>将当前字符串转换成字符数组返回</td></tr><tr><td>public String substring(int beginIndex, int endIndex)</td><td>根据开始和结束索引进行截取，得到新的字符串（包前不包后）</td></tr><tr><td>public String substring(int beginIndex)</td><td>从传入的索引处截取，截取到末尾，得到新的字符串</td></tr><tr><td>public String replace(CharSequence target, CharSequence replacement)</td><td>使用新值，将字符串中的旧值替换，得到新的字符串</td></tr><tr><td>public String[] split(String regex)</td><td>根据传入的规则切割字符串，得到字符串数组返回</td></tr></tbody></table><h2 id="ArrayList">ArrayList</h2><p>ArrayList代表的是集合类，集合是一种容器，与数组类似，不同的是集合的大小是不固定的。通过创建ArrayList的对象表示得到一个集合容器，同时ArrayList提供了比数组更好用，更丰富的API给程序员使用</p><p><strong>ArrayList对象创建</strong></p><pre class="line-numbers language-java" data-language="java"><code class="language-java">ArrayList list = new ArrayList();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>ArrayList集合的添加元素的方法</strong></p><table><thead><tr><th style="text-align:left">方法名</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">public boolean add(E e)</td><td style="text-align:left">将指定的元素追加到此集合的末尾</td></tr><tr><td style="text-align:left">public void add(int index,E element)</td><td style="text-align:left">在此集合中的指定位置插入指定的元素</td></tr></tbody></table><p><strong>泛型概述</strong></p><ul><li>ArrayList&lt;E&gt;：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。</li></ul><p><strong>举例：</strong></p><ul><li><p>ArrayList&lt;String&gt; ：此集合只能操作字符串类型的元素。</p></li><li><p>ArrayList&lt;Integer&gt;：此集合只能操作整数类型的元素。</p></li></ul><p>**注意：**集合中只能存储引用类型，不支持基本数据类型，因此不能填int，需用Integer</p><p><strong>ArrayList集合常用方法</strong></p><table><thead><tr><th style="text-align:left">方法名称</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">public E get(int  index)</td><td style="text-align:left">返回指定索引处的元素</td></tr><tr><td style="text-align:left">public int  size()</td><td style="text-align:left">返回集合中的元素的个数</td></tr><tr><td style="text-align:left">public E remove(int  index)</td><td style="text-align:left">删除指定索引处的元素，返回被删除的元素</td></tr><tr><td style="text-align:left">public boolean remove(Object o)</td><td style="text-align:left">删除指定的元素，返回删除是否成功</td></tr><tr><td style="text-align:left">public E set(int index,E element)</td><td style="text-align:left">修改指定索引处的元素，返回被修改的元素</td></tr></tbody></table><p>利用上述方法，我们可以实现集合的遍历：</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">for (int i = 0; i &lt; list.size(); i++) {    System.out.println(list.get(i));}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java学习笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java面向对象</title>
       <link href="/2022/05/11/java-mian-xiang-dui-xiang/"/>
       <url>/2022/05/11/java-mian-xiang-dui-xiang/</url>
