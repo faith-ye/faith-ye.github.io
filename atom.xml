@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-12T07:30:34.175Z</updated>
+  <updated>2022-05-12T11:27:14.785Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HW4-Self-Attention</title>
+    <link href="https://faith-ye.github.io/2022/05/12/hw4-self-attention/"/>
+    <id>https://faith-ye.github.io/2022/05/12/hw4-self-attention/</id>
+    <published>2022-05-12T10:32:48.000Z</published>
+    <updated>2022-05-12T11:27:14.785Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;作业描述&quot;&gt;&lt;a href=&quot;#作业描述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="李宏毅ML2021作业部分" scheme="https://faith-ye.github.io/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021%E4%BD%9C%E4%B8%9A%E9%83%A8%E5%88%86/"/>
+    
+    
+    <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
+    
+  </entry>
   
   <entry>
     <title>Java两个常用API</title>
@@ -508,33 +533,6 @@
     <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
     <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基于GAN的多水库径流序列的随机生成</title>
-    <link href="https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/"/>
-    <id>https://faith-ye.github.io/2022/04/04/ji-yu-gan-de-duo-shui-ku-jing-liu-xu-lie-de-sui-ji-sheng-cheng/</id>
-    <published>2022-04-04T11:47:07.000Z</published>
-    <updated>2022-04-18T00:59:27.053Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;基于GAN的多水库径流序列的随机生成&quot;&gt;&lt;a href=&quot;#基于GAN的多水库径流序列的随机生成&quot; class=&quot;headerlink&quot; title=&quot;基于GAN的多水库径流序列的随机生成&quot;&gt;&lt;/a&gt;基于GAN的多水库径流序列的随机生成&lt;/h1&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
-    
-    <category term="径流序列的随机生成" scheme="https://faith-ye.github.io/tags/%E5%BE%84%E6%B5%81%E5%BA%8F%E5%88%97%E7%9A%84%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90/"/>
     
   </entry>
   
