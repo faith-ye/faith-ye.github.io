@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-13T13:41:01.605Z</updated>
+  <updated>2022-05-20T08:34:42.491Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>注意力增强卷积网络</title>
+    <link href="https://faith-ye.github.io/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/"/>
+    <id>https://faith-ye.github.io/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/</id>
+    <published>2022-05-20T08:32:45.000Z</published>
+    <updated>2022-05-20T08:34:42.491Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;img src=&quot;/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/image-20220520090637034.png&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="CNN" scheme="https://faith-ye.github.io/tags/CNN/"/>
+    
+    <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
+    
+  </entry>
   
   <entry>
     <title>Conformer-用卷积增强的Transformer做语音识别</title>
@@ -504,35 +531,6 @@
     <category term="BERT" scheme="https://faith-ye.github.io/tags/BERT/"/>
     
     <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Transformer</title>
-    <link href="https://faith-ye.github.io/2022/04/11/transformer/"/>
-    <id>https://faith-ye.github.io/2022/04/11/transformer/</id>
-    <published>2022-04-11T13:14:05.000Z</published>
-    <updated>2022-04-18T00:59:41.898Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;在前面我们学习过&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
-    
-    <category term="Seq2Seq" scheme="https://faith-ye.github.io/tags/Seq2Seq/"/>
-    
-    <category term="Transformer" scheme="https://faith-ye.github.io/tags/Transformer/"/>
     
   </entry>
   
