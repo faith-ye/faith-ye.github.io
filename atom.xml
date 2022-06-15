@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-05-20T08:49:50.230Z</updated>
+  <updated>2022-06-15T09:06:56.166Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zotero</title>
+    <link href="https://faith-ye.github.io/2022/06/15/zotero/"/>
+    <id>https://faith-ye.github.io/2022/06/15/zotero/</id>
+    <published>2022-06-15T09:04:20.000Z</published>
+    <updated>2022-06-15T09:06:56.166Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;说到文献管理软件，大家可能会想到&lt;a href=&quot;https://endnote.com/&quot;&gt;EndNote&lt;/a&gt;或&lt;a href=&quot;http://www.inoteexpress.com/aegean/&quot;&gt;NoteExpress&lt;/a&gt;，这里给大家分享 &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="好用的软件" scheme="https://faith-ye.github.io/tags/%E5%A5%BD%E7%94%A8%E7%9A%84%E8%BD%AF%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>注意力增强卷积网络</title>
@@ -504,33 +529,6 @@
     <category term="DNN" scheme="https://faith-ye.github.io/tags/DNN/"/>
     
     <category term="Regression" scheme="https://faith-ye.github.io/tags/Regression/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BERT</title>
-    <link href="https://faith-ye.github.io/2022/04/17/bert/"/>
-    <id>https://faith-ye.github.io/2022/04/17/bert/</id>
-    <published>2022-04-17T11:26:46.000Z</published>
-    <updated>2022-04-18T01:01:31.006Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;BERT的全称是Bidirectional Encoder Representations from</summary>
-        
-      
-    
-    
-    
-    <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="BERT" scheme="https://faith-ye.github.io/tags/BERT/"/>
-    
-    <category term="NLP" scheme="https://faith-ye.github.io/tags/NLP/"/>
     
   </entry>
   
