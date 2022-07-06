@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Seq2Seq, 小叶の博客">
-    <meta name="description" content="写在前面：这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文Sequence to Sequence Learning with Ne">
+    <meta name="keywords" content="WGAN的Pytorch实现, 小叶の博客">
+    <meta name="description" content="GAN存在训练困难、训练得到的loss无法表示训练进程等问题。大多数的GAN都是从模型的结构上进行修改，如DCGAN，用卷积神经网络设计生成器和判别器，并进行了一些调整，但这些终究是治标不治本，没有从根本上解决问题。原始GAN是用JS散度来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Seq2Seq | 小叶の博客</title>
+    <title>WGAN的Pytorch实现 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +290,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Seq2Seq</h1>
+                    <h1 class="description center-align post-title">WGAN的Pytorch实现</h1>
                 </div>
             </div>
         </div>
@@ -411,8 +411,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/NLP/">
-                                <span class="chip bg-color">NLP</span>
+                            <a href="/tags/GAN/">
+                                <span class="chip bg-color">GAN</span>
+                            </a>
+                        
+                            <a href="/tags/WGAN/">
+                                <span class="chip bg-color">WGAN</span>
                             </a>
                         
                     </div>
@@ -423,8 +427,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                论文阅读笔记
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                深度学习笔记
                             </a>
                         
                     </div>
@@ -436,7 +440,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-29
+                    2022-07-06
                 </div>
                 
 
@@ -445,14 +449,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -475,24 +479,178 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>写在前面：</strong>这个部分主要记录一些关于深度学习相关论文的阅读，由于个人还是刚接触深度学习不久，所以前面需要补充一些很早的论文以巩固自己知识的不足。今天记录最近学的一篇论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a>。这篇论文研究的是机器翻译领域，作者使用的方法是利用一个多层的 LSTM 将输入文本编码成一个向量，这个向量可以视为整个输入句子的抽象表示。然后用另一个 LSTM 将前面编码的向量解码成目标句子。作者将其应用在 WMT’14 数据集上英语到法语的翻译任务，并在整个测试集上得到的 BLEU score 为34.8。下面我门结合<a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a>这本书的相关章节和这篇论文了解 seq2seq 的一般概念，并陈述构建模型时需要用的一些方法。</p>
-<h2 id="seq2seq"><a href="#seq2seq" class="headerlink" title="seq2seq"></a>seq2seq</h2><p>最常用的 seq2seq 模型其实就是encoder-decoder模型。encoder-decoder模型通常使用 RNN 将一段文本作为输入编码（encoder）成一个向量，这个向量可以视为整个输入句子的抽象表示。然后，该向量通过第二个 RNN 解码（decoder），该 RNN 通过一次生成一个单词来学习目标句子（也就是另一种语言的句子）。下图演示了将 seq2seq 模型用于英文到中文的翻译。</p>
-<img src="/2022/03/29/seq2seq/seq2seq.png" class="">
-
-<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>图中展示了一个简单的翻译模型，模型中用&lt;bos&gt;和&lt;eos&gt;分别表示开始词元和结束词元。它的输入句子是”good morning“，它首先通过embedding层转换为对应的词向量，然后再进入编码器（encoder）。在每一个时间步，进入编码器RNN含有embedding$x_{t}$和上一时间步隐状态$h_{t-1}$，然后编码器RNN产生新的隐状态$h_{t}$。我们可以抽象地把这个隐状态代表为前面的词元。该时间步的计算可以用以下公式表达：<br>$$h_{t}=EncoderRNN(e(x_{t},h_{t-1}))$$</p>
-<p>在这里，我们通常使用LSTM或GRU这样的term RNN。假设，输入$X={x_{1},x_{2},…,x_{T}}$，式中 $x_{1}$=&lt;bos&gt;，$x_{2}$=good，etc 。编码器初始的隐状态 $h_{0}$ 通常初始化为0或者已经学习好的参数。一旦最后的词元 $x_{T}$ 通过embedding层进入编码器RNN，我们利用最后的隐状态 $h_{T}$ 来作为文本向量，并把它赋值给z :$h_{T}=z$</p>
-<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>现在我们拥有文本向量z，我们可以开始将其解码成目标句子——”早上好“。同样我们用<sos>和<eos>分别表示目标句子的开始词元和结束词元。在每一个时间步，解码器RNN的输入是当前词元$y_{t}$的embedding $d$和上一时间步的隐状态$s_{t-1}$。在解码器RNN，初始隐状态$s_{0}=z=h_{T}$，即解码器初始隐状态就是编码器的最终隐状态。我们同样用一个公式表示该时间步解码器的操作：<br>$$s_{t}=DecoderRNN(d(y_{t},s_{t-1}))$$<br>在解码器中，我们需要将隐状态转换为对应的单词，因此在每一个时间步，我们通过一个线性层通过$s_{t}$去预测下一个在文本出现的单词$\overset{-}{y_{t}}$<br>$$\overset{-}{y_{t}}=f(s_{t})$$<br>解码器中的单词是随着时间步一个接一个地生成。我们通常使用&lt;bos&gt;作为解码器的第一个输入$y_{1}$，但是对于接下来的输入$y_{t&gt;1}$，我们有时使用在目标句子中下一个单词，有时也会使用经解码器预测的下一个单词$\overset{-}{y_{t}}$，这在机器翻译中被叫做teacher forcing。使用teacher-forcing，在训练过程中，可以加快模型的训练，使得模型会有较好的效果。但是在测试的时候因为不能得到目标句子的支持，存在训练测试偏差，模型会变得脆弱。<br>训练模型时，我们通常知道目标句子有多少单词，一旦解码器输入目标单词，模型就会停止生成单词。但在测试模型时，解码器会不断生成单词，直到模型输出&lt;eos&gt;或生成一定数量的单词之后，模型就停止生成单词。</eos></sos></p>
-<p>一旦模型得到了预测目标句子$\overset{-}{Y}={\overset{-}{y_{1}},\overset{-}{y_{2}},…,\overset{-}{y_{t}}}$，我们将其和目标句子$Y={y_{1},y_{2},…,y_{t}}$进行比较，计算出误差，利用该误差就可以更新模型的所有参数。</p>
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><ul>
-<li>将文本词元化，在机器翻译中我们更喜欢单词级词元化。对训练数据的文本序列进行词元，其中每个词元要么是一个词，要么是一个标点符号。</li>
-<li>分别为源语言和目标语言构建两个字典——int2word 和 word2int （这两个字典将单词和整数一一对应）。同时为了减少数据噪声的影响，我们将出现次数少于2次的低频率词元视为未知 &lt;unk&gt; 词元。除此之外，我们还指定一些额外的特定词元，例如在小批量时用于将序列填充到相同长度的填充词元 &lt;pad&gt; ，以及序列的开始词元 &lt;bos&gt; 和结束词元 &lt;eos&gt; 。</li>
-<li>为了提高计算效率，我们可以通过截断和填充方式实现每个序列都具有相同的长度。当文本序列词元数目少于规定数据时，我们将继续在其末尾添加特定的 &lt;pad&gt; 词元。反之，我们将截断文本序列，只取前指定数目个词元，丢弃剩余词元。</li>
+                <p>GAN存在训练困难、训练得到的loss无法表示训练进程等问题。大多数的GAN都是从模型的结构上进行修改，如DCGAN，用卷积神经网络设计生成器和判别器，并进行了一些调整，但这些终究是治标不治本，没有从根本上解决问题。原始GAN是用JS散度来评判两个分布的相似程度，而JS散度存在一个问题，就是真实数据$P_{data}$和生成数据$P_{G}$没有数据重叠的话，不断真实数据和生成数据之间的距离多远，JS散度计算出来的值都是log2，这就导致了生成器梯度消失的问题。WGAN就是用来解决这个问题，其优点有以下几个方面：</p>
+<ul>
+<li>彻底解决GAN训练不稳定和mode collapse的问题，不再需要小心平衡生成器和判别器的训练程度</li>
+<li>不需要精心设计网络结构，MLP网络就能实现很好的结果</li>
+<li>WGAN定义的损失函数可以反映训练的进程，从而我们可以根据这个指标来判断模型训练的效果</li>
 </ul>
-<h3 id="搭建模型"><a href="#搭建模型" class="headerlink" title="搭建模型"></a>搭建模型</h3><p>这一部分可以参考论文</p>
-<img src="/2022/03/29/seq2seq/1.png" class="">
+<p>WGAN实现以上好处使用的技术有：</p>
+<ul>
+<li>损失函数不取log</li>
+<li>每次更新判别器的参数都截断到-c到c之间</li>
+<li>使用RMSProp参数优化算法，而不是Adam</li>
+<li>判别器的最后一层去掉sigmoid</li>
+</ul>
+<h2 id="模型实现"><a href="#模型实现" class="headerlink" title="模型实现"></a>模型实现</h2><p>具体为什么要这么做，请查看原论文，本文主要关注的是WGAN模型以及训练过程Pytorch代码实现。</p>
+<p>首先来看模型部分，这里使用的是DCGAN的模型，只不过将判别器的最后一层的sigmoid去掉</p>
+<img src="/2022/07/06/wgan-de-pytorch-shi-xian/image-20220706103409376.png" class="" title="DCGAN的模型结构">
 
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="https://d2l.ai/">Dive into Deep Learning</a></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+
+<span class="token comment"># 模型参数初始化</span>
+<span class="token keyword">def</span> <span class="token function">weights_init</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    classname <span class="token operator">=</span> m<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__name__
+    <span class="token keyword">if</span> classname<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'Conv'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>  <span class="token comment"># 均值为0，标准差为0.02的正态分布</span>
+    <span class="token keyword">elif</span> classname<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'BatchNorm'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>
+        m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>fill_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>             <span class="token comment"># 均值为1，标准差为0.02的正态分布</span>
+
+<span class="token comment"># 生成器</span>
+<span class="token keyword">class</span> <span class="token class-name">Generator</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    input (N, in_dim)
+    output (N, 3, 64, 64)
+    """</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_dim<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Generator<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">dconv_bn_relu</span><span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+                nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span>
+                                   padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> output_padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>out_dim<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>l1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">16</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">,</span> bias<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>BatchNorm1d<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">16</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        
+        self<span class="token punctuation">.</span>l2_5 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            dconv_bn_relu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">16</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>        <span class="token comment"># (N, 512, 8, 8)  </span>
+            dconv_bn_relu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">8</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>         <span class="token comment"># (N, 256, 16, 16)</span>
+            dconv_bn_relu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>         <span class="token comment"># (N, 128, 32, 32)</span>
+            nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span>dim<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> output_padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+            nn<span class="token punctuation">.</span>Tanh<span class="token punctuation">(</span><span class="token punctuation">)</span>                                <span class="token comment"># (N, 3, 64, 64)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>weights_init<span class="token punctuation">)</span>
+        
+	<span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>l1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>                        <span class="token comment"># (N, 1024 * 4 * 4)</span>
+        out <span class="token operator">=</span> out<span class="token punctuation">.</span>view<span class="token punctuation">(</span>out<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>   <span class="token comment"># (N, 1024, 4, 4)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>l2_5<span class="token punctuation">(</span>out<span class="token punctuation">)</span>                    <span class="token comment"># (N, 3, 64, 64)</span>
+        <span class="token keyword">return</span> out
+
+<span class="token comment"># 判别器</span>
+<span class="token keyword">class</span> <span class="token class-name">Discriminator</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+        input (N, 3, 64, 64)
+        output (N, )
+        """</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_dim<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Discriminator<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">conv_bn_lrelu</span><span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+                nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> out_dim<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>out_dim<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                nn<span class="token punctuation">.</span>LeakyReLU<span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>ls <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_dim<span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>LeakyReLU<span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment"># (N, 128, 32, 32)</span>
+            conv_bn_lrelu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment"># (N, 256, 16, 16)</span>
+            conv_bn_lrelu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment"># (N, 512, 8, 8)</span>
+            conv_bn_lrelu<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">8</span><span class="token punctuation">,</span> dim <span class="token operator">*</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                       <span class="token comment"># (N, 1024, 4, 4)</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>dim <span class="token operator">*</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                              <span class="token comment"># (N, 1)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>weights_init<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>ls<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        y <span class="token operator">=</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个部分与前面笔记(HW6-GAN)[<a href="https://faith-ye.github.io/2022/05/06/hw6-gan/]%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E5%88%A4%E5%88%AB%E5%99%A8%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%9F%BA%E6%9C%AC%E4%B8%80%E6%A0%B7%EF%BC%8C%E6%9C%89%E5%85%B3%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%8F%AF%E4%BB%A5%E7%9C%8B%E8%BF%99%E4%B8%AA%E7%AC%94%E8%AE%B0%EF%BC%8C%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E4%B8%BB%E8%A6%81%E7%9C%8BWGAN%E7%9A%84%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%89%8D%E9%9D%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E5%B9%B6%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94%E3%80%82">https://faith-ye.github.io/2022/05/06/hw6-gan/]生成器和判别器的模型基本一样，有关数据处理可以看这个笔记，下面我们主要看WGAN的训练过程，可以看前面模型的训练过程并进行对比。</a></p>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><p>准备好model和optimizer</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 设置超参数</span>
+batch_size <span class="token operator">=</span> <span class="token number">64</span>
+z_dim <span class="token operator">=</span> <span class="token number">100</span>
+lr <span class="token operator">=</span> <span class="token number">0.0001</span>
+n_epoch <span class="token operator">=</span> <span class="token number">10</span>
+cliping <span class="token operator">=</span> <span class="token number">0.02</span>
+critic_iter <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token comment"># model</span>
+G <span class="token operator">=</span> Generator<span class="token punctuation">(</span>in_dim<span class="token operator">=</span>z_dim<span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+D <span class="token operator">=</span> Discriminator<span class="token punctuation">(</span>in_dim<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+G<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+D<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># optimizer，注意这里用的是RMSprop</span>
+opt_D <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>RMSprop<span class="token punctuation">(</span>D<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>lr<span class="token punctuation">)</span>
+opt_G <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>RMSprop<span class="token punctuation">(</span>G<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>lr<span class="token punctuation">)</span>
+
+<span class="token comment"># 用于后向传播更新模型参数</span>
+one <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+mone <span class="token operator">=</span> one <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>开始训练</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        imgs <span class="token operator">=</span> data
+        imgs <span class="token operator">=</span> imgs<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        bs <span class="token operator">=</span> imgs<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>     <span class="token comment"># 这里不用batch_size是为了防止最后一个并不是</span>
+
+        <span class="token triple-quoted-string string">"""Train D"""</span>
+        <span class="token comment"># Requires grad, Generator requires_grad = False</span>
+        <span class="token keyword">for</span> p <span class="token keyword">in</span> D<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            p<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">True</span>
+
+        <span class="token keyword">for</span> d_iter <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>critic_iter<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            D<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment"># Clamp parameters</span>
+            <span class="token keyword">for</span> p <span class="token keyword">in</span> D<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                p<span class="token punctuation">.</span>data<span class="token punctuation">.</span>clamp_<span class="token punctuation">(</span><span class="token operator">-</span>cliping<span class="token punctuation">,</span> cliping<span class="token punctuation">)</span>
+
+            z <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>bs<span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            r_imgs <span class="token operator">=</span> Variable<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            f_imgs <span class="token operator">=</span> G<span class="token punctuation">(</span>z<span class="token punctuation">)</span>
+
+            <span class="token comment"># Train with real images</span>
+            d_loss_real <span class="token operator">=</span> D<span class="token punctuation">(</span>r_imgs<span class="token punctuation">)</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            d_loss_real<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>mone<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token comment"># Train with fake images</span>
+            d_loss_fake <span class="token operator">=</span> D<span class="token punctuation">(</span>f_imgs<span class="token punctuation">)</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            d_loss_fake<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>one<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            d_loss <span class="token operator">=</span> d_loss_fake <span class="token operator">-</span> d_loss_real
+            Wasserstein_D <span class="token operator">=</span> d_loss_real <span class="token operator">-</span> d_loss_fake
+            opt_D<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token triple-quoted-string string">""" Train G"""</span>
+        <span class="token keyword">for</span> p <span class="token keyword">in</span> D<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            p<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">False</span>  <span class="token comment"># to avoid computation</span>
+
+        G<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        z <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>bs<span class="token punctuation">,</span> z_dim<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        f_imgs <span class="token operator">=</span> G<span class="token punctuation">(</span>z<span class="token punctuation">)</span>
+
+        g_loss <span class="token operator">=</span> D<span class="token punctuation">(</span>f_imgs<span class="token punctuation">)</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        g_loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>mone<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        g_cost <span class="token operator">=</span> <span class="token operator">-</span>g_loss
+        opt_G<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 打印当前模型训练的状态</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'\rEpoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>n_epoch<span class="token punctuation">}</span></span><span class="token string">] </span><span class="token interpolation"><span class="token punctuation">{</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> '</span></span>
+              <span class="token string-interpolation"><span class="token string">f'Loss_D: </span><span class="token interpolation"><span class="token punctuation">{</span>d_loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string"> Loss_G: </span><span class="token interpolation"><span class="token punctuation">{</span>g_loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>下面展示一张我训练迭代十次后出来的照片，整体看起来还是不错的，这里我没有使用原始DCGAN的模型，而是用了它的简化版，即前面笔记(HW6-GAN)[<a href="https://faith-ye.github.io/2022/05/06/hw6-gan/]%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%8F%AA%E6%98%AF%E5%B0%86%E5%88%A4%E5%88%AB%E5%99%A8%E6%9C%80%E5%90%8E%E4%B8%80%E5%B1%82%E7%9A%84sigmoid%E5%8E%BB%E6%8E%89%EF%BC%8C%E8%BF%99%E4%B8%AA%E8%A7%86%E8%A7%89%E4%B8%8A%E6%AF%94HW6-GAN%E7%AC%AC10%E6%AC%A1%E8%BF%AD%E4%BB%A3%E7%9A%84%E6%95%88%E6%9E%9C%E8%A6%81%E5%A5%BD%E4%BA%9B%EF%BC%8C%E4%BD%86%E5%85%B6%E4%B8%AD%E8%BF%98%E6%98%AF%E6%9C%89%E4%B8%80%E4%BA%9B%E7%91%95%E7%96%B5%EF%BC%8C%E4%B8%AA%E4%BA%BA%E8%A7%89%E5%BE%97%E6%98%AF%E6%88%91%E8%BF%AD%E4%BB%A3%E7%9A%84%E6%AC%A1%E6%95%B0%E5%A4%AA%E5%B0%91%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%98%AF%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98%E3%80%82">https://faith-ye.github.io/2022/05/06/hw6-gan/]中的模型，只是将判别器最后一层的sigmoid去掉，这个视觉上比HW6-GAN第10次迭代的效果要好些，但其中还是有一些瑕疵，个人觉得是我迭代的次数太少，也可能是代码问题。</a></p>
+<img src="/2022/07/06/wgan-de-pytorch-shi-xian/Epoch_010.jpg" class="">
+
 
                 
             </div>
@@ -519,7 +677,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/03/29/seq2seq/">https://faith-ye.github.io/2022/03/29/seq2seq/</a>
+                    <a href="https://faith-ye.github.io/2022/07/06/wgan-de-pytorch-shi-xian/">https://faith-ye.github.io/2022/07/06/wgan-de-pytorch-shi-xian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -557,8 +715,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/NLP/">
-                                    <span class="chip bg-color">NLP</span>
+                                <a href="/tags/GAN/">
+                                    <span class="chip bg-color">GAN</span>
+                                </a>
+                            
+                                <a href="/tags/WGAN/">
+                                    <span class="chip bg-color">WGAN</span>
                                 </a>
                             
                         </div>
@@ -998,66 +1160,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/02/zi-zhu-yi-li-mo-xing/">
+                <a href="/2022/07/06/wgan-de-pytorch-shi-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="自注意力模型">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="WGAN的Pytorch实现">
                         
-                        <span class="card-title">自注意力模型</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-02
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/attention/">
-                        <span class="chip bg-color">attention</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/25/men-kong-xun-huan-dan-yuan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="门控循环单元">
-                        
-                        <span class="card-title">门控循环单元</span>
+                        <span class="card-title">WGAN的Pytorch实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1068,7 +1182,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-06
                             </span>
                         <span class="publish-author">
                             
@@ -1082,11 +1196,65 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GRU/">
-                        <span class="chip bg-color">GRU</span>
+                    <a href="/tags/GAN/">
+                        <span class="chip bg-color">GAN</span>
+                    </a>
+                    
+                    <a href="/tags/WGAN/">
+                        <span class="chip bg-color">WGAN</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/06/15/zotero/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Zotero">
+                        
+                        <span class="card-title">Zotero</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/" class="post-category">
+                                    生命在于折腾
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A5%BD%E7%94%A8%E7%9A%84%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">好用的软件</span>
                     </a>
                     
                 </div>
