@@ -479,7 +479,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>GAN存在训练困难、训练得到的loss无法表示训练进程等问题。大多数的GAN都是从模型的结构上进行修改，如DCGAN，用卷积神经网络设计生成器和判别器，并进行了一些调整，但这些终究是治标不治本，没有从根本上解决问题。原始GAN是用JS散度来评判两个分布的相似程度，而JS散度存在一个问题，就是真实数据$P_{data}$和生成数据$P_{G}$没有数据重叠的话，不断真实数据和生成数据之间的距离多远，JS散度计算出来的值都是log2，这就导致了生成器梯度消失的问题。WGAN就是用来解决这个问题，其优点有以下几个方面：</p>
+                <p>GAN存在训练困难、训练得到的loss无法表示训练进程等问题。大多数的GAN都是从模型的结构上进行修改，如DCGAN，用卷积神经网络设计生成器和判别器，并进行了一些调整，但这些终究是治标不治本，没有从根本上解决问题。原始GAN是用JS散度来评判两个分布的相似程度，而JS散度存在一个问题，就是真实数据$P_{data}$和生成数据$P_{G}$没有数据重叠的话，不管真实数据和生成数据之间的距离多远，JS散度计算出来的值都是log2，这就导致了生成器梯度消失的问题。WGAN就是用来解决这个问题，其优点有以下几个方面：</p>
 <ul>
 <li>彻底解决GAN训练不稳定和mode collapse的问题，不再需要小心平衡生成器和判别器的训练程度</li>
 <li>不需要精心设计网络结构，MLP网络就能实现很好的结果</li>
@@ -492,10 +492,10 @@
 <li>使用RMSProp参数优化算法，而不是Adam</li>
 <li>判别器的最后一层去掉sigmoid</li>
 </ul>
-<h2 id="模型实现"><a href="#模型实现" class="headerlink" title="模型实现"></a>模型实现</h2><p>具体为什么要这么做，请查看原论文，本文主要关注的是WGAN模型以及训练过程Pytorch代码实现。</p>
+<h2 id="模型实现">模型实现</h2>
+<p>具体为什么要这么做，请查看原论文，本文主要关注的是WGAN模型以及训练过程Pytorch代码实现。</p>
 <p>首先来看模型部分，这里使用的是DCGAN的模型，只不过将判别器的最后一层的sigmoid去掉</p>
 <img src="/2022/07/06/wgan-de-pytorch-shi-xian/image-20220706103409376.png" class="" title="DCGAN的模型结构">
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 
@@ -571,9 +571,9 @@
         y <span class="token operator">=</span> self<span class="token punctuation">.</span>ls<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         y <span class="token operator">=</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个部分与前面笔记<a href="https://faith-ye.github.io/2022/05/06/hw6-gan/">HW6-GAN</a>生成器和判别器的模型基本一样，有关数据处理可以看这个笔记，下面我们主要看WGAN的训练过程，可以看前面模型的训练过程并进行对比。</p>
-<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><p>准备好model和optimizer</p>
+<h2 id="模型训练">模型训练</h2>
+<p>准备好model和optimizer</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 设置超参数</span>
 batch_size <span class="token operator">=</span> <span class="token number">64</span>
 z_dim <span class="token operator">=</span> <span class="token number">100</span>
@@ -595,7 +595,6 @@ opt_G <span class="token operator">=</span> torch<span class="token punctuation"
 <span class="token comment"># 用于后向传播更新模型参数</span>
 one <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 mone <span class="token operator">=</span> one <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>开始训练</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i<span class="token punctuation">,</span> data <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -647,10 +646,8 @@ mone <span class="token operator">=</span> one <span class="token operator">*</s
         <span class="token comment"># 打印当前模型训练的状态</span>
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'\rEpoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>n_epoch<span class="token punctuation">}</span></span><span class="token string">] </span><span class="token interpolation"><span class="token punctuation">{</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> '</span></span>
               <span class="token string-interpolation"><span class="token string">f'Loss_D: </span><span class="token interpolation"><span class="token punctuation">{</span>d_loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string"> Loss_G: </span><span class="token interpolation"><span class="token punctuation">{</span>g_loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>下面展示一张我训练迭代十次后出来的照片，整体看起来还是不错的，这里我没有使用原始DCGAN的模型，而是用了它的简化版，即前面笔记<a href="https://faith-ye.github.io/2022/05/06/hw6-gan/">HW6-GAN</a>中的模型，只是将判别器最后一层的sigmoid去掉，这个视觉上比HW6-GAN第10次迭代的效果要好些，但其中还是有一些瑕疵，个人觉得是我迭代的次数太少，也可能是代码问题。</p>
 <img src="/2022/07/06/wgan-de-pytorch-shi-xian/Epoch_010.jpg" class="">
-
 
                 
             </div>
@@ -1160,18 +1157,17 @@ mone <span class="token operator">=</span> one <span class="token operator">*</s
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/07/06/wgan-de-pytorch-shi-xian/">
+                <a href="/2022/07/08/wgan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="WGAN的Pytorch实现">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="WGAN">
                         
-                        <span class="card-title">WGAN的Pytorch实现</span>
+                        <span class="card-title">WGAN</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1181,22 +1177,21 @@ mone <span class="token operator">=</span> one <span class="token operator">*</s
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文阅读笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1452,7 +1447,7 @@ mone <span class="token operator">=</span> one <span class="token operator">*</s
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">51.4k</span>
+                        class="white-color">53.3k</span>
             
             
             
