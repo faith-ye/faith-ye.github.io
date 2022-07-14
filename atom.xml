@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-07-08T11:54:34.068Z</updated>
+  <updated>2022-07-14T03:05:52.951Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WGAN_GP</title>
+    <link href="https://faith-ye.github.io/2022/07/14/wgan-gp/"/>
+    <id>https://faith-ye.github.io/2022/07/14/wgan-gp/</id>
+    <published>2022-07-14T03:03:43.000Z</published>
+    <updated>2022-07-14T03:05:52.951Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;img src=&quot;/2022/07/14/wgan-gp/image-20220714084905587-16577679352952.png&quot; class=&quot;&quot;&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
+    
+    <category term="WGAN_GP" scheme="https://faith-ye.github.io/tags/WGAN-GP/"/>
+    
+  </entry>
   
   <entry>
     <title>WGAN</title>
@@ -494,32 +523,6 @@
         
     <summary type="html">&lt;p&gt;在实现深度学习模型时，我们难免会对数据进行操作，因此我们需要部分线性代数相关的内容。这节我们将学习线性代数中的基本数学对象和运算，并通过相关代码来表现它们。&lt;/p&gt;
 &lt;h2 id=&quot;标量&quot;&gt;&lt;a href=&quot;#标量&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="PyTorch学习笔记" scheme="https://faith-ye.github.io/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="pytorch" scheme="https://faith-ye.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据预处理</title>
-    <link href="https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/"/>
-    <id>https://faith-ye.github.io/2022/04/25/shu-ju-yu-chu-li/</id>
-    <published>2022-04-25T10:21:59.000Z</published>
-    <updated>2022-04-27T02:03:16.500Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;这节我们将简要介绍使用pandas预处理原始数据，并将原始数据转换为张量格式的步骤。&lt;/p&gt;
-&lt;h2 id=&quot;读取数据集&quot;&gt;&lt;a href=&quot;#读取数据集&quot; class=&quot;headerlink&quot;</summary>
         
       
     
