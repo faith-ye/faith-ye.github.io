@@ -488,7 +488,7 @@
 <p>WGAN 模型的性能对超参数 c 特别敏感。下图中，当判别器中没有使用批量标准化，c 从0.001增加到0.1，判别器从梯度消失转为梯度爆炸。</p>
 <img src="/2022/07/14/wgan-gp/image-20220714091239852-16577679352953.png" class="">
 
-<p>同时作者还证明了 weight clipping 降低了模型的表现能力并且限制了模型模拟复杂函数的能力。在下面的实验中，第一行是由 WGAN 估计的判别器值等高线图，第二行是由 WGAN 的一个变体估计的，即本文提出的方法WGAN_GP。从图中可以看出，WGAN 不能创造一个复杂的边界来包围模型的模式（橙色点），只是对最有函数进行了非常简单的近似模拟，而改进的 WGAN_GP 可以。</p>
+<p>同时作者还证明了 weight clipping 降低了模型的表现能力并且限制了模型模拟复杂函数的能力。在下面的实验中，第一行是由 WGAN 估计的判别器值等高线图，第二行是由 WGAN 的一个变体估计的，即本文提出的方法WGAN_GP。从图中可以看出，WGAN 不能创造一个复杂的边界来包围模型的模式（橙色点），只是对最优函数进行了非常简单的近似模拟，而改进的 WGAN_GP 可以。</p>
 <img src="/2022/07/14/wgan-gp/image-20220714093217526-16577679352964.png" class="">
 
 <h2 id="WGAN-GP"><a href="#WGAN-GP" class="headerlink" title="WGAN_GP"></a>WGAN_GP</h2><p>WGAN_GP使用梯度惩罚（gradient penalty）而不是 weight clipping 来实现 Lipschitz 限制：</p>
