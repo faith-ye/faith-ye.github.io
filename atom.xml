@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-07-14T03:09:48.754Z</updated>
+  <updated>2022-07-14T09:25:12.099Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记一：static和继承</title>
+    <link href="https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/"/>
+    <id>https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/</id>
+    <published>2022-07-14T09:23:50.000Z</published>
+    <updated>2022-07-14T09:25:12.099Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;static静态关键字&quot;&gt;&lt;a href=&quot;#static静态关键字&quot; class=&quot;headerlink&quot; title=&quot;static静态关键字&quot;&gt;&lt;/a&gt;static静态关键字&lt;/h2&gt;&lt;h3 id=&quot;static&quot;&gt;&lt;a href=&quot;#static&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
+    
+    
+    <category term="static" scheme="https://faith-ye.github.io/tags/static/"/>
+    
+    <category term="继承" scheme="https://faith-ye.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+  </entry>
   
   <entry>
     <title>WGAN_GP</title>
@@ -497,32 +524,6 @@
         
     <summary type="html">&lt;p&gt;在学习这节之前，我们需先了解一些基本的微积分知识，如导数、微分、偏导数及链式法则等。如果你对这些知识不太了解，请自行在网上找相关资料学习，这是因为求导是几乎所有深度学习优化算法的关键步骤。&lt;/p&gt;
 &lt;p&gt;有过算法实现经验的小伙伴可能有过这种体验，如果一个模型需要通过算法率定</summary>
-        
-      
-    
-    
-    
-    <category term="PyTorch学习笔记" scheme="https://faith-ye.github.io/categories/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="pytorch" scheme="https://faith-ye.github.io/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基本线性代数运算</title>
-    <link href="https://faith-ye.github.io/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/"/>
-    <id>https://faith-ye.github.io/2022/04/26/ji-ben-xian-xing-dai-shu-yun-suan/</id>
-    <published>2022-04-26T13:27:56.000Z</published>
-    <updated>2022-04-27T02:03:42.561Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;在实现深度学习模型时，我们难免会对数据进行操作，因此我们需要部分线性代数相关的内容。这节我们将学习线性代数中的基本数学对象和运算，并通过相关代码来表现它们。&lt;/p&gt;
-&lt;h2 id=&quot;标量&quot;&gt;&lt;a href=&quot;#标量&quot; class=&quot;headerlink&quot;</summary>
         
       
     
