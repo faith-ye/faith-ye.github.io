@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="生成式对抗网络, 小叶の博客">
-    <meta name="description" content="前言GAN的全称为Generative Adversarial Network，翻译成中文就是生成式对抗网络。 在github有个GAN Zoo，它记录了GAN的发展并提供了相关GAN的论文来源和部分GAN模型的实现。下图为GAN的论文数量">
+    <meta name="keywords" content="笔记二：包和多态, 小叶の博客">
+    <meta name="description" content="包定义：包是用来分门别类的管理各种不同类的，类似于文件夹、建包利于程序的管理和维护。
+
+建包的语法格式：package 公司域名倒写.技术名称。包名建议全部英文小写，且具备意义
+
+建包语句必须在第一行，一般IDEA工具会帮助创建
+
+相同包下">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>生成式对抗网络 | 小叶の博客</title>
+    <title>笔记二：包和多态 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +296,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">生成式对抗网络</h1>
+                    <h1 class="description center-align post-title">笔记二：包和多态</h1>
                 </div>
             </div>
         </div>
@@ -411,8 +417,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/GAN/">
-                                <span class="chip bg-color">GAN</span>
+                            <a href="/tags/%E5%A4%9A%E6%80%81/">
+                                <span class="chip bg-color">多态</span>
                             </a>
                         
                     </div>
@@ -423,8 +429,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                深度学习笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                JavaSE进阶
                             </a>
                         
                     </div>
@@ -436,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-16
+                    2022-07-18
                 </div>
                 
 
@@ -475,41 +481,209 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GAN的全称为Generative Adversarial Network，翻译成中文就是生成式对抗网络。 在github有个<a target="_blank" rel="noopener" href="https://github.com/hindupuravinash/the-gan-zoo">GAN Zoo</a>，它记录了GAN的发展并提供了相关GAN的论文来源和部分GAN模型的实现。下图为GAN的论文数量随时间的变化，由图可以看出自2014年第一篇GAN的论文问世，GAN的数量就以指数增长形式迅速壮大。虽然GAN的种类千变万化，但它们的结构类似，都含有一个生成器（generator）和一个判别器（discriminator）。</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313134629440.jpg" class="">
+                <h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p><strong>定义：</strong>包是用来分门别类的管理各种不同类的，类似于文件夹、建包利于程序的管理和维护。</p>
+<ul>
+<li><p>建包的语法格式：<code>package 公司域名倒写.技术名称</code>。包名建议全部英文小写，且具备意义</p>
+</li>
+<li><p>建包语句必须在第一行，一般IDEA工具会帮助创建</p>
+</li>
+<li><p>相同包下的类可以直接访问，不同包下的类必须导包，才可以使用！导包格式：<code>import 包名.类名</code>;</p>
+</li>
+<li><p>假如一个类中需要用到不同类，而这个两个类的名称是一样的，那么默认只能导入一个类，另一个类要带包名访问。</p>
+</li>
+</ul>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h2><p><strong>定义：</strong>是用来控制一个成员能够被访问的范围。可以修饰成员变量，方法，构造器，内部类，不同权限修饰符修饰的成员能够被访问的范围将受到限制。</p>
+<p><strong>分类和具体作用范围：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>修饰符</strong></th>
+<th align="center"><strong>同一 个类中</strong></th>
+<th align="center"><strong>同一个包中其他类</strong></th>
+<th align="center"><strong>不同包下的子类</strong></th>
+<th align="center"><strong>不同包下的无关类</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">private</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">缺省</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+</tbody></table>
+<p><strong>自己定义成员（方法，成员变量，构造器等）一般需要满足如下要求：</strong></p>
+<ul>
+<li><p>成员变量一般私有，方法一般公开。</p>
+</li>
+<li><p>如果该成员只希望本类访问，使用private修饰。</p>
+</li>
+<li><p>如果该成员只希望本类，同一个包下的其他类和子类访问，使用protected修饰。</p>
+</li>
+</ul>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><p><strong>作用：</strong></p>
+<ul>
+<li><p>final 关键字是最终的意思，可以修饰类、方法、变量。</p>
+</li>
+<li><p>修饰类：表明该类是最终类，<font color="Red">不能被继承</font>。</p>
+</li>
+<li><p>修饰方法：表明该方法是最终方法，<font color="Red">不能被重写</font>。</p>
+</li>
+<li><p>修饰变量：表示该变量第一次赋值后，<font color="Red">不能再次被赋值</font>(有且仅能被赋值一次)。</p>
+</li>
+</ul>
+<p><strong>修饰变量需注意：</strong></p>
+<ul>
+<li>final修饰的变量是基本类型：那么变量存储的<font color="Red">数据值</font>不能发生改变。</li>
+<li>final修饰的变量是引用类型：那么变量存储的<font color="Red">地址值</font>不能发生改变，但是地址指向的对象内容是可以发生变化的。</li>
+</ul>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p><strong>定义：</strong>常量是使用了<code>public static final</code>修饰的成员变量，必须有初始化值，而且执行的过程中其值不能被改变</p>
+<p><strong>命名规范：</strong>英文单词全部大写，多个单词下划线连接起来</p>
+<p><strong>作用：</strong><font color="Red">通常用来记录系统的配置数据</font></p>
+<p><strong>常量做信息配置的原理、优势</strong></p>
+<ul>
+<li><p>在编译阶段会进行“宏替换”：把使用常量的地方全部替换成真实的字面量。</p>
+</li>
+<li><p>维护系统容易，可读性更好。</p>
+</li>
+</ul>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>枚举是Java中的一种特殊类型</p>
+<p><strong>作用：</strong>是为了做信息的标志和信息的分类</p>
+<p><strong>格式：</strong></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">修饰符 enum 枚举名称{
+	第一行都是罗列枚举类实例的名称;
+}
+// 如：
+enum Season{
+    SPRING, SUMMER, AUTUMN, WINTER;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>判别器和生成器都是一个神经网络结构，也就是一个黑箱模型。判别器相对比较好理解，就像一个二分类模型，有一个判别界限去区分样本，从概率的角度分析就是获得样本x属于类别y的概率，是一个条件概率P(y|x)。而生成器是需要生成数据的概率分布，就像高斯分布一样，需要去拟合整个分布，从概率角度分析就是样本x在整个分布中对应的概率。</p>
-<h2 id="GAN的相关理论"><a href="#GAN的相关理论" class="headerlink" title="GAN的相关理论"></a>GAN的相关理论</h2><p>GAN本质上是在做什么事情呢？</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313134650100.png" class="">
+<p><strong>反编译后枚举的特征：</strong></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">Compiled from "Season.java"
+public final class Season extends java.lang.Enum&lt;Season&gt; {
+    public static final Season SPRING = new Season();
+    public static final Season SUMMER = new Season();
+    public static final Season AUTUMN = new Season();
+    public static final Season WINTER = new Season();
+    public static Season[] values();
+    public static Season valueOf(java.lang.String);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>以图像生成为例，我们假设吧每一个图片看作二维空间中的一个点，并且现有图片会满足于某个数据分布，我们记作$P_{data}(x)$。那么在这个图像分布空间中，实际上只有很小一部分的区域是人脸图像。如上图所示，只有在蓝色区域采样出的点才会看起来像人脸，而在蓝色区域外采样出来的点就不是人脸。而在GAN中我们需要做的就是让机器找到人脸的分布函数，这也是GAN本质上做的事情。</p>
-<h2 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h2><p>如下图所示，我们需要训练出这样一个生成器，对于一个已知分布的数据z，我们可以通过生成器把数据转化成一个高维向量，它可以表示为一个图片、文本、声音等。只要我们随机输入多个z，就可以生成一个关于数据x的分布，我们把它称作$P_{G}(x)$。而真实数据也对应一个分布$P_{data}(x)$，生成器的目标是使$P_{G}(x)$和$P_{data}(x)$这两个分布越相似越好。我们知道对于回归和分类模型，都有对应的目标函数，我们只需使这个目标函数达到最优，即可得出一个比较好的回归或分类模型。那么对于两个分布，我们可以利用散度（Divergence，简称Div）这个评价指标来衡量两个分布之间的相似性。Div越小就表示两个分布越相似。那么我们可以将Div作为训练G的目标函数，我们的目标是使Div最小。</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135023130.png" class="">
+<p><strong>特征：</strong></p>
+<ul>
+<li><p>枚举类都是继承了枚举类型：java.lang.Enum</p>
+</li>
+<li><p>枚举都是最终类，不可以被继承</p>
+</li>
+<li><p>构造器都是私有的，枚举对外不能创建对象</p>
+</li>
+<li><p>枚举类的第一行默认都是罗列枚举对象的名称的</p>
+</li>
+<li><p>枚举类相当于是多例模式</p>
+</li>
+</ul>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p><strong>定义：</strong>在Java中abstract是抽象的意思，可以修饰类、成员方法。<font color="Red">abstract</font>修饰类，这个类就是抽象类；修饰方法，这个方法就是抽象方法。</p>
+<p><strong>格式：</strong></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">修饰符 abstract class 类名{ 
+	修饰符 abstract 返回值类型 方法名称(形参列表);
+}
+//如：
+public abstract class Animal{
+    public abstract void run();
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Discriminator"><a href="#Discriminator" class="headerlink" title="Discriminator"></a>Discriminator</h2><p>现在有一个最关键的问题是，两个分布之间的Div要如何计算出来呢？理论上来说我们不知道$P_{G}(x)$和$P_{data}(x)$是什么，因此Div我们是无法计算的。因此我们需要构建一个新的网络，它的作用是衡量$P_{G}(x)$和$P_{data}(x)$之间的Div，因此我们有了这样一个网络——判别器。</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135053706.png" class="">
+<p><strong>注意事项：</strong></p>
+<ul>
+<li><p>抽象方法只有方法签名，不能声明方法体。</p>
+</li>
+<li><p>一个类中如果定义了抽象方法，这个类必须声明成抽象类，否则报错</p>
+</li>
+</ul>
+<p><strong>使用场景：</strong></p>
+<ul>
+<li><p>抽象类可以理解成不完整的设计图，一般作为父类，让子类来继承。</p>
+</li>
+<li><p>当父类知道子类一定要完成某些行为，但是<font color="Red">每个子类该行为的实现又不同</font>，于是该父类就把该行为定义成抽象方法的形式，具体实现交给子类去完成。此时这个类就可以声明成抽象类。</p>
+</li>
+</ul>
+<p><strong>特征：</strong></p>
+<ul>
+<li><p>类有的成员（成员变量、方法、构造器）抽象类都具备</p>
+</li>
+<li><p>抽象类中不一定有抽象方法，有抽象方法的类一定是抽象类</p>
+</li>
+<li><p>一个类继承了抽象类必须重写完抽象类的全部抽象方法，否则这个类也必须定义成抽象类。</p>
+</li>
+<li><p>不能用abstract修饰<font color="Red">变量、代码块、构造器</font>。</p>
+</li>
+<li><p><strong>最重要的特征：</strong>得到了抽象方法，失去了创建对象的能力</p>
+</li>
+</ul>
+<p><strong>与final间：</strong></p>
+<ul>
+<li><p>abstract定义的抽象类作为模板让子类继承，final定义的类不能被继承。</p>
+</li>
+<li><p>抽象方法定义通用功能让子类重写，final定义的方法子类不能重写</p>
+</li>
+</ul>
+<h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><p><strong>使用场景：</strong>当系统中出现同一功能多处在开发，而该功能中大部分代码是一样的，只有其中部分可能不同的时候</p>
+<p><strong>实现步骤：</strong></p>
+<p>①定义一个抽象类</p>
+<p>②定义2个方法，一个是模板方法：把相同代码放里面去，不同代码定义成抽象方法</p>
+<p>③子类继承抽象类，重写抽象方法。</p>
+<p><strong>使用final修饰会更专业的原因：</strong></p>
+<p>模板方法是给子类直接使用的，不是让子类重写的，一旦子类重写了模板方法，则模板方法就失效了，因此，加上final后可以防止子类重写了模板方法，这样更安全、专业。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><strong>定义：</strong>指对象可以有多种形态</p>
+<p><strong>形式：</strong><code>父类类型 对象名称 = new 子类构造器;</code></p>
+<p><strong>多态中成员访问特点：</strong></p>
+<ul>
+<li><p>方法调用：编译看左边，运行看右边。</p>
+</li>
+<li><p>变量调用：编译看左边，运行也看<font color="Red">左边</font>。</p>
+</li>
+</ul>
+<p><strong>多态的前提：</strong>有继承/实现关系；有父类引用指向子类对象；<font color="Red">有方法重写</font>。</p>
+<p><strong>优势：</strong></p>
+<ul>
+<li>在多态形式下，右边对象可以实现解耦合，便于扩展和维护</li>
+<li>定义方法的时候，使用父类型作为参数，该方法就可以接收这父类的一切子类对象，体现出多态的扩展性与便利</li>
+</ul>
+<p><strong>劣势：</strong>多态下不能使用子类的独有功能</p>
+<p><strong>类型转换问题：</strong></p>
+<p>自动类型转换：从子到父，如：<code>Animal c = new Cat();</code></p>
+<p>强制类型转换：从父到子，必须使用强制类型转换：<code>子类 对象变量 = (子类)父类类型的变量;</code></p>
+<ul>
+<li><strong>作用：</strong>可以解决多态下的劣势，可以实现调用子类独有的功能</li>
+<li><strong>注意：</strong>有继承/实现关系的类就可以在编译阶段进行强制类型转换；但是，如果转型后的类型和对象真实对象的类型不是同一种类型，那么在运行代码时，就会出现ClassCastException，如：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Animal</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Dog</span> d <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Dog</span><span class="token punctuation">)</span>c<span class="token punctuation">;</span> <span class="token comment">// 出现异常 ClassCastException</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>图中，蓝色星星是从$P_{data}$（真实数据）中采样出的数据，黄色星星是从$P_{G}$（生成的数据）中采样出的数据，现在我们将这两组数据交给判别器，判别器的功能是判别读入的数据是来自$P_{data}$还是$P_{G}$。如果输入数据是$P_{data}$，那么经过判别器后就输出一个较大的值（可以近似理解为输出1）。如果输入数据是$P_{G}$，那么经过判别器后就输出一个较小的值（可以近似理解为输出0）。熟悉分类模型的同学可能就会说判别器不就相当于是一个二分类模型吗？而前面不是说我们是以Div的大小来判断两个分布之间的相似程度。现在我们就用公式推导出Div和二分类模型的目标函数之间的相关性。<br>我们先来看一下判别器的目标函数：</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135121210.png" class="">
-
-<p>从式子本身理解的话，数据来源于$P_{data}$，D(x)要尽可能大，数据来源于$P_{G}$，D(x)要尽可能小。这样的话$V(G,D)$就越大。以最大化$V(G,D)$为目标函数，就可以使得输入数据是$P_{G}$，经过判别器后就输出一个较小的值，相反则输入一个较大的值。这样就达到了区分读入的数据是来自$P_{data}$还是$P_{G}$的目的。接下来我们将目标函数展开：</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135206860.png" class="">
-
-<p>假设判别器十分强大，它模拟出的D(x)可以表示任何函数，给定一个x，都有一个D(x)使得表达式$P_{data}(x)logD(x)+P_{G}(x)log(1-D(x))$最大，求导令其为0可以得出：<br>$$D^{<em>}(x)=\frac{P_{data}(x)}{P_{data}(x)+P_{G}(x)}$$<br>现在把$D^{</em>}(x)$带入到目标函数中得到：</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135318679.png" class="">
-
-<p>将表达式中分子分母都除于2可得：</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135338407.png" class="">
-
-<p>这个表达式等价为：</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135404583.png" class="">
-
-<p>至此我们可以得知通过一定的假设，得出散度的计算类似于二分类器的目标函数的计算。因此可以看出判别器的本质就是一个二分类器，这样就有利于我们后面代码的实现。<br>现在我们再回到生成器，生成器的目的是让生成数据$P_{G}$和真实数据$P_{data}$之间的Div最小，本来Div是没办法计算的，但是现在有了判别器之后，Div变得可以计算了，于是生成器新的目标函数变为：<br> $$G^{*}=arg\underset{G}{min}\underset{D}{V(G,D)}$$<br>至此，GAN就变成了一个求解最小最大值的问题，接下来就可以用最基本的梯度下降法求解这个问题。<br>下面我们用一个完整的伪算法来回顾一下GAN模型训练的整个流程。</p>
-<img src="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/image-20220313135516142.png" class="">
-
-<p>这段伪代码的意思是，首先我们初始化生成器和判别器的参数，接下来规定一个总迭代次数，每轮训练的迭代次数也确定（这个根据数据量大小确定，一般是3-5次为一轮），在每轮训练中，我们先训练判别器，先从真实数据分布$P_{data}(x)$中抽样x，然后从先验分布中抽样z，并通过生成器产生数据$\overset{-}{x}$，接着把x和$\overset{-}{x}$丢入判别器中训练，使得目标函数$\overset{-}{V}$最大；接下来我们训练生成器，从先验分布中抽样新的z，接下来把z丢进生成器中训练，使得目标函数$\overset{-}{V}$最小，其实这一步就是让这一轮训练好的判别器认为生成器生成的是真实的数据。这样循环交替，最终生成器产生的数据$\overset{-}{x}$就会越来越接近真实数据x。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1406.2661">Goodfellow, Ian, et al. “Generative adversarial nets.”Advances in neural information processing systems27 (2014).</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DMA4MrNieWo">李宏毅youtube课程</a></p>
+<ul>
+<li><font color="Red">Java建议强转转换前使用<code>instanceof</code>判断当前对象的真实类型，再进行强制转换</font></li>
+</ul>
+<p>如：<code>变量名 instanceof 真实类型</code>，判断关键字左边的变量指向的对象的真实类型，是否是<font color="Red">右边的类型或者是其子类类型</font>，是则返回true，反之返回false。</p>
 
                 
             </div>
@@ -536,7 +710,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/">https://faith-ye.github.io/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/</a>
+                    <a href="https://faith-ye.github.io/2022/07/18/bi-ji-er-bao-he-duo-tai/">https://faith-ye.github.io/2022/07/18/bi-ji-er-bao-he-duo-tai/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -574,8 +748,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/GAN/">
-                                    <span class="chip bg-color">GAN</span>
+                                <a href="/tags/%E5%A4%9A%E6%80%81/">
+                                    <span class="chip bg-color">多态</span>
                                 </a>
                             
                         </div>
@@ -1015,66 +1189,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/17/hexo-cha-ru-tu-pian/">
+                <a href="/2022/07/18/bi-ji-er-bao-he-duo-tai/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Hexo插入图片">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="笔记二：包和多态">
                         
-                        <span class="card-title">Hexo插入图片</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/" class="post-category">
-                                    生命在于折腾
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/16/sheng-cheng-shi-dui-kang-wang-luo/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="生成式对抗网络">
-                        
-                        <span class="card-title">生成式对抗网络</span>
+                        <span class="card-title">笔记二：包和多态</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1085,14 +1211,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    深度学习笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
                                 </a>
                             
                             
@@ -1103,8 +1229,61 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GAN/">
-                        <span class="chip bg-color">GAN</span>
+                    <a href="/tags/%E5%A4%9A%E6%80%81/">
+                        <span class="chip bg-color">多态</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/14/bi-ji-yi-static-he-ji-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="笔记一：static和继承">
+                        
+                        <span class="card-title">笔记一：static和继承</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/static/">
+                        <span class="chip bg-color">static</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BB%A7%E6%89%BF/">
+                        <span class="chip bg-color">继承</span>
                     </a>
                     
                 </div>
