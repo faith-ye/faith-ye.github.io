@@ -4,11 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="笔记三：接口和内部类, 小叶の博客">
-    <meta name="description" content="接口定义：接口其实就是代码的一种规范。JDK8之前接口中只能是抽象方法和常量，没有其他成分了。接口不能实例化，接口中的成员都是public修饰，写不写都是，因为规范的目的是为了公开化。
-格式：
-// 接口用关键字interface来定义
-p">
+    <meta name="keywords" content="笔记四：包装类和Lambda表达式, 小叶の博客">
+    <meta name="description" content="日期和时间Date
+Date类代表当前所在系统的日期时间信息
+
+获取时间毫秒值
+
+无参构造器：public Date()，创建一个Data对象，代表的是系统当前时刻的日期时间
+
+调用方法：public long getTime()，返回从1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +24,7 @@ p">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>笔记三：接口和内部类 | 小叶の博客</title>
+    <title>笔记四：包装类和Lambda表达式 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -293,12 +297,12 @@ p">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">笔记三：接口和内部类</h1>
+                    <h1 class="description center-align post-title">笔记四：包装类和Lambda表达式</h1>
                 </div>
             </div>
         </div>
@@ -444,14 +448,14 @@ p">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -474,167 +478,36 @@ p">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p><strong>定义：</strong>接口其实就是代码的一种规范。JDK8之前接口中只能是抽象方法和常量，没有其他成分了。接口不能实例化，接口中的成员都是public修饰，写不写都是，因为规范的目的是为了公开化。</p>
-<p><strong>格式：</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 接口用关键字interface来定义</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> 接口名 <span class="token punctuation">{</span>
-       <span class="token comment">// 常量</span>
-       <span class="token comment">// 抽象方法</span>
-<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>用法：</strong>接口是用来被类实现（<code>implements</code>）的，实现接口的类称为<font color="Red">实现类</font>。实现类可以理解成所谓的子类。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 实现的关键字：implements</span>
-修饰符 <span class="token keyword">class</span> 实现类 <span class="token keyword">implements</span> 接口<span class="token number">1</span><span class="token punctuation">,</span> 接口<span class="token number">2</span><span class="token punctuation">,</span> 接口<span class="token number">3</span> <span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 重写抽象方法</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>从上面可以看出，接口可以被类单实现，也可以被类多实现，<font color="Red">接口不能创建对象</font></li>
+                <h2 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h2><h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><ul>
+<li>Date类代表当前所在系统的日期时间信息</li>
 </ul>
-<p><strong>类、接口之间的关系：</strong></p>
+<p><strong>获取时间毫秒值</strong></p>
 <ul>
-<li>类和类之间的关系：单继承</li>
-<li>类和接口之间的关系：多实现</li>
-<li><font color="Red">接口和接口之间的关系：多继承，一个接口可以同时继承多个接口</font></li>
-</ul>
-<p><strong>接口多继承的作用：</strong>规范合并，整合多个接口为同一个接口，便于子类实现</p>
-<p><strong>JDK8开始接口新增的方法</strong></p>
-<p><strong>作用：</strong>防止项目开发时需要对接口丰富，加入新的抽象方法。此时若没有新增的方法就要所有实现类实现这些方法，而引入新增的方法可以在丰富接口功能的同时又不对子类代码进行更改。</p>
-<p><strong>默认方法</strong>：类似之前写的普通<font color="Red">实例方法</font>：必须用default修饰。默认会用public修饰，<font color="Red">需要用接口实现类的对象来调用</font></p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">default void run(){
-    System.out.println("--开始跑--");
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>静态方法：</strong>默认会public修饰，必须static修饰。<font color="Red">接口的静态方法必须用本身的接口名来调用</font></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">inAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我们在学习Java!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>私有方法：</strong>私有的实例方法，必须用private修饰，从<font color="Red">JDK 1.9才开始有的</font>，只能<font color="Red">接口中</font>被其他默认方法或者私有方法访问。</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">private void go(){
-    System.out.println("--准备--");
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>JDK8新增的3种方法我们自己在开发中很少使用，通常是<font color="Red">Java源码</font>涉及到的，我们需要理解、识别语法、明白调用关系即可</p>
-<p><strong>注意事项：</strong></p>
-<ul>
-<li>一个类实现接口，必须<font color="Red">重写</font>完全部接口的全部抽象方法，否则这个类需要定义成抽象类</li>
-<li>一个类实现多个接口，多个接口的规范不能冲突</li>
-<li>一个类实现多个接口，多个接口中有同样的静态方法不冲突。</li>
-<li>一个类继承了父类，同时又实现了接口，父类中和接口中有同名方法，默认用<font color="Red">父类</font>的。</li>
-<li>一个类实现了多个接口，多个接口中存在同名的默认方法，可以不冲突，这个类重写该方法即可。</li>
-<li>一个接口继承多个接口，是没有问题的，如果多个接口中存在<font color="Red">规范冲突</font>则不能多继承。</li>
-</ul>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p><strong>定义：</strong>内部类就是定义在一个类里面的类，里面的类可以理解成”寄生“，外部类可以理解成”宿主“</p>
-<p><strong>使用场景：</strong>当一个事物的内部还有一个部分需要一个完整的结构进行描述时</p>
-<p><strong>基本作用：</strong></p>
-<ul>
-<li><p>内部类通常可以方便访问外部类的成员，包括私有的成员。</p>
+<li><p>无参构造器：<code>public Date()</code>，创建一个Data对象，代表的是系统当前时刻的日期时间</p>
 </li>
-<li><p>内部类提供了更好的封装性，内部类本身就可以用private ，protectecd等修饰，封装性可以做更多控制</p>
+<li><p>调用方法：<code>public long getTime()</code>，返回从<font color="Red">1970年1月1日00:00:00</font>走到此刻的总的毫秒数</p>
 </li>
 </ul>
-<p><strong>类别：</strong>静态内部类、成员内部类、局部内部类、<font color="Red">匿名内部类（重点）</font></p>
-<p><strong>静态内部类</strong></p>
-<p><strong>定义：</strong>有static修饰，属于外部类本身。它的特点和使用与普通类是完全一样的，类有的成分他都有，只是位置在别人里面而已。</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class Outer{
-        // 静态成员内部类
-    public static class Inner{
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>创建对象的格式：</strong><code>外部类名.内部类名 对象名 = new 外部类名.内部类构造器();</code>如：<code>Outer.Inner in =  new Outer.Inner();</code></p>
-<p><strong>注意：</strong></p>
+<p><strong>时间毫秒值到日期</strong></p>
 <ul>
-<li>静态内部类中<font color="Red">可以直接</font>访问外部类的静态成员，因为外部类的静态成员只有一份可以被共享访问。</li>
-<li>但<font color="Red">不能直接访问外部类的实例成员</font>，因为外部类的实例成员必须用外部类的对象访问</li>
+<li>有参构造器：<code>public Date(long time)</code>，把时间毫秒值转换成Date日期对象</li>
+<li>使用无参构造器对象的方法：<code>public long setTime()</code>，设置日期对象的时间为当前时间毫秒值对应的时间</li>
 </ul>
-<p><strong>成员内部类</strong></p>
-<p><strong>定义：</strong>无static修饰，属于外部类的对象。JDK16之前，成员内部类中不能定义静态成员，JDK16开始也可以定义静态成员了。</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class Outer {
-    // 成员内部类
-    public class Inner {
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>创建对象的格式：<code>外部类名.内部类名 对象名 = new 外部类构造器.new 内部类构造器();</code>如：<code>Outer.Inner in =  new Outer().new Inner();</code></p>
-<p><strong>注意：</strong></p>
+<h3 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h3><ul>
+<li>代表简单日期格式化，可以用来把日期时间格式化成为我们想要的形式，也可以把字符串的时间形式解析成Date日期对象</li>
+</ul>
+<p><strong>格式化</strong></p>
 <ul>
-<li>成员内部类中<font color="Red">可以直接</font>访问外部类的静态成员，因为外部类的静态成员只有一份可以被共享访问。</li>
-<li>成员内部类的实例方法中<font color="Red">也可以直接</font>访问外部类的实例成员，因为成员内部类必须先有外部类对象，才能有成员内部类对象，因此能访问。</li>
-<li>在成员内部类中访问所在外部类对象，格式：<code>外部类名.this</code>，<font color="Red">如下面代码</font></li>
+<li>构造器：<code>public SimpleDateFormat(String pattern)</code>，创建简单日期格式化对象，并封装格式化的形式信息，对应设置pattern的格式如下</li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">People</span><span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> heartbeat <span class="token operator">=</span> <span class="token number">150</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Heart</span><span class="token punctuation">{</span>
-        <span class="token keyword">private</span> <span class="token keyword">int</span> heartbeat <span class="token operator">=</span> <span class="token number">110</span><span class="token punctuation">;</span>
-        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">int</span> heartbeat <span class="token operator">=</span> <span class="token number">78</span><span class="token punctuation">;</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>heartbeat<span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 78</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>heartbeat<span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment">// 110</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">People</span><span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">.</span>heartbeat<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 150</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>局部内部类：</strong>放在<font color="Red">方法、代码块、构造器等</font>执行体中。局部内部类的类文件名为：<code>外部类$N内部类.class</code></p>
-<p><font color="Red"><strong>匿名内部类（重点）</strong></font></p>
-<p><strong>定义：</strong>本质上是一个没有名字的局部内部类。</p>
-<p><strong>作用：</strong>方便创建子类对象，最终目的是为了<font color="Red">简化代码编写</font></p>
-<p><strong>格式：</strong></p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">new 类|抽象类名|或者接口名() {
-    重写方法;
-};
-// 如：
-Employee a = new Employee() {
-    public void work() {
-    }
-};
-a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>特点：</strong></p>
+<p><code>2020-11-11 13:27:06 </code>$\Rightarrow$<code>yyyy-MM-dd HH:mm:ss </code></p>
+<p><code>2020年11月11日 13:27:06 </code>$\Rightarrow$<code>yyyy年MM月dd日 HH:mm:ss </code></p>
 <ul>
-<li><p>匿名内部类是一个没有名字的内部类，同时也代表一个<font color="Red">对象</font></p>
-</li>
-<li><p>匿名内部类产生的对象 类型，相当于是当前new类型的子类类型</p>
-</li>
-<li><p>匿名内部类通常是在开发中<font color="Red">调用别人的方法时，别人需要我们写的时候</font>才会定义出来使用</p>
-</li>
+<li>常用方法：①<code>public final String format(Date date)</code>，将日期格式化成日期/时间字符串；②<code>public final String format(Object time)</code>，将时间毫秒值格式化成日期/时间字符串</li>
 </ul>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><strong>定义：</strong>API的全称是Application Programming Interface，应用程序编程接口。其实就是Java写好的功能代码，可以直接调用</p>
-<p><strong>Object类</strong></p>
-<ul>
-<li><p>一个类要么默认继承了Object类，要么间接继承了Object类，Object类是Java中的<font color="Red">祖宗类</font></p>
-</li>
-<li><p>Object作为所有类的父类，提供了很多常用的方法给每个子类对象拿来使用</p>
-</li>
-</ul>
-<p><strong>常用方法：</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">方法名</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">public String toString()</td>
-<td align="left">默认是返回当前对象在堆内存中的地址信息:类的全限名@内存地址</td>
-</tr>
-<tr>
-<td align="left">public boolean equals(Object o)</td>
-<td align="left">默认是比较当前对象与另一个对象的地址是否相同，相同返回true，不同返回false</td>
-</tr>
-</tbody></table>
-<p><strong>注意：</strong></p>
-<ul>
-<li>父类toString()方法存在的意义就是为了被子类重写，以便返回对象的内容信息，而不是地址信息</li>
-<li>父类equals()方法存在的意义也是为了被子类重写，以便子类自己来定制比较规则（如比较对象内容）</li>
-</ul>
-<p><strong>Objects</strong></p>
-<ul>
-<li>Objects是一个工具类，提供了一些方法去完成一些功能</li>
-</ul>
+<p><strong>解析方法：</strong><code>public Date parse(String source)</code>，从给定字符串的开始解析文本以生成日期，字符串的格式要和定义的pattern相同，否则会报错</p>
+<h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><p><strong>定义：</strong>Calendar代表了系统此刻日期对应的日历对象。Calendar是一个<font color="Red">抽象类</font>，不能直接创建对象。Calendar是可变日期对象，一旦修改后其对象本身表示的时间将产生变化</p>
+<p><strong>创建日历对象的方法：</strong><code>public static Calendar getInstance()--&gt;Calendar cal = Calendar.getInstance()</code>，获取当前日历对象</p>
 <p><strong>常用方法：</strong></p>
 <table>
 <thead>
@@ -644,63 +517,316 @@ a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 </tr>
 </thead>
 <tbody><tr>
-<td>public  static boolean equals(Object a,  Object b)</td>
-<td>比较两个对象的，底层会先进行非空判断，从而可以避免空指针异常。再进行equals比较</td>
+<td>public int get(int field)</td>
+<td>取日期中的某个字段信息。</td>
 </tr>
 <tr>
-<td>public  static boolean isNull(Object obj)</td>
-<td>判断变量是否为null  ,为null返回true  ,反之</td>
+<td>public void set(int field,int value)</td>
+<td>修改日历的某个字段信息。</td>
+</tr>
+<tr>
+<td>public void add(int field,int amount)</td>
+<td>为某个字段增加/减少指定的值</td>
+</tr>
+<tr>
+<td>public final Date getTime()</td>
+<td>拿到此刻日期对象。</td>
+</tr>
+<tr>
+<td>public long getTimeInMillis()</td>
+<td>拿到此刻时间毫秒值</td>
 </tr>
 </tbody></table>
-<p><strong>注意：</strong>官方在进行字符串比较时，没有用字符串对象的的equals方法，而是选择了Objects的equals方法来比较，因为<font color="Red">使用Objects的equals方法在进行对象的比较会更安全。</font></p>
-<p><strong>StringBuilder</strong></p>
+<h3 id="JDK8新增日期类"><a href="#JDK8新增日期类" class="headerlink" title="JDK8新增日期类"></a>JDK8新增日期类</h3><p>从<font color="Red">Java 8</font>开始，java.time包提供了新的日期和时间API，主要涉及的类型有以下几个，具体使用请查找Java API文档。</p>
+<img src="/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/image-20220720104711148.png" class="">
+
+<p>新增的API严格区分了时刻、本地日期、本地时间，并且，对日期和时间进行运算更加方便。其次，新API的类型几乎全部是不变类型（和String的使用类似），可以放心使用不必担心被修改。</p>
+<h2 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h2><p><strong>定义：</strong>包装类其实就是8种基本数据类型对应的引用数据类型</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>引用数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<p><strong>提供包装类的原因：</strong></p>
 <ul>
-<li>StringBuilder是一个可变的字符串的操作类，我们可以把它看成是一个对象容器</li>
-<li>使用StringBuilder的核心作用：操作字符串的性能比String要更高（如拼接、修改等）</li>
-<li>最终要用<code>toString()</code>方法转为String类型</li>
+<li><p>Java为了实现一切皆对象，为8种基本类型提供了对应的引用类型</p>
+</li>
+<li><p>后面的<font color="Red">集合和泛型</font>其实也只能支持包装类型，不支持基本数据类型</p>
+</li>
 </ul>
-<p><strong>构造器</strong></p>
+<p><strong>自动装箱：</strong>基本类型的数据和变量可以直接赋值给包装类型的变量</p>
+<p><strong>自动拆箱：</strong>包装类型的变量可以直接赋值给基本数据类型的变量</p>
+<p><strong>包装类特有功能：</strong>①包装类的变量的默认值可以是<font color="Red">null</font>，容错率更高。②可以把基本类型的数据转换成字符串类型(用处不大)。③可以把字符串类型的数值转换成真实的数据类型</p>
+<ul>
+<li><strong>方法：</strong>调用<code>toString()</code>方法得到字符串结果，也调用<code>Integer.toString(基本类型的数据)</code>；调用<code>Integer.parseInt()</code>得到“字符串类型的整数”；调用<code>Double.parseDouble()</code>得到“字符串类型的小数”。</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><strong>作用：</strong>可以用一些规定的字符来制定规则，并用来校验数据格式的合法性</p>
+<p><strong>字符串对象提供了匹配正则表达式的方法：</strong><code>public boolean matches(String regex)</code>，判断是否匹配正则表达式，匹配返回true，不匹配返回false</p>
+<p><strong>语法：</strong>这里就列举一些常用的，具体可以查看<a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html">API文档</a></p>
 <table>
 <thead>
 <tr>
-<th>名称</th>
+<th>字符</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>public  StringBuilder()</td>
-<td>创建一个空白的可变的字符串对象，不包含任何内容</td>
+<td>[abc]</td>
+<td>只能是a, b, 或c</td>
 </tr>
 <tr>
-<td>public  StringBuilder(String str)</td>
-<td>创建一个指定字符串内容的可变字符串对象</td>
+<td>[^abc]</td>
+<td>除了a, b, c之外的任何字符</td>
+</tr>
+<tr>
+<td>[a-zA-Z]</td>
+<td>a到z A到Z，包括（范围）</td>
+</tr>
+<tr>
+<td>[a-d[m-p]]</td>
+<td>a到d，或m通过p：（[a-dm-p]联合）</td>
+</tr>
+<tr>
+<td>[a-z&amp;&amp;[def]]</td>
+<td>d, e, 或f(交集)</td>
+</tr>
+<tr>
+<td>[a-z&amp;&amp;[^bc]]</td>
+<td>a到z，除了b和c</td>
+</tr>
+<tr>
+<td>.</td>
+<td>任何字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>一个数字：[0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>非数字：[^0-9]</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>一个空白字符：[ \t\n\x0B\f\r]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非空白字符：[^\s]</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>[a-zA-Z_0-9] 英文、数字、下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>[^\w] 一个非单词字符</td>
+</tr>
+<tr>
+<td>X?</td>
+<td>X , 一次或根本不</td>
+</tr>
+<tr>
+<td>X*</td>
+<td>X，零次或多次</td>
+</tr>
+<tr>
+<td>X+</td>
+<td>X , 一次或多次</td>
+</tr>
+<tr>
+<td>X {n}</td>
+<td>X，正好n次</td>
+</tr>
+<tr>
+<td>X {n, }</td>
+<td>X，至少n次</td>
+</tr>
+<tr>
+<td>X {n,m}</td>
+<td>X，至少n但不超过m次</td>
 </tr>
 </tbody></table>
-<p><strong>常用方法</strong></p>
+<p><strong>如：</strong></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">System.out.println("a".matches("[abc]"));    // true
+System.out.println("z".matches("[abc]"));    // false
+System.out.println("ab".matches("[abc]"));   // false
+System.out.println("ab".matches("[abc]+"));  // true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>正则表达式在字符串方法中的使用：</strong></p>
 <table>
 <thead>
 <tr>
-<th>方法名称</th>
+<th align="left">方法名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">public String replaceAll(String regex,String newStr)</td>
+<td align="left">按照正则表达式匹配的内容进行替换</td>
+</tr>
+<tr>
+<td align="left">public String[] split(String regex)：</td>
+<td align="left">按照正则表达式匹配的内容进行分割字符串，反回一个字符串数组</td>
+</tr>
+</tbody></table>
+<h2 id="Arrays类"><a href="#Arrays类" class="headerlink" title="Arrays类"></a>Arrays类</h2><p><strong>定义：</strong><font color="Red">数组操作工具类</font>，专门用于操作数组元素的</p>
+<p><strong>Arrays类的常用API：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>public StringBuilder append(任意类型)</td>
-<td>添加数据并返回StringBuilder对象本身</td>
+<td>public static String toString(类型[] a)</td>
+<td>返回数组的内容（字符串形式）</td>
 </tr>
 <tr>
-<td>public StringBuilder reverse()</td>
-<td>将对象的内容反转</td>
+<td>public  static void sort(类型[] a)</td>
+<td>对数组进行默认升序排序</td>
 </tr>
 <tr>
-<td>public int length()</td>
-<td>返回对象内容长度</td>
+<td>public  static &lt;T&gt; void sort(类型[] a, Comparator&lt;?  super T&gt; c)</td>
+<td>使用比较器对象自定义排序</td>
 </tr>
 <tr>
-<td>public String toString()</td>
-<td>通过toString()就可以实现把StringBuilder转换为String</td>
+<td>public  static int binarySearch(int[] a,  int key)</td>
+<td>二分搜索数组中的数据，存在返回索引，不存在返回-1，使用该方法数组需先排好序</td>
 </tr>
 </tbody></table>
+<p><strong>自定义排序规则：</strong>设置Comparator接口对应的比较器对象，来定制比较规则</p>
+<ul>
+<li><p>如果认为左边数据 大于 右边数据 返回正整数</p>
+</li>
+<li><p>如果认为左边数据 小于 右边数据 返回负整数</p>
+</li>
+<li><p>如果认为左边数据 等于 右边数据 返回0</p>
+</li>
+</ul>
+<h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p><strong>思想：</strong>每次依次从数组第一个位置开始比较，若当前位置大于后一个位置则交换数据，依次进行到后面，这样每次结束后都将最大值放到数组的后面去。</p>
+<p><strong>规则：</strong>假定数组长度为n</p>
+<ul>
+<li>总共需要做多少轮：n-1</li>
+<li>比较的总次数：$(n-1)+(n-2)+…+1=\frac{n(n-1)}{2}$</li>
+</ul>
+<img src="/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/image-20220720152813271.png" class="">
+
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p><strong>思想：</strong>每轮选择当前位置，开始找出后面的更小值与该位置交换</p>
+<p><strong>规则：</strong>假定数组长度为n</p>
+<ul>
+<li>总共需要做多少轮：n-1</li>
+<li>控制每轮从以前位置为基准，与后面元素选择几次</li>
+</ul>
+<img src="/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/image-20220720152832927.png" class="">
+
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p><strong>需求：</strong>用于数组元素的基本查询，查询数组中的元素在哪个索引</p>
+<p><strong>规则：</strong></p>
+<ul>
+<li>二分查找性能好，二分查找的前提是必须是排好序的数据</li>
+<li>二分查找相当于每次去掉一半的查找范围</li>
+</ul>
+<p><strong>实现步骤：</strong></p>
+<ul>
+<li><p>定义变量记录左边和右边位置。</p>
+</li>
+<li><p>使用while循环控制查询（条件是左边位置&lt;=右边位置）</p>
+</li>
+<li><p>循环内部获取中间元素索引</p>
+</li>
+<li><p>判断当前要找的元素如果大于中间元素，左边位置=中间索引+1</p>
+</li>
+<li><p>判断当前要找的元素如果小于中间元素，右边位置=中间索引-1</p>
+</li>
+<li><p>判断当前要找的元素如果等于中间元素，返回当前中间元素索引</p>
+</li>
+</ul>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p><strong>定义：</strong>Lambda表达式是JDK 8开始后的一种新语法形式</p>
+<p><strong>作用：</strong>简化匿名内部类的代码写法</p>
+<p><strong>简化格式：</strong></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">(匿名内部类被重写方法的形参列表) -&gt; {
+    被重写方法的方法体代码;
+}
+// 注：-&gt; 是语法形式，无实际含义<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>注意：</strong>Lambda表达式只能简化<font color="Red">函数式接口的匿名内部类的写法形式</font></p>
+<p><strong>函数式接口：</strong>首先必须是<font color="Red">接口</font>，其次接口中有且仅有<font color="Red">一个抽象方法</font>的形式</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class LambdaDemo1 {
+    public static void main(String[] args) {
+        
+        goSwimming( new Swimming() {
+            @Override
+            public void swim() {
+                System.out.println("铁汁, 我们去游泳吧~");
+            }
+        } );
+    }
+    public static void goSwimming(Swimming swimming) {
+        swimming.swim();
+    }
+}
+
+// 使用Lambda表达式之后，可以看出代码更少，关注点更加明确了
+public class LambdaDemo1 {
+    public static void main(String[] args) {
+        
+        goSwimming( () -&gt; {
+		System.out.println("铁汁, 我们去游泳吧~") 
+        } );
+        
+    }
+    public static void goSwimming(Swimming swimming) {
+        swimming.swim();
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>进一步在Lambda表达式的基础上继续简化：</strong></p>
+<ul>
+<li><p><font color="Red">参数类型</font>可以省略不写。</p>
+</li>
+<li><p>如果只有一个参数，参数类型可以省略，同时()也可以省略。</p>
+</li>
+<li><p>如果Lambda表达式的方法体代码只有<font color="Red">一行代码</font>。可以省略大括号不写,同时要省略分号！</p>
+</li>
+<li><p>如果Lambda表达式的方法体代码只有<font color="Red">一行代码</font>。可以省略大括号不写。此时，如果这行代码是return语句，必须省略return不写，同时也必须省略”;”不写</p>
+</li>
+</ul>
 
                 
             </div>
@@ -727,7 +853,7 @@ a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/07/20/bi-ji-san-jie-kou-he-nei-bu-lei/">https://faith-ye.github.io/2022/07/20/bi-ji-san-jie-kou-he-nei-bu-lei/</a>
+                    <a href="https://faith-ye.github.io/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/">https://faith-ye.github.io/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1202,9 +1328,10 @@ a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/">
                     <div class="card-image">
@@ -1222,49 +1349,8 @@ a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
-                                    JavaSE进阶
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/07/18/bi-ji-er-bao-he-duo-tai/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="笔记二：包和多态">
-                        
-                        <span class="card-title">笔记二：包和多态</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
                             </span>
                         <span class="publish-author">
                             
@@ -1278,13 +1364,47 @@ a. work();<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%A4%9A%E6%80%81/">
-                        <span class="chip bg-color">多态</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/20/bi-ji-san-jie-kou-he-nei-bu-lei/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="笔记三：接口和内部类">
+                        
+                        <span class="card-title">笔记三：接口和内部类</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>
