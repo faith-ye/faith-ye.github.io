@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-07-20T13:53:33.378Z</updated>
+  <updated>2022-08-06T07:59:19.888Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记五：Collection集合</title>
+    <link href="https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/"/>
+    <id>https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/</id>
+    <published>2022-08-06T07:52:48.000Z</published>
+    <updated>2022-08-06T07:59:19.888Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;集合&quot;&gt;集合&lt;/h2&gt;
+&lt;p&gt;集合包含Collection集合和Map集合，Collection是单列集合，每个元素（数据）只包含一个值。Map是双列集合，每个元素包含两个值（键值对）。这里我们主要掌握&lt;font</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>笔记四：包装类和Lambda表达式</title>
@@ -492,31 +514,6 @@
 &lt;ul&gt;
 &lt;li&gt;单行注释： //&lt;/li&gt;
 &lt;li&gt;多行注释： /*</summary>
-        
-      
-    
-    
-    
-    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Java" scheme="https://faith-ye.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java快速入门和IDEA的使用</title>
-    <link href="https://faith-ye.github.io/2022/05/04/java-kuai-su-ru-men-he-idea-de-shi-yong/"/>
-    <id>https://faith-ye.github.io/2022/05/04/java-kuai-su-ru-men-he-idea-de-shi-yong/</id>
-    <published>2022-05-04T02:04:43.000Z</published>
-    <updated>2022-05-04T02:06:07.697Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;入门程序-HelloWorld&quot;&gt;&lt;a href=&quot;#入门程序-HelloWorld&quot; class=&quot;headerlink&quot;</summary>
         
       
     
