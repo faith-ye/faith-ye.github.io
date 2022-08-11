@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-08-11T01:38:34.935Z</updated>
+  <updated>2022-08-11T01:40:17.652Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -21,19 +21,20 @@
     <link href="https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/"/>
     <id>https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/</id>
     <published>2022-08-06T07:52:48.000Z</published>
-    <updated>2022-08-11T01:38:34.935Z</updated>
+    <updated>2022-08-11T01:40:17.652Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;集合&quot;&gt;集合&lt;/h2&gt;
-&lt;p&gt;集合包含Collection集合和Map集合，Collection是单列集合，每个元素（数据）只包含一个值。Map是双列集合，每个元素包含两个值（键值对）。这里我们主要掌握&lt;font</summary>
+    <summary type="html">&lt;h2 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot;</summary>
         
       
     
     
+    
+    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
     
     
   </entry>
