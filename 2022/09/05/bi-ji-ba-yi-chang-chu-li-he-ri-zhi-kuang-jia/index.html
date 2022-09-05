@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="WGAN_GP, 小叶の博客">
-    <meta name="description" content="
+    <meta name="keywords" content="笔记八：异常处理和日志框架, 小叶の博客">
+    <meta name="description" content="异常处理定义：异常是程序在“编译”或者“执行”的过程中可能出现的问题，注意：语法错误不算在异常体系中
+为什么学习异常？
 
-前言GAN是强大的生成模型，但是以难训练著称。前面一篇文章讲到的 WGAN 提升了 GAN 训练的稳定性，但有时候还是会产生不好的样本或收敛失败。在原始 WGAN 论文中，作者也提到了，这些问题主要是在判别器中使用 weight cli">
+异常一旦出现了，如果没有提前处理，程序就会退出JVM虚拟机而终止
+
+研究异常并且避免异常，然后提前处理异常，体现的是程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>WGAN_GP | 小叶の博客</title>
+    <title>笔记八：异常处理和日志框架 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -292,12 +295,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">WGAN_GP</h1>
+                    <h1 class="description center-align post-title">笔记八：异常处理和日志框架</h1>
                 </div>
             </div>
         </div>
@@ -411,17 +414,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/GAN/">
-                                <span class="chip bg-color">GAN</span>
-                            </a>
-                        
-                            <a href="/tags/WGAN-GP/">
-                                <span class="chip bg-color">WGAN_GP</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -429,8 +424,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                论文阅读笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                JavaSE进阶
                             </a>
                         
                     </div>
@@ -442,7 +437,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-14
+                    2022-09-05
                 </div>
                 
 
@@ -451,14 +446,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -481,43 +476,200 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <img src="/2022/07/14/wgan-gp/image-20220714084905587-16577679352952.png" class="">
+                <h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p><strong>定义：</strong>异常是程序在“编译”或者“执行”的过程中可能出现的问题，<font color="Red">注意：</font>语法错误不算在异常体系中</p>
+<p><strong>为什么学习异常？</strong></p>
+<ul>
+<li><p>异常一旦出现了，如果没有提前处理，程序就会退出JVM虚拟机而终止</p>
+</li>
+<li><p>研究异常并且避免异常，然后提前处理异常，体现的是程序的安全, 健壮性</p>
+</li>
+</ul>
+<p><strong>异常体系</strong></p>
+<img src="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/image-20220819160737831.png" class="">
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GAN是强大的生成模型，但是以难训练著称。前面一篇文章讲到的 WGAN 提升了 GAN 训练的稳定性，但有时候还是会产生不好的样本或收敛失败。在原始 WGAN 论文中，作者也提到了，这些问题主要是在判别器中使用 weight clipping 技术来实现 Lipschitz 限制导致的，特别是当超参数 c 没有设置合适。</p>
-<p>$$w\leftarrow clip(w,-c,c)$$</p>
-<p>WGAN 模型的性能对超参数 c 特别敏感。下图中，当判别器中没有使用批量标准化，c 从0.001增加到0.1，判别器从梯度消失转为梯度爆炸。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714091239852-16577679352953.png" class="">
+<ul>
+<li><p><strong>Error</strong>：系统级别问题、JVM退出等，代码无法控制</p>
+</li>
+<li><p><strong>Exception</strong>：java.lang包下，称为异常类，它表示程序本身可以处理的问题</p>
+<ul>
+<li><p><strong>RuntimeException及其子类</strong>：运行时异常，编译阶段不会报错。 (空指针异常，数组索引越界异常) </p>
+</li>
+<li><p><strong>除RuntimeException之外所有的异常</strong>：编译时异常，编译期必须处理的，否则程序不能通过编译。 (日期格式化异常)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>编译时异常和运行时异常</strong></p>
+<img src="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/image-20220819161140864.png" class="">
 
-<p>同时作者还证明了 weight clipping 降低了模型的表现能力并且限制了模型模拟复杂函数的能力。在下面的实验中，第一行是由 WGAN 估计的判别器值等高线图，第二行是由 WGAN 的一个变体估计的，即本文提出的方法WGAN_GP。从图中可以看出，WGAN 不能创造一个复杂的边界来包围模型的模式（橙色点），只是对最优函数进行了非常简单的近似模拟，而改进的 WGAN_GP 可以。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714093217526-16577679352964.png" class="">
+<p>简单来说：编译时异常就是在编译的时候出现的异常，运行时异常就是在运行时出现的异常。</p>
+<p><strong>运行时异常示例</strong></p>
+<ul>
+<li><p>数组索引越界异常: ArrayIndexOutOfBoundsException</p>
+</li>
+<li><p>空指针异常 : NullPointerException，直接输出没有问题，但是调用空指针的变量的功能就会报错。</p>
+</li>
+<li><p>数学操作异常：ArithmeticException</p>
+</li>
+<li><p>类型转换异常：ClassCastException</p>
+</li>
+<li><p>数字转换异常： NumberFormatException</p>
+</li>
+</ul>
+<p><strong>编译时异常：</strong>是担心程序员的技术不行，在编译阶段就爆出一个错误, 目的在于提醒不要出错</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">// 编译时异常示例，使用parse时会出现日期解析异常：ParseException
+String date = "2015-01-12 10:23:21";
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+Date d = sdf.parse(date);
+System.out.println(d);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="WGAN-GP"><a href="#WGAN-GP" class="headerlink" title="WGAN_GP"></a>WGAN_GP</h2><p>WGAN_GP使用梯度惩罚（gradient penalty）而不是 weight clipping 来实现 Lipschitz 限制：</p>
-<p>$$|f(x_1)-f(x_2)|\leq K|x_1-x_2|$$</p>
-<p><strong>梯度惩罚</strong></p>
-<p>可微函数 1-Lipschtiz 在任何地方都有范数最多为1的梯度</p>
-<img src="/2022/07/14/wgan-gp/image-20220714094908951-16577679352966.png" class="">
+<p><strong>异常的默认处理流程</strong></p>
+<p>①默认会在出现异常的代码那里<font color="Red">自动的创建一个异常对象：ArithmeticException</font></p>
+<p>②异常会从方法中出现的点这里抛出给<font color="Red">调用者</font>，调用者最终抛出给<font color="Red">JVM虚拟机</font></p>
+<p>③虚拟机接收到异常对象后，先在控制台直接输出异常栈信息数据</p>
+<p>④直接从当前执行的异常点干掉当前程序</p>
+<p>⑤后续代码没有机会执行了，因为程序已经死亡</p>
+<p><strong>编译时异常的处理形式有三种：</strong></p>
+<ul>
+<li><p>出现异常直接抛出去给调用者，调用者也继续抛出去</p>
+</li>
+<li><p>出现异常自己捕获处理，不麻烦别人</p>
+</li>
+<li><p>前两者结合，出现异常直接抛出去给调用者，调用者捕获处理</p>
+</li>
+</ul>
+<p><strong>异常处理方式1——throws</strong></p>
+<ul>
+<li><p>throws：用在方法上，可以将方法内部出现的异常抛出去给本方法的调用者处理</p>
+</li>
+<li><p>这种方式并不好，发生异常的方法自己不处理异常，如果异常最终抛出去给虚拟机将引起程序死亡</p>
+</li>
+</ul>
+<p><strong>异常处理方式2——try…catch…</strong></p>
+<ul>
+<li><p>监视捕获异常，用在方法内部，可以将方法内部出现的异常直接捕获处理。</p>
+</li>
+<li><p>这种方式还可以，发生异常的方法自己独立完成异常的处理，程序可以继续往下执行</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 建议格式</span>
+<span class="token keyword">try</span><span class="token punctuation">{</span>
+	<span class="token comment">// 可能出现异常的代码！</span>
+<span class="token punctuation">}</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 直接打印异常栈信息</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>作者在论文中的附录 A 证明了命题1，感兴趣的可以看一下。论文连接：<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1704.00028">WGAN_GP</a></p>
-<p>这个命题指出在真实数据和生成数据之间的插值点会有一个函数$f^{*}$的梯度规范为1。因此 WGAN_GP 使用的不是weight clipping，而是当其梯度规范偏离其目标规范值时对模型进行惩罚。WGAN_GP 的目标函数为：</p>
-<img src="/2022/07/14/wgan-gp/image-20220714095809861-16577679352965.png" class="">
+<p><strong>异常处理方式3——前两者结合</strong></p>
+<ul>
+<li><p>方法直接将异通过throws抛出去给调用者，调用者收到异常后直接捕获处理</p>
+</li>
+<li><p>在开发中按照规范来说第三种方式是最好的：底层的异常抛出去给最外层，最外层集中捕获处理</p>
+</li>
+</ul>
+<p><strong>运行时异常的处理形式</strong></p>
+<ul>
+<li>运行时异常编译阶段不会出错，是运行时才可能出错的，所以编译阶段不处理也可以</li>
+<li>按照规范建议还是处理：建议在最外层调用处集中捕获处理即可</li>
+</ul>
+<p><strong>自定义异常</strong></p>
+<ul>
+<li><p>Java无法为这个世界上全部的问题提供异常类。</p>
+</li>
+<li><p>如果企业想通过异常的方式来管理自己的某个业务问题，就需要自定义异常类了</p>
+</li>
+</ul>
+<p><strong>自定义异常的好处：</strong></p>
+<ul>
+<li><p>可以使用异常的机制管理业务问题，如提醒程序员注意。</p>
+</li>
+<li><p>同时一旦出现bug，可以用异常的形式清晰的指出出错的地方</p>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>throw：在方法内部直接创建一个异常对象，并从此点抛出</li>
+<li>throws：用在方法申明上的，抛出方法内部的异常</li>
+</ul>
+<p><strong>自定义编译时异常</strong>    </p>
+<ul>
+<li><p>定义一个异常类继承Exception，重写构造器</p>
+</li>
+<li><p>在出现异常的地方用throw new 自定义对象抛出</p>
+</li>
+</ul>
+<p>作用：编译时异常是编译阶段就报错，提醒更加强烈，一定需要处理！！</p>
+<p><strong>自定义运行时异常</strong></p>
+<ul>
+<li><p>定义一个异常类继承RuntimeException，重写构造器</p>
+</li>
+<li><p>在出现异常的地方用throw new 自定义对象抛出</p>
+</li>
+</ul>
+<p>作用：提醒不强烈，编译阶段不报错！！运行时才可能出现！！</p>
+<h2 id="日志框架"><a href="#日志框架" class="headerlink" title="日志框架"></a>日志框架</h2><p><strong>日志：</strong>用来记录程序运行过程中的信息，并可以永久进行存储。</p>
+<p><strong>日志技术具备的优势</strong></p>
+<ul>
+<li><p>可以将系统执行的信息，方便的记录到指定的位置（控制台、文件中、数据库中）</p>
+</li>
+<li><p>可以随时以开关的形式控制是日志的记录和取消，无需侵入到源代码中去进行修改</p>
+</li>
+</ul>
+<p><strong>体系结构</strong></p>
+<img src="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/image-20220826095402939.png" class="">
 
-<p>式中$\overset{\wedge}{x}=t\overset{\sim}{x}+(1-t)x,0\leq t\leq 1$，t是随机采样出来的；论文中，$\lambda$设置为10。</p>
-<p>批量标准化禁止在判别器中使用，因为批量标准化会在相同批量的样本中建立联系，使得判别器从单一输入到单一输出的映射变成了从整批输入到整批输出的映射，而 WGAN_GP 惩罚的是判别器相对于每个输入的梯度规范，而不是整个批次，使用批量标准化会影响梯度惩罚的效率。</p>
-<p>不可否认，引入梯度惩罚会增加计算成本，这可能并不是最优的选择，但作者通过实验证明 WGAN_GP 确实产生了一些更高质量的图像。</p>
-<p><strong>算法</strong></p>
-<p>有了前面的基础，限制让我们细看 WGAN_GP 算法的细节和梯度惩罚是怎样计算的。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714103234274-16577679352967.png" class="">
+<ul>
+<li><p><strong>日志接口：</strong>一些规范，提供给日志的实现框架设计的标准。</p>
+</li>
+<li><p><strong>日志框架：</strong>牛人或者第三方公司已经做好的实现代码，后来者直接可以拿去使用</p>
+</li>
+<li><p>因为对Commons Logging接口不满意，有人就搞了SLF4J。因为对Log4j的性能不满意，有人就搞了Logback</p>
+</li>
+</ul>
+<p><strong>Logback日志框架</strong></p>
+<ul>
+<li>Logback是基于slf4j的日志规范实现的框架，它是由log4j创始人设计的另一个开源日志组件，性能要比log4j要好</li>
+<li>官方网站：<code>https://logback.qos.ch/index.html</code></li>
+</ul>
+<p><strong>Logback主要分为三个技术模块：</strong></p>
+<ul>
+<li><p>logback-core： 该模块为其他两个模块提供基础代码，必须有</p>
+</li>
+<li><p>logback-classic：完整实现了slf4j API的模块，必须有</p>
+</li>
+<li><p>logback-access 模块与 Tomcat 和 Jetty 等 Servlet 容器集成，以提供 HTTP 访问日志功能</p>
+</li>
+</ul>
+<p>注意：想使用Logback日志框架，至少需要在项目中整合三个模块：<code>slf4j-api、logback-core、logback-classic</code></p>
+<p><strong>Logback日志框架实现步骤：</strong></p>
+<p>①：导入Logback框架到项目中去。在项目下新建文件夹lib，导入Logback的jar包到该文件夹下</p>
+<img src="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/image-20220826100730792.png" class="">
 
-<p>与 WGAN 的算法进行对比，有两点不同：①使用了梯度惩罚，而不是 weight clipping；②使用了 Adam 优化算法，而不是 RMSProp 优化算法。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>WGAN_GP 增强了训练的稳定性，如下图所示，当模型设计不是最优时，WGAN_GP 仍然可以生成高质量的图片，而反观其他模型，生成的可能就是一堆噪音。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714103953609-16577679352968.png" class="">
-
-<p>下面是使用不同方法在 CIFAR-10 数据集上 Inception score 随生成器迭代次数的变化曲线。从图中可以看出，相对于 WGAN，WGAN_GP 收敛速度更快，且可以生成更高质量的图片，且使用 Adam 优化算法可以进一步提升模型的性能；相比于 DCGAN， WGAN_GP 收敛的慢些，但 Inception score 的收敛过程更加稳定。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714104944679-16577679352969.png" class="">
-
-<p>这是否就意味着 DCGAN 比 WGAN_GP 性能好？其实不然，WGAN_GP 的主要优势是它可以使训练更加稳定，使得模型更容易训练成功。为了验证 WGAN_GP 有助于模型收敛的更好，作者使用更加复杂的模型——深度残差网络作为生成器和判别器。下图就是不同模型在 LSUN 数据集上 Inception score 的结果，Inception score 越高，表示模型越好。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714105902203-16577679352951.png" class="">
-
+<p>②：将存放jar文件的lib文件夹添加到项目依赖库中去。</p>
+<p>③：将Logback的核心配置文件logback.xml直接拷贝到src目录下（必须是src下）。</p>
+<p>④：创建Logback框架提供的Logger日志对象，后续使用其方法记录系统的日志信息。<code>public static final Logger LOGGER = LoggerFactory.getLogger(“类名");</code></p>
+<p><strong>Logback配置详解</strong></p>
+<p><strong>Logback日志输出位置、格式设置：</strong></p>
+<ul>
+<li><p>通过logback.xml 中的&lt;append&gt;标签可以设置输出位置。</p>
+</li>
+<li><p>通常可以设置2个日志输出位置：一个是控制台、一个是系统文件中</p>
+</li>
+</ul>
+<p><strong>输出到控制台的配置标志</strong></p>
+<p><code>&lt;appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"&gt;</code></p>
+<p><strong>输出到系统文件的配置标志</strong></p>
+<p><code>&lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;</code></p>
+<p><strong>日志级别</strong></p>
+<ul>
+<li><p>ALL  和 OFF分别是打开、及关闭全部日志信息。</p>
+</li>
+<li><p>除此之外，日志级别还有： TRACE &lt;  DEBUG &lt;  INFO &lt; WARN &lt; ERROR ; 默认级别是DEBUG，对应其方法</p>
+</li>
+<li><p>作用：当在logback.xml文件中设置了某种日志级别后，系统将<font color="Red">只输出当前级别，以及高于当前级别的日志</font></p>
+</li>
+<li><p>具体在&lt;root level=”INFO”&gt;标签的level属性中设置指定系统的日志级别</p>
+</li>
+</ul>
 
                 
             </div>
@@ -544,7 +696,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/07/14/wgan-gp/">https://faith-ye.github.io/2022/07/14/wgan-gp/</a>
+                    <a href="https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/">https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -581,15 +733,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/GAN/">
-                                    <span class="chip bg-color">GAN</span>
-                                </a>
-                            
-                                <a href="/tags/WGAN-GP/">
-                                    <span class="chip bg-color">WGAN_GP</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1027,17 +1171,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/14/bi-ji-yi-static-he-ji-cheng/">
+                <a href="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="笔记一：static和继承">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="笔记八：异常处理和日志框架">
                         
-                        <span class="card-title">笔记一：static和继承</span>
+                        <span class="card-title">笔记八：异常处理和日志框架</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1047,9 +1192,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1062,18 +1207,7 @@
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/static/">
-                        <span class="chip bg-color">static</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BB%A7%E6%89%BF/">
-                        <span class="chip bg-color">继承</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -1084,13 +1218,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/08/wgan/">
+                <a href="/2022/09/05/bi-ji-qi-stream-liu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="WGAN">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="笔记七：Stream流">
                         
-                        <span class="card-title">WGAN</span>
+                        <span class="card-title">笔记七：Stream流</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1101,31 +1235,19 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    论文阅读笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/GAN/">
-                        <span class="chip bg-color">GAN</span>
-                    </a>
-                    
-                    <a href="/tags/WGAN/">
-                        <span class="chip bg-color">WGAN</span>
-                    </a>
-                    
                 </div>
                 
             </div>

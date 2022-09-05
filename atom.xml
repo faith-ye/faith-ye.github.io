@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-05T08:01:23.796Z</updated>
+  <updated>2022-09-05T08:02:58.296Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记八：异常处理和日志框架</title>
+    <link href="https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/"/>
+    <id>https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/</id>
+    <published>2022-09-05T08:02:24.000Z</published>
+    <updated>2022-09-05T08:02:58.296Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;异常处理&quot;&gt;&lt;a href=&quot;#异常处理&quot; class=&quot;headerlink&quot; title=&quot;异常处理&quot;&gt;&lt;/a&gt;异常处理&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;异常是程序在“编译”或者“执行”的过程中可能出现的问题，&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>笔记七：Stream流</title>
@@ -491,34 +514,6 @@
     
     <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>数组</title>
-    <link href="https://faith-ye.github.io/2022/05/04/shu-zu/"/>
-    <id>https://faith-ye.github.io/2022/05/04/shu-zu/</id>
-    <published>2022-05-04T02:16:33.000Z</published>
-    <updated>2022-05-04T12:59:45.610Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;数组的定义&quot;&gt;&lt;a href=&quot;#数组的定义&quot; class=&quot;headerlink&quot; title=&quot;数组的定义&quot;&gt;&lt;/a&gt;数组的定义&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;数组就是用来存储一批同种类型数据的内存区域（可以理解为容器）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3</summary>
-        
-      
-    
-    
-    
-    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Java数组" scheme="https://faith-ye.github.io/tags/Java%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
