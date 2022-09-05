@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-08-19T01:14:21.779Z</updated>
+  <updated>2022-09-05T08:01:23.796Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记七：Stream流</title>
+    <link href="https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/"/>
+    <id>https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/</id>
+    <published>2022-09-05T08:00:07.000Z</published>
+    <updated>2022-09-05T08:01:23.796Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Stream流&quot;&gt;&lt;a href=&quot;#Stream流&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>笔记六：Map集合</title>
@@ -496,29 +519,6 @@
     
     
     <category term="Java数组" scheme="https://faith-ye.github.io/tags/Java%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>程序流程控制</title>
-    <link href="https://faith-ye.github.io/2022/05/04/cheng-xu-liu-cheng-kong-zhi/"/>
-    <id>https://faith-ye.github.io/2022/05/04/cheng-xu-liu-cheng-kong-zhi/</id>
-    <published>2022-05-04T02:09:54.000Z</published>
-    <updated>2022-05-04T02:11:00.135Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;分支结构&quot;&gt;&lt;a href=&quot;#分支结构&quot; class=&quot;headerlink&quot; title=&quot;分支结构&quot;&gt;&lt;/a&gt;分支结构&lt;/h2&gt;&lt;h3 id=&quot;If分支&quot;&gt;&lt;a href=&quot;#If分支&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
     
   </entry>
   

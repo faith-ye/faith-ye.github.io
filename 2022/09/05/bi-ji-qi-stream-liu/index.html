@@ -4,12 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="笔记六：Map集合, 小叶の博客">
-    <meta name="description" content="定义：Map集合是一种双列集合，每个元素都包含两个数据。其每个元素的格式：key=value（键值对元素），因此Map集合也被称为“键值对集合”
-整体格式：
-
-Collection集合的格式： [元素1,元素2,元素3..]
-Map集合的完">
+    <meta name="keywords" content="笔记七：Stream流, 小叶の博客">
+    <meta name="description" content="Stream流定义：在Java8中，得益于Lambda所带来的函数式编程，引入了一个全新的Stream流概念，它可以用于简化集合和数组操作的API。
+核心思想：先得到集合或者数组的Stream流，把元素放上去，然后就用这个Stream流简化">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +18,7 @@ Map集合的完">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>笔记六：Map集合 | 小叶の博客</title>
+    <title>笔记七：Stream流 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -294,12 +291,12 @@ Map集合的完">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">笔记六：Map集合</h1>
+                    <h1 class="description center-align post-title">笔记七：Stream流</h1>
                 </div>
             </div>
         </div>
@@ -436,7 +433,7 @@ Map集合的完">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-19
+                    2022-09-05
                 </div>
                 
 
@@ -445,14 +442,14 @@ Map集合的完">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    971
+                    611
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -475,139 +472,105 @@ Map集合的完">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>定义：</strong>Map集合是一种双列集合，每个元素都包含两个数据。其每个元素的格式：key=value（键值对元素），因此Map集合也被称为“<font color="Red">键值对集合</font>”</p>
-<p><strong>整体格式：</strong></p>
-<ul>
-<li>Collection集合的格式： [元素1,元素2,元素3..]</li>
-<li>Map集合的完整格式：{key1=value1 , key2=value2 , key3=value3 , …}</li>
-</ul>
-<p>**特点： **</p>
-<ul>
-<li><p>Map集合的特点都是由键决定的</p>
-</li>
-<li><p>Map集合的<font color="Red">键</font>是无序，不重复的，无索引的，值不做要求（可以重复）</p>
-</li>
-<li><p>Map集合后面重复的键对应的值会覆盖前面重复键的值</p>
-</li>
-<li><p>Map集合的键值对都可以为null</p>
-</li>
-</ul>
-<p><strong>几个实现类特点：</strong></p>
-<ul>
-<li>HashMap：元素按照键是无序，不重复，无索引，值不做要求，Map集合中使用最多</li>
-<li>LinkedHashMap：元素按照键是<font color="Red">有序</font>，不重复，无索引，值不做要求</li>
-<li>TreeMap：元素按照建是排序，不重复，无索引的，值不做要求。</li>
-</ul>
-<h2 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h2><table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>V  put(K key,V value)</td>
-<td>添加元素</td>
-</tr>
-<tr>
-<td>V  remove(Object key)</td>
-<td>根据键删除键值对元素</td>
-</tr>
-<tr>
-<td>void  clear()</td>
-<td>移除所有的键值对元素</td>
-</tr>
-<tr>
-<td>boolean containsKey(Object key)</td>
-<td>判断集合是否包含指定的键</td>
-</tr>
-<tr>
-<td>boolean containsValue(Object value)</td>
-<td>判断集合是否包含指定的值</td>
-</tr>
-<tr>
-<td>boolean isEmpty()</td>
-<td>判断集合是否为空</td>
-</tr>
-<tr>
-<td>int  size()</td>
-<td>集合的长度，也就是集合中键值对的个数</td>
-</tr>
-</tbody></table>
-<h2 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h2><ul>
-<li>方式一：键找值的方式遍历：先获取Map集合全部的键，再根据遍历键找值</li>
-<li>方式二：键值对的方式遍历，把“键值对“看成一个整体，难度较大</li>
-<li>方式三：JDK 1.8开始之后的新技术：Lambda表达式。</li>
-</ul>
-<p><strong>键找值：</strong>先获取Map集合的全部键的Set集合，然后遍历键的Set集合，然后通过键提取对应值。需涉及到的API如下：</p>
+                <h2 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h2><p><strong>定义：</strong>在Java8中，得益于Lambda所带来的函数式编程，引入了一个全新的Stream流概念，它可以<font color="Red">用于简化集合和数组操作的API</font>。</p>
+<p><strong>核心思想：</strong>先得到集合或者数组的Stream流，把元素放上去，然后就用这个Stream流简化的API来方便的操作元素。</p>
+<p><strong>集合获取Stream流的方式：</strong>可以使用Collection接口中的默认方法<code>stream()</code>生成流</p>
+<p><strong>数组获取Stream流的方式：</strong><code>Arrays.stream(arrs)</code>或<code>Stream.of(arrs)</code></p>
+<p><strong>常用API（中间操作方法）</strong></p>
 <table>
 <thead>
 <tr>
-<th>方法名称</th>
+<th>名称</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Set&lt;K&gt; keySet()</td>
-<td>获取所有键的集合</td>
+<td>Stream&lt;T&gt;  filter(Predicate&lt;?  super  T&gt;  predicate)</td>
+<td>用于对流中的数据进行过滤</td>
 </tr>
 <tr>
-<td>V get(Object key)</td>
-<td>根据键获取值</td>
+<td>Stream&lt;T&gt;  limit(long maxSize)</td>
+<td>获取前几个元素</td>
+</tr>
+<tr>
+<td>Stream&lt;T&gt;  skip(long n)</td>
+<td>跳过前几个元素</td>
+</tr>
+<tr>
+<td>Stream&lt;T&gt;  distinct()</td>
+<td>去除流中重复的元素。依赖(hashCode和equals方法)</td>
+</tr>
+<tr>
+<td>static &lt;T&gt; Stream&lt;T&gt; concat(Stream  a, Stream b)</td>
+<td>合并a和b两个流为一个流</td>
 </tr>
 </tbody></table>
-<p><strong>键值对：</strong>先把Map集合转换为Set集合，Set集合中每个元素都是键值对实体类型，然后遍历Set集合，提取键以及对应的值。需涉及到的API如下：</p>
+<p><strong>注意：</strong>中间方法也称非终结方法，调用完成后返回新的Stream流可以继续使用，支持链式编程。且在Stream流中<font color="Red">无法直接修改集合、数组中的数组。</font></p>
+<p><strong>Stream流的常见终结操作方法</strong></p>
 <table>
 <thead>
 <tr>
-<th>方法名称</th>
+<th>名称</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</td>
-<td>获取所有键值对对象的集合</td>
+<td>void  forEach(Consumer action)</td>
+<td>对此流的每个元素执行遍历操作</td>
 </tr>
 <tr>
-<td>K getKey()</td>
-<td>获得键</td>
-</tr>
-<tr>
-<td>V getValue()</td>
-<td>获取值</td>
+<td>long count()</td>
+<td>返回此流中的元素数</td>
 </tr>
 </tbody></table>
-<p><strong>Lambda表达式：</strong>简单、直接的遍历集合的方式。使用的API：<code>default void forEach(BiConsumer&lt;? super K, ? super V&gt; action)</code>，结合lambda遍历Map集合</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">maps.forEach((k , v) -&gt; {
-    System.out.println(k +"-----&gt;" + v);
-});<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>注意：</strong>终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了。</p>
+<p><strong>Stream流的收集操作</strong></p>
+<p>就是把Stream流操作后的结果数据转回到集合或者数组中去。这样做的原因是Stream是方便操作集合/数组的手段，而集合/数组才是开发中的目的。</p>
+<p><strong>Stream流的收集方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R collect(Collector collector)</td>
+<td>开始收集Stream流，指定收集器</td>
+</tr>
+</tbody></table>
+<p><strong>Collectors工具类提供了具体的收集方式</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static &lt;T&gt; Collector toList()</td>
+<td>把元素收集到List集合中</td>
+</tr>
+<tr>
+<td>public static &lt;T&gt; Collector toSet()</td>
+<td>把元素收集到Set集合中</td>
+</tr>
+<tr>
+<td>public static Collector toMap(Function keyMapper  , Function valueMapper)</td>
+<td>把元素收集到Map集合中</td>
+</tr>
+</tbody></table>
+<p><strong>例子：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> names <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>names<span class="token punctuation">,</span> <span class="token string">"张三丰"</span><span class="token punctuation">,</span> <span class="token string">"张无忌"</span><span class="token punctuation">,</span> <span class="token string">"周芷若"</span><span class="token punctuation">,</span> <span class="token string">"赵敏"</span><span class="token punctuation">,</span> <span class="token string">"张超"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><ul>
-<li><p>HashMap是Map里面的一个实现类。特点都是由键决定的：无序、不重复、无索引</p>
-</li>
-<li><p>依赖hashCode方法和equals方法保证键的唯一。</p>
-</li>
-<li><p>如果键要存储的是自定义对象，需要重写hashCode和equals方法</p>
-</li>
-<li><p>HashMap跟HashSet底层原理是一模一样的，都是哈希表结构，只是HashMap的每个元素包含两个值而已</p>
-</li>
-</ul>
-<p>实际上：Set系列集合的底层就是Map实现的，只是Set集合中的元素只要键数据，不要值数据而已</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><ul>
-<li><p>由键决定：有序、不重复、无索引。</p>
-</li>
-<li><p>这里的有序指的是保证存储和取出的元素顺序一致</p>
-</li>
-<li><p>原理：底层数据结构是依然哈希表，只是每个键值对元素又额外的多了一个双链表的机制记录存储的顺序。</p>
-</li>
-</ul>
-<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><ul>
-<li>由键决定特性：不重复、无索引、可排序</li>
-<li>可排序：按照键数据的大小默认升序（有小到大）排序。只能对键排序。</li>
-<li>注意：TreeMap集合是一定要排序的，可以默认排序，也可以将键按照指定的规则进行排序</li>
-<li>TreeMap跟TreeSet一样底层原理是一样的。</li>
-</ul>
-<p><strong>自定义排序规则有2种：</strong>①类实现Comparable接口，重写比较规则。②集合自定义Comparator比较器对象，重写比较规则。</p>
+<span class="token class-name">Stream</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> s1 <span class="token operator">=</span> names<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>s <span class="token operator">-&gt;</span> s<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"张"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> result <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 也可以使用以下形式，但生成的是不可变集合</span>
+<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> result <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -634,7 +597,7 @@ Map集合的完">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/08/19/bi-ji-liu-map-ji-he/">https://faith-ye.github.io/2022/08/19/bi-ji-liu-map-ji-he/</a>
+                    <a href="https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/">https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1109,9 +1072,10 @@ Map集合的完">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/09/05/bi-ji-qi-stream-liu/">
                     <div class="card-image">
@@ -1129,9 +1093,9 @@ Map集合的完">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1144,6 +1108,7 @@ Map集合的完">
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -1154,13 +1119,13 @@ Map集合的完">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/08/06/bi-ji-wu-collection-ji-he/">
+                <a href="/2022/08/19/bi-ji-liu-map-ji-he/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="笔记五：Collection集合">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="笔记六：Map集合">
                         
-                        <span class="card-title">笔记五：Collection集合</span>
+                        <span class="card-title">笔记六：Map集合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1171,7 +1136,7 @@ Map集合的完">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-19
                             </span>
                         <span class="publish-author">
                             
