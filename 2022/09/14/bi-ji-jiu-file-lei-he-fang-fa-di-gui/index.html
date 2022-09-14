@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="笔记一：static和继承, 小叶の博客">
-    <meta name="description" content="static静态关键字static
-static是静态的意思，可以修饰成员变量和成员方法
-static修饰成员变量之后称为静态成员变量（类变量），修饰方法之后称为静态方法（类方法）
-static修饰后的成员变量，可以被类的所有对象共享（访问">
+    <meta name="keywords" content="笔记九：File类和方法递归, 小叶の博客">
+    <meta name="description" content="File类
+File类的对象代表操作系统的文件（文件、文件夹），File类在java.io.File包下
+File类提供了诸如：创建文件对象代表文件，获取文件信息（大小、修改时间）、删除文件、创建文件（文件夹）等功能
+
+File类创建对象
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +22,7 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>笔记一：static和继承 | 小叶の博客</title>
+    <title>笔记九：File类和方法递归 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -293,12 +295,12 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">笔记一：static和继承</h1>
+                    <h1 class="description center-align post-title">笔记九：File类和方法递归</h1>
                 </div>
             </div>
         </div>
@@ -412,17 +414,9 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/static/">
-                                <span class="chip bg-color">static</span>
-                            </a>
-                        
-                            <a href="/tags/%E7%BB%A7%E6%89%BF/">
-                                <span class="chip bg-color">继承</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -443,7 +437,7 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-14
+                    2022-09-14
                 </div>
                 
 
@@ -452,14 +446,14 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    6 分
                 </div>
                 
 
@@ -482,182 +476,291 @@ static修饰后的成员变量，可以被类的所有对象共享（访问">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="static静态关键字"><a href="#static静态关键字" class="headerlink" title="static静态关键字"></a>static静态关键字</h2><h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><ul>
-<li>static是静态的意思，可以修饰成员变量和成员方法</li>
-<li>static修饰成员变量之后称为静态成员变量（类变量），修饰方法之后称为静态方法（类方法）</li>
-<li>static修饰后的成员变量，可以<font color="Red">被类的所有对象共享</font>（访问、修改)。</li>
+                <h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><ul>
+<li>File类的对象代表操作系统的文件（文件、文件夹），File类在java.io.File包下</li>
+<li>File类提供了诸如：创建文件对象代表文件，获取文件信息（大小、修改时间）、删除文件、创建文件（文件夹）等功能</li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
-	<span class="token keyword">static</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>成员变量的分类：</strong></p>
-<ul>
-<li>静态成员变量（有static修饰，属于类，内存中加载一次）：常表示如在线人数信息等需要被共享的信息，可以被共享访问</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">{</span>
-	<span class="token comment">// 静态成员变量</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> onlineNumber <span class="token operator">=</span> <span class="token number">161</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>访问方式：①类名.静态成员变量（<font color="Red">推荐</font>） ②对象．静态成员变量（不推荐）</p>
-<ul>
-<li>实例成员变量（无static修饰，存在于每个对象中）：常表示姓名、年龄等属于每个对象的信息</li>
-</ul>
-<p>访问方式：对象.实例成员变量</p>
-<p><strong>成员方法的分类：</strong></p>
-<ul>
-<li>静态成员方法（有static修饰，归属于类），<font color="Red">建议</font>用类名访问，也可以用对象访问</li>
-<li>实例成员方法（无static修饰，归属于对象），只能用对象触发访问</li>
-</ul>
-<p><strong>注意：</strong></p>
-<ul>
-<li>同一个类中，访问静态变量和静态方法，类名可以<font color="Red">省略</font>不写</li>
-<li>静态方法只能访问静态成员，不能直接访问实例成员</li>
-<li>实例方法可以访问静态成员，也可以访问实例成员</li>
-<li>静态方法不可以出现<font color="Red">this</font>关键字，this只能代表当前对象</li>
-</ul>
-<p><strong>两种方法的使用场景：</strong></p>
-<ul>
-<li>表示对象自己的行为的，且方法中需要访问实例成员的，则该方法必须申明成实例方法</li>
-<li>如果该方法是以执行一个共用功能为目的，则可以申明成静态方法</li>
-</ul>
-<h3 id="static工具类"><a href="#static工具类" class="headerlink" title="static工具类"></a>static工具类</h3><p><strong>定义：</strong>类中都是一些静态方法，每个方法都是以完成一个共用的功能为目的，这个类用来给系统开发人员共同使用的。</p>
-<p><strong>优点：</strong>使用工具类使得调用方便，还提高了代码复用。</p>
-<ul>
-<li><font color="Red">工具类的方法不用实例方法做</font>，这是因为实例方法需要创建对象调用，而工具类只是为了调用方法，创建对象只会浪费内存</li>
-</ul>
-<p><strong>要求：</strong>由于工具里面都是静态方法，直接用类名即可访问，因此，工具类无需创建对象，建议<font color="Red">将工具类的构造器进行私有</font></p>
-<h3 id="static代码块"><a href="#static代码块" class="headerlink" title="static代码块"></a>static代码块</h3><p><strong>定义：</strong>代码块是类的5大成分之一（成员变量、构造器，方法，代码块，内部类），定义在类中方法外。在Java类下，使用 { } 括起来的代码被称为代码块 。</p>
-<p><strong>分类：</strong></p>
-<p><strong>①静态代码块：</strong></p>
-<ul>
-<li>格式：<code>static{}</code></li>
-<li>特点：需要通过static关键字修饰，随着<font color="Red">类</font>的加载而加载，并且自动触发、只执行一次</li>
-<li>使用场景：在类加载的时候做一些静态数据初始化的操作，以便后续使用。</li>
-</ul>
-<p><strong>②构造代码块（少见）：</strong></p>
-<ul>
-<li>格式：<code>{}</code></li>
-<li>特点：每次创建对象，调用<font color="Red">构造器</font>执行时，都会执行该代码块中的代码，并且在构造器执行前执行</li>
-<li>使用场景：初始化实例资源</li>
-</ul>
-<h3 id="static单例设计模式"><a href="#static单例设计模式" class="headerlink" title="static单例设计模式"></a>static单例设计模式</h3><p><strong>什么是设计模式（Design pattern）</strong></p>
-<ul>
-<li>开发中经常遇到一些问题，一个问题通常有n种解法的，但其中肯定有一种解法是最优的，这个最优的解法被人总结出来了，称之为设计模式</li>
-<li>设计模式有20多种，对应20多种软件开发中会遇到的问题</li>
-<li>学设计模式主要是学2点：①这种模式用来解决什么问题；②遇到这种问题了，该模式是怎么写的，他是如何解决这个问题的</li>
-</ul>
-<p><strong>单例模式</strong>：可以保证系统中，应用该模式的这个类永远只有一个实例，即一个类永远只能创建一个对象。如任务管理器对象我们只需要一个就可以解决问题了，这样可以节省内存空间。</p>
-<ul>
-<li><strong>分类：</strong>单例模式分为饿汉单例设计模式和懒汉单例设计模式</li>
-</ul>
-<p><strong>饿汉单例设计模式：</strong>在用类获取对象的时候，对象已经提前为你创建好了</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">/** a、定义一个单例类 */
-public class SingleInstance {  
-    /** c.定义一个静态变量存储一个对象即可 :属于类，与类一起加载一次 */
-    public static SingleInstance instance = new SingleInstance ();
-    
-    /** b.单例必须私有构造器*/
-    private SingleInstance (){
-        System.out.println("创建了一个对象");
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>懒汉单例设计模式：</strong>在真正需要该对象的时候，才去创建一个对象</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">/** 定义一个单例类 */
-class SingleInstance{
-    /** 定义一个静态变量存储一个对象即可 :属于类，与类一起加载一次 */
-    public static SingleInstance instance ; // null
-    
-    /** 单例必须私有构造器*/
-    private SingleInstance(){}
-    
-    /** 必须提供一个方法返回一个单例对象  */
-    public static SingleInstance getInstance(){
-        if(instance == null){
-            instance = new SingleInstance();
-        }
-        return instance;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="什么是继承"><a href="#什么是继承" class="headerlink" title="什么是继承"></a>什么是继承</h3><p><strong>定义：</strong>Java中提供了一个关键词<font color="Red">extends</font>，用这个关键字，我们可以让一个类和另一个类建立起父子关系，如：</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class Student extends People {}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>代码中Student称为子类（派生类），People称为父类（基类）。这样书写的话，子类就可以直接使用父类公共的属性和方法，提高了代码的复用性。</p>
-<p><strong>继承设计规范：</strong>子类们相同特征（共性属性，共性方法）放在父类中定义，子类独有的的属性和行为应该定义在子类自己里面。</p>
-<p><strong>继承的特点：</strong></p>
-<ul>
-<li>子类可以继承父类的属性和行为，但是子类不能继承父类的构造器</li>
-<li>Java是单继承模式：一个类只能继承一个直接父类</li>
-<li>Java不支持多继承、但是支持多层继承</li>
-<li>Java中所有的类都是Object类的子类</li>
-</ul>
-<p>在子类方法中访问成员满足：<font color="Red">就近原则</font>，即先子类局部范围找，再在子类成员范围找，最后在父类成员范围找，如果父类范围还没有找到则报错。</p>
-<p>可以通过<font color="Red">super</font>关键字，指定访问父类的成员，格式：<code>super.父类成员变量/父类成员方法</code></p>
-<h3 id="继承后方法重写"><a href="#继承后方法重写" class="headerlink" title="继承后方法重写"></a>继承后方法重写</h3><p><strong>定义</strong>：在继承体系中，子类出现了和父类中一模一样的方法声明，我们就称子类这个方法是重写的方法</p>
-<p><strong>应用场景：</strong></p>
-<ul>
-<li>当子类需要父类的功能，但父类的该功能不完全满足自己的需求时</li>
-<li>子类可以重写父类中的方法<code>super.父类成员方法</code></li>
-</ul>
-<p><strong>Override重写注释</strong></p>
-<ul>
-<li>@Override是放在重写后的方法上，作为重写是否正确的校验注解</li>
-<li>加上该注解后如果重写错误，编译阶段会出现错误提示</li>
-<li>建议重写方法都加<font color="Red">@Override</font>注解，代码安全，优雅！</li>
-</ul>
-<p><strong>方法重写注意事项和要求</strong></p>
-<ul>
-<li>重写方法的名称、形参列表必须与被重写方法的名称和参数列表<font color="Red">一致</font></li>
-<li><font color="Red">私有方法以及静态方法</font>不能被重写</li>
-<li>子类重写父类方法时，访问权限必须大于或者等于父类 （暂时了解 ：缺省 &lt; protected &lt; public）</li>
-</ul>
-<h3 id="继承后子类构造器的特点"><a href="#继承后子类构造器的特点" class="headerlink" title="继承后子类构造器的特点"></a>继承后子类构造器的特点</h3><p>子类中所有的构造器默认都会先访问父类中无参的构造器，再执行自己。这是因为:</p>
-<ul>
-<li>子类在初始化的时候，有可能会使用到父类中的数据，如果父类没有完成初始化，子类将无法使用父类的数据</li>
-<li>子类初始化之前，一定要调用父类构造器先完成父类数据空间的初始化</li>
-<li>在代码中，子类构造器的第一行语句默认都是：<code>super()</code>，不写也存在</li>
-</ul>
-<p><strong><code>super</code>调用父类有参数构造器的作用</strong>：初始化继承自父类的数据</p>
-<ul>
-<li><p>如果父类中没有无参数构造器，只有有参构造器，会报错，这是因为子类默认的是调用父类无参构造器。</p>
-</li>
-<li><p>子类构造器中可以通过书写<code>super(...)</code>，自动调用父类的有参数构造器</p>
-</li>
-</ul>
-<h3 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h3><ul>
-<li>this代表本类对象的引用；super代表父类存储空间的标识</li>
-</ul>
+<p><strong>File类创建对象</strong></p>
 <table>
 <thead>
 <tr>
-<th><strong>关键字</strong></th>
-<th><strong>访问成员变量</strong></th>
-<th><strong>访问成员方法</strong></th>
-<th><strong>访问构造方法</strong></th>
+<th>方法名称</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>this</strong></td>
-<td>this.成员变量  访问本类成员变量</td>
-<td>this.成员方法(…)  访问本类成员方法</td>
-<td>this(…) 访问本类构造器</td>
+<td>public  File(String pathname)</td>
+<td>根据文件路径创建文件对象</td>
 </tr>
 <tr>
-<td><strong>super</strong></td>
-<td>super.成员变量  访问父类成员变量</td>
-<td>super.成员方法(…)  访问父类成员方法</td>
-<td>super(…)  访问父类构造器</td>
+<td>public File(String  parent, String child)</td>
+<td>根据父路径名字符串和子路径名字符串创建文件对象</td>
+</tr>
+<tr>
+<td>public File(File parent, String child)</td>
+<td>根据父路径对应文件对象和子路径名字符串创建文件对象</td>
 </tr>
 </tbody></table>
-<p><strong>使用注意点：</strong></p>
+<p><strong>绝对路径和相对路径</strong></p>
 <ul>
-<li>子类通过 this (…）去调用本类的其他构造器，本类其他构造器会通过 super 去手动调用父类的构造器，最终还是会调用父类构造器的</li>
-<li>注意：this(…) super(…) 都只能放在构造器的<code>第一行</code>，所以二者不能共存在同一个构造器中</li>
+<li><p>绝对路径：从盘符开始，如<code>File file1 = new File(“D:\\study\\a.txt”);</code></p>
+</li>
+<li><p>相对路径：不带盘符，默认直接到当前工程下的目录寻找文件，如<code>File file3 = new File(“模块名\\a.txt”);</code></p>
+</li>
 </ul>
+<p><strong>File类的判断文件类型、获取文件信息功能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  boolean isDirectory()</td>
+<td>判断此路径名表示的File是否为文件夹</td>
+</tr>
+<tr>
+<td>public  boolean isFile()</td>
+<td>判断此路径名表示的File是否为文件</td>
+</tr>
+<tr>
+<td>public  boolean  exists()</td>
+<td>判断此路径名表示的File是否存在</td>
+</tr>
+<tr>
+<td>public long  length()</td>
+<td>返回文件的大小（字节数量）</td>
+</tr>
+<tr>
+<td>public  String getAbsolutePath()</td>
+<td>返回文件的绝对路径</td>
+</tr>
+<tr>
+<td>public  String getPath()</td>
+<td>返回定义文件时使用的路径</td>
+</tr>
+<tr>
+<td>public  String getName()</td>
+<td>返回文件的名称，带后缀</td>
+</tr>
+<tr>
+<td>public  long lastModified()</td>
+<td>返回文件的最后修改时间（时间毫秒值）</td>
+</tr>
+</tbody></table>
+<p><strong>File类创建文件的功能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public boolean createNewFile()</td>
+<td>创建一个新的空的文件</td>
+</tr>
+<tr>
+<td>public boolean mkdir()</td>
+<td>只能创建<font color="Red">一级</font>文件夹</td>
+</tr>
+<tr>
+<td>public boolean mkdirs()</td>
+<td>可以创建<font color="Red">多级</font>文件夹</td>
+</tr>
+</tbody></table>
+<p><strong>File类删除文件的功能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  boolean delete()</td>
+<td>删除由此抽象路径名表示的文件或空文件夹</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>delete方法默认只能删除文件和<font color="Red">空文件夹</font>，delete方法直接删除不走回收站</p>
+<p><strong>File类的遍历功能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public String[] list()</td>
+<td>获取当前目录下所有的“一级文件名称”到一个字符串数组中去返回。</td>
+</tr>
+<tr>
+<td>public File[] listFiles()(常用)</td>
+<td>获取当前目录下所有的“一级文件对象”到一个文件对象数组中去返回（重点）</td>
+</tr>
+</tbody></table>
+<p><strong>listFiles方法注意事项：</strong></p>
+<ul>
+<li><p>当文件不存在时或者代表文件时，返回null</p>
+</li>
+<li><p>当文件对象代表一个空文件夹时，返回一个长度为0的数组</p>
+</li>
+<li><p>当文件对象是一个有内容的文件夹时，将里面所有文件和文件夹的路径放在File数组中返回</p>
+</li>
+<li><p>当文件对象是一个有隐藏文件的文件夹时，将里面所有文件和文件夹的路径放在File数组中返回，包含隐藏文件</p>
+</li>
+<li><p>当没有权限访问该文件夹时，返回null</p>
+</li>
+</ul>
+<h2 id="方法递归"><a href="#方法递归" class="headerlink" title="方法递归"></a>方法递归</h2><p><strong>定义：</strong>方法调用自身的形式称为递归（recursion），递归做为一种算法在程序设计语言中广泛应用</p>
+<p><strong>形式</strong></p>
+<ul>
+<li>直接递归：方法自己调用自己</li>
+<li>间接递归：方法调用其他方法，其他方法又回调方法自己</li>
+</ul>
+<p><strong>存在的问题：</strong>递归如果没有控制好终止，会出现递归死循环，导致栈内存溢出现象</p>
+<h3 id="案例1：递归求1-n的和"><a href="#案例1：递归求1-n的和" class="headerlink" title="案例1：递归求1-n的和"></a>案例1：递归求1-n的和</h3><img src="/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/image-20220905172641759.png" class="">
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    	<span class="token keyword">return</span> n <span class="token operator">+</span> <span class="token function">f</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="案例2：文件搜索"><a href="#案例2：文件搜索" class="headerlink" title="案例2：文件搜索"></a>案例2：文件搜索</h3><p><strong>需求：</strong>从某路径下搜索出某个文件名称并输出绝对路径</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">searchFile</span><span class="token punctuation">(</span><span class="token class-name">File</span> dir<span class="token punctuation">,</span> <span class="token class-name">String</span> fileName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// 3、判断dir是否为目录</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>dir <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> dir<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 4、提取当前目录下的一级文件对象</span>
+        <span class="token class-name">File</span><span class="token punctuation">[</span><span class="token punctuation">]</span> files <span class="token operator">=</span> dir<span class="token punctuation">.</span><span class="token function">listFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//null []</span>
+        <span class="token comment">// 5、判断一级文件夹是否存在</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>files <span class="token operator">!=</span><span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> files<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">File</span> file <span class="token operator">:</span> files<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 6、判断当前遍历的一级文件对象是文件还是目录</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">isFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token comment">// 7、是不是要找的，是把其路径输出</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"找到了："</span> <span class="token operator">+</span> file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                    <span class="token comment">// 8、是文件夹，需要继续递归寻找</span>
+                    <span class="token function">searchFile</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"对不起，当前搜索的位置不是文件夹！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="案例3：啤酒问题"><a href="#案例3：啤酒问题" class="headerlink" title="案例3：啤酒问题"></a>案例3：啤酒问题</h3><p><strong>需求：</strong>啤酒2元1瓶，4个盖子可以换一瓶，2个空瓶可以换一瓶，请问10元钱可以喝多少瓶酒，剩余多少空瓶和盖子。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test3</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// 定义一个静态的成员变量用于存储可以买的酒数量</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> totalNumber<span class="token punctuation">;</span>           <span class="token comment">// 总数量</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> lastBottleNumber<span class="token punctuation">;</span>      <span class="token comment">// 记录每次剩余的瓶子个数</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> lastCoverNumber<span class="token punctuation">;</span>       <span class="token comment">// 记录每次剩余的盖子个数</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 1、拿钱买酒</span>
+        <span class="token function">buy</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"总数："</span> <span class="token operator">+</span> totalNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"剩余盖子数："</span> <span class="token operator">+</span> lastCoverNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"剩余瓶子数："</span> <span class="token operator">+</span> lastBottleNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">buy</span><span class="token punctuation">(</span><span class="token keyword">int</span> money<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 2、看可以立马买多少瓶</span>
+        <span class="token keyword">int</span> buyNumber <span class="token operator">=</span> money <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>  <span class="token comment">// 5</span>
+        totalNumber <span class="token operator">+=</span> buyNumber<span class="token punctuation">;</span>
+
+        <span class="token comment">// 3、把盖子和瓶子换成钱</span>
+        <span class="token comment">// 统计本轮总的盖子数和瓶子数</span>
+        <span class="token keyword">int</span> coverNumber <span class="token operator">=</span> lastCoverNumber <span class="token operator">+</span> buyNumber<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> bottleNumber <span class="token operator">=</span> lastBottleNumber <span class="token operator">+</span> buyNumber<span class="token punctuation">;</span>
+
+        <span class="token comment">// 4、更新每次剩余的盖子数和瓶子数</span>
+        lastCoverNumber <span class="token operator">=</span> coverNumber <span class="token operator">%</span> <span class="token number">4</span><span class="token punctuation">;</span>
+        lastBottleNumber <span class="token operator">=</span> bottleNumber <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 5、判断是否够换成钱</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>coverNumber <span class="token operator">/</span> <span class="token number">4</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">||</span> bottleNumber <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// 够，计算出能换成多少钱，并重新迭代</span>
+            <span class="token keyword">int</span> allMoney <span class="token operator">=</span> <span class="token punctuation">(</span>coverNumber <span class="token operator">/</span> <span class="token number">4</span> <span class="token operator">+</span> bottleNumber <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token function">buy</span><span class="token punctuation">(</span>allMoney<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><ul>
+<li><p>计算机底层不可以直接存储字符的，计算机底层只能存储二进制</p>
+</li>
+<li><p>计算机可以给人类字符进行编号存储，这套编号规则就是字符集</p>
+</li>
+<li><p>字符集（Character Set）是多个字符的集合</p>
+</li>
+<li><p>常见字符集有ASCII字符集、GBK字符集以及Unicode（UTF-8）字符集等</p>
+</li>
+</ul>
+<p><strong>ASCII字符集</strong></p>
+<ul>
+<li>ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)：包括了数字、英文、符号</li>
+<li>ASCII使用<font color="Red">一个字节</font>存储一个字符，一个字节是8位，总共可以表示128个字符信息，对于表示英文、数字来说是够用</li>
+</ul>
+<p><strong>GBK</strong></p>
+<ul>
+<li><p>GBK是中国的码表，包含了几万个汉字等字符，同时也要兼容ASCII编码</p>
+</li>
+<li><p>GBK编码中一个中文字符一般以<font color="Red">两个字节</font>的形式存储</p>
+</li>
+</ul>
+<p><strong>Unicode字符集</strong></p>
+<ul>
+<li><p>统一码，也叫万国码。是计算机科学领域里的一项业界标准</p>
+</li>
+<li><p>UTF-8是Unicode的一种常见编码方式，一般以<font color="Red">三个字节</font>的形式存储，同时也要兼容ASCII编码表，英文和数字在任何国家的编码中都不会乱码</p>
+</li>
+</ul>
+<p><strong>注意：</strong>技术人员都应该使用UTF-8的字符集编码，编码器前和编码后的字符集要一致，否则会出现中文乱码。</p>
+<p><strong>String编码</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte[] getBytes()</td>
+<td>使用平台的默认字符集将该  String编码为一系列字节，将结果存储到新的字节数组中</td>
+</tr>
+<tr>
+<td>byte[] getBytes(String charsetName)</td>
+<td>使用指定的字符集将该 String编码为一系列字节，将结果存储到新的字节数组中</td>
+</tr>
+</tbody></table>
+<p><strong>String解码</strong></p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String(byte[] bytes)</td>
+<td>通过使用平台的默认字符集解码指定的字节数组来构造新的  String</td>
+</tr>
+<tr>
+<td>String(byte[] bytes, String charsetName)</td>
+<td>通过指定的字符集解码指定的字节数组来构造新的 String</td>
+</tr>
+</tbody></table>
 
                 
             </div>
@@ -684,7 +787,7 @@ class SingleInstance{
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/">https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/</a>
+                    <a href="https://faith-ye.github.io/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/">https://faith-ye.github.io/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -721,15 +824,7 @@ class SingleInstance{
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/static/">
-                                    <span class="chip bg-color">static</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%BB%A7%E6%89%BF/">
-                                    <span class="chip bg-color">继承</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1167,17 +1262,18 @@ class SingleInstance{
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/18/bi-ji-er-bao-he-duo-tai/">
+                <a href="/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="笔记二：包和多态">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="笔记九：File类和方法递归">
                         
-                        <span class="card-title">笔记二：包和多态</span>
+                        <span class="card-title">笔记九：File类和方法递归</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1187,9 +1283,9 @@ class SingleInstance{
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1202,14 +1298,7 @@ class SingleInstance{
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%A4%9A%E6%80%81/">
-                        <span class="chip bg-color">多态</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -1220,13 +1309,13 @@ class SingleInstance{
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/14/wgan-gp/">
+                <a href="/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="WGAN_GP">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="笔记八：异常处理和日志框架">
                         
-                        <span class="card-title">WGAN_GP</span>
+                        <span class="card-title">笔记八：异常处理和日志框架</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1237,31 +1326,19 @@ class SingleInstance{
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    论文阅读笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/GAN/">
-                        <span class="chip bg-color">GAN</span>
-                    </a>
-                    
-                    <a href="/tags/WGAN-GP/">
-                        <span class="chip bg-color">WGAN_GP</span>
-                    </a>
-                    
                 </div>
                 
             </div>
