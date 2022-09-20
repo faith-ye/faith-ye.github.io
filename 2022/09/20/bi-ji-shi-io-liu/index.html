@@ -4,10 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="WGAN_GP, 小叶の博客">
-    <meta name="description" content="
+    <meta name="keywords" content="笔记十：IO流, 小叶の博客">
+    <meta name="description" content="定义：I表示intput，把硬盘文件中的数据读入到内存的过程，称之输入，负责读；lO表示output，把内存中的数据写出到硬盘文件的过程，称之输出，负责写。
+IO流的分类
 
-前言GAN是强大的生成模型，但是以难训练著称。前面一篇文章讲到的 WGAN 提升了 GAN 训练的稳定性，但有时候还是会产生不好的样本或收敛失败。在原始 WGAN 论文中，作者也提到了，这些问题主要是在判别器中使用 weight cli">
+
+总结流的四大类
+
+字节输入流：以内存为基准，来自磁盘文件/网络中">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>WGAN_GP | 小叶の博客</title>
+    <title>笔记十：IO流 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -292,12 +296,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">WGAN_GP</h1>
+                    <h1 class="description center-align post-title">笔记十：IO流</h1>
                 </div>
             </div>
         </div>
@@ -413,12 +417,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/GAN/">
-                                <span class="chip bg-color">GAN</span>
-                            </a>
-                        
-                            <a href="/tags/WGAN-GP/">
-                                <span class="chip bg-color">WGAN_GP</span>
+                            <a href="/tags/IO%E6%B5%81/">
+                                <span class="chip bg-color">IO流</span>
                             </a>
                         
                     </div>
@@ -429,8 +429,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                论文阅读笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                JavaSE进阶
                             </a>
                         
                     </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-14
+                    2022-09-20
                 </div>
                 
 
@@ -451,14 +451,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    13 分
                 </div>
                 
 
@@ -481,43 +481,675 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <img src="/2022/07/14/wgan-gp/image-20220714084905587-16577679352952.png" class="">
+                <p><strong>定义：</strong>I表示intput，把硬盘文件中的数据读入到内存的过程，称之输入，负责读；lO表示output，把内存中的数据写出到硬盘文件的过程，称之输出，负责写。</p>
+<p><strong>IO流的分类</strong></p>
+<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220907170330470.png" class="">
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GAN是强大的生成模型，但是以难训练著称。前面一篇文章讲到的 WGAN 提升了 GAN 训练的稳定性，但有时候还是会产生不好的样本或收敛失败。在原始 WGAN 论文中，作者也提到了，这些问题主要是在判别器中使用 weight clipping 技术来实现 Lipschitz 限制导致的，特别是当超参数 c 没有设置合适。</p>
-<p>$$w\leftarrow clip(w,-c,c)$$</p>
-<p>WGAN 模型的性能对超参数 c 特别敏感。下图中，当判别器中没有使用批量标准化，c 从0.001增加到0.1，判别器从梯度消失转为梯度爆炸。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714091239852-16577679352953.png" class="">
+<p><strong>总结流的四大类</strong></p>
+<ul>
+<li><p>字节输入流：以内存为基准，来自磁盘文件/网络中的数据<font color="Red">以字节的形式读入到内存</font>中去的流称为字节输入流。</p>
+</li>
+<li><p>字节输出流：以内存为基准，把内存中的数据<font color="Red">以字节写出到磁盘文件或者网络</font>中去的流称为字节输出流。</p>
+</li>
+<li><p>字符输入流：以内存为基准，来自磁盘文件/网络中的数据<font color="Red">以字符的形式读入到内存</font>中去的流称为字符输入流。</p>
+</li>
+<li><p>字符输出流：以内存为基准，把内存中的数据<font color="Red">以字符写出到磁盘文件或者网络介质</font>中去的流称为字符输出流。</p>
+</li>
+</ul>
+<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220914172125552.png" class="">
 
-<p>同时作者还证明了 weight clipping 降低了模型的表现能力并且限制了模型模拟复杂函数的能力。在下面的实验中，第一行是由 WGAN 估计的判别器值等高线图，第二行是由 WGAN 的一个变体估计的，即本文提出的方法WGAN_GP。从图中可以看出，WGAN 不能创造一个复杂的边界来包围模型的模式（橙色点），只是对最优函数进行了非常简单的近似模拟，而改进的 WGAN_GP 可以。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714093217526-16577679352964.png" class="">
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p><strong>文件字节输入流：FileInputStream</strong></p>
+<p><strong>作用：</strong>以内存为基准，把磁盘文件中的数据以字节的形式读取到内存中去</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  FileInputStream(File file)</td>
+<td>创建字节输入流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td>public  FileInputStream(String pathname)</td>
+<td>创建字节输入流管道与源文件路径接通</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public int  read()</td>
+<td>每次读取一个字节返回，如果字节已经没有可读的返回-1</td>
+</tr>
+<tr>
+<td>public int  read(byte[] buffer)</td>
+<td>每次读取一个字节数组返回，如果字节已经没有可读的返回-1</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1、创建一个文件字节输入流管道与源文件连通</span>
+<span class="token class-name">InputStream</span> is <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"文件相对路径"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="WGAN-GP"><a href="#WGAN-GP" class="headerlink" title="WGAN_GP"></a>WGAN_GP</h2><p>WGAN_GP使用梯度惩罚（gradient penalty）而不是 weight clipping 来实现 Lipschitz 限制：</p>
-<p>$$|f(x_1)-f(x_2)|\leq K|x_1-x_2|$$</p>
-<p><strong>梯度惩罚</strong></p>
-<p>可微函数 1-Lipschtiz 在任何地方都有范数最多为1的梯度</p>
-<img src="/2022/07/14/wgan-gp/image-20220714094908951-16577679352966.png" class="">
+<span class="token comment">// 2、定义一个字节数组，用于读取字节数组</span>
+<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> rs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// String rs = new String(buffer, 0, len);  读取多少倒出多少</span>
 
-<p>作者在论文中的附录 A 证明了命题1，感兴趣的可以看一下。论文连接：<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1704.00028">WGAN_GP</a></p>
-<p>这个命题指出在真实数据和生成数据之间的插值点会有一个函数$f^{*}$的梯度规范为1。因此 WGAN_GP 使用的不是weight clipping，而是当其梯度规范偏离其目标规范值时对模型进行惩罚。WGAN_GP 的目标函数为：</p>
-<img src="/2022/07/14/wgan-gp/image-20220714095809861-16577679352965.png" class="">
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>rs<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//前三个字节代表的内容</span>
 
-<p>式中$\overset{\wedge}{x}=t\overset{\sim}{x}+(1-t)x,0\leq t\leq 1$，t是随机采样出来的；论文中，$\lambda$设置为10。</p>
-<p>批量标准化禁止在判别器中使用，因为批量标准化会在相同批量的样本中建立联系，使得判别器从单一输入到单一输出的映射变成了从整批输入到整批输出的映射，而 WGAN_GP 惩罚的是判别器相对于每个输入的梯度规范，而不是整个批次，使用批量标准化会影响梯度惩罚的效率。</p>
-<p>不可否认，引入梯度惩罚会增加计算成本，这可能并不是最优的选择，但作者通过实验证明 WGAN_GP 确实产生了一些更高质量的图像。</p>
-<p><strong>算法</strong></p>
-<p>有了前面的基础，限制让我们细看 WGAN_GP 算法的细节和梯度惩罚是怎样计算的。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714103234274-16577679352967.png" class="">
+<span class="token comment">// 3、改进使用循环，每次读取一个字节数组</span>
+<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> len<span class="token punctuation">;</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>与 WGAN 的算法进行对比，有两点不同：①使用了梯度惩罚，而不是 weight clipping；②使用了 Adam 优化算法，而不是 RMSProp 优化算法。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>WGAN_GP 增强了训练的稳定性，如下图所示，当模型设计不是最优时，WGAN_GP 仍然可以生成高质量的图片，而反观其他模型，生成的可能就是一堆噪音。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714103953609-16577679352968.png" class="">
+<p><strong>文件字节输出流：FileOutputStream</strong></p>
+<p><strong>作用：</strong>以内存为基准，把内存中的数据以字节的形式写出到磁盘文件中去的流</p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public FileOutputStream(File file)</td>
+<td>创建字节输出流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td>public FileOutputStream(File file，boolean append)</td>
+<td>创建字节输出流管道与源文件对象接通，<font color="Red">可追加数据 </font></td>
+</tr>
+<tr>
+<td>public FileOutputStream(String filepath)</td>
+<td>创建字节输出流管道与源文件路径接通</td>
+</tr>
+<tr>
+<td>public FileOutputStream(String filepath，boolean append)</td>
+<td>创建字节输出流管道与源文件路径接通，<font color="Red">可追加数据 </font></td>
+</tr>
+</tbody></table>
+<p> <strong>写数据出去的API</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void write(int a)</td>
+<td>写一个字节出去</td>
+</tr>
+<tr>
+<td>public void write(byte[] buffer)</td>
+<td>写一个字节数组出去</td>
+</tr>
+<tr>
+<td>public void write(byte[] buffer , int pos , int len)</td>
+<td>写一个字节数组的一部分出去。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>换行：<code>os.write(“\r\n”.getBytes())</code></li>
+</ul>
+<p><strong>流的关闭和刷新</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flush()</td>
+<td>刷新流，还可以继续写数据</td>
+</tr>
+<tr>
+<td>close()</td>
+<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
+</tr>
+</tbody></table>
+<p><strong>资源释放的方式</strong></p>
+<p><strong>try-catch-finally</strong></p>
+<ul>
+<li><p>finally：放在try-catch后面的，无论是正常执行还是异常执行代码，最后一定要执行，除非JVM退出。</p>
+</li>
+<li><p>作用：一般用于进行最后的资源释放操作（专业级做法）</p>
+</li>
+<li><p>格式</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token class-name">FileOutputStream</span> fos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    fos<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token number">97</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
+    <span class="token comment">// 即使上面有return语句执行，也必须执行完这里才可以！</span>
+    <span class="token comment">// 开发中不建议在这加return，加了永远是返回这里的数据</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>下面是使用不同方法在 CIFAR-10 数据集上 Inception score 随生成器迭代次数的变化曲线。从图中可以看出，相对于 WGAN，WGAN_GP 收敛速度更快，且可以生成更高质量的图片，且使用 Adam 优化算法可以进一步提升模型的性能；相比于 DCGAN， WGAN_GP 收敛的慢些，但 Inception score 的收敛过程更加稳定。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714104944679-16577679352969.png" class="">
+<p><strong>JDK 7和JDK9中都简化了资源释放操作</strong></p>
+<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220914164230804.png" class="">
 
-<p>这是否就意味着 DCGAN 比 WGAN_GP 性能好？其实不然，WGAN_GP 的主要优势是它可以使训练更加稳定，使得模型更容易训练成功。为了验证 WGAN_GP 有助于模型收敛的更好，作者使用更加复杂的模型——深度残差网络作为生成器和判别器。下图就是不同模型在 LSUN 数据集上 Inception score 的结果，Inception score 越高，表示模型越好。</p>
-<img src="/2022/07/14/wgan-gp/image-20220714105902203-16577679352951.png" class="">
+<p><strong>综合案例：文件拷贝</strong></p>
+<p><strong>需求：</strong>把某个视频复制到其他目录下</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CopyDemo01</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">InputStream</span> is <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">OutputStream</span> os <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 1、创建一个字节输入流管道与原视频接通</span>
+            is <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"D:\\原始视频.wmv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 2、创建一个字节输出流管道与目标文件接通</span>
+            os <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"D:\\new.wmv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 3、定义一个字节数组来转移数据</span>
+            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> len<span class="token punctuation">;</span>  <span class="token comment">// 记录每次读取的字节数</span>
+
+            <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                os<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"复制完成了！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 4、关闭流</span>
+            os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
+            <span class="token comment">// 无论代码是正常结束，还是出现异常都要最后执行这里</span>
+            <span class="token comment">// 4、关闭流</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>os <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>is <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><ul>
+<li>读取中文输出，字符流更合适，因为字节流读取中文输出会乱码，或者内存溢出</li>
+</ul>
+<p><strong>文件字符输入流：Reader</strong></p>
+<ul>
+<li>作用：以内存为基准，把磁盘文件中的数据以字符的形式读取到内存中去</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public FileReader(File file)</td>
+<td>创建字符输入流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td>public FileReader(String  pathname)</td>
+<td>创建字符输入流管道与源文件路径接通</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public int read()</td>
+<td>每次读取一个字符返回，如果字符已经没有可读的返回-1</td>
+</tr>
+<tr>
+<td>public int  read(char[] buffer)</td>
+<td>每次读取一个字符数组，返回读取的字符个数，如果字符已经没有可读的返回-1</td>
+</tr>
+</tbody></table>
+<p><strong>文件字符输出流：FileWriter</strong></p>
+<ul>
+<li>作用：以内存为基准，把内存中的数据以字符的形式写出到磁盘文件中去的流</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public FileWriter(File file)</td>
+<td>创建字符输出流管道与源文件对象接通</td>
+</tr>
+<tr>
+<td>public FileWriter(File file，boolean append)</td>
+<td>创建字符输出流管道与源文件对象接通，可追加数据</td>
+</tr>
+<tr>
+<td>public FileWriter(String filepath)</td>
+<td>创建字符输出流管道与源文件路径接通</td>
+</tr>
+<tr>
+<td>public FileWriter(String filepath，boolean append)</td>
+<td>创建字符输出流管道与源文件路径接通，可追加数据</td>
+</tr>
+</tbody></table>
+<p><strong>写数据出去的API</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void  write(int c)</td>
+<td>写一个字符</td>
+</tr>
+<tr>
+<td>void  write(char[] cbuf)</td>
+<td>写入一个字符数组</td>
+</tr>
+<tr>
+<td>void  write(char[] cbuf, int off, int len)</td>
+<td>写入字符数组的一部分</td>
+</tr>
+<tr>
+<td>void  write(String str)</td>
+<td>写一个字符串</td>
+</tr>
+<tr>
+<td>void  write(String str, int off, int len)</td>
+<td>写一个字符串的一部分</td>
+</tr>
+</tbody></table>
+<p><strong>流的关闭和刷新</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flush()</td>
+<td>刷新流，还可以继续写数据</td>
+</tr>
+<tr>
+<td>close()</td>
+<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
+</tr>
+</tbody></table>
+<h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><ul>
+<li>缓冲流也称为高效流、或者高级流。之前学习的字节流可以称为原始流</li>
+<li>作用：<font color="Red">缓冲流自带缓冲区、可以提高原始字节流、字符流读写数据的性能</font></li>
+</ul>
+<p><strong>字节缓冲流性能优化原理</strong></p>
+<ul>
+<li>字节缓冲输入流自带了<font color="Red">8KB缓冲池</font>，以后我们直接从缓冲池读取数据，所以性能较好</li>
+<li>字节缓冲输出流自带了<font color="Red">8KB缓冲池</font>，数据就直接写入到缓冲池中去，写数据性能极高了</li>
+</ul>
+<p><strong>字节缓冲流</strong></p>
+<ul>
+<li><p>字节缓冲输入流：BufferedInputStream，提高字节输入流读取数据的性能</p>
+</li>
+<li><p>字节缓冲输出流：BufferedOutputStream，提高字节输出流读取数据的性能</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public BufferedInputStream(InputStream is)</td>
+<td>可以把低级的字节输入流包装成一个高级的缓冲字节输入流管道，从而提高字节输入流读数据的性能</td>
+</tr>
+<tr>
+<td>public BufferedOutputStream(OutputStream os)</td>
+<td>可以把低级的字节输出流包装成一个高级的缓冲字节输出流，从而提高写数据的性能</td>
+</tr>
+</tbody></table>
+<p><strong>字符缓冲流</strong></p>
+<ul>
+<li>字符缓冲输入流：BufferedReader，提高字符输入流读取数据的性能，除此之外多了<font color="Red">按照行读取数据</font>的功能</li>
+<li>字符缓冲输出流：BufferedWriter，提高字符输出流写取数据的性能，除此之外多了<font color="Red">换行</font>功能</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  BufferedReader(Reader r)</td>
+<td>可以把低级的字符输入流包装成一个高级的缓冲字符输入流管道，从而提高字符输入流读数据的性能</td>
+</tr>
+<tr>
+<td>public BufferedWriter(Writer  w)</td>
+<td>可以把低级的字符输出流包装成一个高级的缓冲字符输出流管道，从而提高字符输出流写数据的性能</td>
+</tr>
+</tbody></table>
+<p><strong>字符缓冲流新增功能</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  String readLine()</td>
+<td>读取一行数据返回，如果读取没有完毕，无行可读返回<font color="Red">null </font></td>
+</tr>
+<tr>
+<td>public  void newLine()</td>
+<td>换行操作</td>
+</tr>
+</tbody></table>
+<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><ul>
+<li>作用：解决不同编码读取乱码的问题</li>
+<li>字符输入转换流：InputStreamReader，可以把原始的字节流按照指定编码转换成字符输入流</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public InputStreamReader(InputStream is)</td>
+<td>可以把原始的字节流按照代码默认编码转换成字符输入流，<font color="Red">几乎不用</font>，与默认的FileReader一样。</td>
+</tr>
+<tr>
+<td>public InputStreamReader(InputStream is ，String charset)</td>
+<td>可以把原始的字节流按照<font color="Red">指定编码</font>转换成字符输入流，这样字符流中的字符就不乱码了</td>
+</tr>
+</tbody></table>
+<ul>
+<li>字符输入转换流：OutputStreamWriter，可以把字节输出流按照指定编码转换成字符输出流</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public OutputStreamWriter(OutputStream os)</td>
+<td>可以把原始的字节输出流按照代码默认编码转换成字符输出流，几乎不用。</td>
+</tr>
+<tr>
+<td>public OutputStreamWriter(OutputStream os，String  charset)</td>
+<td>可以把原始的字节输出流按照<font color="Red">指定编码</font>转换成字符输出流</td>
+</tr>
+</tbody></table>
+<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p><strong>对象序列化</strong></p>
+<ul>
+<li>作用：以内存为基准，把内存中的<font color="Red">对象</font>存储到磁盘文件中去，称为对象序列化</li>
+<li>使用到的流是对象字节输出流：<font color="Red">ObjectOutputStream</font></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public ObjectOutputStream(OutputStream  out)</td>
+<td>把低级字节输出流包装成高级的对象字节输出流</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public final void writeObject(Object obj)</td>
+<td>把对象写出去到对象序列化流的文件中去</td>
+</tr>
+</tbody></table>
+<p><strong>对象反序列化</strong></p>
+<ul>
+<li>作用：以内存为基准，把存储到磁盘文件中去的<font color="Red">对象数据</font>恢复成内存中的对象，称为对象反序列化</li>
+<li>使用到的流是对象字节输入流：<font color="Red">ObjectInputStream</font></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public ObjectInputStream(InputStream  out)</td>
+<td>把低级字节输如流包装成高级的对象字节输入流</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public  Object readObject()</td>
+<td>把存储到磁盘文件中去的对象数据恢复成内存中的对象返回</td>
+</tr>
+</tbody></table>
+<p><strong>注意事项</strong></p>
+<ul>
+<li>对象如果要序列化，必须实现<font color="Red">Serializable</font>序列化接口</li>
+<li>transient修饰的成员变量不会参与序列化，这样可以避免泄露敏感信息</li>
+<li>使用<code>private static final long serialVersionUID = 1</code>来申明序列化的版本号码，这样序列化的版本号与反序列化的版本号必须一致才不会出错</li>
+</ul>
+<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><ul>
+<li><p>作用：打印流可以实现<font color="Red">方便、高效的打印数据到文件</font>中去。打印流一般是指：PrintStream，PrintWriter两个类</p>
+</li>
+<li><p>可以实现打印什么数据就是什么数据，例如打印整数97写出去就是97，打印boolean的true，写出去就是true</p>
+</li>
+</ul>
+<p><strong>PrintStream</strong></p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public PrintStream(OutputStream os)</td>
+<td>打印流直接通向字节输出流管道</td>
+</tr>
+<tr>
+<td>public PrintStream(File f)</td>
+<td>打印流直接通向文件对象</td>
+</tr>
+<tr>
+<td>public PrintStream(String filepath)</td>
+<td>打印流直接通向文件路径</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void print(Xxx  xx)</td>
+<td>打印任意类型的数据出去</td>
+</tr>
+</tbody></table>
+<p><strong>PrintWriter</strong></p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public PrintWriter(OutputStream os)</td>
+<td>打印流直接通向字节输出流管道</td>
+</tr>
+<tr>
+<td>public PrintWriter (Writer w)</td>
+<td>打印流直接通向字符输出流管道</td>
+</tr>
+<tr>
+<td>public PrintWriter (File f)</td>
+<td>打印流直接通向文件对象</td>
+</tr>
+<tr>
+<td>public PrintWriter (String filepath)</td>
+<td>打印流直接通向文件路径</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public void print(Xxx  xx)</td>
+<td>打印任意类型的数据出去</td>
+</tr>
+</tbody></table>
+<p><strong>PrintStream和PrintWriter的区别</strong></p>
+<ul>
+<li><p>打印数据功能上是一模一样的，都是使用方便，性能高效（核心优势）</p>
+</li>
+<li><p>PrintStream继承自字节输出流OutputStream，支持写字节数据的方法</p>
+</li>
+<li><p>PrintWriter继承自字符输出流Writer，支持写字符数据出去</p>
+</li>
+</ul>
+<p><strong>输出语句重定向</strong></p>
+<ul>
+<li>属于打印流的一种应用，可以把输出语句的打印位置改到文件</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">PrintStream</span> ps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrintStream</span><span class="token punctuation">(</span><span class="token string">"文件地址"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">setOut</span><span class="token punctuation">(</span>ps<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ul>
+<li>其实就是一个Map集合，但是我们一般不会当集合使用，因为HashMap更好用</li>
+</ul>
+<p><strong>Properties核心作用</strong></p>
+<ul>
+<li><p>Properties代表的是一个<font color="Red">属性文件</font>，可以把自己对象中的键值对信息存入到一个属性文件中去</p>
+</li>
+<li><p>属性文件：后缀是.properties结尾的文件，里面的内容都是<font color="Red"> key=value</font>，后续做系统配置信息的</p>
+</li>
+</ul>
+<p><strong>Properties和IO流结合的方法(API)</strong></p>
+<table>
+<thead>
+<tr>
+<th>构造器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void load(InputStream inStream)</td>
+<td>从输入字节流读取属性列表（键和元素对）</td>
+</tr>
+<tr>
+<td>void  load(Reader reader)</td>
+<td>从输入字符流读取属性列表（键和元素对）</td>
+</tr>
+<tr>
+<td>void  store(OutputStream out, String comments)</td>
+<td>将此属性列表（键和元素对）写入此  Properties表中，以适合于使用 load(InputStream)方法的格式写入输出字节流</td>
+</tr>
+<tr>
+<td>void  store(Writer writer, String comments)</td>
+<td>将此属性列表（键和元素对）写入此  Properties表中，以适合使用 load(Reader)方法的格式写入输出字符流</td>
+</tr>
+<tr>
+<td>public Object setProperty(String  key, String value)</td>
+<td>保存键值对（put）</td>
+</tr>
+<tr>
+<td>public String getProperty(String  key)</td>
+<td>使用此属性列表中指定的键搜索属性值  (get)</td>
+</tr>
+<tr>
+<td>public Set&lt;String&gt; stringPropertyNames()</td>
+<td>所有键的名称的集合 (keySet())</td>
+</tr>
+</tbody></table>
+<h2 id="IO框架"><a href="#IO框架" class="headerlink" title="IO框架"></a>IO框架</h2><p><strong>commons-io概述</strong></p>
+<ul>
+<li><p>commons-io是apache开源基金组织提供的一组有关IO操作的类库，可以提高IO功能开发的效率</p>
+</li>
+<li><p>commons-io工具包提供了很多有关io操作的类。有两个主要的类FileUtils，IOUtils</p>
+</li>
+</ul>
+<p><strong>FileUtils主要有如下方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String  readFileToString(File  file, String encoding)</td>
+<td>读取文件中的数据, 返回字符串</td>
+</tr>
+<tr>
+<td>void  copyFile(File  srcFile, File destFile)</td>
+<td>复制文件。</td>
+</tr>
+<tr>
+<td>void  copyDirectoryToDirectory(File  srcDir,  File destDir)</td>
+<td>复制文件夹。</td>
+</tr>
+</tbody></table>
+<p><strong>案例：导入commons-io-2.6.jar做开发</strong></p>
+<p>需求：使用commons-io简化io流读写</p>
+<p>具体步骤：</p>
+<ul>
+<li>在项目中创建一个文件夹：lib</li>
+<li>将commons-io-2.6.jar文件复制到lib文件夹</li>
+<li>在jar文件上点右键，选择 Add as Library -&gt; 点击OK</li>
+<li>在类中导包使用</li>
+</ul>
 
                 
             </div>
@@ -544,7 +1176,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/07/14/wgan-gp/">https://faith-ye.github.io/2022/07/14/wgan-gp/</a>
+                    <a href="https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/">https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -582,12 +1214,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/GAN/">
-                                    <span class="chip bg-color">GAN</span>
-                                </a>
-                            
-                                <a href="/tags/WGAN-GP/">
-                                    <span class="chip bg-color">WGAN_GP</span>
+                                <a href="/tags/IO%E6%B5%81/">
+                                    <span class="chip bg-color">IO流</span>
                                 </a>
                             
                         </div>
@@ -1027,17 +1655,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/14/bi-ji-yi-static-he-ji-cheng/">
+                <a href="/2022/09/20/bi-ji-shi-io-liu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="笔记一：static和继承">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="笔记十：IO流">
                         
-                        <span class="card-title">笔记一：static和继承</span>
+                        <span class="card-title">笔记十：IO流</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1047,9 +1676,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1062,15 +1691,12 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/static/">
-                        <span class="chip bg-color">static</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BB%A7%E6%89%BF/">
-                        <span class="chip bg-color">继承</span>
+                    <a href="/tags/IO%E6%B5%81/">
+                        <span class="chip bg-color">IO流</span>
                     </a>
                     
                 </div>
@@ -1084,13 +1710,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/08/wgan/">
+                <a href="/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="WGAN">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="笔记九：File类和方法递归">
                         
-                        <span class="card-title">WGAN</span>
+                        <span class="card-title">笔记九：File类和方法递归</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1101,31 +1727,19 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    论文阅读笔记
+                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
+                                    JavaSE进阶
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/GAN/">
-                        <span class="chip bg-color">GAN</span>
-                    </a>
-                    
-                    <a href="/tags/WGAN/">
-                        <span class="chip bg-color">WGAN</span>
-                    </a>
-                    
                 </div>
                 
             </div>
