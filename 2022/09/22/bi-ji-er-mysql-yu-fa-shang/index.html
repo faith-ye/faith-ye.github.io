@@ -4,14 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="笔记十：IO流, 小叶の博客">
-    <meta name="description" content="定义：I表示intput，把硬盘文件中的数据读入到内存的过程，称之输入，负责读；lO表示output，把内存中的数据写出到硬盘文件的过程，称之输出，负责写。
-IO流的分类
-
-
-总结流的四大类
-
-字节输入流：以内存为基准，来自磁盘文件/网络中">
+    <meta name="keywords" content="笔记二：MySQL语法上, 小叶の博客">
+    <meta name="description" content="这里可以通过进入终端或者使用一些软件进行学习，软件的话推荐Navicat。终端的话，通过win+R进入终端后输入mysql -u root -p后按回车输入前面安装时的密码就可以进入mysql下进行操作，退出 mysql可以使用 exit ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +17,7 @@ IO流的分类
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>笔记十：IO流 | 小叶の博客</title>
+    <title>笔记二：MySQL语法上 | 小叶の博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -296,12 +290,12 @@ IO流的分类
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">笔记十：IO流</h1>
+                    <h1 class="description center-align post-title">笔记二：MySQL语法上</h1>
                 </div>
             </div>
         </div>
@@ -415,13 +409,9 @@ IO流的分类
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/IO%E6%B5%81/">
-                                <span class="chip bg-color">IO流</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -429,8 +419,8 @@ IO流的分类
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
-                                JavaSE进阶
+                            <a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                MySQL学习笔记
                             </a>
                         
                     </div>
@@ -442,7 +432,7 @@ IO流的分类
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-20
+                    2022-09-22
                 </div>
                 
 
@@ -451,14 +441,14 @@ IO流的分类
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.5k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    5 分
                 </div>
                 
 
@@ -481,675 +471,121 @@ IO流的分类
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>定义：</strong>I表示intput，把硬盘文件中的数据读入到内存的过程，称之输入，负责读；lO表示output，把内存中的数据写出到硬盘文件的过程，称之输出，负责写。</p>
-<p><strong>IO流的分类</strong></p>
-<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220907170330470.png" class="">
+                <p>这里可以通过进入终端或者使用一些软件进行学习，软件的话推荐<code>Navicat</code>。终端的话，通过win+R进入终端后输入<code>mysql -u root -p</code>后按回车输入前面安装时的密码就可以进入mysql下进行操作，退出 mysql可以使用 exit 命令</p>
+<h2 id="数据库和数据表"><a href="#数据库和数据表" class="headerlink" title="数据库和数据表"></a>数据库和数据表</h2><p>下面是对数据库的三个基本操作：</p>
+<ul>
+<li>创建MySQL数据库：<code>CREATE DATABASE 数据库名;</code></li>
+<li>删除MySQL数据库：<code>DROP DATABASE 数据库名;</code></li>
+<li>选择MySQL数据库：<code>USE 数据库名;</code></li>
+</ul>
+<p>选定数据库之后就可以创建相应的数据表，创建MySQL数据表需要的信息：表名、表字段名和定义每个表字段</p>
+<ul>
+<li>创建MySQL数据表：<code>CREATE TABLE table_name (column_name column_type);</code></li>
+</ul>
+<p>以下是一个基本示例：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE IF NOT EXISTS `runoob_tbl`(
+   `runoob_id` INT UNSIGNED AUTO_INCREMENT,
+   `runoob_title` VARCHAR(100) NOT NULL,
+   `runoob_author` VARCHAR(40) NOT NULL,
+   `submission_date` DATE,
+   PRIMARY KEY ( `runoob_id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>总结流的四大类</strong></p>
+<p>实例解析：</p>
 <ul>
-<li><p>字节输入流：以内存为基准，来自磁盘文件/网络中的数据<font color="Red">以字节的形式读入到内存</font>中去的流称为字节输入流。</p>
-</li>
-<li><p>字节输出流：以内存为基准，把内存中的数据<font color="Red">以字节写出到磁盘文件或者网络</font>中去的流称为字节输出流。</p>
-</li>
-<li><p>字符输入流：以内存为基准，来自磁盘文件/网络中的数据<font color="Red">以字符的形式读入到内存</font>中去的流称为字符输入流。</p>
-</li>
-<li><p>字符输出流：以内存为基准，把内存中的数据<font color="Red">以字符写出到磁盘文件或者网络介质</font>中去的流称为字符输出流。</p>
-</li>
+<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
+<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
+<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
 </ul>
-<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220914172125552.png" class="">
+<p>对应的也有删除数据表的命令：</p>
+<ul>
+<li>删除MySQL数据表：<code>DROP TABLE table_name;</code></li>
+</ul>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>创建好数据表之后就可以使用通用的<strong>INSERT INTO</strong> SQL语法插入数据：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO table_name ( field1, field2,...fieldN )
+                       VALUES
+                       ( value1, value2,...valueN );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p><strong>文件字节输入流：FileInputStream</strong></p>
-<p><strong>作用：</strong>以内存为基准，把磁盘文件中的数据以字节的形式读取到内存中去</p>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public  FileInputStream(File file)</td>
-<td>创建字节输入流管道与源文件对象接通</td>
-</tr>
-<tr>
-<td>public  FileInputStream(String pathname)</td>
-<td>创建字节输入流管道与源文件路径接通</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public int  read()</td>
-<td>每次读取一个字节返回，如果字节已经没有可读的返回-1</td>
-</tr>
-<tr>
-<td>public int  read(byte[] buffer)</td>
-<td>每次读取一个字节数组返回，如果字节已经没有可读的返回-1</td>
-</tr>
-</tbody></table>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1、创建一个文件字节输入流管道与源文件连通</span>
-<span class="token class-name">InputStream</span> is <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"文件相对路径"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>如果数据是字符型，必须使用单引号或者双引号，如：”value”。</p>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><p>MySQL 数据库使用SQL SELECT语句来查询数据：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT column_name,column_name
+FROM table_name
+[WHERE Clause]
+[LIMIT N][ OFFSET M];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">// 2、定义一个字节数组，用于读取字节数组</span>
-<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> rs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// String rs = new String(buffer, 0, len);  读取多少倒出多少</span>
+<ul>
+<li>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件</li>
+<li>SELECT 命令可以读取一条或者多条记录</li>
+<li>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</li>
+<li>你可以使用 WHERE 语句来包含任何条件</li>
+<li>你可以使用 LIMIT 属性来设定返回的记录数</li>
+<li>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0</li>
+</ul>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><p>如果我们需要修改或更新 MySQL 中的数据，我们可以使用 SQL UPDATE 命令来操作：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE table_name SET field1=new-value1, field2=new-value2
+[WHERE Clause];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>rs<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//前三个字节代表的内容</span>
+<ul>
+<li>你可以同时更新一个或多个字段</li>
+<li>你可以在 WHERE 子句中指定任何条件</li>
+<li>你可以在一个单独表中同时更新数据</li>
+</ul>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>你可以使用 SQL 的 DELETE FROM 命令来删除 MySQL 数据表中的记录：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DELETE FROM table_name [WHERE Clause];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment">// 3、改进使用循环，每次读取一个字节数组</span>
-<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> len<span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>如果没有指定 WHERE 子句，MySQL 表中的所有记录将被删除</li>
+<li>你可以在 WHERE 子句中指定任何条件</li>
+<li>您可以在单个表中一次性删除记录</li>
+</ul>
+<h2 id="LIKE子句"><a href="#LIKE子句" class="headerlink" title="LIKE子句"></a>LIKE子句</h2><p>用于获取某个字段中含有特定字符的所有记录，SQL LIKE 子句中使用百分号 <strong>%</strong> 字符来表示任意字符，类似于UNIX或正则表达式中的星号 *****。如果没有使用百分号 **%**， LIKE 子句与等号 <strong>=</strong> 的效果是一样的</p>
+<p>以下是 SQL SELECT 语句使用 LIKE 子句从数据表中读取数据的通用语法：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT field1, field2,...fieldN 
+FROM table_name
+WHERE field1 LIKE condition1 [AND [OR]] filed2 = 'somevalue';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>文件字节输出流：FileOutputStream</strong></p>
-<p><strong>作用：</strong>以内存为基准，把内存中的数据以字节的形式写出到磁盘文件中去的流</p>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public FileOutputStream(File file)</td>
-<td>创建字节输出流管道与源文件对象接通</td>
-</tr>
-<tr>
-<td>public FileOutputStream(File file，boolean append)</td>
-<td>创建字节输出流管道与源文件对象接通，<font color="Red">可追加数据 </font></td>
-</tr>
-<tr>
-<td>public FileOutputStream(String filepath)</td>
-<td>创建字节输出流管道与源文件路径接通</td>
-</tr>
-<tr>
-<td>public FileOutputStream(String filepath，boolean append)</td>
-<td>创建字节输出流管道与源文件路径接通，<font color="Red">可追加数据 </font></td>
-</tr>
-</tbody></table>
-<p> <strong>写数据出去的API</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public void write(int a)</td>
-<td>写一个字节出去</td>
-</tr>
-<tr>
-<td>public void write(byte[] buffer)</td>
-<td>写一个字节数组出去</td>
-</tr>
-<tr>
-<td>public void write(byte[] buffer , int pos , int len)</td>
-<td>写一个字节数组的一部分出去。</td>
-</tr>
-</tbody></table>
 <ul>
-<li>换行：<code>os.write(“\r\n”.getBytes())</code></li>
+<li>LIKE 通常与 <strong>%</strong> 一同使用，类似于一个元字符的搜索</li>
+<li>你可以使用 AND 或者 OR 指定一个或多个条件</li>
+<li>你可以在 DELETE 或 UPDATE 命令中使用 WHERE…LIKE 子句来指定条件</li>
 </ul>
-<p><strong>流的关闭和刷新</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>flush()</td>
-<td>刷新流，还可以继续写数据</td>
-</tr>
-<tr>
-<td>close()</td>
-<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
-</tr>
-</tbody></table>
-<p><strong>资源释放的方式</strong></p>
-<p><strong>try-catch-finally</strong></p>
-<ul>
-<li><p>finally：放在try-catch后面的，无论是正常执行还是异常执行代码，最后一定要执行，除非JVM退出。</p>
-</li>
-<li><p>作用：一般用于进行最后的资源释放操作（专业级做法）</p>
-</li>
-<li><p>格式</p>
-</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>
-    <span class="token class-name">FileOutputStream</span> fos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"a.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    fos<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token number">97</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-	
-<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
-    <span class="token comment">// 即使上面有return语句执行，也必须执行完这里才可以！</span>
-    <span class="token comment">// 开发中不建议在这加return，加了永远是返回这里的数据</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="UNION操作符"><a href="#UNION操作符" class="headerlink" title="UNION操作符"></a>UNION操作符</h2><p>MySQL UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据。</p>
+<p>MySQL UNION 操作符语法格式：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions]
+UNION [ALL | DISTINCT]
+SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>JDK 7和JDK9中都简化了资源释放操作</strong></p>
-<img src="/2022/09/20/bi-ji-shi-io-liu/image-20220914164230804.png" class="">
+<ul>
+<li><strong>expression1, expression2, … expression_n</strong>: 要检索的列。</li>
+<li><strong>tables:</strong> 要检索的数据表。</li>
+<li><strong>WHERE conditions:</strong> 可选， 检索条件。</li>
+<li><strong>DISTINCT:</strong> 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。</li>
+<li><strong>ALL:</strong> 可选，返回所有结果集，包含重复数据。</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>可以使用 MySQL 的 <strong>ORDER BY</strong> 子句来设定你想按哪个字段哪种方式来进行排序，再返回搜索结果。</p>
+<p>以下是 SQL SELECT 语句使用 ORDER BY 子句将查询数据排序后再返回数据：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT field1, field2,...fieldN FROM table_name1, table_name2...
+ORDER BY field1 [ASC [DESC][默认 ASC]], [field2...] [ASC [DESC][默认 ASC]]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><strong>综合案例：文件拷贝</strong></p>
-<p><strong>需求：</strong>把某个视频复制到其他目录下</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
+<ul>
+<li>你可以使用任何字段来作为排序的条件，从而返回排序后的查询结果</li>
+<li>你可以设定多个字段来排序</li>
+<li>你可以使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列</li>
+<li>你可以添加 WHERE…LIKE 子句来设置条件</li>
+</ul>
+<h2 id="GROUP-BY语句"><a href="#GROUP-BY语句" class="headerlink" title="GROUP BY语句"></a>GROUP BY语句</h2><p>GROUP BY 语句根据一个或多个列对结果集进行分组，在分组的列上我们可以使用 COUNT, SUM, AVG,等函数。</p>
+<p>对应语法：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT column_name, function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CopyDemo01</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">InputStream</span> is <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token class-name">OutputStream</span> os <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            <span class="token comment">// 1、创建一个字节输入流管道与原视频接通</span>
-            is <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"D:\\原始视频.wmv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">// 2、创建一个字节输出流管道与目标文件接通</span>
-            os <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"D:\\new.wmv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">// 3、定义一个字节数组来转移数据</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> buffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> len<span class="token punctuation">;</span>  <span class="token comment">// 记录每次读取的字节数</span>
-
-            <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> is<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                os<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"复制完成了！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">// 4、关闭流</span>
-            os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
-            <span class="token comment">// 无论代码是正常结束，还是出现异常都要最后执行这里</span>
-            <span class="token comment">// 4、关闭流</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>os <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>is <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><ul>
-<li>读取中文输出，字符流更合适，因为字节流读取中文输出会乱码，或者内存溢出</li>
-</ul>
-<p><strong>文件字符输入流：Reader</strong></p>
-<ul>
-<li>作用：以内存为基准，把磁盘文件中的数据以字符的形式读取到内存中去</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public FileReader(File file)</td>
-<td>创建字符输入流管道与源文件对象接通</td>
-</tr>
-<tr>
-<td>public FileReader(String  pathname)</td>
-<td>创建字符输入流管道与源文件路径接通</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public int read()</td>
-<td>每次读取一个字符返回，如果字符已经没有可读的返回-1</td>
-</tr>
-<tr>
-<td>public int  read(char[] buffer)</td>
-<td>每次读取一个字符数组，返回读取的字符个数，如果字符已经没有可读的返回-1</td>
-</tr>
-</tbody></table>
-<p><strong>文件字符输出流：FileWriter</strong></p>
-<ul>
-<li>作用：以内存为基准，把内存中的数据以字符的形式写出到磁盘文件中去的流</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public FileWriter(File file)</td>
-<td>创建字符输出流管道与源文件对象接通</td>
-</tr>
-<tr>
-<td>public FileWriter(File file，boolean append)</td>
-<td>创建字符输出流管道与源文件对象接通，可追加数据</td>
-</tr>
-<tr>
-<td>public FileWriter(String filepath)</td>
-<td>创建字符输出流管道与源文件路径接通</td>
-</tr>
-<tr>
-<td>public FileWriter(String filepath，boolean append)</td>
-<td>创建字符输出流管道与源文件路径接通，可追加数据</td>
-</tr>
-</tbody></table>
-<p><strong>写数据出去的API</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>void  write(int c)</td>
-<td>写一个字符</td>
-</tr>
-<tr>
-<td>void  write(char[] cbuf)</td>
-<td>写入一个字符数组</td>
-</tr>
-<tr>
-<td>void  write(char[] cbuf, int off, int len)</td>
-<td>写入字符数组的一部分</td>
-</tr>
-<tr>
-<td>void  write(String str)</td>
-<td>写一个字符串</td>
-</tr>
-<tr>
-<td>void  write(String str, int off, int len)</td>
-<td>写一个字符串的一部分</td>
-</tr>
-</tbody></table>
-<p><strong>流的关闭和刷新</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>flush()</td>
-<td>刷新流，还可以继续写数据</td>
-</tr>
-<tr>
-<td>close()</td>
-<td>关闭流，释放资源，但是在关闭之前会先刷新流。一旦关闭，就不能再写数据</td>
-</tr>
-</tbody></table>
-<h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><ul>
-<li>缓冲流也称为高效流、或者高级流。之前学习的字节流可以称为原始流</li>
-<li>作用：<font color="Red">缓冲流自带缓冲区、可以提高原始字节流、字符流读写数据的性能</font></li>
-</ul>
-<p><strong>字节缓冲流性能优化原理</strong></p>
-<ul>
-<li>字节缓冲输入流自带了<font color="Red">8KB缓冲池</font>，以后我们直接从缓冲池读取数据，所以性能较好</li>
-<li>字节缓冲输出流自带了<font color="Red">8KB缓冲池</font>，数据就直接写入到缓冲池中去，写数据性能极高了</li>
-</ul>
-<p><strong>字节缓冲流</strong></p>
-<ul>
-<li><p>字节缓冲输入流：BufferedInputStream，提高字节输入流读取数据的性能</p>
-</li>
-<li><p>字节缓冲输出流：BufferedOutputStream，提高字节输出流读取数据的性能</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public BufferedInputStream(InputStream is)</td>
-<td>可以把低级的字节输入流包装成一个高级的缓冲字节输入流管道，从而提高字节输入流读数据的性能</td>
-</tr>
-<tr>
-<td>public BufferedOutputStream(OutputStream os)</td>
-<td>可以把低级的字节输出流包装成一个高级的缓冲字节输出流，从而提高写数据的性能</td>
-</tr>
-</tbody></table>
-<p><strong>字符缓冲流</strong></p>
-<ul>
-<li>字符缓冲输入流：BufferedReader，提高字符输入流读取数据的性能，除此之外多了<font color="Red">按照行读取数据</font>的功能</li>
-<li>字符缓冲输出流：BufferedWriter，提高字符输出流写取数据的性能，除此之外多了<font color="Red">换行</font>功能</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public  BufferedReader(Reader r)</td>
-<td>可以把低级的字符输入流包装成一个高级的缓冲字符输入流管道，从而提高字符输入流读数据的性能</td>
-</tr>
-<tr>
-<td>public BufferedWriter(Writer  w)</td>
-<td>可以把低级的字符输出流包装成一个高级的缓冲字符输出流管道，从而提高字符输出流写数据的性能</td>
-</tr>
-</tbody></table>
-<p><strong>字符缓冲流新增功能</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public  String readLine()</td>
-<td>读取一行数据返回，如果读取没有完毕，无行可读返回<font color="Red">null </font></td>
-</tr>
-<tr>
-<td>public  void newLine()</td>
-<td>换行操作</td>
-</tr>
-</tbody></table>
-<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><ul>
-<li>作用：解决不同编码读取乱码的问题</li>
-<li>字符输入转换流：InputStreamReader，可以把原始的字节流按照指定编码转换成字符输入流</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public InputStreamReader(InputStream is)</td>
-<td>可以把原始的字节流按照代码默认编码转换成字符输入流，<font color="Red">几乎不用</font>，与默认的FileReader一样。</td>
-</tr>
-<tr>
-<td>public InputStreamReader(InputStream is ，String charset)</td>
-<td>可以把原始的字节流按照<font color="Red">指定编码</font>转换成字符输入流，这样字符流中的字符就不乱码了</td>
-</tr>
-</tbody></table>
-<ul>
-<li>字符输入转换流：OutputStreamWriter，可以把字节输出流按照指定编码转换成字符输出流</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public OutputStreamWriter(OutputStream os)</td>
-<td>可以把原始的字节输出流按照代码默认编码转换成字符输出流，几乎不用。</td>
-</tr>
-<tr>
-<td>public OutputStreamWriter(OutputStream os，String  charset)</td>
-<td>可以把原始的字节输出流按照<font color="Red">指定编码</font>转换成字符输出流</td>
-</tr>
-</tbody></table>
-<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p><strong>对象序列化</strong></p>
-<ul>
-<li>作用：以内存为基准，把内存中的<font color="Red">对象</font>存储到磁盘文件中去，称为对象序列化</li>
-<li>使用到的流是对象字节输出流：<font color="Red">ObjectOutputStream</font></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public ObjectOutputStream(OutputStream  out)</td>
-<td>把低级字节输出流包装成高级的对象字节输出流</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public final void writeObject(Object obj)</td>
-<td>把对象写出去到对象序列化流的文件中去</td>
-</tr>
-</tbody></table>
-<p><strong>对象反序列化</strong></p>
-<ul>
-<li>作用：以内存为基准，把存储到磁盘文件中去的<font color="Red">对象数据</font>恢复成内存中的对象，称为对象反序列化</li>
-<li>使用到的流是对象字节输入流：<font color="Red">ObjectInputStream</font></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public ObjectInputStream(InputStream  out)</td>
-<td>把低级字节输如流包装成高级的对象字节输入流</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public  Object readObject()</td>
-<td>把存储到磁盘文件中去的对象数据恢复成内存中的对象返回</td>
-</tr>
-</tbody></table>
-<p><strong>注意事项</strong></p>
-<ul>
-<li>对象如果要序列化，必须实现<font color="Red">Serializable</font>序列化接口</li>
-<li>transient修饰的成员变量不会参与序列化，这样可以避免泄露敏感信息</li>
-<li>使用<code>private static final long serialVersionUID = 1</code>来申明序列化的版本号码，这样序列化的版本号与反序列化的版本号必须一致才不会出错</li>
-</ul>
-<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><ul>
-<li><p>作用：打印流可以实现<font color="Red">方便、高效的打印数据到文件</font>中去。打印流一般是指：PrintStream，PrintWriter两个类</p>
-</li>
-<li><p>可以实现打印什么数据就是什么数据，例如打印整数97写出去就是97，打印boolean的true，写出去就是true</p>
-</li>
-</ul>
-<p><strong>PrintStream</strong></p>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public PrintStream(OutputStream os)</td>
-<td>打印流直接通向字节输出流管道</td>
-</tr>
-<tr>
-<td>public PrintStream(File f)</td>
-<td>打印流直接通向文件对象</td>
-</tr>
-<tr>
-<td>public PrintStream(String filepath)</td>
-<td>打印流直接通向文件路径</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public void print(Xxx  xx)</td>
-<td>打印任意类型的数据出去</td>
-</tr>
-</tbody></table>
-<p><strong>PrintWriter</strong></p>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public PrintWriter(OutputStream os)</td>
-<td>打印流直接通向字节输出流管道</td>
-</tr>
-<tr>
-<td>public PrintWriter (Writer w)</td>
-<td>打印流直接通向字符输出流管道</td>
-</tr>
-<tr>
-<td>public PrintWriter (File f)</td>
-<td>打印流直接通向文件对象</td>
-</tr>
-<tr>
-<td>public PrintWriter (String filepath)</td>
-<td>打印流直接通向文件路径</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public void print(Xxx  xx)</td>
-<td>打印任意类型的数据出去</td>
-</tr>
-</tbody></table>
-<p><strong>PrintStream和PrintWriter的区别</strong></p>
-<ul>
-<li><p>打印数据功能上是一模一样的，都是使用方便，性能高效（核心优势）</p>
-</li>
-<li><p>PrintStream继承自字节输出流OutputStream，支持写字节数据的方法</p>
-</li>
-<li><p>PrintWriter继承自字符输出流Writer，支持写字符数据出去</p>
-</li>
-</ul>
-<p><strong>输出语句重定向</strong></p>
-<ul>
-<li>属于打印流的一种应用，可以把输出语句的打印位置改到文件</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">PrintStream</span> ps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrintStream</span><span class="token punctuation">(</span><span class="token string">"文件地址"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">setOut</span><span class="token punctuation">(</span>ps<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ul>
-<li>其实就是一个Map集合，但是我们一般不会当集合使用，因为HashMap更好用</li>
-</ul>
-<p><strong>Properties核心作用</strong></p>
-<ul>
-<li><p>Properties代表的是一个<font color="Red">属性文件</font>，可以把自己对象中的键值对信息存入到一个属性文件中去</p>
-</li>
-<li><p>属性文件：后缀是.properties结尾的文件，里面的内容都是<font color="Red"> key=value</font>，后续做系统配置信息的</p>
-</li>
-</ul>
-<p><strong>Properties和IO流结合的方法(API)</strong></p>
-<table>
-<thead>
-<tr>
-<th>构造器</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>void load(InputStream inStream)</td>
-<td>从输入字节流读取属性列表（键和元素对）</td>
-</tr>
-<tr>
-<td>void  load(Reader reader)</td>
-<td>从输入字符流读取属性列表（键和元素对）</td>
-</tr>
-<tr>
-<td>void  store(OutputStream out, String comments)</td>
-<td>将此属性列表（键和元素对）写入此  Properties表中，以适合于使用 load(InputStream)方法的格式写入输出字节流</td>
-</tr>
-<tr>
-<td>void  store(Writer writer, String comments)</td>
-<td>将此属性列表（键和元素对）写入此  Properties表中，以适合使用 load(Reader)方法的格式写入输出字符流</td>
-</tr>
-<tr>
-<td>public Object setProperty(String  key, String value)</td>
-<td>保存键值对（put）</td>
-</tr>
-<tr>
-<td>public String getProperty(String  key)</td>
-<td>使用此属性列表中指定的键搜索属性值  (get)</td>
-</tr>
-<tr>
-<td>public Set&lt;String&gt; stringPropertyNames()</td>
-<td>所有键的名称的集合 (keySet())</td>
-</tr>
-</tbody></table>
-<h2 id="IO框架"><a href="#IO框架" class="headerlink" title="IO框架"></a>IO框架</h2><p><strong>commons-io概述</strong></p>
-<ul>
-<li><p>commons-io是apache开源基金组织提供的一组有关IO操作的类库，可以提高IO功能开发的效率</p>
-</li>
-<li><p>commons-io工具包提供了很多有关io操作的类。有两个主要的类FileUtils，IOUtils</p>
-</li>
-</ul>
-<p><strong>FileUtils主要有如下方法</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>String  readFileToString(File  file, String encoding)</td>
-<td>读取文件中的数据, 返回字符串</td>
-</tr>
-<tr>
-<td>void  copyFile(File  srcFile, File destFile)</td>
-<td>复制文件。</td>
-</tr>
-<tr>
-<td>void  copyDirectoryToDirectory(File  srcDir,  File destDir)</td>
-<td>复制文件夹。</td>
-</tr>
-</tbody></table>
-<p><strong>案例：导入commons-io-2.6.jar做开发</strong></p>
-<p>需求：使用commons-io简化io流读写</p>
-<p>具体步骤：</p>
-<ul>
-<li>在项目中创建一个文件夹：lib</li>
-<li>将commons-io-2.6.jar文件复制到lib文件夹</li>
-<li>在jar文件上点右键，选择 Add as Library -&gt; 点击OK</li>
-<li>在类中导包使用</li>
-</ul>
+<p>如：<code>SELECT name, COUNT(*) FROM employee_tbl GROUP BY name;</code></p>
 
                 
             </div>
@@ -1176,7 +612,7 @@ IO流的分类
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/">https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/</a>
+                    <a href="https://faith-ye.github.io/2022/09/22/bi-ji-er-mysql-yu-fa-shang/">https://faith-ye.github.io/2022/09/22/bi-ji-er-mysql-yu-fa-shang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1213,11 +649,7 @@ IO流的分类
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/IO%E6%B5%81/">
-                                    <span class="chip bg-color">IO流</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1655,9 +1087,52 @@ IO流的分类
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/09/22/bi-ji-er-mysql-yu-fa-shang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="笔记二：MySQL语法上">
+                        
+                        <span class="card-title">笔记二：MySQL语法上</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    MySQL学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/09/22/bi-ji-yi-mysql-an-zhuang-ji-shu-ju-lei-xing/">
                     <div class="card-image">
@@ -1675,56 +1150,15 @@ IO流的分类
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
                             <a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
                                     MySQL学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="笔记九：File类和方法递归">
-                        
-                        <span class="card-title">笔记九：File类和方法递归</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-14
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/JavaSE%E8%BF%9B%E9%98%B6/" class="post-category">
-                                    JavaSE进阶
                                 </a>
                             
                             

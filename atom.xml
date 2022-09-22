@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-22T08:56:03.749Z</updated>
+  <updated>2022-09-22T11:38:45.361Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记二：MySQL语法上</title>
+    <link href="https://faith-ye.github.io/2022/09/22/bi-ji-er-mysql-yu-fa-shang/"/>
+    <id>https://faith-ye.github.io/2022/09/22/bi-ji-er-mysql-yu-fa-shang/</id>
+    <published>2022-09-22T11:37:06.000Z</published>
+    <updated>2022-09-22T11:38:45.361Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这里可以通过进入终端或者使用一些软件进行学习，软件的话推荐&lt;code&gt;Navicat&lt;/code&gt;。终端的话，通过win+R进入终端后输入&lt;code&gt;mysql -u root -p&lt;/code&gt;后按回车输入前面安装时的密码就可以进入mysql下进行操作，退出</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL学习笔记" scheme="https://faith-ye.github.io/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>笔记一：MySQL安装及数据类型</title>
@@ -484,29 +507,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h2&gt;&lt;p&gt;API的全称是Application Programming</summary>
-        
-      
-    
-    
-    
-    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Java面向对象</title>
-    <link href="https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/"/>
-    <id>https://faith-ye.github.io/2022/05/11/java-mian-xiang-dui-xiang/</id>
-    <published>2022-05-11T03:00:14.000Z</published>
-    <updated>2022-05-11T03:02:40.460Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;设计对象并使用&quot;&gt;&lt;a href=&quot;#设计对象并使用&quot; class=&quot;headerlink&quot;</summary>
         
       
     
