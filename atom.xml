@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-22T11:38:45.361Z</updated>
+  <updated>2022-09-27T07:17:47.829Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Maven仓库安装配置及使用</title>
+    <link href="https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/"/>
+    <id>https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/</id>
+    <published>2022-09-27T07:13:31.000Z</published>
+    <updated>2022-09-27T07:17:47.829Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;亲测下面这个链接有用，大家按照这个博主写的配置就好&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="Maven仓库" scheme="https://faith-ye.github.io/tags/Maven%E4%BB%93%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>笔记二：MySQL语法上</title>
@@ -491,29 +517,6 @@
     
     
     <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java两个常用API</title>
-    <link href="https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/"/>
-    <id>https://faith-ye.github.io/2022/05/12/java-liang-ge-chang-yong-api/</id>
-    <published>2022-05-12T07:30:01.000Z</published>
-    <updated>2022-05-12T07:30:34.175Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h2&gt;&lt;p&gt;API的全称是Application Programming</summary>
-        
-      
-    
-    
-    
-    <category term="Java学习笔记" scheme="https://faith-ye.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
     
   </entry>
   

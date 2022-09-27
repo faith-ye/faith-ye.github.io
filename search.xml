@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Maven仓库安装配置及使用</title>
+      <link href="/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/"/>
+      <url>/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<p>亲测下面这个链接有用，大家按照这个博主写的配置就好</p><p><a href="https://www.cnblogs.com/desireyang/p/12787480.html">Maven仓库安装配置及使用</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生命在于折腾 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Maven仓库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>笔记二：MySQL语法上</title>
       <link href="/2022/09/22/bi-ji-er-mysql-yu-fa-shang/"/>
       <url>/2022/09/22/bi-ji-er-mysql-yu-fa-shang/</url>
