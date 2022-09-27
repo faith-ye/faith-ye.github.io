@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-27T07:17:47.829Z</updated>
+  <updated>2022-09-27T09:29:34.305Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/"/>
     <id>https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/</id>
     <published>2022-09-27T07:13:31.000Z</published>
-    <updated>2022-09-27T07:17:47.829Z</updated>
+    <updated>2022-09-27T09:29:34.305Z</updated>
     
     
       
@@ -29,7 +29,8 @@
         
         
     <summary type="html">&lt;p&gt;亲测下面这个链接有用，大家按照这个博主写的配置就好&lt;/p&gt;
-&lt;p&gt;&lt;a</summary>
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/desireyang/p/12787480.html&quot;&gt;Maven仓库安装配置及使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;需要补充的地方是 jdk</summary>
         
       
     
