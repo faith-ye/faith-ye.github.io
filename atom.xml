@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-29T02:00:34.867Z</updated>
+  <updated>2022-09-29T03:30:23.134Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笔记四：JDBC练习</title>
+    <link href="https://faith-ye.github.io/2022/09/29/bi-ji-si-jdbc-lian-xi/"/>
+    <id>https://faith-ye.github.io/2022/09/29/bi-ji-si-jdbc-lian-xi/</id>
+    <published>2022-09-29T03:28:07.000Z</published>
+    <updated>2022-09-29T03:30:23.134Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL学习笔记" scheme="https://faith-ye.github.io/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="JDBC" scheme="https://faith-ye.github.io/tags/JDBC/"/>
+    
+  </entry>
   
   <entry>
     <title>笔记三：JDBC</title>
@@ -490,34 +515,6 @@
     <category term="CNN" scheme="https://faith-ye.github.io/tags/CNN/"/>
     
     <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Conformer-用卷积增强的Transformer做语音识别</title>
-    <link href="https://faith-ye.github.io/2022/05/13/conformer-yong-juan-ji-zeng-qiang-de-transformer-zuo-yu-yin-shi-bie/"/>
-    <id>https://faith-ye.github.io/2022/05/13/conformer-yong-juan-ji-zeng-qiang-de-transformer-zuo-yu-yin-shi-bie/</id>
-    <published>2022-05-13T13:37:57.000Z</published>
-    <updated>2022-05-13T13:41:01.605Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;今天学习一篇ASR-语言识别领域的文章，来自google的：&lt;/p&gt;
-&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Conformer" scheme="https://faith-ye.github.io/tags/Conformer/"/>
-    
-    <category term="ASR" scheme="https://faith-ye.github.io/tags/ASR/"/>
     
   </entry>
   
