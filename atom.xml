@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-09-29T03:30:23.134Z</updated>
+  <updated>2022-10-18T07:46:49.237Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git命令行</title>
+    <link href="https://faith-ye.github.io/2022/10/18/git-ming-ling-xing/"/>
+    <id>https://faith-ye.github.io/2022/10/18/git-ming-ling-xing/</id>
+    <published>2022-10-18T07:44:52.000Z</published>
+    <updated>2022-10-18T07:46:49.237Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;git基本操作&quot;&gt;&lt;a href=&quot;#git基本操作&quot; class=&quot;headerlink&quot; title=&quot;git基本操作&quot;&gt;&lt;/a&gt;git基本操作&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;##</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="git" scheme="https://faith-ye.github.io/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>笔记四：JDBC练习</title>
@@ -488,33 +513,6 @@
     
     
     <category term="好用的软件" scheme="https://faith-ye.github.io/tags/%E5%A5%BD%E7%94%A8%E7%9A%84%E8%BD%AF%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>注意力增强卷积网络</title>
-    <link href="https://faith-ye.github.io/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/"/>
-    <id>https://faith-ye.github.io/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/</id>
-    <published>2022-05-20T08:32:45.000Z</published>
-    <updated>2022-05-20T08:49:50.230Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;img src=&quot;/2022/05/20/zhu-yi-li-zeng-qiang-juan-ji-wang-luo/image-20220520090637034.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="CNN" scheme="https://faith-ye.github.io/tags/CNN/"/>
-    
-    <category term="attention" scheme="https://faith-ye.github.io/tags/attention/"/>
     
   </entry>
   
