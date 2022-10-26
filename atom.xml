@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-10-18T07:46:49.237Z</updated>
+  <updated>2022-10-26T12:43:19.836Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Anaconda常用命令</title>
+    <link href="https://faith-ye.github.io/2022/10/26/anaconda-chang-yong-ming-ling/"/>
+    <id>https://faith-ye.github.io/2022/10/26/anaconda-chang-yong-ming-ling/</id>
+    <published>2022-10-26T12:37:49.000Z</published>
+    <updated>2022-10-26T12:43:19.836Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;具体参考下面这篇博客&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="anaconda" scheme="https://faith-ye.github.io/tags/anaconda/"/>
+    
+  </entry>
   
   <entry>
     <title>Git命令行</title>
@@ -488,31 +514,6 @@
     <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
     
     <category term="WGAN" scheme="https://faith-ye.github.io/tags/WGAN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zotero</title>
-    <link href="https://faith-ye.github.io/2022/06/15/zotero/"/>
-    <id>https://faith-ye.github.io/2022/06/15/zotero/</id>
-    <published>2022-06-15T09:04:20.000Z</published>
-    <updated>2022-06-15T09:55:57.419Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;说到文献管理软件，大家可能会想到&lt;a href=&quot;https://endnote.com/&quot;&gt;EndNote&lt;/a&gt;或&lt;a href=&quot;http://www.inoteexpress.com/aegean/&quot;&gt;NoteExpress&lt;/a&gt;，这里给大家分享 &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
-    
-    
-    <category term="好用的软件" scheme="https://faith-ye.github.io/tags/%E5%A5%BD%E7%94%A8%E7%9A%84%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
