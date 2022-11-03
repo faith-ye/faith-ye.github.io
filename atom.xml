@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-10-26T12:43:19.836Z</updated>
+  <updated>2022-11-03T01:56:42.999Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot基础配置</title>
+    <link href="https://faith-ye.github.io/2022/11/03/springboot-ji-chu-pei-zhi/"/>
+    <id>https://faith-ye.github.io/2022/11/03/springboot-ji-chu-pei-zhi/</id>
+    <published>2022-11-03T01:54:27.000Z</published>
+    <updated>2022-11-03T01:56:42.999Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;配置文件分类&quot;&gt;&lt;a href=&quot;#配置文件分类&quot; class=&quot;headerlink&quot; title=&quot;配置文件分类&quot;&gt;&lt;/a&gt;配置文件分类&lt;/h2&gt;&lt;p&gt;SpringBoot 除了支持 properties</summary>
+        
+      
+    
+    
+    
+    <category term="SpringBoot" scheme="https://faith-ye.github.io/categories/SpringBoot/"/>
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/tags/SSM/"/>
+    
+  </entry>
   
   <entry>
     <title>Anaconda常用命令</title>
@@ -482,33 +507,6 @@
     
     
     <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
-    
-    <category term="WGAN" scheme="https://faith-ye.github.io/tags/WGAN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WGAN的Pytorch实现</title>
-    <link href="https://faith-ye.github.io/2022/07/06/wgan-de-pytorch-shi-xian/"/>
-    <id>https://faith-ye.github.io/2022/07/06/wgan-de-pytorch-shi-xian/</id>
-    <published>2022-07-06T03:15:31.000Z</published>
-    <updated>2022-07-08T11:48:20.798Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;GAN存在训练困难、训练得到的loss无法表示训练进程等问题。大多数的GAN都是从模型的结构上进行修改，如DCGAN，用卷积神经网络设计生成器和判别器，并进行了一些调整，但这些终究是治标不治本，没有从根本上解决问题。原始GAN是用JS散度来评判两个分布的相似程度，而JS散度</summary>
-        
-      
-    
-    
-    
-    <category term="深度学习笔记" scheme="https://faith-ye.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
     <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
