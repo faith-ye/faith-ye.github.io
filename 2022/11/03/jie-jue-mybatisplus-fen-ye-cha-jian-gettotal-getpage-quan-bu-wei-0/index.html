@@ -450,7 +450,7 @@ void testGetPage(){
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    327
+                    408
                 </div>
                 
 
@@ -501,13 +501,15 @@ void testGetPage(){
     <span class="token annotation punctuation">@Bean</span>
     <span class="token keyword">public</span> <span class="token class-name">MybatisPlusInterceptor</span> <span class="token function">mybatisPlusInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token class-name">MybatisPlusInterceptor</span> interceptor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MybatisPlusInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        interceptor<span class="token punctuation">.</span><span class="token function">addInnerInterceptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PaginationInnerInterceptor</span><span class="token punctuation">(</span><span class="token class-name">DbType</span><span class="token punctuation">.</span>MYSQL<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        interceptor<span class="token punctuation">.</span><span class="token function">addInnerInterceptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PaginationInnerInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> interceptor<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>现在看一下控制台分页查询的执行情况，问题就已经解决了，这里需要注意将方法定义为一个Bean，同时将对应的类设为配置类，还有就是加入<code>DbType.MYSQL</code>，表明所用的数据库为 MySQL</p>
+<p>上述代码第一行是创建MP的拦截器栈，这个时候拦截器栈中没有具体的拦截器，第二行是初始化了分页拦截器，并添加到拦截器栈中。如果后期开发其他功能，需要添加全新的拦截器，按照第二行的格式继续add进去新的拦截器就可以了。</p>
+<p>现在看一下控制台分页查询的执行情况，问题就已经解决了，这里需要注意将方法定义为一个Bean，同时将对应的类设为配置类，用注解<code>@Configuration</code></p>
 <img src="/2022/11/03/jie-jue-mybatisplus-fen-ye-cha-jian-gettotal-getpage-quan-bu-wei-0/image-20221103150103886.png" class="">
+
 
                 
             </div>
