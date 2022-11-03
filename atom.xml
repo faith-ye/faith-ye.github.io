@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-11-03T01:56:42.999Z</updated>
+  <updated>2022-11-03T07:01:22.194Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决mybatisplus分页插件getTotal，getPage全部为0</title>
+    <link href="https://faith-ye.github.io/2022/11/03/jie-jue-mybatisplus-fen-ye-cha-jian-gettotal-getpage-quan-bu-wei-0/"/>
+    <id>https://faith-ye.github.io/2022/11/03/jie-jue-mybatisplus-fen-ye-cha-jian-gettotal-getpage-quan-bu-wei-0/</id>
+    <published>2022-11-03T06:43:39.000Z</published>
+    <updated>2022-11-03T07:01:22.194Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;首先看一下测试的内容和运行结果&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-java&quot; data-language=&quot;java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/categories/SSM/"/>
+    
+    
+    <category term="mybatisplus" scheme="https://faith-ye.github.io/tags/mybatisplus/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot基础配置</title>
@@ -481,37 +507,6 @@
     <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
     
     <category term="WGAN_GP" scheme="https://faith-ye.github.io/tags/WGAN-GP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WGAN</title>
-    <link href="https://faith-ye.github.io/2022/07/08/wgan/"/>
-    <id>https://faith-ye.github.io/2022/07/08/wgan/</id>
-    <published>2022-07-08T11:46:14.000Z</published>
-    <updated>2022-07-08T11:54:34.068Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;img src=&quot;/2022/07/08/wgan/image-20220708100202682.png&quot; class=&quot;&quot;&gt;
-
-
-
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
-    
-    <category term="WGAN" scheme="https://faith-ye.github.io/tags/WGAN/"/>
     
   </entry>
   
