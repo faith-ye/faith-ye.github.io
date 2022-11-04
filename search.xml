@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>windows系统下关于端口的一些命令</title>
+      <link href="/2022/11/04/windows-xi-tong-xia-guan-yu-duan-kou-de-yi-xie-ming-ling/"/>
+      <url>/2022/11/04/windows-xi-tong-xia-guan-yu-duan-kou-de-yi-xie-ming-ling/</url>
+      
+        <content type="html"><![CDATA[<p>这部分知识可以用于解决在 DOS 环境下启动 SpringBoot 工程时，会遇到端口占用的问题</p><ul><li>查询端口</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">netstat -ano<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>查询指定端口</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">netstat -ano |findstr "端口号"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>根据进程 PID 查询进程名称</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">tasklist |findstr "进程PID号"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>根据 PID 杀死任务</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">taskkill /F /PID "进程PID号"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>根据进程名称杀死任务</li></ul><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">taskkill -f -t -im "进程名称"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> SSM </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>解决mybatisplus分页插件getTotal，getPage全部为0</title>
       <link href="/2022/11/03/jie-jue-mybatisplus-fen-ye-cha-jian-gettotal-getpage-quan-bu-wei-0/"/>
       <url>/2022/11/03/jie-jue-mybatisplus-fen-ye-cha-jian-gettotal-getpage-quan-bu-wei-0/</url>

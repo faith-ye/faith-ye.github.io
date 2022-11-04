@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-11-03T07:09:00.595Z</updated>
+  <updated>2022-11-04T02:00:24.381Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows系统下关于端口的一些命令</title>
+    <link href="https://faith-ye.github.io/2022/11/04/windows-xi-tong-xia-guan-yu-duan-kou-de-yi-xie-ming-ling/"/>
+    <id>https://faith-ye.github.io/2022/11/04/windows-xi-tong-xia-guan-yu-duan-kou-de-yi-xie-ming-ling/</id>
+    <published>2022-11-04T01:54:04.000Z</published>
+    <updated>2022-11-04T02:00:24.381Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这部分知识可以用于解决在 DOS 环境下启动 SpringBoot 工程时，会遇到端口占用的问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查询端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;line-numbers language-shell&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/categories/SSM/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>解决mybatisplus分页插件getTotal，getPage全部为0</title>
@@ -478,35 +505,6 @@
     <category term="static" scheme="https://faith-ye.github.io/tags/static/"/>
     
     <category term="继承" scheme="https://faith-ye.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WGAN_GP</title>
-    <link href="https://faith-ye.github.io/2022/07/14/wgan-gp/"/>
-    <id>https://faith-ye.github.io/2022/07/14/wgan-gp/</id>
-    <published>2022-07-14T03:03:43.000Z</published>
-    <updated>2022-07-14T03:09:48.754Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;img src=&quot;/2022/07/14/wgan-gp/image-20220714084905587-16577679352952.png&quot; class=&quot;&quot;&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读笔记" scheme="https://faith-ye.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="GAN" scheme="https://faith-ye.github.io/tags/GAN/"/>
-    
-    <category term="WGAN_GP" scheme="https://faith-ye.github.io/tags/WGAN-GP/"/>
     
   </entry>
   
