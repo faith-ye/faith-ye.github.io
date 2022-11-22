@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-11-04T02:00:24.381Z</updated>
+  <updated>2022-11-22T10:59:11.911Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot热部署</title>
+    <link href="https://faith-ye.github.io/2022/11/22/springboot-re-bu-shu/"/>
+    <id>https://faith-ye.github.io/2022/11/22/springboot-re-bu-shu/</id>
+    <published>2022-11-22T10:57:58.000Z</published>
+    <updated>2022-11-22T10:59:11.911Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;热部署的定义：&lt;/strong&gt;简单来说就是当你程序改了，不用重启服务器，服务器会自己把更新后的程序给重新加载一遍&lt;/p&gt;
+&lt;h2 id=&quot;手动启动热部署&quot;&gt;&lt;a href=&quot;#手动启动热部署&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/categories/SSM/"/>
+    
+    
+    <category term="SpringBoot" scheme="https://faith-ye.github.io/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>windows系统下关于端口的一些命令</title>
@@ -478,33 +504,6 @@
     
     
     <category term="多态" scheme="https://faith-ye.github.io/tags/%E5%A4%9A%E6%80%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>笔记一：static和继承</title>
-    <link href="https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/"/>
-    <id>https://faith-ye.github.io/2022/07/14/bi-ji-yi-static-he-ji-cheng/</id>
-    <published>2022-07-14T09:23:50.000Z</published>
-    <updated>2022-07-14T09:25:12.099Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;static静态关键字&quot;&gt;&lt;a href=&quot;#static静态关键字&quot; class=&quot;headerlink&quot; title=&quot;static静态关键字&quot;&gt;&lt;/a&gt;static静态关键字&lt;/h2&gt;&lt;h3 id=&quot;static&quot;&gt;&lt;a href=&quot;#static&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-    <category term="static" scheme="https://faith-ye.github.io/tags/static/"/>
-    
-    <category term="继承" scheme="https://faith-ye.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
     
   </entry>
   
