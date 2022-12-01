@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-11-22T10:59:11.911Z</updated>
+  <updated>2022-12-01T09:42:08.398Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot内置缓存</title>
+    <link href="https://faith-ye.github.io/2022/12/01/springboot-nei-zhi-huan-cun/"/>
+    <id>https://faith-ye.github.io/2022/12/01/springboot-nei-zhi-huan-cun/</id>
+    <published>2022-12-01T09:35:12.000Z</published>
+    <updated>2022-12-01T09:42:08.398Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/categories/SSM/"/>
+    
+    
+    <category term="springboot缓存" scheme="https://faith-ye.github.io/tags/springboot%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot热部署</title>
@@ -479,31 +504,6 @@
     
     <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>笔记二：包和多态</title>
-    <link href="https://faith-ye.github.io/2022/07/18/bi-ji-er-bao-he-duo-tai/"/>
-    <id>https://faith-ye.github.io/2022/07/18/bi-ji-er-bao-he-duo-tai/</id>
-    <published>2022-07-18T08:30:45.000Z</published>
-    <updated>2022-07-18T08:31:55.654Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;包&quot;&gt;&lt;a href=&quot;#包&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-    <category term="多态" scheme="https://faith-ye.github.io/tags/%E5%A4%9A%E6%80%81/"/>
     
   </entry>
   
