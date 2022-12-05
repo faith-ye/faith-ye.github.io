@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-12-01T09:42:08.398Z</updated>
+  <updated>2022-12-05T07:00:13.826Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot整合缓存</title>
+    <link href="https://faith-ye.github.io/2022/12/05/springboot-zheng-he-huan-cun/"/>
+    <id>https://faith-ye.github.io/2022/12/05/springboot-zheng-he-huan-cun/</id>
+    <published>2022-12-05T06:56:48.000Z</published>
+    <updated>2022-12-05T07:00:13.826Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​        springboot提供了对市面上几乎所有的缓存技术进行整合的方案，这里主要记录两个——Redis和jetcache。这章的代码是基于&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="SSM" scheme="https://faith-ye.github.io/categories/SSM/"/>
+    
+    
+    <category term="Redis" scheme="https://faith-ye.github.io/tags/Redis/"/>
+    
+    <category term="jetcache" scheme="https://faith-ye.github.io/tags/jetcache/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot内置缓存</title>
@@ -474,29 +501,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;日期和时间&quot;&gt;&lt;a href=&quot;#日期和时间&quot; class=&quot;headerlink&quot; title=&quot;日期和时间&quot;&gt;&lt;/a&gt;日期和时间&lt;/h2&gt;&lt;h3 id=&quot;Date&quot;&gt;&lt;a href=&quot;#Date&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记三：接口和内部类</title>
-    <link href="https://faith-ye.github.io/2022/07/20/bi-ji-san-jie-kou-he-nei-bu-lei/"/>
-    <id>https://faith-ye.github.io/2022/07/20/bi-ji-san-jie-kou-he-nei-bu-lei/</id>
-    <published>2022-07-20T01:48:37.000Z</published>
-    <updated>2022-07-20T01:49:42.995Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;接口&quot;&gt;&lt;a href=&quot;#接口&quot; class=&quot;headerlink&quot;</summary>
         
       
     
