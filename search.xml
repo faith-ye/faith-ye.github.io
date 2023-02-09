@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux常用命令</title>
+      <link href="/2023/02/09/linux-chang-yong-ming-ling/"/>
+      <url>/2023/02/09/linux-chang-yong-ming-ling/</url>
+      
+        <content type="html"><![CDATA[<h2 id="文件目录操作命令"><a href="#文件目录操作命令" class="headerlink" title="文件目录操作命令"></a>文件目录操作命令</h2><p><strong>ls</strong></p><p><strong>作用：</strong>显示指定目录下的内容</p><p><strong>语法：</strong>ls [-al] [dir]</p><ul><li>-a显示所有文件及目录（.开头的隐藏文件也会列出）</li><li>-l除文件名称外，同时将文件形态（d表示目录，-表示文件）、权限、拥有者、文件大小等信息详细列出</li><li>常用命令ls -l，简写为ll</li></ul><p><strong>cd</strong></p><p><strong>作用：</strong>用于切换当前工作目录</p><p><strong>语法：</strong>cd [dirName]</p><ul><li>~表示用户的home目录</li><li>.表示目前所在的目录</li><li>..表示目前目录位置的上级目录</li></ul><p><strong>pwd</strong></p><p><strong>作用：</strong>显示目前所在目录</p><p><strong>语法：</strong>pwd [-p]</p><ul><li>-p：显示出确实的路径，而非使用链接 (link) 路径</li></ul><p><strong>cat</strong></p><p><strong>作用：</strong>用于显示文件内容</p><p><strong>语法：</strong>cat [-n] fileName</p><ul><li>-n：由1开始对所有输出的行数编号</li></ul><p><strong>more</strong></p><p><strong>作用：</strong>以分页的形式显示文件内容</p><p><strong>语法：</strong>more fileName</p><ul><li>回车键：向下滚动一行</li><li>空格键：向下滚动一屏</li><li>b：返回上一屏</li><li>q或者Ctrl+C：退出more</li></ul><p><strong>tail</strong></p><p><strong>作用：</strong>查看文件末尾的内容</p><p><strong>语法：</strong>tail [-f] fileName</p><ul><li>-f：动态读取文件末尾内容并显示，通常用于日志文件的内容输出</li></ul><p><strong>mkdir</strong></p><p><strong>作用：</strong>创建目录</p><p><strong>语法：</strong>mkdir [-p] dirName</p><ul><li>-p：确保目录名称存在，不存在就创建一个。通过此选项，可以实现多层目录同时创建</li></ul><p><strong>rmdir</strong></p><p><strong>作用：</strong>删除空目录</p><p><strong>语法：</strong>rmdir [-p] dirName</p><ul><li>-p：当子目录被删除后使父目录为空目录的话，则一并删除</li></ul><p><strong>rm</strong></p><p><strong>作用：</strong>删除文件或者目录</p><p><strong>语法：</strong>rm [-rf] name</p><ul><li>-r：将目录及目录中所有文件逐一删除</li><li>-f：无需确定，直接删除</li></ul><h2 id="拷贝移动命令cp"><a href="#拷贝移动命令cp" class="headerlink" title="拷贝移动命令cp"></a>拷贝移动命令cp</h2><p><strong>作用：</strong>用于复制文件或者目录</p><p><strong>语法：</strong>cp [-r] source dest</p><ul><li>-r：如果复制的是目录，需要使用此选项，此时将复制该目录下所有的子目录和文件</li></ul><p><strong>mv</strong></p><p><strong>作用：</strong>为文件、目录改名或移动到其他位置</p><p><strong>语法：</strong>mv source dest</p><h2 id="打包压缩命令tar"><a href="#打包压缩命令tar" class="headerlink" title="打包压缩命令tar"></a>打包压缩命令tar</h2><p><strong>作用：</strong>对文件进行打包、解包、压缩、解压</p><p><strong>语法：</strong>tar [-zcxvf] fileName [files]</p><p>包文件后缀为.tar表示只是完成了打包，并没有压缩</p><p>包文件后缀为.tar.gz表示打包的同时还进行了压缩</p><ul><li>-z：z代表的是gzip，对文件压缩或者解压</li><li>-c：c代表的是create，即创建新的包文件</li><li>-x：x代表的是extract，实现从包文件中还原文件</li><li>-v：v代表的是verbose，显示命令的执行过程</li><li>-f：f代表的是file，用于指定包文件的名称</li></ul><h2 id="文本编辑命令vi-x2F-vim"><a href="#文本编辑命令vi-x2F-vim" class="headerlink" title="文本编辑命令vi/vim"></a>文本编辑命令vi/vim</h2><p><strong>作用：</strong>vi命令是Linux系统提供的一个文本编辑工具，可以对文件内容进行编辑</p><p><strong>语法：</strong>vi fileName</p><h2 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h2><p><strong>作用：</strong>提供了查找、安装、删除某一个、一组甚至全部软件包的命令</p><p><strong>语法：</strong>yum [options] [command] [package …]</p><ul><li>options：可选，选项包括-h（帮助），-y（当安装过程提示选择全部为 “yes”），-q（不显示安装的过程）等等。</li><li>command：要进行的操作。</li><li>package：安装的包名</li></ul><p><strong>yum常用命令</strong></p><ul><li>列出所有可更新的软件清单命令：<strong>yum check-update</strong></li><li>更新所有软件命令：<strong>yum update</strong></li><li>仅安装指定的软件命令：<strong>yum install <package_name></package_name></strong></li><li>仅更新指定的软件命令：<strong>yum update <package_name></package_name></strong></li><li>列出所有可安裝的软件清单命令：<strong>yum list</strong></li><li>删除软件包命令：<strong>yum remove <package_name></package_name></strong></li><li>查找软件包命令：<strong>yum search &lt;keyword&gt;</strong></li><li>清除缓存命令:<ul><li><strong>yum clean packages</strong>: 清除缓存目录下的软件包</li><li><strong>yum clean headers</strong>: 清除缓存目录下的 headers</li><li><strong>yum clean oldheaders</strong>: 清除缓存目录下旧的 headers</li><li><strong>yum clean, yum clean all (= yum clean packages; yum clean oldheaders)</strong> :清除缓存目录下的软件包及旧的 headers</li></ul></li></ul><h2 id="apt命令"><a href="#apt命令" class="headerlink" title="apt命令"></a>apt命令</h2><p><strong>作用：</strong>提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令</p><p><strong>语法：</strong>apt [options] [command] [package …]</p><ul><li>options：可选，选项包括 -h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等</li><li>command：要进行的操作</li><li>package：安装的包名</li></ul><p><strong>apt常用命令</strong></p><ul><li><p>列出所有可更新的软件清单命令：<strong>sudo apt update</strong></p></li><li><p>升级软件包：<strong>sudo apt upgrade</strong></p><p>列出可更新的软件包及版本信息：<strong>apt list –upgradeable</strong></p><p>升级软件包，升级前先删除需要更新软件包：<strong>sudo apt full-upgrade</strong></p></li><li><p>安装指定的软件命令：<strong>sudo apt install <package_name></package_name></strong></p><p>安装多个软件包：<strong>sudo apt install <package_1> <package_2> <package_3></package_3></package_2></package_1></strong></p></li><li><p>更新指定的软件命令：<strong>sudo apt update <package_name></package_name></strong></p></li><li><p>显示软件包具体信息,例如：版本号，安装大小，依赖关系等等：<strong>sudo apt show <package_name></package_name></strong></p></li><li><p>删除软件包命令：<strong>sudo apt remove <package_name></package_name></strong></p></li><li><p>清理不再使用的依赖和库文件: <strong>sudo apt autoremove</strong></p></li><li><p>移除软件包及配置文件: <strong>sudo apt purge <package_name></package_name></strong></p></li><li><p>查找软件包命令： <strong>sudo apt search &lt;keyword&gt;</strong></p></li><li><p>列出所有已安装的包：<strong>apt list –installed</strong></p></li><li><p>列出所有已安装的包的版本信息：<strong>apt list –all-versions</strong></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生命在于折腾 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SpringBoot整合缓存</title>
       <link href="/2022/12/05/springboot-zheng-he-huan-cun/"/>
       <url>/2022/12/05/springboot-zheng-he-huan-cun/</url>

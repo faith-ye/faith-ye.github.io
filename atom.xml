@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2022-12-05T07:03:31.293Z</updated>
+  <updated>2023-02-09T07:01:49.846Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux常用命令</title>
+    <link href="https://faith-ye.github.io/2023/02/09/linux-chang-yong-ming-ling/"/>
+    <id>https://faith-ye.github.io/2023/02/09/linux-chang-yong-ming-ling/</id>
+    <published>2023-02-09T06:57:59.000Z</published>
+    <updated>2023-02-09T07:01:49.846Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;文件目录操作命令&quot;&gt;&lt;a href=&quot;#文件目录操作命令&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="Linux" scheme="https://faith-ye.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot整合缓存</title>
@@ -478,29 +503,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记四：包装类和Lambda表达式</title>
-    <link href="https://faith-ye.github.io/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/"/>
-    <id>https://faith-ye.github.io/2022/07/20/bi-ji-si-bao-zhuang-lei-he-lambda-biao-da-shi/</id>
-    <published>2022-07-20T13:51:36.000Z</published>
-    <updated>2022-07-20T13:53:33.378Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;日期和时间&quot;&gt;&lt;a href=&quot;#日期和时间&quot; class=&quot;headerlink&quot; title=&quot;日期和时间&quot;&gt;&lt;/a&gt;日期和时间&lt;/h2&gt;&lt;h3 id=&quot;Date&quot;&gt;&lt;a href=&quot;#Date&quot; class=&quot;headerlink&quot;</summary>
         
       
     
