@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-02-09T07:01:49.846Z</updated>
+  <updated>2023-03-10T08:40:07.957Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jmeter高并发测试</title>
+    <link href="https://faith-ye.github.io/2023/03/10/jmeter-gao-bing-fa-ce-shi/"/>
+    <id>https://faith-ye.github.io/2023/03/10/jmeter-gao-bing-fa-ce-shi/</id>
+    <published>2023-03-10T07:57:07.000Z</published>
+    <updated>2023-03-10T08:40:07.957Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这里测试的场景是秒杀优惠券的抢购，总共有200张优惠券，1000个人同时抢购，测试系统高并发下的性能。由于我是新建的系统，所以本次测试分为两步进行，第一步是生产数据，也就是让1000个用户登录登录系统，然后再用jmeter进行测试。&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="jmeter" scheme="https://faith-ye.github.io/tags/jmeter/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux常用命令</title>
@@ -480,29 +506,6 @@
         
         
     <summary type="html">&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;Map集合是一种双列集合，每个元素都包含两个数据。其每个元素的格式：key=value（键值对元素），因此Map集合也被称为“&lt;font</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记五：Collection集合</title>
-    <link href="https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/"/>
-    <id>https://faith-ye.github.io/2022/08/06/bi-ji-wu-collection-ji-he/</id>
-    <published>2022-08-06T07:52:48.000Z</published>
-    <updated>2022-08-11T01:51:04.720Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot;</summary>
         
       
     
