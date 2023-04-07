@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-03-10T08:40:07.957Z</updated>
+  <updated>2023-04-07T08:55:30.293Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JMM内存模型和volatile关键字</title>
+    <link href="https://faith-ye.github.io/2023/04/07/jmm-nei-cun-mo-xing-he-volatile-guan-jian-zi/"/>
+    <id>https://faith-ye.github.io/2023/04/07/jmm-nei-cun-mo-xing-he-volatile-guan-jian-zi/</id>
+    <published>2023-04-07T08:51:52.000Z</published>
+    <updated>2023-04-07T08:55:30.293Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JMM&quot;&gt;JMM&lt;/h2&gt;
+&lt;p&gt;JMM 的全称是Java Memory</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="JMM" scheme="https://faith-ye.github.io/tags/JMM/"/>
+    
+    <category term="volatile" scheme="https://faith-ye.github.io/tags/volatile/"/>
+    
+  </entry>
   
   <entry>
     <title>jmeter高并发测试</title>
@@ -483,29 +511,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;Stream流&quot;&gt;&lt;a href=&quot;#Stream流&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记六：Map集合</title>
-    <link href="https://faith-ye.github.io/2022/08/19/bi-ji-liu-map-ji-he/"/>
-    <id>https://faith-ye.github.io/2022/08/19/bi-ji-liu-map-ji-he/</id>
-    <published>2022-08-19T01:13:04.000Z</published>
-    <updated>2022-08-19T01:14:21.779Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;Map集合是一种双列集合，每个元素都包含两个数据。其每个元素的格式：key=value（键值对元素），因此Map集合也被称为“&lt;font</summary>
         
       
     
