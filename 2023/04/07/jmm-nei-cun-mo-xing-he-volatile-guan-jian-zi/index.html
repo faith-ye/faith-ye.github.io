@@ -458,7 +458,7 @@ JMM 的全称是 Java Memory Model，即 Java 内存模型。
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -487,7 +487,7 @@ JMM 的全称是 Java Memory Model，即 Java 内存模型。
 <p>JMM 实际上是一种抽象的概念，并不存在，你可以把它看作是<strong>Java定义并发编程相关的一组规范</strong>，除了<strong>抽象了线程和主内存之间的关系</strong>之外，还规定了从 Java 源代码到 CPU 可执行指令的这个转化过程要遵守哪些和并发相关的原则和规范，其主要目的是为了简化多线程编程，增强程序可移植性的。</p>
 <h3 id="JMM是如何抽象线程和主内存之间的关系？">JMM是如何抽象线程和主内存之间的关系？</h3>
 <p>Java内存模型（JMM）抽象了线程和主内存之间的关系，在讲解这个概念之前我们先看Java内存模型的抽象示意图：</p>
-<p><img src="https://oss.javaguide.cn/github/javaguide/java/concurrent/jmm.png" alt=""></p>
+<img src="/2023/04/07/jmm-nei-cun-mo-xing-he-volatile-guan-jian-zi/image-20230407170624334.png" class="">
 <ul>
 <li>**主内存：**所有线程创建的实例对象都存放在主内存中，不管该实例对象是成员变量还是方法中的本地变量(也称局部变量)</li>
 <li><strong>本地内存：<strong>每个线程都有一个</strong>私有</strong>的本地内存来存储共享变量的副本，本地内存是 JMM 抽象出来的一个概念，存储了主内存中的共享变量副本</li>
@@ -611,6 +611,11 @@ JMM 的全称是 Java Memory Model，即 Java 内存模型。
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     inc<span class="token punctuation">.</span><span class="token function">getAndIncrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="参考">参考</h2>
+<ul>
+<li>JavaGuide（Java面试+学习指南）</li>
+<li>尚硅谷Java大厂面试题第2季</li>
+</ul>
 
                 
             </div>
@@ -1412,7 +1417,7 @@ JMM 的全称是 Java Memory Model，即 Java 内存模型。
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">92.6k</span>
+                        class="white-color">92.7k</span>
             
             
             
