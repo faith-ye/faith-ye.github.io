@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="JMM内存模型和volatile关键字, 小叶の博客">
     <meta name="description" content="JMM
-JMM 的全称是Java Memory Model，即Java内存模型。
-一般来说，编程语言可以直接使用操作系统层面的内存模型。不过不同操作系统内存模型不同，如果直接使用操作系统层面的内存模型，就可能导致同样一套代码换了一个操作系统">
+JMM 的全称是 Java Memory Model，即 Java 内存模型。
+一般来说，编程语言可以直接使用操作系统层面的内存模型。不过不同操作系统内存模型不同，如果直接使用操作系统层面的内存模型，就可能导致同样一套代码换了一个操">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -458,7 +458,7 @@ JMM 的全称是Java Memory Model，即Java内存模型。
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
 
@@ -482,8 +482,8 @@ JMM 的全称是Java Memory Model，即Java内存模型。
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="JMM">JMM</h2>
-<p>JMM 的全称是Java Memory Model，即Java内存模型。</p>
-<p>一般来说，编程语言可以直接使用操作系统层面的内存模型。不过不同操作系统内存模型不同，如果直接使用操作系统层面的内存模型，就可能导致同样一套代码换了一个操作系统就无法执行了。而我们知道Java语言是跨平台的，因此它需要自己提供一套内存模型以屏蔽系统的差异，这也是JMM存在的其中一个原因。</p>
+<p>JMM 的全称是 Java Memory Model，即 Java 内存模型。</p>
+<p>一般来说，编程语言可以直接使用操作系统层面的内存模型。不过不同操作系统内存模型不同，如果直接使用操作系统层面的内存模型，就可能导致同样一套代码换了一个操作系统就无法执行了。而我们知道Java语言是跨平台的，因此它需要自己提供一套内存模型以屏蔽系统的差异，这也是 JMM 存在的其中一个原因。</p>
 <p>JMM 实际上是一种抽象的概念，并不存在，你可以把它看作是<strong>Java定义并发编程相关的一组规范</strong>，除了<strong>抽象了线程和主内存之间的关系</strong>之外，还规定了从 Java 源代码到 CPU 可执行指令的这个转化过程要遵守哪些和并发相关的原则和规范，其主要目的是为了简化多线程编程，增强程序可移植性的。</p>
 <h3 id="JMM是如何抽象线程和主内存之间的关系？">JMM是如何抽象线程和主内存之间的关系？</h3>
 <p>Java内存模型（JMM）抽象了线程和主内存之间的关系，在讲解这个概念之前我们先看Java内存模型的抽象示意图：</p>
@@ -492,7 +492,7 @@ JMM 的全称是Java Memory Model，即Java内存模型。
 <li>**主内存：**所有线程创建的实例对象都存放在主内存中，不管该实例对象是成员变量还是方法中的本地变量(也称局部变量)</li>
 <li><strong>本地内存：<strong>每个线程都有一个</strong>私有</strong>的本地内存来存储共享变量的副本，本地内存是 JMM 抽象出来的一个概念，存储了主内存中的共享变量副本</li>
 </ul>
-<p>因此每个线程要对共享变量进行修改时，需先将共享变量拷贝到本地内存，再将修改过的共享变量副本的值同步到主内存中去。若上图线程1要与线程2进行通信的话，则需经历下面2个步骤：</p>
+<p>因此每个线程要对共享变量进行修改时，需先将共享变量拷贝到本地内存，再将修改过的共享变量副本的值同步到主内存中去。若上图线程 1 要与线程 2 进行通信的话，则需经历下面 2 个步骤：</p>
 <p>①线程 1 把本地内存中修改过的共享变量副本的值同步到主内存中去；②线程 2 到主存中读取对应的共享变量的值</p>
 <h3 id="JMM-的三大特性">JMM 的三大特性</h3>
 <h4 id="原子性">原子性</h4>
@@ -545,13 +545,12 @@ JMM 的全称是Java Memory Model，即Java内存模型。
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上述代码 <code>instance</code> 如果没用 <code>volatile</code> 修饰，1000个线程只生成了一个<code>Singleton</code>对象，从结果上看是能够保证单例模式的正确性，但是还是存在问题</p>
 <p>双重检验锁方式不一定是线程安全的，例如上述代码<code>instance = new Singleton();</code>其实是分以下三步执行的：</p>
-<p>①为 <code>instance</code> 分配内存空间</p>
-<p>②初始化 <code>instance</code></p>
-<p>③将 <code>instance</code> 指向分配的内存地址</p>
+<p>​	①为 <code>instance</code> 分配内存空间</p>
+<p>​	②初始化 <code>instance</code></p>
+<p>​	③将 <code>instance</code> 指向分配的内存地址</p>
 <p>但是由于 JVM 具有指令重排的特性，执行顺序会发生改变。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 ①和 ③，此时 T2 调用 <code>getinstance()</code> 后发现 <code>instance</code> 不为空，因此返回 <code>instance</code>，但此时 <code>instance</code> 还未被初始化，因此还是有必要加入<code>volatile</code>关键字，禁止指令重排</p>
 <h3 id="不保证原子性">不保证原子性</h3>
-<p>**原子性：**不可分割，完整性，也就是一次操作或者多次操作，要么所有的操作全部都得到执行并且不会受到任何因素的干扰而中断，要么都不执行</p>
-<p>在数据库事务四大特性<strong>ACID</strong>中也经常提到原子性</p>
+<p>在数据库事务四大特性 <strong>ACID</strong> 中也经常提到原子性</p>
 <p><code>volatile</code>不保证原子性代码证明：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">VolatileAtomicityDemo</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> <span class="token keyword">int</span> number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -1413,7 +1412,7 @@ JMM 的全称是Java Memory Model，即Java内存模型。
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">92.7k</span>
+                        class="white-color">92.6k</span>
             
             
             
