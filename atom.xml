@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-07T09:08:36.851Z</updated>
+  <updated>2023-04-07T09:11:12.569Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -21,15 +21,14 @@
     <link href="https://faith-ye.github.io/2023/04/07/jmm-nei-cun-mo-xing-he-volatile-guan-jian-zi/"/>
     <id>https://faith-ye.github.io/2023/04/07/jmm-nei-cun-mo-xing-he-volatile-guan-jian-zi/</id>
     <published>2023-04-07T08:51:52.000Z</published>
-    <updated>2023-04-07T09:08:36.851Z</updated>
+    <updated>2023-04-07T09:11:12.569Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;JMM&quot;&gt;JMM&lt;/h2&gt;
-&lt;p&gt;JMM 的全称是 Java Memory Model，即 Java</summary>
+    <summary type="html">&lt;h2 id=&quot;JMM&quot;&gt;&lt;a href=&quot;#JMM&quot; class=&quot;headerlink&quot; title=&quot;JMM&quot;&gt;&lt;/a&gt;JMM&lt;/h2&gt;&lt;p&gt;JMM 的全称是 Java Memory Model，即 Java</summary>
         
       
     
