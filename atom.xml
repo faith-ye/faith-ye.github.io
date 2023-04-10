@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-07T09:11:12.569Z</updated>
+  <updated>2023-04-10T07:02:17.413Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL索引</title>
+    <link href="https://faith-ye.github.io/2023/04/10/mysql-suo-yin/"/>
+    <id>https://faith-ye.github.io/2023/04/10/mysql-suo-yin/</id>
+    <published>2023-04-10T06:59:44.000Z</published>
+    <updated>2023-04-10T07:02:17.413Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;索引（index）是帮助 MySQL 高效获取数据的数据结构(有序)。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据， 这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL进阶笔记" scheme="https://faith-ye.github.io/categories/MySQL%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="索引" scheme="https://faith-ye.github.io/tags/%E7%B4%A2%E5%BC%95/"/>
+    
+  </entry>
   
   <entry>
     <title>JMM内存模型和volatile关键字</title>
@@ -487,29 +513,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;异常处理&quot;&gt;&lt;a href=&quot;#异常处理&quot; class=&quot;headerlink&quot; title=&quot;异常处理&quot;&gt;&lt;/a&gt;异常处理&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;异常是程序在“编译”或者“执行”的过程中可能出现的问题，&lt;font</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记七：Stream流</title>
-    <link href="https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/"/>
-    <id>https://faith-ye.github.io/2022/09/05/bi-ji-qi-stream-liu/</id>
-    <published>2022-09-05T08:00:07.000Z</published>
-    <updated>2022-09-05T08:01:23.796Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Stream流&quot;&gt;&lt;a href=&quot;#Stream流&quot; class=&quot;headerlink&quot;</summary>
         
       
     
