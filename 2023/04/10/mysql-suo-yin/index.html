@@ -446,7 +446,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    3.9k
                 </div>
                 
 
@@ -477,68 +477,61 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>索引（index）是帮助 MySQL 高效获取数据的数据结构(有序)。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据， 这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引</p>
-<h2 id="索引结构">索引结构</h2>
-<p>由于 MySQL（5.5之后）默认的存储引擎是 InnoDB， 而 InnoDB 默认使用 B+Tree索引，所以这节主要讲述 B+Tree 索引，除此之外，还简要介绍一下 Hash，从而论述为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构?</p>
-<h3 id="B-Tree">B-Tree</h3>
-<p>在介绍 B+Tree 之前，我们先来了解一下 B-Tree，B树是一种多叉路衡查找树，相对于二叉树，B树每个节点可以有多个分支，即多叉。<br>
-以一颗最大度数（max-degree）为5(5阶)的b-tree为例，那这个B树每个节点最多存储4个key，5个指针：</p>
+<h2 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h2><p>由于 MySQL（5.5之后）默认的存储引擎是 InnoDB， 而 InnoDB 默认使用 B+Tree索引，所以这节主要讲述 B+Tree 索引，除此之外，还简要介绍一下 Hash，从而论述为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构?  </p>
+<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h3><p>在介绍 B+Tree 之前，我们先来了解一下 B-Tree，B树是一种多叉路衡查找树，相对于二叉树，B树每个节点可以有多个分支，即多叉。<br>以一颗最大度数（max-degree）为5(5阶)的b-tree为例，那这个B树每个节点最多存储4个key，5个指针：  </p>
 <img src="/2023/04/10/mysql-suo-yin/image-20230407185327945.png" class="">
-<p>我们可以通过一个数据结构可视化的网站来简单演示一下： <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">https://www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
+
+<p>我们可以通过一个数据结构可视化的网站来简单演示一下： <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">https://www.cs.usfca.edu/~galles/visualization/BTree.html</a>  </p>
 <p>通过演示可以发现其插入数据满足的特点：</p>
 <ul>
 <li>5阶的B树，每一个节点最多存储4个key，对应5个指针</li>
 <li>一旦节点存储的key数量到达5，就会裂变，中间元素向上分裂</li>
 <li>在B树中，非叶子节点和叶子节点都会存放数据</li>
 </ul>
-<h3 id="B-Tree-2">B+Tree</h3>
-<p>B+Tree是B-Tree的变种，我们以一颗最大度数（max-degree）为4（4阶）的b+tree为例，来看一下其结构示意图：</p>
+<h3 id="B-Tree-1"><a href="#B-Tree-1" class="headerlink" title="B+Tree"></a>B+Tree</h3><p>B+Tree是B-Tree的变种，我们以一颗最大度数（max-degree）为4（4阶）的b+tree为例，来看一下其结构示意图：  </p>
 <img src="/2023/04/10/mysql-suo-yin/image-20230407185620676.png" class="">
-<p>这里也可以通过一个数据结构可视化的网站来简单演示一下： <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a></p>
+
+<p>这里也可以通过一个数据结构可视化的网站来简单演示一下： <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a>  </p>
 <p>从两者演示和上述两张图中可以看出B树和B+树两者的异同：</p>
 <ul>
-<li>
-<p>B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。</p>
+<li><p>B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。</p>
 </li>
-<li>
-<p>B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。</p>
+<li><p>B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。</p>
 </li>
-<li>
-<p>B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的检索效率就很稳定了，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。</p>
+<li><p>B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的检索效率就很稳定了，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。</p>
 </li>
 </ul>
 <p>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能，利于排序</p>
   <img src="/2023/04/10/mysql-suo-yin/image-20230407190215875.png" class="">
+
 <p>在 MySQL 中，MyISAM 引擎和 InnoDB 引擎都是使用 B+Tree 作为索引结构，但是，两者的实现方式不太一样。</p>
 <blockquote>
 <p>MyISAM 引擎中，B+Tree 叶节点的 data 域存放的是数据记录的地址。在索引检索的时候，首先按照 B+Tree 搜索算法搜索索引，如果指定的 Key 存在，则取出其 data 域的值，然后以 data 域的值为地址读取相应的数据记录。这被称为“<strong>非聚簇索引（非聚集索引）</strong>”。</p>
 <p>InnoDB 引擎中，其数据文件本身就是索引文件。相比 MyISAM，索引文件和数据文件是分离的，其表数据文件本身就是按 B+Tree 组织的一个索引结构，树的叶节点 data 域保存了完整的数据记录。这个索引的 key 是数据表的主键，因此 InnoDB 表数据文件本身就是主索引。这被称为“<strong>聚簇索引（聚集索引）</strong>”，而其余的索引都作为 <strong>辅助索引</strong> ，辅助索引的 data 域存储相应记录主键的值而不是地址，这也是和 MyISAM 不同的地方。在根据主索引搜索时，直接找到 key 所在的节点即可取出数据；在根据辅助索引查找时，则需要先取出主键的值，再走一遍主索引。 因此，在设计表的时候，不建议使用过长的字段作为主键，也不建议使用非单调的字段作为主键，这样会造成主索引频繁分裂</p>
 </blockquote>
-<h3 id="Hash索引">Hash索引</h3>
-<p>哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中。如果两个(或多个)键值，映射到一个相同的槽位上，他们就产生了hash冲突（也称为hash碰撞），可以通过链表来解决，如下图所示：</p>
+<h3 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h3><p>哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中。如果两个(或多个)键值，映射到一个相同的槽位上，他们就产生了hash冲突（也称为hash碰撞），可以通过链表来解决，如下图所示：</p>
  <img src="/2023/04/10/mysql-suo-yin/image-20230407191210308.png" class="">
+
 <p><strong>Hash索引的特点：</strong></p>
 <ul>
 <li>Hash索引只能用于对等比较(=，in)，不支持范围查询（between，&gt;，&lt; ，…）</li>
 <li>无法利用索引完成排序操作</li>
 <li>查询效率高，通常(不存在hash冲突的情况)只需要一次检索就可以了，效率通常要高于B+tree索引</li>
 </ul>
-<p><strong>思考题： 为什么 InnoDB 存储引擎选择使用 B+tree 索引结构?</strong></p>
+<p><strong>思考题： 为什么 InnoDB 存储引擎选择使用 B+tree 索引结构?</strong>  </p>
 <ul>
 <li>相对于二叉树，层级更少，搜索效率高</li>
 <li>对于B-tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
 <li>相对Hash索引，B+tree支持范围匹配及排序操作</li>
 </ul>
-<h2 id="索引分类">索引分类</h2>
-<h3 id="应用维度">应用维度</h3>
-<p>在 MySQL 数据库，将索引的具体类型主要分为以下几类：主键索引、唯一索引、常规索引、全文索引</p>
+<h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><h3 id="应用维度"><a href="#应用维度" class="headerlink" title="应用维度"></a>应用维度</h3><p>在 MySQL 数据库，将索引的具体类型主要分为以下几类：主键索引、唯一索引、常规索引、全文索引  </p>
 <ul>
 <li>主键索引：针对表中主键创建的索引（<strong>PRIMARY</strong>），加速查询 + 列值唯一（不可以有 NULL）+ 表中只有一个</li>
 <li>唯一索引：避免同一个表中某数据列中的值重复（<strong>UNIQUE</strong>），加速查询 + 列值唯一（可以有 NULL）</li>
 <li>普通索引：仅加速查询</li>
 <li>全文索引：对文本的内容进行分词，进行搜索（<strong>FULLTEXT</strong>）。目前只有 <code>CHAR</code>、<code>VARCHAR</code> ，<code>TEXT</code> 列上可以创建全文索引。一般不会使用，效率较低，通常使用搜索引擎如 ElasticSearch 代替</li>
 </ul>
-<h3 id="底层存储方式">底层存储方式</h3>
-<p>在 InnoDB 存储引擎中，根据索引的存储形式，又可以分为以下两种：</p>
+<h3 id="底层存储方式"><a href="#底层存储方式" class="headerlink" title="底层存储方式"></a>底层存储方式</h3><p>在 InnoDB 存储引擎中，根据索引的存储形式，又可以分为以下两种：  </p>
 <ul>
 <li>聚集索引：将数据存储与索引放到了一块，索引结构的叶子节点保存了<strong>行数据</strong>（必须有，而且只有一个）</li>
 <li>二级索引：将数据与索引分开存储，索引结构的叶子节点关联的是对应的<strong>主键</strong>（可以存在多个）</li>
@@ -549,58 +542,55 @@
 <li>如果不存在主键，将使用第一个唯一（UNIQUE）索引作为聚集索引</li>
 <li>如果表没有主键，或没有合适的唯一索引，则 InnoDB 会自动生成一个某一行的 id 作为隐藏的聚集索引</li>
 </ul>
-<p>接下来，我们可以通过下图了解当我们执行如下的 SQL 语句时，查找过程是什么样子的</p>
+<p>接下来，我们可以通过下图了解当我们执行如下的 SQL 语句时，查找过程是什么样子的  </p>
 <img src="/2023/04/10/mysql-suo-yin/image-20230407193242320.png" class="">
+
 <ul>
-<li>聚集索引的叶子节点下挂的是这一行的数据</li>
-<li>二级索引的叶子节点下挂的是该字段值对应的主键值</li>
+<li>聚集索引的叶子节点下挂的是这一行的数据 </li>
+<li>二级索引的叶子节点下挂的是该字段值对应的主键值  </li>
 <li>回表查询：先到二级索引中查找数据，找到主键值，然后再到聚集索引中根据主键值，获取数据的方式</li>
 </ul>
-<h2 id="索引语法">索引语法</h2>
-<ul>
-<li>
-<p>创建索引</p>
+<h2 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h2><ul>
+<li><p>创建索引</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token punctuation">[</span><span class="token keyword">UNIQUE</span> <span class="token operator">|</span> FULLTEXT<span class="token punctuation">]</span> <span class="token keyword">INDEX</span> index_name <span class="token keyword">ON</span> table_name <span class="token punctuation">(</span>index_col_name<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>查看索引</p>
+<li><p>查看索引</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> <span class="token keyword">INDEX</span> <span class="token keyword">FROM</span> table_name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>删除索引</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">INDEX</span> index_name <span class="token keyword">ON</span> table_name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
+<li><p>删除索引</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">INDEX</span> index_name <span class="token keyword">ON</span> table_name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<h2 id="SQL性能分析">SQL性能分析</h2>
-<h3 id="SQL执行频率">SQL执行频率</h3>
-<p>MySQL 客户端连接成功后，通过 show [session|global] status 命令可以提供服务器状态信息。通过如下指令，可以查看当前数据库的INSERT、UPDATE、DELETE、SELECT的访问频次：</p>
+<h2 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h2><h3 id="SQL执行频率"><a href="#SQL执行频率" class="headerlink" title="SQL执行频率"></a>SQL执行频率</h3><p>MySQL 客户端连接成功后，通过 show [session|global] status 命令可以提供服务器状态信息。通过如下指令，可以查看当前数据库的INSERT、UPDATE、DELETE、SELECT的访问频次：</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- session 是查看当前会话 ;</span>
 <span class="token comment">-- global 是查询全局数据 ;</span>
 <span class="token keyword">SHOW</span> <span class="token keyword">GLOBAL</span> <span class="token keyword">STATUS</span> <span class="token operator">LIKE</span> <span class="token string">'Com_______'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>Com_delete: 删除次数</li>
 <li>Com_insert: 插入次数</li>
 <li>Com_select: 查询次数</li>
 <li>Com_update: 更新次数</li>
 </ul>
-<h3 id="慢查询日志">慢查询日志</h3>
-<p>慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有 SQL 语句的日志。<br>
-MySQL 的慢查询日志默认没有开启，我们可以查看一下系统变量 slow_query_log</p>
+<h3 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h3><p>慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有 SQL 语句的日志。<br>MySQL 的慢查询日志默认没有开启，我们可以查看一下系统变量 slow_query_log  </p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'show_query_log'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如果要开启慢查询日志，需要在 MySQL 的配置文件（/etc/my.cnf）中配置如下信息：</p>
+
+<p>如果要开启慢查询日志，需要在 MySQL 的配置文件（/etc/my.cnf）中配置如下信息：  </p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># 开启MySQL慢日志查询开关</span>
 slow_query_log<span class="token operator">=</span><span class="token number">1</span>
 <span class="token comment"># 设置慢日志的时间为2秒，SQL语句执行时间超过2秒，就会视为慢查询，记录慢查询日志</span>
 long_query_time<span class="token operator">=</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置完毕之后，通过以下指令重新启动 MySQL 服务器进行测试</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>然后再次查看开关情况，慢查询日志就已经打开了</p>
 <p>查看慢日志文件中记录的信息：<code>tail -f /var/lib/mysql/localhost-slow.log</code></p>
-<h3 id="profile详情">profile详情</h3>
-<p>show profiles 能够在做 SQL 优化时帮助我们了解时间都耗费到哪里去了。通过 have_profiling 参数，能够看到当前 MySQL 是否支持 profile 操作：</p>
+<h3 id="profile详情"><a href="#profile详情" class="headerlink" title="profile详情"></a>profile详情</h3><p>show profiles 能够在做 SQL 优化时帮助我们了解时间都耗费到哪里去了。通过 have_profiling 参数，能够看到当前 MySQL 是否支持 profile 操作：  </p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> @<span class="token variable">@have_profiling</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>MySQL 是支持 profile 操作的，但是开关是关闭的，可以通过 set 语句在 session/global 级别开启profiling：</p>
+
+<p>MySQL 是支持 profile 操作的，但是开关是关闭的，可以通过 set 语句在 session/global 级别开启profiling：  </p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SET</span> profiling <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>执行一系列的业务 SQL 的操作，可以通过如下指令查看指令的执行耗时：</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 查看每一条SQL的耗时基本情况</span>
 <span class="token keyword">show</span> profiles<span class="token punctuation">;</span>
@@ -608,10 +598,10 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <span class="token keyword">show</span> profile <span class="token keyword">for</span> query query_id<span class="token punctuation">;</span>
 <span class="token comment">-- 查看指定query_id的SQL语句CPU的使用情况</span>
 <span class="token keyword">show</span> profile cpu <span class="token keyword">for</span> query query_id<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="explain">explain</h3>
-<p>EXPLAIN 或者 DESC命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序</p>
+
+<h3 id="explain"><a href="#explain" class="headerlink" title="explain"></a>explain</h3><p>EXPLAIN 或者 DESC命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序  </p>
 <p>语法：<code>EXPLAIN SELECT 字段列表 FROM 表名 WHERE 条件; </code></p>
-<p>Explain 执行计划中各个字段的含义:</p>
+<p>Explain 执行计划中各个字段的含义:  </p>
 <table>
 <thead>
 <tr>
@@ -619,8 +609,7 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>id</td>
 <td>select查询的序列号，表示查询中执行select子句或者是操作表的顺序 (id相同，执行顺序从上到下；id不同，<strong>值越大，越先执行</strong>)。</td>
 </tr>
@@ -652,8 +641,7 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <td>filtered</td>
 <td>表示返回结果的行数占需读取行数的百分比， filtered 的值越大越好。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -661,8 +649,7 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Using where; Using Index</td>
 <td>查找使用了索引，但是需要的数据都在索引列中能找到，所以不需要回表查询数据</td>
 </tr>
@@ -670,42 +657,41 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <td>Using index condition</td>
 <td>查找使用了索引，但是需要回表查询数据</td>
 </tr>
-</tbody>
-</table>
-<h2 id="索引使用">索引使用</h2>
-<h3 id="索引失效情况">索引失效情况</h3>
-<p><strong>最左前缀法则</strong></p>
-<p>如果索引了多列（联合索引），要遵守最左前缀法则。最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。如果跳跃某一列，索引将会部分失效(后面的字段索引失效)</p>
+</tbody></table>
+<h2 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h2><h3 id="索引失效情况"><a href="#索引失效情况" class="headerlink" title="索引失效情况"></a>索引失效情况</h3><p><strong>最左前缀法则</strong></p>
+<p>如果索引了多列（联合索引），要遵守最左前缀法则。最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。如果跳跃某一列，索引将会部分失效(后面的字段索引失效)  </p>
 <p><strong>范围查询</strong></p>
-<p>联合索引中，出现范围查询(&gt;,&lt;)，范围查询右侧的列索引失效，但使用(&gt;= ,&lt;=) 不会失效。因此，在业务允许的情况下，尽可能的使用类似于 &gt;= 或 &lt;= 这类的范围查询，而避免使用 &gt; 或 &lt;</p>
+<p>联合索引中，出现范围查询(&gt;,&lt;)，范围查询右侧的列索引失效，但使用(&gt;= ,&lt;=) 不会失效。因此，在业务允许的情况下，尽可能的使用类似于 &gt;= 或 &lt;= 这类的范围查询，而避免使用 &gt; 或 &lt;  </p>
 <p><strong>索引列计算</strong></p>
 <p>在索引列上进行运算操作， 索引将失效。如我们在 tb_user 这张表中 phone 字段建立了索引，当根据 phone 字段进行函数运算操作之后，索引失效，当我们执行以下语句时，发现 key 字段为 NULL，即索引失效</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> tb_user <span class="token keyword">where</span> substring<span class="token punctuation">(</span>phone<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">'15'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>字符串不加引号</strong></p>
 <p>字符串类型字段使用时，不加引号，索引将失效，同上，当我们执行以下语句时，也会发现 key 字段为 NULL，索引失效</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> tb_user <span class="token keyword">where</span> phone <span class="token operator">=</span> <span class="token number">17799990015</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>模糊查询</strong></p>
 <p>如果仅仅是尾部模糊匹配，索引不会失效。如果是头部模糊匹配，索引失效</p>
 <p><code>like '软件%' </code> 索引不失效，<code>like '%工程'</code>索引失效</p>
-<p>**or连接条件  **</p>
-<p>用or分割开的条件， 如果 or 前的条件中的列有索引，而后面的列中没有索引，那么涉及的索引都不会被用到，当我们使用 or 连接时，只有左右两侧字段都有索引时，索引才会生效</p>
+<p><strong>连接条件or</strong></p>
+<p>用or分割开的条件， 如果 or 前的条件中的列有索引，而后面的列中没有索引，那么涉及的索引都不会被用到，当我们使用 or 连接时，只有左右两侧字段都有索引时，索引才会生效  </p>
 <p><strong>数据分布影响</strong></p>
-<p>如果 MySQL 评估使用索引比全表更慢，则不使用索引</p>
-<h3 id="SQL提示">SQL提示</h3>
-<p>SQL提示，是优化数据库的一个重要手段，简单来说，就是在SQL语句中加入一些人为的提示来达到优化操作的目的</p>
-<p>use index ： 建议 MySQL 使用哪一个索引完成此次查询（仅仅是建议，mysql 内部还会再次进行评估）</p>
+<p>如果 MySQL 评估使用索引比全表更慢，则不使用索引  </p>
+<h3 id="SQL提示"><a href="#SQL提示" class="headerlink" title="SQL提示"></a>SQL提示</h3><p>SQL提示，是优化数据库的一个重要手段，简单来说，就是在SQL语句中加入一些人为的提示来达到优化操作的目的  </p>
+<p>use index ： 建议 MySQL 使用哪一个索引完成此次查询（仅仅是建议，mysql 内部还会再次进行评估）  </p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> tb_user <span class="token keyword">use</span> <span class="token keyword">index</span><span class="token punctuation">(</span>idx_user_pro<span class="token punctuation">)</span> <span class="token keyword">where</span> profession <span class="token operator">=</span> <span class="token string">'软件工程'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>ignore index ： 忽略指定的索引</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> tb_user <span class="token keyword">ignore</span> <span class="token keyword">index</span><span class="token punctuation">(</span>idx_user_pro<span class="token punctuation">)</span> <span class="token keyword">where</span> profession <span class="token operator">=</span> <span class="token string">'软件工程'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>force index ： 强制使用索引</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> tb_user <span class="token keyword">force</span> <span class="token keyword">index</span><span class="token punctuation">(</span>idx_user_pro<span class="token punctuation">)</span> <span class="token keyword">where</span> profession <span class="token operator">=</span> <span class="token string">'软件工程'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="索引设计原则">索引设计原则</h3>
-<p>先介绍几个名词意思</p>
-<p>**覆盖索引：**指查询使用了索引，并且需要返回的列，在该索引中已经全部能够找到，查询时尽量使用覆盖索引，减少<code>select * </code></p>
-<p>**前缀索引：**当字段类型为字符串（varchar，text，longtext等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘IO， 影响查询效率。此时可以只将字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率</p>
+
+<h3 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h3><p>先介绍几个名词意思</p>
+<p><strong>覆盖索引：</strong>指查询使用了索引，并且需要返回的列，在该索引中已经全部能够找到，查询时尽量使用覆盖索引，减少<code>select * </code></p>
+<p><strong>前缀索引：</strong>当字段类型为字符串（varchar，text，longtext等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘IO， 影响查询效率。此时可以只将字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率 </p>
 <p>如为 tb_user 表的 email 字段，建立长度为5的前缀索引：<code>create index idx_email_5 on tb_user(email(5));</code></p>
-<p>**单列索引：**即一个索引只包含单个列<br>
-**联合索引：**即一个索引包含了多个列</p>
+<p><strong>单列索引：</strong>即一个索引只包含单个列<br><strong>联合索引：</strong>即一个索引包含了多个列 </p>
 <p>设计索引应满足的原则：</p>
 <ul>
 <li>针对于数据量较大，且查询比较频繁的表建立索引</li>
@@ -716,8 +702,7 @@ long_query_time<span class="token operator">=</span><span class="token number">2
 <li>要控制索引的数量，索引并不是多多益善，索引越多，维护索引结构的代价也就越大，会影响增删改的效率</li>
 <li>如果索引列不能存储NULL值，请在创建表时使用NOT NULL约束它。当优化器知道每列是否包含 NULL 值时，它可以更好地确定哪个索引最有效地用于查询</li>
 </ul>
-<h2 id="参考">参考</h2>
-<ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>黑马程序员 MySQL 数据库入门到精通</li>
 </ul>
 
