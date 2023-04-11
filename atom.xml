@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-10T07:10:50.245Z</updated>
+  <updated>2023-04-11T11:50:32.097Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CAS和ABA问题</title>
+    <link href="https://faith-ye.github.io/2023/04/11/cas-he-aba-wen-ti/"/>
+    <id>https://faith-ye.github.io/2023/04/11/cas-he-aba-wen-ti/</id>
+    <published>2023-04-11T11:46:41.000Z</published>
+    <updated>2023-04-11T11:50:32.097Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;CAS&quot;&gt;&lt;a href=&quot;#CAS&quot; class=&quot;headerlink&quot; title=&quot;CAS&quot;&gt;&lt;/a&gt;CAS&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="CAS" scheme="https://faith-ye.github.io/tags/CAS/"/>
+    
+    <category term="ABA" scheme="https://faith-ye.github.io/tags/ABA/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL索引</title>
@@ -490,29 +517,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;File类&quot;&gt;&lt;a href=&quot;#File类&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记八：异常处理和日志框架</title>
-    <link href="https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/"/>
-    <id>https://faith-ye.github.io/2022/09/05/bi-ji-ba-yi-chang-chu-li-he-ri-zhi-kuang-jia/</id>
-    <published>2022-09-05T08:02:24.000Z</published>
-    <updated>2022-09-05T08:02:58.296Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;异常处理&quot;&gt;&lt;a href=&quot;#异常处理&quot; class=&quot;headerlink&quot; title=&quot;异常处理&quot;&gt;&lt;/a&gt;异常处理&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;异常是程序在“编译”或者“执行”的过程中可能出现的问题，&lt;font</summary>
         
       
     
