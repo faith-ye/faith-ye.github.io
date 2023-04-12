@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-11T11:50:32.097Z</updated>
+  <updated>2023-04-12T03:22:36.052Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -17,18 +17,50 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MySQL事务和SQL语句执行过程</title>
+    <link href="https://faith-ye.github.io/2023/04/12/mysql-shi-wu-he-sql-yu-ju-zhi-xing-guo-cheng/"/>
+    <id>https://faith-ye.github.io/2023/04/12/mysql-shi-wu-he-sql-yu-ju-zhi-xing-guo-cheng/</id>
+    <published>2023-04-12T03:13:54.000Z</published>
+    <updated>2023-04-12T03:22:36.052Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;MySQL事务&quot;&gt;MySQL事务&lt;/h2&gt;
+&lt;p&gt;事务是一组操作的集合，它是一个不可分割的工作单位，事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成功，要么同时失败&lt;/p&gt;
+&lt;h3</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL进阶笔记" scheme="https://faith-ye.github.io/categories/MySQL%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="事务" scheme="https://faith-ye.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+    <category term="SQL执行" scheme="https://faith-ye.github.io/tags/SQL%E6%89%A7%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CAS和ABA问题</title>
     <link href="https://faith-ye.github.io/2023/04/11/cas-he-aba-wen-ti/"/>
     <id>https://faith-ye.github.io/2023/04/11/cas-he-aba-wen-ti/</id>
     <published>2023-04-11T11:46:41.000Z</published>
-    <updated>2023-04-11T11:50:32.097Z</updated>
+    <updated>2023-04-12T03:17:06.410Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;CAS&quot;&gt;&lt;a href=&quot;#CAS&quot; class=&quot;headerlink&quot; title=&quot;CAS&quot;&gt;&lt;/a&gt;CAS&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;CAS&quot;&gt;CAS&lt;/h2&gt;
+&lt;h3 id=&quot;概念&quot;&gt;概念&lt;/h3&gt;
+&lt;p&gt;CAS 的全称是 Compare-And-Swap，它是 CPU 并发原语，功能是判断内存某个位置的值是否为预期值，如果是则更改为新的值&lt;/p&gt;
+&lt;p&gt;CAS 并发原语体现在 Java</summary>
         
       
     
@@ -501,29 +533,6 @@
     
     
     <category term="IO流" scheme="https://faith-ye.github.io/tags/IO%E6%B5%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>笔记九：File类和方法递归</title>
-    <link href="https://faith-ye.github.io/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/"/>
-    <id>https://faith-ye.github.io/2022/09/14/bi-ji-jiu-file-lei-he-fang-fa-di-gui/</id>
-    <published>2022-09-14T09:16:19.000Z</published>
-    <updated>2022-09-14T09:17:46.562Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;File类&quot;&gt;&lt;a href=&quot;#File类&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
     
   </entry>
   
