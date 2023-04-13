@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-12T03:22:36.052Z</updated>
+  <updated>2023-04-13T13:15:12.344Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java集合线程不安全举例</title>
+    <link href="https://faith-ye.github.io/2023/04/13/java-ji-he-xian-cheng-bu-an-quan-ju-li/"/>
+    <id>https://faith-ye.github.io/2023/04/13/java-ji-he-xian-cheng-bu-an-quan-ju-li/</id>
+    <published>2023-04-13T13:14:13.000Z</published>
+    <updated>2023-04-13T13:15:12.344Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Java 集合，也叫做容器，主要由两大接口派生而来： &lt;code&gt;Collection&lt;/code&gt;接口（存放单一元素）、 &lt;code&gt;Map&lt;/code&gt; 接口（存放键值对）。对于&lt;code&gt;Collection&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>MySQL事务和SQL语句执行过程</title>
@@ -506,33 +529,6 @@
     
     <category term="MySQL学习笔记" scheme="https://faith-ye.github.io/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>笔记十：IO流</title>
-    <link href="https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/"/>
-    <id>https://faith-ye.github.io/2022/09/20/bi-ji-shi-io-liu/</id>
-    <published>2022-09-20T08:22:36.000Z</published>
-    <updated>2022-09-20T08:25:05.353Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt;I表示intput，把硬盘文件中的数据读入到内存的过程，称之输入，负责读；lO表示output，把内存中的数据写出到硬盘文件的过程，称之输出，负责写。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;IO流的分类&lt;/strong&gt;&lt;/p&gt;
-&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="JavaSE进阶" scheme="https://faith-ye.github.io/categories/JavaSE%E8%BF%9B%E9%98%B6/"/>
-    
-    
-    <category term="IO流" scheme="https://faith-ye.github.io/tags/IO%E6%B5%81/"/>
     
   </entry>
   
