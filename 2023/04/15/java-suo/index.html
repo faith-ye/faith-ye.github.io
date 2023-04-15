@@ -442,7 +442,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.7k
                 </div>
                 
 
@@ -610,6 +610,7 @@
 <h2 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h2><p>乐观锁总是假设最好的情况，认为共享资源每次被访问的时候不会出现问题，线程可以不停地执行，无需加锁也无需等待，只是在提交修改的时候去验证对应的资源（也就是数据）是否被其它线程修改了（具体方法可以使用版本号机制或 CAS 算法）</p>
 <p>悲观锁总是假设最坏的情况，认为共享资源每次被访问的时候就会出现问题(比如共享数据被修改)，所以每次在获取资源操作的时候都会上锁，这样其他线程想拿到这个资源就会阻塞直到锁被上一个持有者释放。也就是说，<strong>共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程</strong>。</p>
 <p>这具体可以看 JavaGuide 里的文章 <a target="_blank" rel="noopener" href="https://javaguide.cn/java/concurrent/optimistic-lock-and-pessimistic-lock.html">乐观锁和悲观锁详解</a></p>
+<p>最后分享一个面试题目：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Pd6dOXaMQFUHfAUnOhnwtw">一道题决定去留：为什么synchronized无法禁止指令重排，却能保证有序性？</a></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>尚硅谷 Java 大厂面试题第 2 季</li>
 <li>JavaGuide（Java面试+学习指南）</li>
@@ -1387,7 +1388,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">103.5k</span>
+                        class="white-color">103.6k</span>
             
             
             
