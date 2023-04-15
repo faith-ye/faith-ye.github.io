@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-13T13:15:12.344Z</updated>
+  <updated>2023-04-15T11:02:08.589Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java锁</title>
+    <link href="https://faith-ye.github.io/2023/04/15/java-suo/"/>
+    <id>https://faith-ye.github.io/2023/04/15/java-suo/</id>
+    <published>2023-04-15T10:58:57.000Z</published>
+    <updated>2023-04-15T11:02:08.589Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在程序世界中，Java 锁的最终目的都是为了保证线程安全，避免在并发场景下的资源竞争问题。但考虑适用场合和性能问题，就出现了各种 Java 锁&lt;/p&gt;
+&lt;h2 id=&quot;独占锁和共享锁&quot;&gt;&lt;a href=&quot;#独占锁和共享锁&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Java集合线程不安全举例</title>
@@ -499,29 +523,6 @@
         
         
     <summary type="html">&lt;p&gt;这里可以通过进入终端或者使用一些软件进行学习，软件的话推荐&lt;code&gt;Navicat&lt;/code&gt;。终端的话，通过win+R进入终端后输入&lt;code&gt;mysql -u root -p&lt;/code&gt;后按回车输入前面安装时的密码就可以进入mysql下进行操作，退出</summary>
-        
-      
-    
-    
-    
-    <category term="MySQL学习笔记" scheme="https://faith-ye.github.io/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>笔记一：MySQL安装及数据类型</title>
-    <link href="https://faith-ye.github.io/2022/09/22/bi-ji-yi-mysql-an-zhuang-ji-shu-ju-lei-xing/"/>
-    <id>https://faith-ye.github.io/2022/09/22/bi-ji-yi-mysql-an-zhuang-ji-shu-ju-lei-xing/</id>
-    <published>2022-09-22T08:54:51.000Z</published>
-    <updated>2022-09-22T08:56:03.749Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;MySQL安装&quot;&gt;&lt;a href=&quot;#MySQL安装&quot; class=&quot;headerlink&quot; title=&quot;MySQL安装&quot;&gt;&lt;/a&gt;MySQL安装&lt;/h2&gt;&lt;p&gt;所有平台的MySQL下载地址为： &lt;a</summary>
         
       
     
