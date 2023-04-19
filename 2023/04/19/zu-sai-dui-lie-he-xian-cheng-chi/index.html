@@ -642,20 +642,24 @@
 <li><p>**<code>maximumPoolSize</code> **： 任务队列中存放的任务达到队列容量的时候，当前可以同时运行的线程数量变为最大线程数</p>
 </li>
 <li><p>**<code>workQueue</code>**： 新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中</p>
+</li>
+</ul>
 <ul>
 <li><p><code>LinkedBlockingQueue</code>：链表阻塞队列</p>
 </li>
 <li><p><code>SynchronousBlockingQueue</code>：同步阻塞队列</p>
 </li>
 </ul>
-</li>
-</ul>
 <p><code>ThreadPoolExecutor</code>其他常见参数 :</p>
 <ul>
-<li>**<code>keepAliveTime</code>**：线程池中的线程数量大于 <code>corePoolSize</code> 的时候，如果这时没有新的任务提交，核心线程外的线程不会立即销毁，而是会等待，直到等待的时间超过了 <code>keepAliveTime</code>才会被回收销毁</li>
-<li><strong><code>unit</code></strong> ：<code>keepAliveTime</code> 参数的时间单位</li>
-<li><strong><code>threadFactory</code></strong> ：表示生成线程池中工作线程的线程工厂，用于创建线程池 一般用默认即可</li>
-<li><strong><code>handler</code></strong> ：拒绝策略，表示当队列满了并且工作线程大于线程池的最大线程数时，如何来拒绝请求执行的Runnable的策略</li>
+<li><p>**<code>keepAliveTime</code>**：线程池中的线程数量大于 <code>corePoolSize</code> 的时候，如果这时没有新的任务提交，核心线程外的线程不会立即销毁，而是会等待，直到等待的时间超过了 <code>keepAliveTime</code>才会被回收销毁</p>
+</li>
+<li><p><strong><code>unit</code></strong> ：<code>keepAliveTime</code> 参数的时间单位</p>
+</li>
+<li><p><strong><code>threadFactory</code></strong> ：表示生成线程池中工作线程的线程工厂，用于创建线程池 一般用默认即可</p>
+</li>
+<li><p><strong><code>handler</code></strong> ：拒绝策略，表示当队列满了并且工作线程大于线程池的最大线程数时，如何来拒绝请求执行的Runnable的策略</p>
+</li>
 </ul>
 <img src="/2023/04/19/zu-sai-dui-lie-he-xian-cheng-chi/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.d65f3309.png" class="">
 
