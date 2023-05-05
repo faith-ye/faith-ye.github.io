@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-04-19T13:24:56.438Z</updated>
+  <updated>2023-05-05T03:17:07.274Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>死锁和Java内存区域</title>
+    <link href="https://faith-ye.github.io/2023/05/05/si-suo-he-java-nei-cun-qu-yu/"/>
+    <id>https://faith-ye.github.io/2023/05/05/si-suo-he-java-nei-cun-qu-yu/</id>
+    <published>2023-05-05T03:13:05.000Z</published>
+    <updated>2023-05-05T03:17:07.274Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="死锁" scheme="https://faith-ye.github.io/tags/%E6%AD%BB%E9%94%81/"/>
+    
+    <category term="Java内存区域" scheme="https://faith-ye.github.io/tags/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>阻塞队列和线程池</title>
@@ -507,33 +534,6 @@
     
     
     <category term="JDBC" scheme="https://faith-ye.github.io/tags/JDBC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Maven仓库安装配置及使用</title>
-    <link href="https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/"/>
-    <id>https://faith-ye.github.io/2022/09/27/maven-cang-ku-an-zhuang-pei-zhi-ji-shi-yong/</id>
-    <published>2022-09-27T07:13:31.000Z</published>
-    <updated>2022-09-27T09:29:34.305Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;亲测下面这个链接有用，大家按照这个博主写的配置就好&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/desireyang/p/12787480.html&quot;&gt;Maven仓库安装配置及使用&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;需要补充的地方是 jdk</summary>
-        
-      
-    
-    
-    
-    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
-    
-    
-    <category term="Maven仓库" scheme="https://faith-ye.github.io/tags/Maven%E4%BB%93%E5%BA%93/"/>
     
   </entry>
   
