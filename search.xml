@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>JVM垃圾回收</title>
+      <link href="/2023/05/09/jvm-la-ji-hui-shou/"/>
+      <url>/2023/05/09/jvm-la-ji-hui-shou/</url>
+      
+        <content type="html"><![CDATA[<p>可以看JavaGuide的这篇文章<a href="https://javaguide.cn/java/jvm/jvm-garbage-collection.html">JVM 垃圾回收详解</a>或者周志明《深入理解Java虚拟机 第3版》第三章部分</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 垃圾回收 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>死锁和Java内存区域</title>
       <link href="/2023/05/05/si-suo-he-java-nei-cun-qu-yu/"/>
       <url>/2023/05/05/si-suo-he-java-nei-cun-qu-yu/</url>
