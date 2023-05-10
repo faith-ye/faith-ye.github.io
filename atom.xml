@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-05-09T09:05:58.903Z</updated>
+  <updated>2023-05-10T03:06:53.556Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM重要参数</title>
+    <link href="https://faith-ye.github.io/2023/05/10/jvm-chong-yao-can-shu/"/>
+    <id>https://faith-ye.github.io/2023/05/10/jvm-chong-yao-can-shu/</id>
+    <published>2023-05-10T03:00:32.000Z</published>
+    <updated>2023-05-10T03:06:53.556Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JVM参数类型&quot;&gt;&lt;a href=&quot;#JVM参数类型&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="JVM参数" scheme="https://faith-ye.github.io/tags/JVM%E5%8F%82%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM垃圾回收</title>
@@ -509,31 +534,6 @@
     
     
     <category term="git" scheme="https://faith-ye.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>笔记四：JDBC练习</title>
-    <link href="https://faith-ye.github.io/2022/09/29/bi-ji-si-jdbc-lian-xi/"/>
-    <id>https://faith-ye.github.io/2022/09/29/bi-ji-si-jdbc-lian-xi/</id>
-    <published>2022-09-29T03:28:07.000Z</published>
-    <updated>2022-09-29T03:30:23.134Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="MySQL学习笔记" scheme="https://faith-ye.github.io/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="JDBC" scheme="https://faith-ye.github.io/tags/JDBC/"/>
     
   </entry>
   
