@@ -6,7 +6,7 @@
   <link href="https://faith-ye.github.io/atom.xml" rel="self"/>
   
   <link href="https://faith-ye.github.io/"/>
-  <updated>2023-05-10T03:06:53.556Z</updated>
+  <updated>2023-05-11T13:27:09.742Z</updated>
   <id>https://faith-ye.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java内存溢出OOM</title>
+    <link href="https://faith-ye.github.io/2023/05/11/java-nei-cun-yi-chu-oom/"/>
+    <id>https://faith-ye.github.io/2023/05/11/java-nei-cun-yi-chu-oom/</id>
+    <published>2023-05-11T13:25:54.000Z</published>
+    <updated>2023-05-11T13:27:09.742Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;JVM 中常见的两个错误：StackoverFlowError （栈溢出）和OutofMemoryError: java heap space（堆溢出），这两种是属于 Error，而不是 Exception&lt;/p&gt;
+&lt;p&gt;除此之外，OutOfMemoryError</summary>
+        
+      
+    
+    
+    
+    <category term="Java面试" scheme="https://faith-ye.github.io/categories/Java%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="OOM" scheme="https://faith-ye.github.io/tags/OOM/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM重要参数</title>
@@ -509,31 +535,6 @@
     
     
     <category term="anaconda" scheme="https://faith-ye.github.io/tags/anaconda/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git命令行</title>
-    <link href="https://faith-ye.github.io/2022/10/18/git-ming-ling-xing/"/>
-    <id>https://faith-ye.github.io/2022/10/18/git-ming-ling-xing/</id>
-    <published>2022-10-18T07:44:52.000Z</published>
-    <updated>2022-10-18T07:46:49.237Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;git基本操作&quot;&gt;&lt;a href=&quot;#git基本操作&quot; class=&quot;headerlink&quot; title=&quot;git基本操作&quot;&gt;&lt;/a&gt;git基本操作&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;##</summary>
-        
-      
-    
-    
-    
-    <category term="生命在于折腾" scheme="https://faith-ye.github.io/categories/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/"/>
-    
-    
-    <category term="git" scheme="https://faith-ye.github.io/tags/git/"/>
     
   </entry>
   
